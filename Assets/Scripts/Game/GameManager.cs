@@ -17,6 +17,8 @@ namespace Project
 
         [field: SerializeField] public float TimeBetweenPlayerMoves { get; private set; } = 0.25f;
 
+        public GridManager Grid;
+
         public HeroNode Hero => Player.HeroNode;
         public int Turn { get; private set; }
 
@@ -29,7 +31,9 @@ namespace Project
         protected override void Awake()
         {
             base.Awake();
+            Grid = new GridManager(new Vector2(1, 1));
             stateMachine = new StateMachine();
+
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created

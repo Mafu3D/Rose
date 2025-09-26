@@ -22,8 +22,8 @@ namespace Project.GameNode
 
         protected virtual void Start()
         {
-            CurrentCell = GridManager.Instance.WorldPositionToCell(this.transform.position);
-            GridManager.Instance.RegisterToCell(CurrentCell, this);
+            CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
+            GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
         }
     }
 }

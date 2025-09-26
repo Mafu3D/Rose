@@ -1,3 +1,4 @@
+using Project;
 using Project.Grid;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class Scratch : MonoBehaviour {
             if (!clicked)
             {
                 Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Cell hitCell = GridManager.Instance.WorldPositionToCell(worldPosition);
+                Cell hitCell = GameManager.Instance.Grid.WorldPositionToCell(worldPosition);
                 Instantiate(hitPointObject, worldPosition, Quaternion.identity);
                 Debug.Log($"X: {hitCell.x} Y: {hitCell.y}");
                 Debug.Log(hitCell.Center);

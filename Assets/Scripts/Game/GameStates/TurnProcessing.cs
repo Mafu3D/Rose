@@ -16,7 +16,7 @@ namespace Project.GameStates
 
         public override void Enter()
         {
-            nodesToProcess = GridManager.Instance.GetNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell);
+            nodesToProcess = GameManager.Instance.Grid.GetNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell);
         }
 
         public override void Exit() { }

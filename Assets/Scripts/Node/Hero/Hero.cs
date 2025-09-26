@@ -19,19 +19,19 @@ namespace Project.GameNode.Hero
 
         protected override void Start()
         {
-            CurrentCell = GridManager.Instance.WorldPositionToCell(this.transform.position);
-            GridManager.Instance.RegisterToCell(CurrentCell, this);
+            CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
+            GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
         }
 
         public void Move(Vector2 direction)
         {
             if (direction != Vector2.zero)
             {
-                GridManager.Instance.DeregisterFromCell(CurrentCell, this);
-                Cell destinationCell = GridManager.Instance.GetNeighborCell(CurrentCell, direction);
+                GameManager.Instance.Grid.DeregisterFromCell(CurrentCell, this);
+                Cell destinationCell = GameManager.Instance.Grid.GetNeighborCell(CurrentCell, direction);
                 CurrentCell = destinationCell;
                 myRigidBody.MovePosition(destinationCell.Center);
-                GridManager.Instance.RegisterToCell(CurrentCell, this);
+                GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
             }
         }
 

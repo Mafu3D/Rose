@@ -45,12 +45,16 @@ namespace Project.Grid
         public static bool operator !=(Cell left, Cell right) => !(left == right);
     }
 
-    public class GridManager : Singleton<GridManager>
+    public class GridManager
     {
-        [SerializeField] private Vector2 cellSize = new Vector2(1, 1);
+        private Vector2 cellSize = new Vector2(1, 1);
 
         private Dictionary<Cell, List<Node>> registeredCells = new();
         private Dictionary<int, Cell> registeredKeys = new();
+
+        public GridManager(Vector2 cellSize) {
+            this.cellSize = cellSize;
+        }
 
         public List<Node> GetNodesRegisteredToCell(Cell cell)
         {
