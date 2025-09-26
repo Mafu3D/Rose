@@ -3,7 +3,7 @@ using Project.PlayerSystem;
 using Project.Grid;
 using Project.GameNode;
 
-namespace Project.Hero
+namespace Project.GameNode.Hero
 {
     public class HeroNode : Node
     {

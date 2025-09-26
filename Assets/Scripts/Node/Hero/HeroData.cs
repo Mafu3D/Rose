@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Hero
+namespace Project.GameNode.Hero
 {
     [CreateAssetMenu(fileName = "HeroData", menuName = "HeroData", order = 0)]
     public class HeroData : ScriptableObject

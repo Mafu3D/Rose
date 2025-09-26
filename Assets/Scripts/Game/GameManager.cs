@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Project.Grid;
-using Project.Hero;
+using Project.GameNode.Hero;
 using Project.GameNode;
 using UnityEngine;
 

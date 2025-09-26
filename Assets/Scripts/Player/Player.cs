@@ -1,4 +1,4 @@
-using Project.Hero;
+using Project.GameNode.Hero;
 using UnityEngine;
 
 namespace Project.PlayerSystem
