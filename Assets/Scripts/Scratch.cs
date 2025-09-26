@@ -15,6 +15,7 @@ public class Scratch : MonoBehaviour {
                 Instantiate(hitPointObject, worldPosition, Quaternion.identity);
                 Debug.Log($"X: {hitCell.x} Y: {hitCell.y}");
                 Debug.Log(hitCell.Center);
+                // Debug.Log(hitCell.GetHashCode());
 
                 clicked = true;
             }

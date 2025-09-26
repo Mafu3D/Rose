@@ -4,11 +4,9 @@ using Project.Grid;
 
 namespace Project.Hero
 {
-    public class Hero : MonoBehaviour
+    public class HeroNode : Node
     {
         [SerializeField] public Player Player;
-
-        public Cell CurrentCell;
 
         private Rigidbody2D myRigidBody;
         private HeroData heroData => Player.HeroData;
@@ -21,10 +19,10 @@ namespace Project.Hero
             myRigidBody = GetComponent<Rigidbody2D>();
         }
 
-        void Start()
+        protected override void Start()
         {
             CurrentCell = GridManager.Instance.WorldPositionToCell(this.transform.position);
-            Debug.Log(CurrentCell.ToString());
+            GridManager.Instance.RegisterToCell(CurrentCell, this);
         }
 
         void Update()
@@ -40,10 +38,11 @@ namespace Project.Hero
                 Vector2 movementValue = Player.InputReader.MovementValue;
                 if (movementValue != Vector2.zero)
                 {
+                    GridManager.Instance.DeregisterFromCell(CurrentCell, this);
                     Cell destinationCell = GridManager.Instance.GetNeighborCell(CurrentCell, movementValue);
                     CurrentCell = destinationCell;
                     myRigidBody.MovePosition(destinationCell.Center);
-                    Debug.Log(CurrentCell.ToString());
+                    GridManager.Instance.RegisterToCell(CurrentCell, this);
                     timeSinceLastMove = 0f;
 
                     GameManager.Instance.ProcessTurn();
@@ -51,42 +50,14 @@ namespace Project.Hero
             }
         }
 
-        void OnTriggerStay2D(Collider2D collision)
+        public override void Process()
         {
-            if (collision.CompareTag("Node"))
-            {
-                Node node = collision.GetComponent<Node>();
-                if (node != null)
-                {
-                    Debug.Log("here1");
-                    if (node.CurrentCell == this.CurrentCell)
-                    {
-                        Debug.Log("here2");
-                        node.ProcessEnter();
-                    }
-                }
-            }
+            //Noop
         }
 
-        void OnTriggerExit2D(Collider2D collision)
+        public override void Reset()
         {
-            if (collision.CompareTag("Node"))
-            {
-                // CollisionType collisionType = CollisionType.Adjacent;
-                // if (this.transform.position == collision.transform.position)
-                // {
-                //     collisionType = CollisionType.Overlap;
-                // }
-
-                // INode node = collision.GetComponent<INode>();
-                // if (node != null)
-                // {
-                //     if (collisionType == CollisionType.Overlap)
-                //     {
-                //         node.Reset();
-                //     }
-                // }
-            }
+            //Noop
         }
     }
 }

@@ -5,12 +5,15 @@ public abstract class Node : MonoBehaviour
 {
     public Cell CurrentCell;
 
-    void Start()
-    {
-        CurrentCell = GridManager.Instance.WorldPositionToCell(this.transform.position);
-    }
+    [SerializeField] public NodeData NodeData;
 
-    public abstract void ProcessEnter();
+    public abstract void Process();
 
     public abstract void Reset();
+
+    protected virtual void Start()
+    {
+        CurrentCell = GridManager.Instance.WorldPositionToCell(this.transform.position);
+        GridManager.Instance.RegisterToCell(CurrentCell, this);
+    }
 }

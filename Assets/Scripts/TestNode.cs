@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TestNode : Node
 {
-    public override void ProcessEnter()
+    public override void Process()
     {
         Debug.Log("Entered node");
     }

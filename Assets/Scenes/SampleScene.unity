@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &50849353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4955919999020241967, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+  m_PrefabInstance: {fileID: 6229871062601988883}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20083334452a5aa479b4801b87c432e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &500629218
 GameObject:
   m_ObjectHideFlags: 0
@@ -7015,6 +7026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983519051542bd147b72ba5dc4376a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPointObject: {fileID: 6683939368783204238, guid: 579e374c68b80d84ea7879b5a8ecc734, type: 3}
 --- !u!4 &1430360740
 Transform:
   m_ObjectHideFlags: 0
@@ -7059,6 +7071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251dd5d19a7e9954885693956ee304ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hero: {fileID: 50849353}
 --- !u!4 &1639557477
 Transform:
   m_ObjectHideFlags: 0
@@ -7084,8 +7097,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2007160442}
   - component: {fileID: 2007160441}
-  - component: {fileID: 2007160443}
   - component: {fileID: 2007160444}
+  - component: {fileID: 2007160445}
   m_Layer: 0
   m_Name: TestNode
   m_TagString: Node
@@ -7163,18 +7176,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2007160443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007160440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f7cb2daef6d6544b6f4c4f00d0ba0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2007160444
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7221,6 +7222,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2007160445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007160440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ac465b30061c74d994dbdeec70e4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NodeData: {fileID: 11400000, guid: 78bb3cbf69e25f4489aa3a884a309511, type: 2}
 --- !u!1001 &6229871062601988883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7277,6 +7291,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 943401407}
+    - target: {fileID: 4955919999020241967, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+      propertyPath: NodeData
+      value: 
+      objectReference: {fileID: 11400000, guid: c301ca033ba24dd4697d1a4f36764008, type: 2}
     - target: {fileID: 8881772238092289395, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: m_Name
       value: Hero
