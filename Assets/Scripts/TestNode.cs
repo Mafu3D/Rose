@@ -1,15 +1,27 @@
 using Project.Grid;
 using UnityEngine;
 
-public class TestNode : Node
+namespace Project.GameNode
 {
-    public override void Process()
+    public class TestNode : Node
     {
-        Debug.Log("Entered node");
-    }
+        [SerializeField] float timeToProcess = 3f;
+        float timeProcessing;
+        public override Status Process()
+        {
+            timeProcessing += Time.deltaTime;
+            if (timeProcessing < timeToProcess)
+            {
+                Debug.Log(timeProcessing);
+                return Status.Running;
+            }
+            return Status.Success;
+        }
 
-    public override void Reset()
-    {
-        Debug.Log("Reset");
+        public override void Reset()
+        {
+            timeProcessing = 0f;
+            Debug.Log("Reset");
+        }
     }
 }

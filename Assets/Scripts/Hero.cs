@@ -1,6 +1,7 @@
 using UnityEngine;
 using Project.PlayerSystem;
 using Project.Grid;
+using Project.GameNode;
 
 namespace Project.Hero
 {
@@ -27,7 +28,10 @@ namespace Project.Hero
 
         void Update()
         {
-            Move();
+            if (GameManager.Instance.GameState == GameState.PlayerMove)
+            {
+                Move();
+            }
         }
 
         private void Move()
@@ -45,14 +49,14 @@ namespace Project.Hero
                     GridManager.Instance.RegisterToCell(CurrentCell, this);
                     timeSinceLastMove = 0f;
 
-                    GameManager.Instance.ProcessTurn();
+                    GameManager.Instance.EndPlayerTurn();
                 }
             }
         }
 
-        public override void Process()
+        public override Status Process()
         {
-            //Noop
+            return Status.Success;
         }
 
         public override void Reset()
