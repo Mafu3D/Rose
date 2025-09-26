@@ -12,7 +12,6 @@ namespace Project.GameNode
             timeProcessing += Time.deltaTime;
             if (timeProcessing < timeToProcess)
             {
-                Debug.Log(timeProcessing);
                 return Status.Running;
             }
             return Status.Success;
@@ -21,7 +20,6 @@ namespace Project.GameNode
         public override void Reset()
         {
             timeProcessing = 0f;
-            Debug.Log("Reset");
         }
     }
 }

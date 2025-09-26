@@ -12,9 +12,6 @@ namespace Project.GameNode.Hero
         private Rigidbody2D myRigidBody;
         private HeroData heroData => Player.HeroData;
 
-        private float timeBetweenMoves => 1f / heroData.MoveSpeed;
-        private float timeSinceLastMove = 0f;
-
         void Awake()
         {
             myRigidBody = GetComponent<Rigidbody2D>();
@@ -26,31 +23,15 @@ namespace Project.GameNode.Hero
             GridManager.Instance.RegisterToCell(CurrentCell, this);
         }
 
-        void Update()
+        public void Move(Vector2 direction)
         {
-            if (GameManager.Instance.GameState == GameState.PlayerMove)
+            if (direction != Vector2.zero)
             {
-                Move();
-            }
-        }
-
-        private void Move()
-        {
-            timeSinceLastMove += Time.deltaTime;
-            if (timeSinceLastMove > timeBetweenMoves)
-            {
-                Vector2 movementValue = Player.InputReader.MovementValue;
-                if (movementValue != Vector2.zero)
-                {
-                    GridManager.Instance.DeregisterFromCell(CurrentCell, this);
-                    Cell destinationCell = GridManager.Instance.GetNeighborCell(CurrentCell, movementValue);
-                    CurrentCell = destinationCell;
-                    myRigidBody.MovePosition(destinationCell.Center);
-                    GridManager.Instance.RegisterToCell(CurrentCell, this);
-                    timeSinceLastMove = 0f;
-
-                    GameManager.Instance.EndPlayerTurn();
-                }
+                GridManager.Instance.DeregisterFromCell(CurrentCell, this);
+                Cell destinationCell = GridManager.Instance.GetNeighborCell(CurrentCell, direction);
+                CurrentCell = destinationCell;
+                myRigidBody.MovePosition(destinationCell.Center);
+                GridManager.Instance.RegisterToCell(CurrentCell, this);
             }
         }
 

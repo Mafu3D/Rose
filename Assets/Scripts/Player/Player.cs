@@ -7,6 +7,7 @@ namespace Project.PlayerSystem
     {
         [SerializeField] public Input.InputReader InputReader;
         [SerializeField] public HeroData HeroData;
+        [SerializeField] public HeroNode HeroNode;
         public Camera PlayerCamera { get; private set; }
 
         void Awake()

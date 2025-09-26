@@ -6,6 +6,12 @@ namespace Project.States
 {
     public abstract class State
     {
+        protected StateMachine StateMachine;
+        public State(StateMachine stateMachine)
+        {
+            this.StateMachine = stateMachine;
+        }
+
         public float TimeInState { get; private set; } = 0f;
         public abstract void Enter();
 

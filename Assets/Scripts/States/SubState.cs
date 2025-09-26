@@ -4,7 +4,7 @@ namespace Project.States
     {
         public State SuperState;
 
-        public SubState(State superState)
+        public SubState(State superState, StateMachine stateMachine) : base(stateMachine)
         {
             this.SuperState = superState;
         }

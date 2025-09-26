@@ -1,31 +1,36 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Project.Grid;
 using Project.GameNode.Hero;
 using Project.GameNode;
-using UnityEngine;
+using Project.States;
+using Project.PlayerSystem;
+using Project.GameStates;
 
 namespace Project
 {
-    public enum GameState
-    {
-        PlayerMove,
-        ProcessingTurn,
-    }
 
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField] HeroNode hero;
+        [SerializeField] public Player Player;
+
+        [field: SerializeField] public float TimeBetweenPlayerMoves { get; private set; } = 0.25f;
+
+        public HeroNode Hero => Player.HeroNode;
         public int Turn { get; private set; }
 
-        public GameState GameState { get; private set; } = GameState.PlayerMove;
+        public StateMachine stateMachine;
 
         public event Action OnStartPlayerTurn;
         public event Action OnEndPlayerTurn;
         public event Action OnEndTurn;
 
-        private List<Node> nodesToProcess;
-        private int currentProcessingNode = 0;
+        protected override void Awake()
+        {
+            base.Awake();
+            stateMachine = new StateMachine();
+        }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -36,56 +41,18 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
-            if (GameState == GameState.ProcessingTurn)
-            {
-                Status status = ProcessTurn();
-                if (status == Status.Success)
-                {
-                    currentProcessingNode = 0;
-                    EndTurn();
-                }
-            }
+            stateMachine.Update();
         }
 
-        public Status ProcessTurn()
-        {
-            while (currentProcessingNode < nodesToProcess.Count)
-            {
-                Status status = nodesToProcess[currentProcessingNode].Process();
-                if (status != Status.Success)
-                {
-                    return status;
-                }
-                nodesToProcess[currentProcessingNode].Reset();
-                currentProcessingNode++;
-            }
-            return Status.Success;
-        }
-
-        public void EndPlayerTurn()
-        {
-            OnEndPlayerTurn?.Invoke();
-            nodesToProcess = GridManager.Instance.GetNodesRegisteredToCell(hero.CurrentCell);
-            GameState = GameState.ProcessingTurn;
-
-            foreach (Node node in nodesToProcess)
-            {
-                node.Process();
-            }
-
-        }
-
-        private void EndTurn()
+        public void IncrementTurn()
         {
             Turn += 1;
-            GameState = GameState.PlayerMove;
-            OnEndTurn?.Invoke();
         }
 
         public void StartGame()
         {
+            stateMachine.SwitchState(new PlayerMove(new GameRunning(stateMachine), stateMachine));
             Turn = 0;
-            EndPlayerTurn();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Project.States
     /// <summary>
     /// Base class for unit state machines. Ticks the current state every Update.
     /// </summary>
-    public abstract class StateMachine
+    public class StateMachine
     {
         public StateMachine()
         {
