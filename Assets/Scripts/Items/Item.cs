@@ -8,7 +8,9 @@ namespace Project.Items
             this.data = itemData;
         }
 
-        public void OnEquip() { }
+        public void OnEquip()
+        {
+        }
 
         public void OnUnequip() { }
 
