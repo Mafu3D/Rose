@@ -19,4 +19,12 @@ public static class ListExtensions
 
         return list;
     }
+
+    public static IList<T> Pop<T>(this IList<T> list, int index, out T item)
+    {
+        item = list[index];
+        list.RemoveAt(index);
+
+        return list;
+    }
 }

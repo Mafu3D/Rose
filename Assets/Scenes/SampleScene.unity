@@ -7190,6 +7190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPointObject: {fileID: 6683939368783204238, guid: 579e374c68b80d84ea7879b5a8ecc734, type: 3}
+  deckData: {fileID: 11400000, guid: a52d215cec2418e4c93e99025946dab8, type: 2}
 --- !u!4 &1430360740
 Transform:
   m_ObjectHideFlags: 0
