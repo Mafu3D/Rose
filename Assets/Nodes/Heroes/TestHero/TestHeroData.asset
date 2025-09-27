@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: TestHeroData
   m_EditorClassIdentifier: 
   MoveDistance: 1
+  DisplayName: Hero
+  Sprite: {fileID: 7463086174397488636, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   StatsData: {fileID: 11400000, guid: 1325e153fb89aa44297450eca0bceb34, type: 2}

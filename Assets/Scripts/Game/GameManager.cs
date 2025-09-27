@@ -22,6 +22,7 @@ namespace Project
         [SerializeField] public DeckData ItemDeckData;
 
         [field: SerializeField] public float TimeBetweenPlayerMoves { get; private set; } = 0.25f;
+        [field: SerializeField] public float TimeBetweenCombatTurns { get; private set; } = 0.25f;
 
         public GridManager Grid;
 

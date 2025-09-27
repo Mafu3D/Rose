@@ -7,6 +7,8 @@ namespace Project.GameNode.Hero
     public class HeroData : ScriptableObject
     {
         [SerializeField] public int MoveDistance = 1;
+        [SerializeField] public string DisplayName = "Hero";
+        [SerializeField] public Sprite Sprite;
         [SerializeField] public StatsData StatsData;
     }
 }

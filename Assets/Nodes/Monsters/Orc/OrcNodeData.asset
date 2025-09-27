@@ -22,6 +22,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Orc
+  Description: Doubles strength when bloodied
   Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   Priority: 0
   NodeType: 3
+  StatsData: {fileID: 11400000, guid: 726a2e8ecf860b843b211d5f04c09e0a, type: 2}

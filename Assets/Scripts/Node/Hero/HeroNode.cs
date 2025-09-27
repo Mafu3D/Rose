@@ -4,10 +4,11 @@ using Project.Grid;
 using Project.GameNode;
 using System;
 using Project.Stats;
+using Project.Combat;
 
 namespace Project.GameNode.Hero
 {
-    public class HeroNode : Node
+    public class HeroNode : Node, ICombatantNode
     {
         [SerializeField] public Player Player;
 
@@ -63,6 +64,23 @@ namespace Project.GameNode.Hero
         public override void Reset()
         {
             //Noop
+        }
+
+        public int GetHealthValue() => Stats.GetHealthValue();
+        public int GetSpeedValue() => Stats.GetSpeedValue();
+        public int GetStrengthValue() => Stats.GetStrengthValue();
+        public int GetMagicValue() => Stats.GetMagicValue();
+        public int GetDexterityValue() => Stats.GetDexterityValue();
+        public int GetArmorValue() => Stats.GetArmorValue();
+
+        public void Attack(out int attackValue)
+        {
+            attackValue = GetStrengthValue();
+        }
+
+        public void ReceiveAttack(HitReport hitReport)
+        {
+            Stats.DecreaseHealthValue(hitReport.Damage);
         }
     }
 }
