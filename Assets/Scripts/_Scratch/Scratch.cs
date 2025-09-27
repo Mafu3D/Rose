@@ -2,23 +2,22 @@ using System.Collections.Generic;
 using Project;
 using Project.Decks;
 using Project.Grid;
+using Project.Items;
 using UnityEngine;
 
 public class Scratch : MonoBehaviour
 {
     [SerializeField] GameObject hitPointObject;
-    [SerializeField] DeckData deckData;
+    [SerializeField] Inventory inventory;
+    [SerializeField] ItemData item;
     bool lmbClicked = false;
     bool rmbClicked = false;
 
-    Deck deck;
+    int itemIndex;
+
 
     void Start()
     {
-        deck = new Deck();
-
-        deck.AddCards(deckData.UnpackCards());
-        deck.Shuffle();
     }
 
     void Update()
@@ -28,16 +27,9 @@ public class Scratch : MonoBehaviour
             if (!lmbClicked)
             {
                 lmbClicked = true;
-                CheckWorldPosForCell();
                 return;
+                itemIndex = inventory.AddItem(item);
                 // CheckWorldPosForCell();
-                Card card = deck.DrawCard();
-                if (card != null)
-                {
-                    Debug.Log($"{card.Name}: {card.DisplayText}");
-                }
-
-
             }
         }
         else
@@ -49,10 +41,8 @@ public class Scratch : MonoBehaviour
         {
             if (!rmbClicked)
             {
-                deck.Reset();
-                Debug.Log($"Reset");
-                // Debug.Log(deck.NumberRemaining);
-
+                return;
+                inventory.RemoveItem(itemIndex);
                 rmbClicked = true;
             }
         }

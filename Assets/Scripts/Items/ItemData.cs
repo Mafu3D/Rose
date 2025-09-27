@@ -5,12 +5,19 @@ namespace Project.Items
     [CreateAssetMenu(fileName = "ItemData", menuName = "ItemData", order = 0)]
     public class ItemData : ScriptableObject
     {
+        [Header("Meta")]
+        [SerializeField] public string Name;
+        [SerializeField] public string Description;
+        [SerializeField] public Sprite Sprite;
+        [SerializeField] public int GoldValue;
+
+        [Header("Modifiers")]
         [SerializeField] public int HealthModifier = 0;
-        [SerializeField] public int SpeedModifier = 0;
+        [SerializeField] public int ArmorModifier = 0;
         [SerializeField] public int StrengthModifier = 0;
         [SerializeField] public int MagicModifier = 0;
         [SerializeField] public int DexterityModifier = 0;
-        [SerializeField] public int ArmorModifier = 0;
+        [SerializeField] public int SpeedModifier = 0;
 
         // On Combat Start Strategies
 
