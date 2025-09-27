@@ -8,13 +8,23 @@ namespace Project.GameNode
 {
     public class MonsterNode : CombatNode, IMovableNode
     {
+        bool hasSentBattleRequest;
         public override Status Process()
         {
-            if (!BattleManager.Instance.IsActiveBattle)
+            if (!BattleManager.Instance.IsActiveBattle && !hasSentBattleRequest)
             {
                 BattleManager.Instance.StartNewBattle(GameManager.Instance.Hero, this);
+                hasSentBattleRequest = true;
             }
-            return BattleManager.Instance.Process();
+
+            if (BattleManager.Instance.IsActiveBattle)
+            {
+                return Status.Running;
+            }
+            else
+            {
+                return Status.Success;
+            }
         }
 
         public override void Reset()

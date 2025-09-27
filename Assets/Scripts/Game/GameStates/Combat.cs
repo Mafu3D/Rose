@@ -1,6 +1,7 @@
 using System;
 using Project.Combat;
 using Project.States;
+using UnityEngine.InputSystem;
 
 namespace Project.GameStates
 {
@@ -20,12 +21,29 @@ namespace Project.GameStates
 
         public override void Subscribe()
         {
-            BattleManager.Instance.OnBattleEnd += ExitCombat;
+            GameManager.Instance.Player.InputReader.OnProceedInput += Proceed;
+            // BattleManager.Instance.OnBattleEnd += ExitCombat;
         }
 
         public override void Unsubscribe()
         {
-            BattleManager.Instance.OnBattleEnd -= ExitCombat;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= Proceed;
+            // BattleManager.Instance.OnBattleEnd -= ExitCombat;
+        }
+
+        private void Proceed()
+        {
+            if (BattleManager.Instance.IsActiveBattle)
+            {
+                switch (BattleManager.Instance.Proceed())
+                {
+                    case GameNode.Status.Success:
+                        ExitCombat();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private void ExitCombat()

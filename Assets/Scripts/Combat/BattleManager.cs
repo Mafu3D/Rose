@@ -24,22 +24,19 @@ namespace Project.Combat
             BattleUI.Instance.OpenBattleUI();
         }
 
-        public Status Process()
+        public Status Proceed()
         {
             if (ActiveBattle == null) return Status.Failure;
 
-            switch (ActiveBattle.ProcessBattle())
+            switch (ActiveBattle.Proceed())
             {
-                case Status.Running:
-                    break;
-                case Status.Success:
+                case BattleResolution.None:
+                    return Status.Running;
+                default:
                     BattleUI.Instance.CloseBattleUI();
                     EndActiveBattle();
                     return Status.Success;
-                default:
-                    return Status.Failure;
             }
-            return Status.Running;
         }
 
         public void EndActiveBattle()

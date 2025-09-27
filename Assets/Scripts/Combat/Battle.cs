@@ -8,15 +8,13 @@ namespace Project.Combat
     public enum BattleState
     {
         NotStarted,
+        RoundStart,
         TurnOne,
-        TurnOneBuffer,
         TurnTwo,
-        TurnTwoBuffer,
-        Victory,
-        Defeat
+        Complete
     }
 
-    public enum CombatResolution
+    public enum BattleResolution
     {
         None,
         LeftSideWon,
@@ -31,6 +29,7 @@ namespace Project.Combat
         public int Turn;
         CombatNode[] combatantOrder = new CombatNode[2];
         BattleState battleState = BattleState.NotStarted;
+        BattleResolution battleResolution = BattleResolution.None;
 
         float timer;
 
@@ -51,65 +50,67 @@ namespace Project.Combat
             Debug.Log("Starting new battle");
         }
 
-        public Status ProcessBattle()
+        public BattleResolution Proceed()
+        {
+            ProcessBattle();
+            return battleResolution;
+        }
+
+        private BattleState ProcessBattle()
         {
             switch (battleState)
             {
                 case BattleState.NotStarted:
-                    return Status.Running;
+                    battleState = BattleState.TurnOne;
+                    return battleState;
 
                 case BattleState.TurnOne:
-                    timer = 0f;
-                    battleState = BattleState.TurnOneBuffer;
-                    NextTurn();
-                    return Status.Running;
+                    IncrementTurn();
+                    ProcessAttack(0);
 
-                case BattleState.TurnOneBuffer:
-                    timer += Time.deltaTime;
-                    if (timer > BattleManager.Instance.TimeBetweenCombatTurns)
+                    battleResolution = CheckForCombatResolution();
+                    if (battleResolution != BattleResolution.None)
                     {
-                        timer = 0f;
+                        battleState = BattleState.Complete;
+                    }
+                    else
+                    {
                         battleState = BattleState.TurnTwo;
                     }
-                    return Status.Running;
+                    return battleState;
 
                 case BattleState.TurnTwo:
-                    timer = 0f;
-                    battleState = BattleState.TurnTwoBuffer;
-                    NextTurn();
-                    return Status.Running;
+                    IncrementTurn();
+                    ProcessAttack(1);
 
-                case BattleState.TurnTwoBuffer:
-                    timer += Time.deltaTime;
-                    if (timer > BattleManager.Instance.TimeBetweenCombatTurns)
+                    battleResolution = CheckForCombatResolution();
+                    if (battleResolution != BattleResolution.None)
                     {
-                        timer = 0f;
-                        battleState = BattleState.TurnOne;
-                        NewRound();
+                        battleState = BattleState.Complete;
                     }
-                    return Status.Running;
-
-                case BattleState.Victory:
-                    FinishBattle();
-                    return Status.Success;
-
-                case BattleState.Defeat:
-                    FinishBattle();
-                    return Status.Success;
+                    else
+                    {
+                        NewRound();
+                        battleState = BattleState.TurnOne;
+                    }
+                    return battleState;
+                case BattleState.Complete:
+                    return battleState;
             }
-
-            FinishBattle();
-            return Status.Success;
+            return battleState;
         }
 
         private void NewRound()
         {
             Round += 1;
-            Turn = 0;
-            combatantOrder = new CombatNode[2];
-            battleState = BattleState.TurnOne;
+            ResetTurns();
+            DetermineCombatantOrder();
 
-            // Determine round order
+        }
+
+        private void DetermineCombatantOrder()
+        {
+            combatantOrder = new CombatNode[2];
             if (Left.GetSpeedValue() > Right.GetSpeedValue())
             {
                 combatantOrder[0] = Left;
@@ -122,29 +123,25 @@ namespace Project.Combat
             }
         }
 
-        private void NextTurn()
-        {
-            Turn += 1;
-            ProcessAttack(Turn - 1);
-
-        }
+        private void IncrementTurn() => Turn += 1;
+        private void ResetTurns() => Turn = 0;
 
         private void ProcessAttack(int i)
         {
             int attackValue;
             combatantOrder[i].Attack(out attackValue);
             HitReport hitReport = new HitReport(attackValue);
-            string message = "";
+            string message;
 
             if (i == 0)
             {
-                combatantOrder[i + 1].ReceiveAttack(hitReport);
-                message = $"Hero took {hitReport.Damage} dmg";
+                combatantOrder[1].ReceiveAttack(hitReport);
+                message = $"{combatantOrder[1].NodeData.DisplayName} took {hitReport.Damage} dmg";
             }
             else
             {
-                combatantOrder[i - 1].ReceiveAttack(hitReport);
-                message = $"Enemy took {hitReport.Damage} dmg";
+                combatantOrder[0].ReceiveAttack(hitReport);
+                message = $"{combatantOrder[0].NodeData.DisplayName} took {hitReport.Damage} dmg";
             }
 
             OnBattleAction?.Invoke(message);
@@ -153,19 +150,22 @@ namespace Project.Combat
             CheckForCombatResolution();
         }
 
-        private void CheckForCombatResolution()
+        private BattleResolution CheckForCombatResolution()
         {
             if (Left.GetHealthValue() <= 0)
             {
-                battleState = BattleState.Defeat;
-                Debug.Log("defeat!");
+                battleResolution = BattleResolution.RightSideWon;
             }
 
-            if (Right.GetHealthValue() <= 0)
+            else if (Right.GetHealthValue() <= 0)
             {
-                battleState = BattleState.Victory;
-                Debug.Log("victory");
+                battleResolution = BattleResolution.LeftSideWon;
             }
+            else
+            {
+                battleResolution = BattleResolution.None;
+            }
+            return battleResolution;
         }
 
         private void FinishBattle()
