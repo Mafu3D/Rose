@@ -1,19 +1,19 @@
 using System;
 using Project.Combat;
-using Project.Stats;
+using Project.Attributes;
 using UnityEngine;
 
 namespace Project.GameNode
 {
     public class CombatNode : Node
     {
-        [SerializeField] public StatsData statsData;
-        public CharacterStats Stats;
+        [SerializeField] public AttributesData attributesData;
+        public CharacterAttributes Attributes;
 
         protected override void Awake()
         {
             base.Awake();
-            Stats = new CharacterStats(statsData);
+            Attributes = new CharacterAttributes(attributesData);
         }
 
         public override Status Resolve()
@@ -27,21 +27,14 @@ namespace Project.GameNode
             // Noop
         }
 
-        public int GetHealthValue() => Stats.GetHealthValue();
-        public int GetSpeedValue() => Stats.GetSpeedValue();
-        public int GetStrengthValue() => Stats.GetStrengthValue();
-        public int GetMagicValue() => Stats.GetMagicValue();
-        public int GetDexterityValue() => Stats.GetDexterityValue();
-        public int GetArmorValue() => Stats.GetArmorValue();
-
-        public void Attack(out int attackValue)
+        public void Attack(out int value)
         {
-            attackValue = GetStrengthValue();
+            value = Attributes.GetAttributeValue(AttributeType.Strength);
         }
 
         public void ReceiveAttack(HitReport hitReport)
         {
-            Stats.DecreaseHealthValue(hitReport.Damage);
+            Attributes.DecreaseAttributeValue(AttributeType.Health, hitReport.Damage);
         }
     }
 }

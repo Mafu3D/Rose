@@ -3,7 +3,7 @@ using Project.PlayerSystem;
 using Project.Grid;
 using Project.GameNode;
 using System;
-using Project.Stats;
+using Project.Attributes;
 using Project.Combat;
 
 namespace Project.GameNode.Hero
@@ -11,9 +11,9 @@ namespace Project.GameNode.Hero
     public class HeroNode : CombatNode, IMovableNode
     {
         [SerializeField] public Player Player;
+        [SerializeField] private int moveDistance = 1;
 
         private Rigidbody2D myRigidBody;
-        public HeroData HeroData => Player.HeroData;
 
         public int MovesRemaining { get; private set; }
 
@@ -23,13 +23,13 @@ namespace Project.GameNode.Hero
         {
             base.Awake();
             myRigidBody = GetComponent<Rigidbody2D>();
-            ResetMovesRemaining();
         }
 
         protected override void Start()
         {
             CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
             GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
+            ResetMovesRemaining();
         }
 
         public void Move(Vector2 direction)
@@ -37,7 +37,7 @@ namespace Project.GameNode.Hero
             if (direction != Vector2.zero && MovesRemaining > 0)
             {
                 GameManager.Instance.Grid.DeregisterFromCell(CurrentCell, this);
-                Cell destinationCell = GameManager.Instance.Grid.GetNeighborCell(CurrentCell, direction * HeroData.MoveDistance);
+                Cell destinationCell = GameManager.Instance.Grid.GetNeighborCell(CurrentCell, direction * moveDistance);
                 CurrentCell = destinationCell;
                 myRigidBody.MovePosition(destinationCell.Center);
                 GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
@@ -50,7 +50,7 @@ namespace Project.GameNode.Hero
 
         public void ResetMovesRemaining()
         {
-            MovesRemaining = Stats.GetSpeedValue();
+            MovesRemaining = Math.Clamp(Attributes.GetAttributeValue(AttributeType.Speed), 1, 99);
             OnRemainingMovesChanged?.Invoke();
         }
 

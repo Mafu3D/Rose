@@ -176,4 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NodeData: {fileID: 11400000, guid: c301ca033ba24dd4697d1a4f36764008, type: 2}
+  attributesData: {fileID: 11400000, guid: 1325e153fb89aa44297450eca0bceb34, type: 2}
   Player: {fileID: 0}
+  moveDistance: 1

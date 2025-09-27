@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
-  m_Name: HeroStats
+  m_Name: Skeleton_Attrs
   m_EditorClassIdentifier: 
-  Health: 20
-  Speed: 3
-  Strength: 2
+  Health: 10
+  Speed: 2
+  Strength: 1
   Magic: 1
-  Dexterity: 1
+  Dexterity: 0
   Armor: 0

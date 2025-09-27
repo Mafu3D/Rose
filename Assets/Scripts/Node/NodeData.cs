@@ -1,4 +1,4 @@
-using Project.Stats;
+using Project.Attributes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,6 +12,5 @@ namespace Project.GameNode
         [SerializeField] public Sprite Sprite;
         [SerializeField] public int Priority = 0;
         [SerializeField] public NodeType NodeType;
-        [SerializeField] public StatsData StatsData;
     }
 }

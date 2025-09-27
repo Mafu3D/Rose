@@ -32,12 +32,12 @@ namespace Project.UI.BattleUI
 
         public void UpdateStats()
         {
-            healthText.text = combatant.GetHealthValue().ToString();
-            armorText.text = combatant.GetArmorValue().ToString();
-            speedText.text = combatant.GetSpeedValue().ToString();
-            strengthText.text = combatant.GetStrengthValue().ToString();
-            magicText.text = combatant.GetMagicValue().ToString();
-            dexterityText.text = combatant.GetDexterityValue().ToString();
+            healthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Health).ToString();
+            armorText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Armor).ToString();
+            speedText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Speed).ToString();
+            strengthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Strength).ToString();
+            magicText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Magic).ToString();
+            dexterityText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Dexterity).ToString();
         }
     }
 }

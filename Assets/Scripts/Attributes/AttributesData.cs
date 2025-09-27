@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Project.Stats
+namespace Project.Attributes
 {
-    [CreateAssetMenu(fileName = "StatsData", menuName = "StatsData", order = 0)]
-    public class StatsData : ScriptableObject
+    [CreateAssetMenu(fileName = "NewAttributesData", menuName = "Attributes Data", order = 0)]
+    public class AttributesData : ScriptableObject
     {
         [SerializeField] public int Health = 3;
         [SerializeField] public int Speed = 3;

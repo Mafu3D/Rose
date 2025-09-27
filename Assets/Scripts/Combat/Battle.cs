@@ -110,7 +110,8 @@ namespace Project.Combat
         private void DetermineCombatantOrder()
         {
             combatantOrder = new CombatNode[2];
-            if (Left.GetSpeedValue() > Right.GetSpeedValue())
+
+            if (Left.Attributes.GetAttributeValue(Attributes.AttributeType.Speed) > Right.Attributes.GetAttributeValue(Attributes.AttributeType.Speed))
             {
                 combatantOrder[0] = Left;
                 combatantOrder[1] = Right;
@@ -150,12 +151,11 @@ namespace Project.Combat
 
         private BattleResolution CheckForCombatResolution()
         {
-            if (Left.GetHealthValue() <= 0)
+            if (Left.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
                 battleResolution = BattleResolution.RightSideWon;
             }
-
-            else if (Right.GetHealthValue() <= 0)
+            else if (Right.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
                 battleResolution = BattleResolution.LeftSideWon;
             }

@@ -1,7 +1,7 @@
 
 
 using Project.Combat;
-using Project.Stats;
+using Project.Attributes;
 using UnityEngine;
 
 namespace Project.GameNode
