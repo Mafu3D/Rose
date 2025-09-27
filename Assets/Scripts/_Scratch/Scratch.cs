@@ -27,6 +27,7 @@ public class Scratch : MonoBehaviour
         {
             if (!lmbClicked)
             {
+                return;
                 // CheckWorldPosForCell();
                 Card card = deck.DrawCard();
                 if (card != null)

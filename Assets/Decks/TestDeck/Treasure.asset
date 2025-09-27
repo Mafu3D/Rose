@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Goblin_Test
+  m_Name: Treasure
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,5 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Goblin
-  Text: Oh no! It's a stinky goblin!
+  Name: Treasure
+  Sprite: {fileID: -8781031223190532986, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  CardType: 1
+  DisplayText: ooooh some nice treasure
+  Value: 1

@@ -6,6 +6,6 @@ namespace Project.GameNode.Hero
     public class HeroData : ScriptableObject
     {
         [SerializeField] public int MoveDistance = 1;
-        [SerializeField] public float MoveSpeed = 4f;
+        [SerializeField] public int Speed = 2;
     }
 }

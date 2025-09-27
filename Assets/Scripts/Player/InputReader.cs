@@ -14,7 +14,8 @@ namespace Project.PlayerSystem.Input
         public Vector2 MovementValue { get; private set; }
 
         // Events (TODO: Clean these up with new controls!)
-        public event Action OnMoveInputEvent;
+        public event Action OnMoveInput;
+        public event Action OnProceedInput;
 
         private Controls controls;
 
@@ -34,7 +35,13 @@ namespace Project.PlayerSystem.Input
         public void OnMove(InputAction.CallbackContext context)
         {
             MovementValue = context.ReadValue<Vector2>();
-            OnMoveInputEvent?.Invoke();
+            OnMoveInput?.Invoke();
+        }
+
+        public void OnProceed(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnProceedInput?.Invoke();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Project.Decks
                 for (int i = 0; i < entry.Value; i++)
                 {
                     CardData cd = entry.Key;
-                    Card card = new Card(cd.Name, entry.Key.Text);
+                    Card card = new Card(cd.Name, entry.Key.DisplayText);
                     unpackedCards.Add(card);
                 }
             }

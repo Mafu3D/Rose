@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Healer_Test
+  m_Name: Orc
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,5 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Healer
-  Text: It's a healer! You're healed! <3
+  Name: Orc
+  Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  CardType: 4
+  DisplayText: Run! it's a nasty orc!
+  Value: 0

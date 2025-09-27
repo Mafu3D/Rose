@@ -1,3 +1,4 @@
+using Project.Decks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -5,5 +6,8 @@ using UnityEngine;
 public class CardData : SerializedScriptableObject
 {
     [SerializeField] public string Name;
-    [SerializeField] public string Text;
+    [SerializeField] public Sprite Sprite;
+    [SerializeField] public CardType CardType;
+    [SerializeField] public string DisplayText;
+    [SerializeField] public int Value;
 }

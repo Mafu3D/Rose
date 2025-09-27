@@ -4,6 +4,16 @@ using UnityEngine;
 
 namespace Project.Decks
 {
+    public enum CardType
+    {
+        Location,
+        Encounter,
+        Event,
+        NPC,
+        Monster,
+        Item
+    }
+
     public class Card
     {
         public readonly string name;

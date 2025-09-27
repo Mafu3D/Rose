@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project;
+using Project.Decks;
 using Project.GameNode;
 using Project.Grid;
 using Project.States;
@@ -16,6 +17,8 @@ namespace Project.GameStates
 
         public override void Enter()
         {
+            DrawEncounterCard();
+
             nodesToProcess = GameManager.Instance.Grid.GetNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell);
         }
 
@@ -54,6 +57,15 @@ namespace Project.GameStates
         {
             GameManager.Instance.IncrementTurn();
             StateMachine.SwitchState(new PlayerMove(new GameRunning(StateMachine), StateMachine));
+        }
+
+        private void DrawEncounterCard()
+        {
+            Card card = GameManager.Instance.EncounterDeck.DrawCard();
+            if (card != null)
+            {
+                Debug.Log($"{card.name}: {card.text}");
+            }
         }
     }
 }

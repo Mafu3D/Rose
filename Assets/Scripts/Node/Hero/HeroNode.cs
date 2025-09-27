@@ -1,0 +1,64 @@
+using UnityEngine;
+using Project.PlayerSystem;
+using Project.Grid;
+using Project.GameNode;
+using System;
+
+namespace Project.GameNode.Hero
+{
+    public class HeroNode : Node
+    {
+        [SerializeField] public Player Player;
+
+        private Rigidbody2D myRigidBody;
+        public HeroData HeroData => Player.HeroData;
+
+        public int MovesRemaining { get; private set; }
+
+        public Action OnRemainingMovesChanged;
+
+        void Awake()
+        {
+            myRigidBody = GetComponent<Rigidbody2D>();
+            ResetMovesRemaining();
+        }
+
+        protected override void Start()
+        {
+            CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
+            GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
+        }
+
+        public void Move(Vector2 direction)
+        {
+            if (direction != Vector2.zero && MovesRemaining > 0)
+            {
+                GameManager.Instance.Grid.DeregisterFromCell(CurrentCell, this);
+                Cell destinationCell = GameManager.Instance.Grid.GetNeighborCell(CurrentCell, direction * HeroData.MoveDistance);
+                CurrentCell = destinationCell;
+                myRigidBody.MovePosition(destinationCell.Center);
+                GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
+
+                MovesRemaining -= 1;
+
+                OnRemainingMovesChanged?.Invoke();
+            }
+        }
+
+        public void ResetMovesRemaining()
+        {
+            MovesRemaining = HeroData.Speed;
+            OnRemainingMovesChanged?.Invoke();
+        }
+
+        public override Status Process()
+        {
+            return Status.Success;
+        }
+
+        public override void Reset()
+        {
+            //Noop
+        }
+    }
+}
