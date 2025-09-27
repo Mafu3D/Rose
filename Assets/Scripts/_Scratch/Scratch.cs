@@ -27,6 +27,8 @@ public class Scratch : MonoBehaviour
         {
             if (!lmbClicked)
             {
+                lmbClicked = true;
+                CheckWorldPosForCell();
                 return;
                 // CheckWorldPosForCell();
                 Card card = deck.DrawCard();
@@ -35,7 +37,7 @@ public class Scratch : MonoBehaviour
                     Debug.Log($"{card.Name}: {card.DisplayText}");
                 }
 
-                lmbClicked = true;
+
             }
         }
         else
@@ -66,7 +68,7 @@ public class Scratch : MonoBehaviour
         Cell hitCell = GameManager.Instance.Grid.WorldPositionToCell(worldPosition);
         Instantiate(hitPointObject, worldPosition, Quaternion.identity);
         Debug.Log($"X: {hitCell.x} Y: {hitCell.y}");
-        Debug.Log(hitCell.Center);
+        // Debug.Log(hitCell.Center);
         // Debug.Log(hitCell.GetHashCode());
     }
 }

@@ -15,6 +15,7 @@ namespace Project
     public class GameManager : Singleton<GameManager>
     {
         [SerializeField] public Player Player;
+        [SerializeField] public GameObject UICanvas;
 
         [SerializeField] public DeckData EncounterDeckData;
         [SerializeField] public DeckData MonsterDeckData;

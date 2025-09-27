@@ -56,6 +56,20 @@ namespace Project.Grid
             this.cellSize = cellSize;
         }
 
+        public bool AreNodesRegisteredToCell(Cell cell, bool excludeHeroes=true)
+        {
+            List<Node> registeredNodes = GetNodesRegisteredToCell(cell);
+            if (registeredNodes.Count > 0)
+            {
+                if (registeredNodes.Count == 1 && excludeHeroes)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
         public List<Node> GetNodesRegisteredToCell(Cell cell)
         {
             List<Node> registeredNodes = new List<Node>();

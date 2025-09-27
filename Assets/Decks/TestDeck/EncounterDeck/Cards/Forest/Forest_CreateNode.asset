@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6283bb658c436f246aa210ab7ca730fd, type: 3}
   m_Name: Forest_CreateNode
   m_EditorClassIdentifier: 
-  nodeGameObject: {fileID: 242391786272760267, guid: b504909c309f43d4292d92215ae33a3e, type: 3}
+  nodePrefab: {fileID: 242391786272760267, guid: b504909c309f43d4292d92215ae33a3e, type: 3}

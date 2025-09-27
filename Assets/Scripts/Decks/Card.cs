@@ -37,8 +37,7 @@ namespace Project.Decks
 
         public void Execute()
         {
-            Debug.Log($"{Name}: {DisplayText}");
-
+            // Debug.Log($"{Name}: {DisplayText}");
             foreach (IStrategy strategy in strategies)
             {
                 strategy.Execute();

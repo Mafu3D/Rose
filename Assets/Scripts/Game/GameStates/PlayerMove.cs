@@ -49,7 +49,7 @@ namespace Project.GameStates
 
         private void EndPlayerTurn()
         {
-            StateMachine.SwitchState(new TurnProcessing(new GameRunning(StateMachine), StateMachine));
+            StateMachine.SwitchState(new ResolveCardDraw(new GameRunning(StateMachine), StateMachine));
         }
     }
 }
