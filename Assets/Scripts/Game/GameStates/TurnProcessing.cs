@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project;
+using Project.Combat;
 using Project.Decks;
 using Project.GameNode;
 using Project.Grid;
@@ -8,23 +9,31 @@ using UnityEngine;
 
 namespace Project.GameStates
 {
-    public class TurnProcessing : SubState
+    public class TurnProcessing : State
     {
         private List<Node> nodesToProcess = new();
         private int currentProcessingNode = 0;
 
-        public TurnProcessing(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
+        public TurnProcessing(StateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
             nodesToProcess = GameManager.Instance.Grid.GetNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell);
+            Debug.Log("Start Turn Processing");
         }
 
-        public override void Exit() { }
+        public override void Exit()
+        {
+            Debug.Log("End Turn Processing");
+        }
 
-        public override void Subscribe() { }
+        public override void Subscribe() {
+            BattleManager.Instance.OnBattleStart += EnterCombat;
+         }
 
-        public override void Unsubscribe() { }
+        public override void Unsubscribe() {
+            BattleManager.Instance.OnBattleStart -= EnterCombat;
+         }
 
         public override void Update(float deltaTime)
         {
@@ -41,6 +50,7 @@ namespace Project.GameStates
             while (currentProcessingNode < nodesToProcess.Count)
             {
                 Status status = nodesToProcess[currentProcessingNode].Process();
+                Debug.Log($"Processing: {nodesToProcess[currentProcessingNode]}");
                 if (status != Status.Success)
                 {
                     return status;
@@ -51,10 +61,15 @@ namespace Project.GameStates
             return Status.Success;
         }
 
+        private void EnterCombat()
+        {
+            StateMachine.SwitchState(new Combat(this, StateMachine));
+        }
+
         private void EndTurn()
         {
             GameManager.Instance.IncrementTurn();
-            StateMachine.SwitchState(new PlayerMove(new GameRunning(StateMachine), StateMachine));
+            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Project.GameStates
                 if (movementInput != Vector2.zero)
                 {
                     GameManager.Instance.Player.HeroNode.Move(movementInput);
-                    StateMachine.SwitchState(new PlayerMove(new GameRunning(StateMachine), StateMachine));
+                    StateMachine.SwitchState(new PlayerMove(SuperState, StateMachine));
                 }
             }
             if (GameManager.Instance.Hero.MovesRemaining <= 0)
@@ -49,7 +49,7 @@ namespace Project.GameStates
 
         private void EndPlayerTurn()
         {
-            StateMachine.SwitchState(new ResolveCardDraw(new GameRunning(StateMachine), StateMachine));
+            StateMachine.SwitchState(new ResolveCardDraw(SuperState, StateMachine));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Project
         public HeroNode Hero => Player.HeroNode;
         public int Turn { get; private set; }
 
-        public StateMachine stateMachine;
+        public StateMachine StateMachine;
 
         public Deck EncounterDeck;
         public Deck MonsterDeck;
@@ -42,7 +42,7 @@ namespace Project
         {
             base.Awake();
             Grid = new GridManager(new Vector2(1, 1));
-            stateMachine = new StateMachine();
+            StateMachine = new StateMachine();
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,7 +54,7 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
-            stateMachine.Update();
+            StateMachine.Update();
         }
 
         public void IncrementTurn()
@@ -66,7 +66,7 @@ namespace Project
 
         public void StartGame()
         {
-            stateMachine.SwitchState(new PlayerMove(new GameRunning(stateMachine), stateMachine));
+            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
             Turn = 0;
 
             EncounterDeck = InitializeDeck(EncounterDeckData);

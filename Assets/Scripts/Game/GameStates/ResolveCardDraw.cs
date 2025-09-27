@@ -72,7 +72,7 @@ namespace Project.GameStates
 
         private void MoveToNextState()
         {
-            StateMachine.SwitchState(new TurnProcessing(new GameRunning(StateMachine), StateMachine));
+            StateMachine.SwitchState(new WaitForTurnProcess(new TurnProcessing(StateMachine), StateMachine));
         }
     }
 }

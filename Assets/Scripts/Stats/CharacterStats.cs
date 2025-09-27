@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Project.Stats
 {
     public class CharacterStats
@@ -17,6 +19,8 @@ namespace Project.Stats
             this.Magic = new Stat("Magic", data.Magic);
             this.Dexterity = new Stat("Dexterity", data.Dexterity);
             this.Armor = new Stat("Armor", data.Armor);
+
+            Debug.Log($"{this.Health.GetValue()}, {this.Speed.GetValue()}, {this.Strength.GetValue()}, {this.Magic.GetValue()}, {this.Dexterity.GetValue()}, {this.Armor.GetValue()}");
         }
 
         public int GetHealthValue() => Health.GetValue();

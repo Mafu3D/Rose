@@ -1,3 +1,4 @@
+using System;
 using Project.GameNode;
 using UnityEngine;
 
@@ -11,12 +12,15 @@ namespace Project.Combat
 
         public Battle ActiveBattle;
         public bool IsActiveBattle => ActiveBattle != null;
+        public event Action OnBattleStart;
+        public event Action OnBattleEnd;
 
 
         public void StartNewBattle(CombatNode left, CombatNode right)
         {
             ActiveBattle = new Battle(left, right);
             ActiveBattle.StartBattle();
+            OnBattleStart?.Invoke();
             BattleUI.Instance.OpenBattleUI();
         }
 
@@ -44,6 +48,7 @@ namespace Project.Combat
             {
                 ActiveBattle = null;
             }
+            OnBattleEnd?.Invoke();
         }
     }
 }
