@@ -8,13 +8,12 @@ using Project.Combat;
 
 namespace Project.GameNode.Hero
 {
-    public class HeroNode : Node, ICombatantNode
+    public class HeroNode : CombatNode, IMovableNode
     {
         [SerializeField] public Player Player;
 
         private Rigidbody2D myRigidBody;
         public HeroData HeroData => Player.HeroData;
-        public CharacterStats Stats;
 
         public int MovesRemaining { get; private set; }
 
@@ -23,7 +22,6 @@ namespace Project.GameNode.Hero
         protected override void Awake()
         {
             base.Awake();
-            Stats = new CharacterStats(HeroData.StatsData);
             myRigidBody = GetComponent<Rigidbody2D>();
             ResetMovesRemaining();
         }
@@ -64,23 +62,6 @@ namespace Project.GameNode.Hero
         public override void Reset()
         {
             //Noop
-        }
-
-        public int GetHealthValue() => Stats.GetHealthValue();
-        public int GetSpeedValue() => Stats.GetSpeedValue();
-        public int GetStrengthValue() => Stats.GetStrengthValue();
-        public int GetMagicValue() => Stats.GetMagicValue();
-        public int GetDexterityValue() => Stats.GetDexterityValue();
-        public int GetArmorValue() => Stats.GetArmorValue();
-
-        public void Attack(out int attackValue)
-        {
-            attackValue = GetStrengthValue();
-        }
-
-        public void ReceiveAttack(HitReport hitReport)
-        {
-            Stats.DecreaseHealthValue(hitReport.Damage);
         }
     }
 }

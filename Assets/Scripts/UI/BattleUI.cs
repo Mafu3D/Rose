@@ -14,7 +14,7 @@ public class BattleUI : Singleton<BattleUI>
 
     [SerializeField] TMP_Text BattleLog;
 
-    Battle activeBattle;
+    Battle activeBattle => BattleManager.Instance.ActiveBattle;
 
     protected override void Awake()
     {
@@ -23,25 +23,28 @@ public class BattleUI : Singleton<BattleUI>
         BattleLog.text = "";
     }
 
-    public void OpenBattleUI(Battle battle, HeroData heroData, NodeData monsterData)
+    public void OpenBattleUI()
     {
         MainContainer.SetActive(true);
 
-        activeBattle = battle;
-
-        LeftCombatantUI.InitializeCombatant(activeBattle.Hero, heroData.Sprite, heroData.DisplayName, "");
-        RightCombatantUI.InitializeCombatant(activeBattle.Monster, monsterData.Sprite, monsterData.DisplayName, monsterData.Description);
+        LeftCombatantUI.InitializeCombatant(activeBattle.Left,
+                                            activeBattle.Left.NodeData.Sprite,
+                                            activeBattle.Left.NodeData.DisplayName,
+                                            "");
+        RightCombatantUI.InitializeCombatant(activeBattle.Right,
+                                             activeBattle.Right.NodeData.Sprite,
+                                             activeBattle.Right.NodeData.DisplayName,
+                                             activeBattle.Right.NodeData.Description);
 
         BattleLog.text = "";
 
-        battle.OnBattleAction += UpdateUI;
+        activeBattle.OnBattleAction += UpdateUI;
     }
 
-    public void CloseBattleUI(Battle battle)
+    public void CloseBattleUI()
     {
 
-        battle.OnBattleAction -= UpdateUI;
-        activeBattle = null;
+        activeBattle.OnBattleAction -= UpdateUI;
         MainContainer.SetActive(false);
     }
 

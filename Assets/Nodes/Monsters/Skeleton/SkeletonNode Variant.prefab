@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: NodeData
       value: 
       objectReference: {fileID: 11400000, guid: 4c8a7f0cb796f4b4cb951392eaa50e2d, type: 2}
+    - target: {fileID: 6582607631212750363, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+      propertyPath: statsData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a24b4c12d60ef948b7f3287c9d45bcf, type: 2}
     - target: {fileID: 7483181370825314142, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
       propertyPath: m_Name
       value: SkeletonNode Variant

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 3
   Speed: 3
-  Strength: 2
+  Strength: 3
   Magic: 1
   Dexterity: 1
   Armor: 0

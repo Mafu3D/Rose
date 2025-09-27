@@ -25,11 +25,11 @@ namespace Project.Combat
 
     public class Battle
     {
-        public readonly ICombatantNode Hero;
-        public readonly ICombatantNode Monster;
+        public readonly CombatNode Left;
+        public readonly CombatNode Right;
         public int Round;
         public int Turn;
-        ICombatantNode[] combatantOrder = new ICombatantNode[2];
+        CombatNode[] combatantOrder = new CombatNode[2];
         BattleState battleState = BattleState.NotStarted;
 
         float timer;
@@ -37,10 +37,10 @@ namespace Project.Combat
         public event Action<string> OnBattleAction;
 
 
-        public Battle(ICombatantNode hero, ICombatantNode monster)
+        public Battle(CombatNode left, CombatNode right)
         {
-            this.Hero = hero;
-            this.Monster = monster;
+            this.Left = left;
+            this.Right = right;
         }
 
         public void StartBattle()
@@ -48,6 +48,7 @@ namespace Project.Combat
             Round = 0;
             Turn = 0;
             NewRound();
+            Debug.Log("Starting new battle");
         }
 
         public Status ProcessBattle()
@@ -65,7 +66,7 @@ namespace Project.Combat
 
                 case BattleState.TurnOneBuffer:
                     timer += Time.deltaTime;
-                    if (timer > GameManager.Instance.TimeBetweenCombatTurns)
+                    if (timer > BattleManager.Instance.TimeBetweenCombatTurns)
                     {
                         timer = 0f;
                         battleState = BattleState.TurnTwo;
@@ -80,7 +81,7 @@ namespace Project.Combat
 
                 case BattleState.TurnTwoBuffer:
                     timer += Time.deltaTime;
-                    if (timer > GameManager.Instance.TimeBetweenCombatTurns)
+                    if (timer > BattleManager.Instance.TimeBetweenCombatTurns)
                     {
                         timer = 0f;
                         battleState = BattleState.TurnOne;
@@ -105,19 +106,19 @@ namespace Project.Combat
         {
             Round += 1;
             Turn = 0;
-            combatantOrder = new ICombatantNode[2];
+            combatantOrder = new CombatNode[2];
             battleState = BattleState.TurnOne;
 
             // Determine round order
-            if (Hero.GetSpeedValue() > Monster.GetSpeedValue())
+            if (Left.GetSpeedValue() > Right.GetSpeedValue())
             {
-                combatantOrder[0] = Hero;
-                combatantOrder[1] = Monster;
+                combatantOrder[0] = Left;
+                combatantOrder[1] = Right;
             }
             else
             {
-                combatantOrder[0] = Monster;
-                combatantOrder[1] = Hero;
+                combatantOrder[0] = Right;
+                combatantOrder[1] = Left;
             }
         }
 
@@ -147,20 +148,23 @@ namespace Project.Combat
             }
 
             OnBattleAction?.Invoke(message);
+            Debug.Log(message);
 
             CheckForCombatResolution();
         }
 
         private void CheckForCombatResolution()
         {
-            if (Hero.GetHealthValue() <= 0)
+            if (Left.GetHealthValue() <= 0)
             {
                 battleState = BattleState.Defeat;
+                Debug.Log("defeat!");
             }
 
-            if (Monster.GetHealthValue() <= 0)
+            if (Right.GetHealthValue() <= 0)
             {
                 battleState = BattleState.Victory;
+                Debug.Log("victory");
             }
         }
 

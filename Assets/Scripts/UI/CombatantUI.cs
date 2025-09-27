@@ -15,9 +15,9 @@ public class CombatantUI : MonoBehaviour
     [SerializeField] TMP_Text magicText;
     [SerializeField] TMP_Text dexterityText;
 
-    ICombatantNode combatant;
+    CombatNode combatant;
 
-    public void InitializeCombatant(ICombatantNode combatantNode, Sprite sprite, string name, string description)
+    public void InitializeCombatant(CombatNode combatantNode, Sprite sprite, string name, string description)
     {
         image.sprite = sprite;
         displayName.text = name;

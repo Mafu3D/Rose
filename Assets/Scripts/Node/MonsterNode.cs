@@ -6,38 +6,15 @@ using UnityEngine;
 
 namespace Project.GameNode
 {
-    public class MonsterNode : Node, ICombatantNode
+    public class MonsterNode : CombatNode, IMovableNode
     {
-        public CharacterStats Stats;
-
-        public Battle battle;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            Stats = new CharacterStats(NodeData.StatsData);
-        }
         public override Status Process()
         {
-            if (battle == null)
+            if (!BattleManager.Instance.IsActiveBattle)
             {
-                battle = new Battle(GameManager.Instance.Hero, this);
-                battle.StartBattle();
-                BattleUI.Instance.OpenBattleUI(battle, GameManager.Instance.Hero.HeroData, this.NodeData);
-                return Status.Running;
+                BattleManager.Instance.StartNewBattle(GameManager.Instance.Hero, this);
             }
-
-            switch (battle.ProcessBattle())
-            {
-                case Status.Running:
-                    break;
-                case Status.Success:
-                    BattleUI.Instance.CloseBattleUI(battle);
-                    return Status.Success;
-                default:
-                    return Status.Failure;
-            }
-            return Status.Running;
+            return BattleManager.Instance.Process();
         }
 
         public override void Reset()
@@ -45,21 +22,9 @@ namespace Project.GameNode
             // Noop
         }
 
-        public int GetHealthValue() => Stats.GetHealthValue();
-        public int GetSpeedValue() => Stats.GetSpeedValue();
-        public int GetStrengthValue() => Stats.GetStrengthValue();
-        public int GetMagicValue() => Stats.GetMagicValue();
-        public int GetDexterityValue() => Stats.GetDexterityValue();
-        public int GetArmorValue() => Stats.GetArmorValue();
-
-        public void Attack(out int attackValue)
+        public void Move(Vector2 direction)
         {
-            attackValue = GetStrengthValue();
-        }
-
-        public void ReceiveAttack(HitReport hitReport)
-        {
-            Stats.DecreaseHealthValue(hitReport.Damage);
+            // TOOD: Implement
         }
     }
 }
