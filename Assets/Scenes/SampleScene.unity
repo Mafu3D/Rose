@@ -7834,7 +7834,6 @@ MonoBehaviour:
   MonsterDeckData: {fileID: 0}
   ItemDeckData: {fileID: 0}
   <TimeBetweenPlayerMoves>k__BackingField: 0.25
-  PlayerMovesRemaining: 0
 --- !u!4 &1639557477
 Transform:
   m_ObjectHideFlags: 0

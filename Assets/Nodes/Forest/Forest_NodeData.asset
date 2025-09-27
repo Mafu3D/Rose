@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Forest
+  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
+  m_Name: Forest_NodeData
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,8 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Forest
+  DisplayName: Forest
   Sprite: {fileID: 1467490156855167635, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  CardType: 0
-  DisplayText: A nice quaint forest.
-  Value: 0
+  Priority: 0
+  NodeType: 0

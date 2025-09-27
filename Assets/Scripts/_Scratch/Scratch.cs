@@ -32,7 +32,7 @@ public class Scratch : MonoBehaviour
                 Card card = deck.DrawCard();
                 if (card != null)
                 {
-                    Debug.Log($"{card.name}: {card.text}");
+                    Debug.Log($"{card.Name}: {card.DisplayText}");
                 }
 
                 lmbClicked = true;

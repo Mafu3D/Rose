@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: HeroNodeData
+  m_Script: {fileID: 11500000, guid: 6283bb658c436f246aa210ab7ca730fd, type: 3}
+  m_Name: Forest_CreateNode
   m_EditorClassIdentifier: 
-  Priority: 0
+  nodeGameObject: {fileID: 242391786272760267, guid: b504909c309f43d4292d92215ae33a3e, type: 3}

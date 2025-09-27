@@ -42,7 +42,6 @@ namespace Project
             base.Awake();
             Grid = new GridManager(new Vector2(1, 1));
             stateMachine = new StateMachine();
-
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created

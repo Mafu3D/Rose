@@ -17,8 +17,9 @@ namespace Project.GameNode.Hero
 
         public Action OnRemainingMovesChanged;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             myRigidBody = GetComponent<Rigidbody2D>();
             ResetMovesRemaining();
         }

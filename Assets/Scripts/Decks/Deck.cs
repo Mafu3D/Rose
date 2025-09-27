@@ -4,27 +4,7 @@ using UnityEngine;
 
 namespace Project.Decks
 {
-    public enum CardType
-    {
-        Location,
-        Encounter,
-        Event,
-        NPC,
-        Monster,
-        Item
-    }
 
-    public class Card
-    {
-        public readonly string name;
-        public readonly string text;
-
-        public Card(string name, string text)
-        {
-            this.name = name;
-            this.text = text;
-        }
-    }
 
     public class Deck
     {

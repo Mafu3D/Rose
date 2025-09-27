@@ -10,7 +10,7 @@ namespace Project.GameStates
 {
     public class TurnProcessing : SubState
     {
-        private List<Node> nodesToProcess;
+        private List<Node> nodesToProcess = new();
         private int currentProcessingNode = 0;
 
         public TurnProcessing(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
@@ -64,7 +64,7 @@ namespace Project.GameStates
             Card card = GameManager.Instance.EncounterDeck.DrawCard();
             if (card != null)
             {
-                Debug.Log($"{card.name}: {card.text}");
+                card.Execute();
             }
         }
     }
