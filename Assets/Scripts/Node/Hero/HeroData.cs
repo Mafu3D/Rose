@@ -1,3 +1,4 @@
+using Project.Stats;
 using UnityEngine;
 
 namespace Project.GameNode.Hero
@@ -6,6 +7,6 @@ namespace Project.GameNode.Hero
     public class HeroData : ScriptableObject
     {
         [SerializeField] public int MoveDistance = 1;
-        [SerializeField] public int Speed = 2;
+        [SerializeField] public StatsData StatsData;
     }
 }

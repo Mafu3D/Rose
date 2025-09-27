@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de37a04a3ae037c4e8c51ab3d505446f, type: 3}
-  m_Name: TestDeck
+  m_Name: TestEncounterDecl
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 2a636352b121fda45b5c745c0fef0165, type: 2}
+    - {fileID: 11400000, guid: 83c88ac918b29f34291b14e1af0a3306, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,18 +25,18 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Cards
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[CardData, Assembly-CSharp],[System.Int32,
+      Data: 0|System.Collections.Generic.Dictionary`2[[Project.Decks.CardData, Assembly-CSharp],[System.Int32,
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[CardData, Assembly-CSharp]],
-        mscorlib
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[Project.Decks.CardData,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
@@ -45,6 +46,18 @@ MonoBehaviour:
     - Name: $v
       Entry: 3
       Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 5
     - Name: 
       Entry: 8
       Data: 

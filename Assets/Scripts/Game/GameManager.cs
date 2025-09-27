@@ -69,10 +69,17 @@ namespace Project
             stateMachine.SwitchState(new PlayerMove(new GameRunning(stateMachine), stateMachine));
             Turn = 0;
 
-            EncounterDeck = new Deck();
-            EncounterDeck.AddCards(EncounterDeckData.UnpackCards());
-            EncounterDeck.Reset();
-            EncounterDeck.Shuffle();
+            EncounterDeck = InitializeDeck(EncounterDeckData);
+            MonsterDeck = InitializeDeck(MonsterDeckData);
+        }
+
+        private Deck InitializeDeck(DeckData deckData)
+        {
+            Deck deck = new Deck();
+            deck.AddCards(deckData.UnpackCards());
+            deck.Reset();
+            deck.Shuffle();
+            return deck;
         }
     }
 }

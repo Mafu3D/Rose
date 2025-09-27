@@ -3,6 +3,7 @@ using Project.PlayerSystem;
 using Project.Grid;
 using Project.GameNode;
 using System;
+using Project.Stats;
 
 namespace Project.GameNode.Hero
 {
@@ -12,6 +13,7 @@ namespace Project.GameNode.Hero
 
         private Rigidbody2D myRigidBody;
         public HeroData HeroData => Player.HeroData;
+        public CharacterStats Stats;
 
         public int MovesRemaining { get; private set; }
 
@@ -20,6 +22,7 @@ namespace Project.GameNode.Hero
         protected override void Awake()
         {
             base.Awake();
+            Stats = new CharacterStats(HeroData.StatsData);
             myRigidBody = GetComponent<Rigidbody2D>();
             ResetMovesRemaining();
         }
@@ -48,7 +51,7 @@ namespace Project.GameNode.Hero
 
         public void ResetMovesRemaining()
         {
-            MovesRemaining = HeroData.Speed;
+            MovesRemaining = Stats.GetSpeedValue();
             OnRemainingMovesChanged?.Invoke();
         }
 

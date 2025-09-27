@@ -18,7 +18,7 @@ namespace Project.GameStates
         {
             if (GameManager.Instance.Grid.AreNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell))
             {
-                MoveToNextState();
+                // MoveToNextState();
             }
             else
             {
@@ -47,6 +47,15 @@ namespace Project.GameStates
             {
                 MoveToNextState();
                 return;
+            }
+            if (card.CardType == CardType.Monster)
+            {
+                card = GameManager.Instance.MonsterDeck.DrawCard();
+                if (card == null)
+                {
+                    MoveToNextState();
+                    return;
+                }
             }
             MainUI.Instance.DisplayCard(card);
         }

@@ -15,14 +15,32 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 3f29c466b24f85244b05838f24eaa3f1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Strategies
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Projejct.Decks.CardStrategies.IStrategy,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   Name: Orc
   Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   CardType: 4
   DisplayText: Run! it's a nasty orc!
   Value: 0
+  NodeData: {fileID: 11400000, guid: 47ad9efd924de8d47920c9bbefb93701, type: 2}
