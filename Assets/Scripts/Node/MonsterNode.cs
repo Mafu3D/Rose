@@ -9,7 +9,7 @@ namespace Project.GameNode
     public class MonsterNode : CombatNode, IMovableNode
     {
         bool hasSentBattleRequest;
-        public override Status Process()
+        public override Status Resolve()
         {
             if (!BattleManager.Instance.IsActiveBattle && !hasSentBattleRequest)
             {
@@ -23,7 +23,7 @@ namespace Project.GameNode
             }
             else
             {
-                return Status.Success;
+                return Status.Complete;
             }
         }
 

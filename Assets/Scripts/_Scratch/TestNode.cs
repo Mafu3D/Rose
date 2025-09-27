@@ -7,14 +7,14 @@ namespace Project.GameNode
     {
         [SerializeField] float timeToProcess = 3f;
         float timeProcessing;
-        public override Status Process()
+        public override Status Resolve()
         {
             timeProcessing += Time.deltaTime;
             if (timeProcessing < timeToProcess)
             {
                 return Status.Running;
             }
-            return Status.Success;
+            return Status.Complete;
         }
 
         public override void Reset()

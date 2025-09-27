@@ -54,9 +54,9 @@ namespace Project.GameNode.Hero
             OnRemainingMovesChanged?.Invoke();
         }
 
-        public override Status Process()
+        public override Status Resolve()
         {
-            return Status.Success;
+            return Status.Complete;
         }
 
         public override void Reset()

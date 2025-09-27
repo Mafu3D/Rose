@@ -16,7 +16,7 @@ namespace Project.GameNode
             Stats = new CharacterStats(statsData);
         }
 
-        public override Status Process()
+        public override Status Resolve()
         {
             // Noop
             return Status.Running;

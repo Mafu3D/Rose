@@ -27,7 +27,7 @@ namespace Project.Combat
 
         public Status Proceed()
         {
-            if (ActiveBattle == null) return Status.Failure;
+            if (ActiveBattle == null) return Status.Complete;
 
             switch (ActiveBattle.Proceed())
             {
@@ -36,7 +36,7 @@ namespace Project.Combat
                 default:
                     BattleUI.Instance.CloseBattleUI();
                     EndActiveBattle();
-                    return Status.Success;
+                    return Status.Complete;
             }
         }
 

@@ -2,7 +2,7 @@ namespace Project.GameNode
 {
     public class MovableNode : Node
     {
-        public override Status Process()
+        public override Status Resolve()
         {
             throw new System.NotImplementedException();
         }

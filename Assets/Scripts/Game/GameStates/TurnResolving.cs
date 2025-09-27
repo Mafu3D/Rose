@@ -9,16 +9,28 @@ using UnityEngine;
 
 namespace Project.GameStates
 {
-    public class TurnProcessing : State
+    public class TurnResolving : State
     {
-        private List<Node> nodesToProcess = new();
-        private int currentProcessingNode = 0;
+        private List<Node> nodesToResolve = new();
+        private int resolvingNodeIndex = 0;
 
-        public TurnProcessing(StateMachine stateMachine) : base(stateMachine) { }
+        public Node CurrentResolvingNode
+        {
+            get
+            {
+                if (nodesToResolve.Count > 0)
+                {
+                    return nodesToResolve[resolvingNodeIndex];
+                }
+                return null;
+            }
+        }
+
+        public TurnResolving(StateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
-            nodesToProcess = GameManager.Instance.Grid.GetNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell);
+            nodesToResolve = GameManager.Instance.Grid.GetNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell);
             Debug.Log("Start Turn Processing");
         }
 
@@ -37,28 +49,27 @@ namespace Project.GameStates
 
         public override void Update(float deltaTime)
         {
-            Status status = ProcessTurn();
-            if (status == Status.Success)
+            Status status = ResolveTurn();
+            if (status == Status.Complete)
             {
-                currentProcessingNode = 0;
+                resolvingNodeIndex = 0;
                 EndTurn();
             }
         }
 
-        private Status ProcessTurn()
+        private Status ResolveTurn()
         {
-            while (currentProcessingNode < nodesToProcess.Count)
+            while (resolvingNodeIndex < nodesToResolve.Count)
             {
-                Status status = nodesToProcess[currentProcessingNode].Process();
-                Debug.Log($"Processing: {nodesToProcess[currentProcessingNode]}");
-                if (status != Status.Success)
+                Status status = nodesToResolve[resolvingNodeIndex].Resolve();
+                if (status != Status.Complete)
                 {
                     return status;
                 }
-                nodesToProcess[currentProcessingNode].Reset();
-                currentProcessingNode++;
+                nodesToResolve[resolvingNodeIndex].Reset();
+                resolvingNodeIndex++;
             }
-            return Status.Success;
+            return Status.Complete;
         }
 
         private void EnterCombat()

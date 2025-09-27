@@ -15,8 +15,7 @@ namespace Project.GameNode
     public enum Status
     {
         Running,
-        Success,
-        Failure
+        Complete
     }
 
     public abstract class Node : MonoBehaviour
@@ -26,7 +25,7 @@ namespace Project.GameNode
 
         [SerializeField] public NodeData NodeData;
 
-        public abstract Status Process();
+        public abstract Status Resolve();
 
         public abstract void Reset();
 

@@ -14,16 +14,5 @@ namespace Project.UI.DebugUI
             stateText.text = textString;
         }
     }
-
-    public class DebugNodeProcessingUI : MonoBehaviour
-    {
-        [SerializeField] TMP_Text nodeProcessingText;
-
-        void Update()
-        {
-            string textString = $"State: {GameManager.Instance.StateMachine.CurrentSuperState} > {GameManager.Instance.StateMachine.CurrentState}";
-            nodeProcessingText.text = textString;
-        }
-    }
 }
 
