@@ -3,18 +3,21 @@ using Project;
 using TMPro;
 using UnityEngine;
 
-public class TurnUI : MonoBehaviour
+namespace Project.UI.MainUI
 {
-    [SerializeField] private TMP_Text turnText;
-
-    void Start()
+    public class TurnUI : MonoBehaviour
     {
-        GameManager.Instance.OnStartPlayerTurn += UpdateTurnTracker;
-        UpdateTurnTracker();
-    }
+        [SerializeField] private TMP_Text turnText;
 
-    private void UpdateTurnTracker()
-    {
-        turnText.text = $"Turn: {GameManager.Instance.Turn.ToString("D3")}";
+        void Start()
+        {
+            GameManager.Instance.OnStartPlayerTurn += UpdateTurnTracker;
+            UpdateTurnTracker();
+        }
+
+        private void UpdateTurnTracker()
+        {
+            turnText.text = $"Turn: {GameManager.Instance.Turn.ToString("D3")}";
+        }
     }
 }

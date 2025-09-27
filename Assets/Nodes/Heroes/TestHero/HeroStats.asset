@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
   m_Name: HeroStats
   m_EditorClassIdentifier: 
-  Health: 3
+  Health: 20
   Speed: 3
-  Strength: 3
+  Strength: 2
   Magic: 1
   Dexterity: 1
   Armor: 0

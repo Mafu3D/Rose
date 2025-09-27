@@ -2,13 +2,28 @@ using Project;
 using TMPro;
 using UnityEngine;
 
-public class DebugStateUI : MonoBehaviour
+namespace Project.UI.DebugUI
 {
-    [SerializeField] TMP_Text stateText;
-
-    void Update()
+    public class DebugStateUI : MonoBehaviour
     {
-        string textString = $"State: {GameManager.Instance.StateMachine.CurrentSuperState} > {GameManager.Instance.StateMachine.CurrentState}";
-        stateText.text = textString;
+        [SerializeField] TMP_Text stateText;
+
+        void Update()
+        {
+            string textString = $"State: {GameManager.Instance.StateMachine.CurrentSuperState} > {GameManager.Instance.StateMachine.CurrentState}";
+            stateText.text = textString;
+        }
+    }
+
+    public class DebugNodeProcessingUI : MonoBehaviour
+    {
+        [SerializeField] TMP_Text nodeProcessingText;
+
+        void Update()
+        {
+            string textString = $"State: {GameManager.Instance.StateMachine.CurrentSuperState} > {GameManager.Instance.StateMachine.CurrentState}";
+            nodeProcessingText.text = textString;
+        }
     }
 }
+

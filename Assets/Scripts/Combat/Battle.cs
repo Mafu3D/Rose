@@ -47,7 +47,6 @@ namespace Project.Combat
             Round = 0;
             Turn = 0;
             NewRound();
-            Debug.Log("Starting new battle");
         }
 
         public BattleResolution Proceed()
@@ -145,7 +144,6 @@ namespace Project.Combat
             }
 
             OnBattleAction?.Invoke(message);
-            Debug.Log(message);
 
             CheckForCombatResolution();
         }

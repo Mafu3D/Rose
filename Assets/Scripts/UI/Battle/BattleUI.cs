@@ -5,54 +5,57 @@ using Project.GameNode.Hero;
 using TMPro;
 using UnityEngine;
 
-public class BattleUI : Singleton<BattleUI>
+namespace Project.UI.BattleUI
 {
-    [SerializeField] GameObject MainContainer;
-
-    [SerializeField] CombatantUI LeftCombatantUI;
-    [SerializeField] CombatantUI RightCombatantUI;
-
-    [SerializeField] TMP_Text BattleLog;
-
-    Battle activeBattle => BattleManager.Instance.ActiveBattle;
-
-    protected override void Awake()
+    public class BattleUI : Singleton<BattleUI>
     {
-        base.Awake();
-        MainContainer.SetActive(false);
-        BattleLog.text = "";
-    }
+        [SerializeField] GameObject MainContainer;
 
-    public void OpenBattleUI()
-    {
-        MainContainer.SetActive(true);
+        [SerializeField] CombatantUI LeftCombatantUI;
+        [SerializeField] CombatantUI RightCombatantUI;
 
-        LeftCombatantUI.InitializeCombatant(activeBattle.Left,
-                                            activeBattle.Left.NodeData.Sprite,
-                                            activeBattle.Left.NodeData.DisplayName,
-                                            "");
-        RightCombatantUI.InitializeCombatant(activeBattle.Right,
-                                             activeBattle.Right.NodeData.Sprite,
-                                             activeBattle.Right.NodeData.DisplayName,
-                                             activeBattle.Right.NodeData.Description);
+        [SerializeField] TMP_Text BattleLog;
 
-        BattleLog.text = "";
+        Battle activeBattle => BattleManager.Instance.ActiveBattle;
 
-        activeBattle.OnBattleAction += UpdateUI;
-    }
+        protected override void Awake()
+        {
+            base.Awake();
+            MainContainer.SetActive(false);
+            BattleLog.text = "";
+        }
 
-    public void CloseBattleUI()
-    {
+        public void OpenBattleUI()
+        {
+            MainContainer.SetActive(true);
 
-        activeBattle.OnBattleAction -= UpdateUI;
-        MainContainer.SetActive(false);
-    }
+            LeftCombatantUI.InitializeCombatant(activeBattle.Left,
+                                                activeBattle.Left.NodeData.Sprite,
+                                                activeBattle.Left.NodeData.DisplayName,
+                                                "");
+            RightCombatantUI.InitializeCombatant(activeBattle.Right,
+                                                 activeBattle.Right.NodeData.Sprite,
+                                                 activeBattle.Right.NodeData.DisplayName,
+                                                 activeBattle.Right.NodeData.Description);
 
-    void UpdateUI(string message)
-    {
-        // int lines = BattleLog.text.Split('\n').Length;
-        LeftCombatantUI.UpdateStats();
-        RightCombatantUI.UpdateStats();
-        BattleLog.text += $"{message} \n";
+            BattleLog.text = "";
+
+            activeBattle.OnBattleAction += UpdateUI;
+        }
+
+        public void CloseBattleUI()
+        {
+
+            activeBattle.OnBattleAction -= UpdateUI;
+            MainContainer.SetActive(false);
+        }
+
+        void UpdateUI(string message)
+        {
+            // int lines = BattleLog.text.Split('\n').Length;
+            LeftCombatantUI.UpdateStats();
+            RightCombatantUI.UpdateStats();
+            BattleLog.text += $"{message} \n";
+        }
     }
 }

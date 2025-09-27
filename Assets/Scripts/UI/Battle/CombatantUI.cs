@@ -3,38 +3,41 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CombatantUI : MonoBehaviour
+namespace Project.UI.BattleUI
 {
-    [SerializeField] Image image;
-    [SerializeField] TMP_Text displayName;
-    [SerializeField] TMP_Text description;
-    [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text armorText;
-    [SerializeField] TMP_Text speedText;
-    [SerializeField] TMP_Text strengthText;
-    [SerializeField] TMP_Text magicText;
-    [SerializeField] TMP_Text dexterityText;
-
-    CombatNode combatant;
-
-    public void InitializeCombatant(CombatNode combatantNode, Sprite sprite, string name, string description)
+    public class CombatantUI : MonoBehaviour
     {
-        image.sprite = sprite;
-        displayName.text = name;
-        this.description.text = description;
+        [SerializeField] Image image;
+        [SerializeField] TMP_Text displayName;
+        [SerializeField] TMP_Text description;
+        [SerializeField] TMP_Text healthText;
+        [SerializeField] TMP_Text armorText;
+        [SerializeField] TMP_Text speedText;
+        [SerializeField] TMP_Text strengthText;
+        [SerializeField] TMP_Text magicText;
+        [SerializeField] TMP_Text dexterityText;
 
-        combatant = combatantNode;
+        CombatNode combatant;
 
-        UpdateStats();
-    }
+        public void InitializeCombatant(CombatNode combatantNode, Sprite sprite, string name, string description)
+        {
+            image.sprite = sprite;
+            displayName.text = name;
+            this.description.text = description;
 
-    public void UpdateStats()
-    {
-        healthText.text = combatant.GetHealthValue().ToString();
-        armorText.text = combatant.GetArmorValue().ToString();
-        speedText.text = combatant.GetSpeedValue().ToString();
-        strengthText.text = combatant.GetStrengthValue().ToString();
-        magicText.text = combatant.GetMagicValue().ToString();
-        dexterityText.text = combatant.GetDexterityValue().ToString();
+            combatant = combatantNode;
+
+            UpdateStats();
+        }
+
+        public void UpdateStats()
+        {
+            healthText.text = combatant.GetHealthValue().ToString();
+            armorText.text = combatant.GetArmorValue().ToString();
+            speedText.text = combatant.GetSpeedValue().ToString();
+            strengthText.text = combatant.GetStrengthValue().ToString();
+            magicText.text = combatant.GetMagicValue().ToString();
+            dexterityText.text = combatant.GetDexterityValue().ToString();
+        }
     }
 }

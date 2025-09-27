@@ -2,25 +2,28 @@ using Project;
 using Project.Decks;
 using UnityEngine;
 
-public class MainUI : Singleton<MainUI>
+namespace Project.UI.MainUI
 {
-    [SerializeField] private GameObject cardDisplayPrefab;
-    [SerializeField] private RectTransform cardDisplayTransform;
-
-    GameObject currentlyDisplayedCard;
-
-    public void DisplayCard(Card card)
+    public class MainUI : Singleton<MainUI>
     {
-        currentlyDisplayedCard = Instantiate(cardDisplayPrefab, cardDisplayTransform.position, Quaternion.identity, cardDisplayTransform);
-        CardDisplay cardDisplay = currentlyDisplayedCard.GetComponent<CardDisplay>();
-        cardDisplay.DisplayCard(card);
-    }
+        [SerializeField] private GameObject cardDisplayPrefab;
+        [SerializeField] private RectTransform cardDisplayTransform;
 
-    public void DestroyDisplayedCard()
-    {
-        if (currentlyDisplayedCard != null)
+        GameObject currentlyDisplayedCard;
+
+        public void DisplayCard(Card card)
         {
-            Destroy(currentlyDisplayedCard);
+            currentlyDisplayedCard = Instantiate(cardDisplayPrefab, cardDisplayTransform.position, Quaternion.identity, cardDisplayTransform);
+            CardDisplay cardDisplay = currentlyDisplayedCard.GetComponent<CardDisplay>();
+            cardDisplay.DisplayCard(card);
+        }
+
+        public void DestroyDisplayedCard()
+        {
+            if (currentlyDisplayedCard != null)
+            {
+                Destroy(currentlyDisplayedCard);
+            }
         }
     }
 }
