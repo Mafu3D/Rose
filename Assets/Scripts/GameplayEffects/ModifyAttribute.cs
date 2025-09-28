@@ -21,26 +21,26 @@ namespace Project.GameplayEffects
             HeroNode heroNode = GameManager.Instance.Player.HeroNode;
             if (AttributeType == AttributeType.Health)
             {
-                if (BaseValueModifier != 0)
-                {
-                    heroNode.Attributes.ModifyAttributeValue(AttributeType, BaseValueModifier);
-                }
-
                 if (MaxValueModifier != 0)
                 {
                     heroNode.Attributes.ModifyMaxAttributeValue(AttributeType, MaxValueModifier);
                 }
+
+                if (BaseValueModifier != 0)
+                {
+                    heroNode.Attributes.ModifyAttributeValue(AttributeType, BaseValueModifier);
+                }
             }
             else
             {
-                if (BaseValueModifier != 0)
-                {
-                    heroNode.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier);
-                }
-
                 if (MaxValueModifier != 0)
                 {
                     heroNode.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier);
+                }
+
+                if (BaseValueModifier != 0)
+                {
+                    heroNode.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier);
                 }
             }
 
