@@ -15,31 +15,13 @@ namespace Project.GameNode
         [SerializeField] public int Priority = 0;
         [SerializeField] public NodeType NodeType;
 
-        [SerializeField] public List<IStrategy> OnTurnResolveStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnPlayerEnterStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnPlayerExitStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnCreateStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnDestroyStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnRoundStartStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnPlayerTurnEndStrategies = new List<IStrategy>();
-        [SerializeField] public List<IStrategy> OnRoundEndStrategies = new List<IStrategy>();
-
-        // On PlayerEnter Strategies
-
-        // On PlayerExit Strategies
-
-        // On Resolve Strategies
-
-        // On Create Strategies
-
-        // On Destroy Strategies
-
-        // On RoundStart Strategies
-
-        // On PlayerTurnEnd Strategies
-
-        // On RoundEnd Strategies
-
-        // On Move Strategies
+        [SerializeField] public List<INodeStrategy> OnTurnResolveStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnPlayerEnterStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnPlayerExitStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnCreateStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnDestroyStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnRoundStartStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnPlayerTurnEndStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<INodeStrategy> OnRoundEndStrategies = new List<INodeStrategy>();
     }
 }

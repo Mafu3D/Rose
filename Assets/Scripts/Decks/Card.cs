@@ -23,7 +23,7 @@ namespace Project.Decks
         public readonly Sprite Sprite;
         public readonly CardType CardType;
         public readonly int Value;
-        public readonly List<IStrategy> strategies;
+        public readonly List<ICardStrategy> strategies;
 
         public Card(CardData data)
         {
@@ -38,7 +38,7 @@ namespace Project.Decks
         public void Execute()
         {
             // Debug.Log($"{Name}: {DisplayText}");
-            foreach (IStrategy strategy in strategies)
+            foreach (ICardStrategy strategy in strategies)
             {
                 strategy.Execute();
             }

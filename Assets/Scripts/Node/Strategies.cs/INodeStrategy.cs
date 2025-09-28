@@ -1,6 +1,6 @@
 namespace Project.GameNode.Strategies
 {
-    public interface IStrategy
+    public interface INodeStrategy
     {
         public Status Resolve(Node other);
 

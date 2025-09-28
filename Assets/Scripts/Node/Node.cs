@@ -42,14 +42,14 @@ namespace Project.GameNode
 
         private void ResetNode()
         {
-            foreach (IStrategy strategy in NodeData.OnTurnResolveStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnPlayerEnterStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnPlayerExitStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnCreateStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnDestroyStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnRoundStartStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnPlayerTurnEndStrategies) strategy.ResetNode();
-            foreach (IStrategy strategy in NodeData.OnRoundEndStrategies) strategy.ResetNode();
+            if (NodeData.OnTurnResolveStrategies != null) foreach (INodeStrategy strategy in NodeData.OnTurnResolveStrategies) strategy.ResetNode();
+            if (NodeData.OnPlayerEnterStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerEnterStrategies) strategy.ResetNode();
+            if (NodeData.OnPlayerExitStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerExitStrategies) strategy.ResetNode();
+            if (NodeData.OnCreateStrategies != null) foreach (INodeStrategy strategy in NodeData.OnCreateStrategies) strategy.ResetNode();
+            if (NodeData.OnDestroyStrategies != null) foreach (INodeStrategy strategy in NodeData.OnDestroyStrategies) strategy.ResetNode();
+            if (NodeData.OnRoundStartStrategies != null) foreach (INodeStrategy strategy in NodeData.OnRoundStartStrategies) strategy.ResetNode();
+            if (NodeData.OnPlayerTurnEndStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerTurnEndStrategies) strategy.ResetNode();
+            if (NodeData.OnRoundEndStrategies != null) foreach (INodeStrategy strategy in NodeData.OnRoundEndStrategies) strategy.ResetNode();
         }
 
         public void RegisterToGrid()
@@ -58,15 +58,15 @@ namespace Project.GameNode
             GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
         }
 
-        List<IStrategy> strategiesToResolve = new();
+        List<INodeStrategy> strategiesToResolve = new();
         int resolvingStrategyIndex;
         bool isCurrentlyResolvingStrategies;
 
-        public IStrategy ResolvingStrategy
+        public INodeStrategy ResolvingStrategy
         {
             get
             {
-                if (strategiesToResolve.Count > 0)
+                if (strategiesToResolve!= null && strategiesToResolve.Count > 0)
                 {
                     return strategiesToResolve[resolvingStrategyIndex];
                 }
@@ -84,7 +84,7 @@ namespace Project.GameNode
             return ResolveStrategies(NodeData.OnTurnResolveStrategies);
         }
 
-        private Status ResolveStrategies(List<IStrategy> strategies)
+        private Status ResolveStrategies(List<INodeStrategy> strategies)
         {
             if (!isCurrentlyResolvingStrategies)
             {
@@ -113,7 +113,7 @@ namespace Project.GameNode
             return Status.Complete;
         }
 
-        public void ResetStrategies(List<IStrategy> strategies)
+        public void ResetStrategies(List<INodeStrategy> strategies)
         {
 
         }

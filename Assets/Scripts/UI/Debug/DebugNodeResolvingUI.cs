@@ -28,7 +28,7 @@ namespace Project.UI.DebugUI
                     textString += "None";
                 }
 
-                IStrategy strategy = resolvingNode.ResolvingStrategy;
+                INodeStrategy strategy = resolvingNode.ResolvingStrategy;
                 if (strategy != null)
                 {
                     textString += $"\n {strategy}";

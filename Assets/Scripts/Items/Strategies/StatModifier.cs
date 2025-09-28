@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Project.Items
 {
-    public class AttributeModifier : ScriptableObject, IStrategy
+    public class AttributeModifier : ScriptableObject, IItemStrategy
     {
         public AttributeModifier()
         {

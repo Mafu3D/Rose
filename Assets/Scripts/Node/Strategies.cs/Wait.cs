@@ -3,7 +3,7 @@ using Project.GameNode.Strategies;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewWait", menuName = "Nodes/Wait", order = 0)]
-public class Wait : ScriptableObject, IStrategy
+public class Wait : ScriptableObject, INodeStrategy
 {
     [SerializeField] float timeToWait = 3f;
     float timer = 0f;

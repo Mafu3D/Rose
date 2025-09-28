@@ -16,8 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 7ac0eccd6da42034f9d694d3b846a071, type: 2}
     - {fileID: 11400000, guid: 39e9a440283882c41ac36f4aa7cd72d0, type: 2}
+    - {fileID: 11400000, guid: 7ac0eccd6da42034f9d694d3b846a071, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: OnTurnResolveStrategies
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Project.GameNode.Strategies.IStrategy,
+      Data: 0|System.Collections.Generic.List`1[[Project.GameNode.Strategies.INodeStrategy,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12

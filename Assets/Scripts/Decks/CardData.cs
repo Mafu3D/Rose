@@ -16,6 +16,6 @@ namespace Project.Decks
         [SerializeField] public string DisplayText;
         [SerializeField] public int Value;
         [SerializeField] public NodeData NodeData;
-        [SerializeField] public List<IStrategy> Strategies;
+        [SerializeField] public List<ICardStrategy> Strategies;
     }
 }

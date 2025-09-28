@@ -1,6 +1,6 @@
 namespace Project.Items
 {
-    public interface IStrategy
+    public interface IItemStrategy
     {
         public void Execute();
     }

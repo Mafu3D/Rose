@@ -1,6 +1,6 @@
 namespace Projejct.Decks.CardStrategies
 {
-    public interface IStrategy
+    public interface ICardStrategy
     {
         public void Execute();
     }

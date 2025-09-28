@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Project.GameNode.Strategies
 {
     [CreateAssetMenu(fileName = "NewModifyAttributes", menuName = "Nodes/Modify Attributes", order = 0)]
-    public class ModifyAttributes : ScriptableObject, IStrategy
+    public class ModifyAttributes : ScriptableObject, INodeStrategy
     {
         [SerializeField] bool CanBeUsedMultipleTimes = false;
         [SerializeField] int HealthModifier;
@@ -25,7 +25,6 @@ namespace Project.GameNode.Strategies
             HeroNode heroNode = GameManager.Instance.Player.HeroNode;
             if (!CanBeUsedMultipleTimes && hasBeenUsed) return Status.Complete;
 
-            Debug.Log("registering attribues");
             if (HealthModifier != 0) heroNode.Attributes.RegisterAttributeModifier(AttributeType.Health, HealthModifier);
             if (ArmorModifier != 0) heroNode.Attributes.RegisterAttributeModifier(AttributeType.Armor, ArmorModifier);
             if (StrengthModifier != 0) heroNode.Attributes.RegisterAttributeModifier(AttributeType.Strength, StrengthModifier);
