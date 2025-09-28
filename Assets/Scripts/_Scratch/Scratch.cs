@@ -84,6 +84,8 @@ public class Scratch : MonoBehaviour
 
     private void FirstUpdate()
     {
+        // GameManager.Instance.Player.HeroNode.Attributes.ModifyAttributeValue(Project.Attributes.AttributeType.Health, -9);
+
         // List<Item> choiceItems = new();
         // foreach (ItemData itemData in items)
         // {

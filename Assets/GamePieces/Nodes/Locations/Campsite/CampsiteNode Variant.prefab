@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8775567835100925374
+--- !u!1001 &6324362001594527574
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,9 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3910359582337386825, guid: 97070362418655c45bb7b009e6fbf7ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1256095980742163159, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+    - target: {fileID: 5821725703336155077, guid: 97070362418655c45bb7b009e6fbf7ca, type: 3}
+      propertyPath: NodeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 038797a53406a68459bd2a1c36854ab5, type: 2}
     - target: {fileID: 6868866696085068855, guid: 97070362418655c45bb7b009e6fbf7ca, type: 3}
       propertyPath: m_Name
-      value: LocationNode Variant
+      value: CampsiteNode Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7023993327422684502, guid: 97070362418655c45bb7b009e6fbf7ca, type: 3}
       propertyPath: m_LocalPosition.x
