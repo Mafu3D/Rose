@@ -37,5 +37,13 @@ namespace Project.UI.MainUI
             TreasureChoiceDisplay treasureChoiceDisplay = currentTreasureChoice.GetComponent<TreasureChoiceDisplay>();
             treasureChoiceDisplay.DisplayChoices(treasureChoice);
         }
+
+        public void DestroyTreasureChoice()
+        {
+            if (currentTreasureChoice != null)
+            {
+                Destroy(currentTreasureChoice);
+            }
+        }
     }
 }

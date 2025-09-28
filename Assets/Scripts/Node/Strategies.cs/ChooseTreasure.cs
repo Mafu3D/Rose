@@ -11,12 +11,21 @@ namespace Project.GameNode.Strategies
 
         public Status Resolve(Node other)
         {
-            throw new System.NotImplementedException();
+            if (!hasBeenUsed)
+            {
+                List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
+                TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
+                GameManager.Instance.StartNewTreasureChoice(treasureChoice);
+
+                hasBeenUsed = true;
+            }
+
+            if (GameManager.Instance.IsChoosingTreasure) return Status.Running;
+            return Status.Complete;
         }
 
         public void Reset()
         {
-            throw new System.NotImplementedException();
         }
 
         public void ResetNode()

@@ -15,7 +15,16 @@ namespace Project.Items
         {
             if (!ItemHasBeenChosen)
             {
-                GameManager.Instance.Player.Inventory.AddItem(items[index]);
+                Item item = items[index];
+                switch (item.ItemData.ItemType)
+                {
+                    case ItemType.Weapon:
+                        GameManager.Instance.Player.Inventory.SwapEquippedWeapon(item);
+                        break;
+                    default:
+                        GameManager.Instance.Player.Inventory.AddItem(item);
+                        break;
+                }
                 ItemHasBeenChosen = true;
             }
         }

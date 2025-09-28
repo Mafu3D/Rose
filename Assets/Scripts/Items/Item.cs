@@ -3,6 +3,13 @@ using Project.GameNode;
 
 namespace Project.Items
 {
+    public enum ItemType
+    {
+        Basic,
+        Weapon,
+        Consumable
+    }
+
     public class Item
     {
         public ItemData ItemData;

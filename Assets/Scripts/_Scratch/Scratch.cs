@@ -71,10 +71,10 @@ public class Scratch : MonoBehaviour
         //     choiceItems.Add(item);
         // }
 
-        List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
+        // List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
 
-        TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
-        MainUI.Instance.DisplayTreasureChoice(treasureChoice);
+        // TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
+        // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
     }
 
     private void CheckWorldPosForCell()

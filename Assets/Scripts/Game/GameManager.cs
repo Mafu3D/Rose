@@ -9,6 +9,7 @@ using Project.PlayerSystem;
 using Project.GameStates;
 using Project.Decks;
 using Project.Items;
+using Project.UI.MainUI;
 
 namespace Project
 {
@@ -38,6 +39,11 @@ namespace Project
         public event Action OnStartPlayerTurn;
         public event Action OnEndPlayerTurn;
         public event Action OnEndTurn;
+
+        public TreasureChoice ActiveTreasureChoice;
+        public event Action OnTresureChoiceStarted;
+        public event Action OnTresureChoiceEnded;
+        public bool IsChoosingTreasure => ActiveTreasureChoice != null;
 
         protected override void Awake()
         {
@@ -91,6 +97,23 @@ namespace Project
             deck.Reset();
             deck.Shuffle();
             return deck;
+        }
+
+        public void StartNewTreasureChoice(TreasureChoice treasureChoice)
+        {
+            ActiveTreasureChoice = treasureChoice;
+            MainUI.Instance.DisplayTreasureChoice(treasureChoice);
+            OnTresureChoiceStarted?.Invoke();
+        }
+
+        public void EndTreasureChoice()
+        {
+            if (ActiveTreasureChoice != null)
+            {
+                ActiveTreasureChoice = null;
+                MainUI.Instance.DestroyTreasureChoice();
+                OnTresureChoiceEnded?.Invoke();
+            }
         }
     }
 }

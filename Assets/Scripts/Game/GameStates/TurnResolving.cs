@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Project;
 using Project.Combat;
@@ -41,11 +42,14 @@ namespace Project.GameStates
 
         public override void Subscribe() {
             BattleManager.Instance.OnBattleStart += EnterCombat;
+            GameManager.Instance.OnTresureChoiceStarted += EnterChoosing;
          }
 
         public override void Unsubscribe() {
             BattleManager.Instance.OnBattleStart -= EnterCombat;
+            GameManager.Instance.OnTresureChoiceStarted -= EnterChoosing;
          }
+
 
         public override void Update(float deltaTime)
         {
@@ -75,6 +79,12 @@ namespace Project.GameStates
         private void EnterCombat()
         {
             StateMachine.SwitchState(new Combat(this, StateMachine));
+        }
+
+
+        private void EnterChoosing()
+        {
+            StateMachine.SwitchState(new Choosing(this, StateMachine));
         }
 
         private void EndTurn()

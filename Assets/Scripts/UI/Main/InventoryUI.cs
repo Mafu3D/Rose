@@ -24,10 +24,10 @@ namespace Project.UI.MainUI
             inventory.OnInventoryChanged -= UpdateUI;
         }
 
-        // void Start()
-        // {
-        //     UpdateUI();
-        // }
+        void Start()
+        {
+            UpdateUI();
+        }
 
         private void UpdateUI()
         {

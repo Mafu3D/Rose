@@ -10,6 +10,7 @@ namespace Project.Items
         [SerializeField] public string Description;
         [SerializeField] public Sprite Sprite;
         [SerializeField] public int GoldValue;
+        [SerializeField] public ItemType ItemType;
 
         [Header("Modifiers")]
         [SerializeField] public int HealthModifier = 0;
