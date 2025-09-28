@@ -28,6 +28,8 @@ namespace Project.GameNode
 
         [SerializeField] public NodeData NodeData;
 
+        List<Node> usedNodes = new();
+
         protected virtual void Awake()
         {
             mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,14 +44,15 @@ namespace Project.GameNode
 
         private void ResetNode()
         {
-            if (NodeData.OnTurnResolveStrategies != null) foreach (INodeStrategy strategy in NodeData.OnTurnResolveStrategies) strategy.ResetNode();
-            if (NodeData.OnPlayerEnterStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerEnterStrategies) strategy.ResetNode();
-            if (NodeData.OnPlayerExitStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerExitStrategies) strategy.ResetNode();
-            if (NodeData.OnCreateStrategies != null) foreach (INodeStrategy strategy in NodeData.OnCreateStrategies) strategy.ResetNode();
-            if (NodeData.OnDestroyStrategies != null) foreach (INodeStrategy strategy in NodeData.OnDestroyStrategies) strategy.ResetNode();
-            if (NodeData.OnRoundStartStrategies != null) foreach (INodeStrategy strategy in NodeData.OnRoundStartStrategies) strategy.ResetNode();
-            if (NodeData.OnPlayerTurnEndStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerTurnEndStrategies) strategy.ResetNode();
-            if (NodeData.OnRoundEndStrategies != null) foreach (INodeStrategy strategy in NodeData.OnRoundEndStrategies) strategy.ResetNode();
+            if (NodeData.OnTurnResolveStrategies != null) foreach (INodeStrategy strategy in NodeData.OnTurnResolveStrategies) strategy.Reset();
+            if (NodeData.OnPlayerEnterStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerEnterStrategies) strategy.Reset();
+            if (NodeData.OnPlayerExitStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerExitStrategies) strategy.Reset();
+            if (NodeData.OnCreateStrategies != null) foreach (INodeStrategy strategy in NodeData.OnCreateStrategies) strategy.Reset();
+            if (NodeData.OnDestroyStrategies != null) foreach (INodeStrategy strategy in NodeData.OnDestroyStrategies) strategy.Reset();
+            if (NodeData.OnRoundStartStrategies != null) foreach (INodeStrategy strategy in NodeData.OnRoundStartStrategies) strategy.Reset();
+            if (NodeData.OnPlayerTurnEndStrategies != null) foreach (INodeStrategy strategy in NodeData.OnPlayerTurnEndStrategies) strategy.Reset();
+            if (NodeData.OnRoundEndStrategies != null) foreach (INodeStrategy strategy in NodeData.OnRoundEndStrategies) strategy.Reset();
+            usedNodes = new();
         }
 
         public void RegisterToGrid()
@@ -86,6 +89,8 @@ namespace Project.GameNode
 
         private Status ResolveStrategies(List<INodeStrategy> strategies)
         {
+            if (!NodeData.CanBeUsedMultipleTimes && usedNodes.Contains(GameManager.Instance.Player.HeroNode)) return Status.Complete;
+
             if (!isCurrentlyResolvingStrategies)
             {
                 strategiesToResolve = strategies;
@@ -110,6 +115,13 @@ namespace Project.GameNode
             resolvingStrategyIndex = 0;
             strategiesToResolve = new();
             isCurrentlyResolvingStrategies = false;
+
+            usedNodes.Add(GameManager.Instance.Player.HeroNode);
+
+            if (NodeData.DestroyAfterUsing)
+            {
+                Destroy(this.gameObject);
+            }
             return Status.Complete;
         }
 

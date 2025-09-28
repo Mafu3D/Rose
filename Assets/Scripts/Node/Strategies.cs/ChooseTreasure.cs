@@ -7,17 +7,16 @@ namespace Project.GameNode.Strategies
     [CreateAssetMenu(fileName = "NewChooseTreasure", menuName = "Nodes/ChooseTreasure", order = 1)]
     public class ChooseTreasure : ScriptableObject, INodeStrategy
     {
-        bool hasBeenUsed = false;
-
+        private bool choiceHasBeenShown;
         public Status Resolve(Node other)
         {
-            if (!hasBeenUsed)
+            if (!choiceHasBeenShown)
             {
                 List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
                 TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
                 GameManager.Instance.StartNewTreasureChoice(treasureChoice);
 
-                hasBeenUsed = true;
+                choiceHasBeenShown = true;
             }
 
             if (GameManager.Instance.IsChoosingTreasure) return Status.Running;
@@ -26,11 +25,7 @@ namespace Project.GameNode.Strategies
 
         public void Reset()
         {
-        }
-
-        public void ResetNode()
-        {
-            hasBeenUsed = false;
+            choiceHasBeenShown = false;
         }
     }
 }

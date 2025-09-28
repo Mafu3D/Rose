@@ -38,7 +38,7 @@ namespace Project.Items
         {
             if (equippedWeapon != null)
             {
-                equippedWeapon.OnEquip();
+                equippedWeapon.OnUnequip();
                 equippedWeapon.DeregisterFromNode();
             }
 

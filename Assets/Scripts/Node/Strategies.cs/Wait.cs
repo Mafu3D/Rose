@@ -7,14 +7,10 @@ public class Wait : ScriptableObject, INodeStrategy
 {
     [SerializeField] float timeToWait = 3f;
     float timer = 0f;
+
     public void Reset()
     {
         timer = 0f;
-    }
-
-    public void ResetNode()
-    {
-        Reset();
     }
 
     public Status Resolve(Node other)
