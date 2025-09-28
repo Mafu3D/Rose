@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Snake
+  m_Name: TestCard
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,9 +20,15 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  Name: Snake
-  Sprite: {fileID: 390077150306746073, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  CardType: 4
-  DisplayText: A sneky snaaaake
+    SerializationNodes:
+    - Name: Strategies
+      Entry: 6
+      Data: 
+  Name: TestCard
+  Sprite: {fileID: -9066083113907974341, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  CardType: 0
+  DisplayText: 
   Value: 0
+  NodeData: {fileID: 0}
+  GEStrategies:
+  - {fileID: 11400000, guid: d0017d359bd0702489f74df5c2dadd9d, type: 2}

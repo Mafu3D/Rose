@@ -17,5 +17,6 @@ namespace Project.Decks
         [SerializeField] public int Value;
         [SerializeField] public NodeData NodeData;
         [SerializeField] public List<ICardStrategy> Strategies;
+        [SerializeField] public List<GameplayEffectStrategy> GEStrategies;
     }
 }

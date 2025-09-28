@@ -17,6 +17,7 @@ namespace Project.GameNode.Strategies
                 GameManager.Instance.StartNewTreasureChoice(treasureChoice);
 
                 choiceHasBeenShown = true;
+                Debug.Log($"{other.gameObject.name}: showing treasure");
             }
 
             if (GameManager.Instance.IsChoosingTreasure) return Status.Running;

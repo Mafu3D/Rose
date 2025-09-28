@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Project;
+using Project.Decks;
+using Project.GameNode;
 using Project.Items;
 using UnityEngine;
 
@@ -9,6 +11,9 @@ public class Scratch : MonoBehaviour
     [SerializeField] Inventory inventory;
     [SerializeField] ItemData item;
     [SerializeField] List<ItemData> items;
+    [SerializeField] CardData cardData;
+    Card card;
+    Status cardStatus = Status.Running;
     bool lmbClicked = false;
     bool rmbClicked = false;
 
@@ -29,6 +34,13 @@ public class Scratch : MonoBehaviour
             FirstUpdate();
             firstUpdate = false;
         }
+
+        if (cardStatus != Status.Complete)
+        {
+            cardStatus = card.Resolve();
+
+        }
+
         if (Input.GetMouseButton(0))
         {
             if (!lmbClicked)
@@ -60,7 +72,8 @@ public class Scratch : MonoBehaviour
         }
     }
 
-    private void FirstUpdate() {
+    private void FirstUpdate()
+    {
         // List<Item> choiceItems = new();
         // foreach (ItemData itemData in items)
         // {
@@ -72,6 +85,9 @@ public class Scratch : MonoBehaviour
 
         // TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
         // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
+
+        card = new Card(cardData);
+
     }
 
     private void CheckWorldPosForCell()
