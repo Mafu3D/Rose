@@ -23,8 +23,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: OnTurnResolveStrategies
       Entry: 7
-      Data: 0|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[Project.GameNode.Strategies.IStrategy,
-        Assembly-CSharp]], Unity.Plastic.Antlr3.Runtime
+      Data: 0|System.Collections.Generic.List`1[[Project.GameNode.Strategies.INodeStrategy,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -60,3 +60,5 @@ MonoBehaviour:
   Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   Priority: 0
   NodeType: 3
+  CanBeUsedMultipleTimes: 0
+  DestroyAfterUsing: 1

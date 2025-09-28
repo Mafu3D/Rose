@@ -85,6 +85,7 @@ namespace Project.GameStates
 
         private void EndTurn()
         {
+            GameManager.Instance.DestroyMarkedNodes();
             GameManager.Instance.IncrementTurn();
             StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
         }

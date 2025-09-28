@@ -24,6 +24,10 @@ namespace Project.GameNode
             }
             else
             {
+                if (NodeData.DestroyAfterUsing)
+                {
+                    GameManager.Instance.MarkNodeForDestroy(this);
+                }
                 return Status.Complete;
             }
         }

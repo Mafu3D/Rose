@@ -118,7 +118,7 @@ namespace Project.GameNode
 
             if (NodeData.DestroyAfterUsing)
             {
-                Destroy(this.gameObject);
+                GameManager.Instance.MarkNodeForDestroy(this);
             }
             return Status.Complete;
         }

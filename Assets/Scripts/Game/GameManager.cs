@@ -44,6 +44,8 @@ namespace Project
         public event Action OnTresureChoiceEnded;
         public bool IsChoosingTreasure => ActiveTreasureChoice != null;
 
+        private List<Node> nodesToBeDestroyed = new();
+
         protected override void Awake()
         {
             base.Awake();
@@ -118,7 +120,25 @@ namespace Project
             }
         }
 
+        public void MarkNodeForDestroy(Node node)
+        {
+            if (node == null) return;
 
+            if (!nodesToBeDestroyed.Contains(node))
+            {
+                node.gameObject.SetActive(false);
+                nodesToBeDestroyed.Add(node);
+            }
+        }
+
+        public void DestroyMarkedNodes()
+        {
+            foreach (Node node in nodesToBeDestroyed)
+            {
+                Destroy(node.gameObject);
+            }
+            nodesToBeDestroyed = new();
+        }
 
 
         private void TEMP_BUILD_MAP()
