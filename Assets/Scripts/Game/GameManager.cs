@@ -30,6 +30,7 @@ namespace Project
         public int Turn { get; private set; }
 
         public StateMachine StateMachine;
+        public EffectQueue EffectQueue;
 
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
@@ -54,6 +55,7 @@ namespace Project
             TEMP_BUILD_MAP();
 
             StateMachine = new StateMachine();
+            EffectQueue = new EffectQueue();
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -65,6 +67,7 @@ namespace Project
         // Update is called once per frame
         void Update()
         {
+            EffectQueue.Update();
             StateMachine.Update();
         }
 

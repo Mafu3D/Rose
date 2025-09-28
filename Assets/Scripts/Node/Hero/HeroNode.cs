@@ -44,6 +44,8 @@ namespace Project.GameNode.Hero
                     MovesRemaining -= 1;
 
                     OnRemainingMovesChanged?.Invoke();
+
+
                 }
             }
         }

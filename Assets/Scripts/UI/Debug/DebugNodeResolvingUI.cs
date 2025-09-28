@@ -15,23 +15,16 @@ namespace Project.UI.DebugUI
         {
             string textString = "Resolving: ";
 
-            State superState = GameManager.Instance.StateMachine.CurrentSuperState;
-            if (superState is TurnResolving)
+            if (GameManager.Instance.EffectQueue.ResolvingQueue)
             {
-                Node resolvingNode = (superState as TurnResolving).CurrentResolvingNode;
-                if (resolvingNode != null)
+                GameplayEffectStrategy effect = GameManager.Instance.EffectQueue.GetCurrentEffect();
+                if (effect != null)
                 {
-                    textString += resolvingNode.name;
+                    textString += effect.name;
                 }
                 else
                 {
                     textString += "None";
-                }
-
-                INodeStrategy strategy = resolvingNode.ResolvingStrategy;
-                if (strategy != null)
-                {
-                    textString += $"\n {strategy}";
                 }
             }
             else

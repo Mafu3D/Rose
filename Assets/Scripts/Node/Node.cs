@@ -13,12 +13,6 @@ namespace Project.GameNode
         Event
     }
 
-    public enum Status
-    {
-        Running,
-        Complete
-    }
-
     public abstract class Node : MonoBehaviour
     {
         public Cell CurrentCell;

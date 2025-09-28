@@ -13945,6 +13945,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7470619312118461195, guid: 84cad83d09aaab3469b92d78038a6179, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7892855125640634561, guid: 84cad83d09aaab3469b92d78038a6179, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -14167,6 +14171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1446772431115317835, guid: bf1785c2e88a4474aaf91a55fece0411, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2223977743015866282, guid: bf1785c2e88a4474aaf91a55fece0411, type: 3}
       propertyPath: m_Name
       value: DebugUI
@@ -14353,6 +14361,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2325197199692100490, guid: cde994b910928b54aac3967a8be70726, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14367,8 +14379,8 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1415024320}
   - {fileID: 1535818414499637489}
-  - {fileID: 3028699358384905879}
   - {fileID: 7776690375369417289}
+  - {fileID: 3028699358384905879}
   - {fileID: 1639557477}
   - {fileID: 80292350}
   - {fileID: 1430360740}

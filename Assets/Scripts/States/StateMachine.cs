@@ -70,25 +70,13 @@ namespace Project.States
             CurrentState?.SuperState?.UpdateTimeInState(deltaTime);
         }
 
-        public void SwitchState(SubState newState)
+        public void SwitchState(SubState state)
         {
             // Exit the previous state
             CurrentState?.Exit();
-            if (CurrentState != null)
-            {
-                if (newState.SuperState != CurrentState.SuperState)
-                {
-                    CurrentState?.SuperState?.Exit();
-                }
-            }
+            CurrentState?.SuperState?.Exit();
             CurrentState?.Unsubscribe();
-            if (CurrentState != null)
-            {
-                if (newState.SuperState != CurrentState.SuperState)
-                {
-                    CurrentState?.SuperState?.Unsubscribe();
-                }
-            }
+            CurrentState?.SuperState?.Unsubscribe();
 
             // Cache the previous state
             if (CurrentState != null)
@@ -98,27 +86,13 @@ namespace Project.States
             }
 
             // Set the new state and its parent state
-            CurrentState = newState;
+            CurrentState = state;
 
             // Enter the new state
             CurrentState?.Subscribe();
-            if (PreviousState != null)
-            {
-                if (newState.SuperState != PreviousState.SuperState)
-                {
-                    CurrentState?.SuperState?.Subscribe();
-                }
-            }
-
+            CurrentState?.SuperState?.Subscribe();
             CurrentState?.Enter();
-            if (PreviousState != null)
-            {
-                if (newState.SuperState != PreviousState.SuperState)
-                {
-                    CurrentState?.SuperState?.Enter();
-                }
-            }
-
+            CurrentState?.SuperState?.Enter();
 
             // Callback
             OnSwitchState();

@@ -41,31 +41,36 @@ namespace Project.Decks
 
         public Status Resolve()
         {
-            while (resolvingStrategyIndex < gestrategies.Count)
-            {
-                if (!resolveingEffectHasStarted)
-                {
-                    gestrategies[resolvingStrategyIndex].Start();
-                    resolveingEffectHasStarted = true;
-                }
-                Status status = gestrategies[resolvingStrategyIndex].Resolve();
-                if (status != Status.Complete)
-                {
-                    return status;
-                }
-                resolvingStrategyIndex++;
-                gestrategies[resolvingStrategyIndex].Reset();
-                resolveingEffectHasStarted = false;
-            }
+            // while (resolvingStrategyIndex < gestrategies.Count)
+            // {
+            //     if (!resolveingEffectHasStarted)
+            //     {
+            //         gestrategies[resolvingStrategyIndex].Start();
+            //         resolveingEffectHasStarted = true;
+            //     }
+            //     Status status = gestrategies[resolvingStrategyIndex].Resolve();
+            //     if (status != Status.Complete)
+            //     {
+            //         return status;
+            //     }
+            //     resolvingStrategyIndex++;
+            //     gestrategies[resolvingStrategyIndex].Reset();
+            //     resolveingEffectHasStarted = false;
+            // }
             return Status.Complete;
         }
 
         public void Execute()
         {
             // Debug.Log($"{Name}: {DisplayText}");
-            foreach (ICardStrategy strategy in strategies)
+            // foreach (ICardStrategy strategy in strategies)
+            // {
+            //     strategy.Execute();
+            // }
+
+            foreach (GameplayEffectStrategy effect in gestrategies)
             {
-                strategy.Execute();
+                GameManager.Instance.EffectQueue.AddEffect(effect);
             }
         }
     }

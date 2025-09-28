@@ -13,13 +13,15 @@ public class Scratch : MonoBehaviour
     [SerializeField] List<ItemData> items;
     [SerializeField] CardData cardData;
     Card card;
-    Status cardStatus = Status.Running;
     bool lmbClicked = false;
     bool rmbClicked = false;
 
     int itemIndex;
 
     bool firstUpdate = true;
+    float timer = 5f;
+    float time;
+    bool hasExecuted = false;
 
 
     void Start()
@@ -34,12 +36,19 @@ public class Scratch : MonoBehaviour
             FirstUpdate();
             firstUpdate = false;
         }
-
-        if (cardStatus != Status.Complete)
+        time += Time.deltaTime;
+        if (time > timer && !hasExecuted)
         {
-            cardStatus = card.Resolve();
-
+            card = new Card(cardData);
+            card.Execute();
+            hasExecuted = true;
         }
+
+        // if (cardStatus != Status.Complete)
+        // {
+        //     cardStatus = card.Resolve();
+
+        // }
 
         if (Input.GetMouseButton(0))
         {
@@ -86,7 +95,7 @@ public class Scratch : MonoBehaviour
         // TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
         // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
 
-        card = new Card(cardData);
+
 
     }
 

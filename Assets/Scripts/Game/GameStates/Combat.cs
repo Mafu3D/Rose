@@ -37,7 +37,7 @@ namespace Project.GameStates
             {
                 switch (BattleManager.Instance.Proceed())
                 {
-                    case GameNode.Status.Complete:
+                    case Status.Complete:
                         ExitCombat();
                         break;
                     default:
