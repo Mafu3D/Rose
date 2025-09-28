@@ -1,5 +1,6 @@
 using System;
 using Project.States;
+using UnityEngine;
 
 namespace Project.GameStates
 {
@@ -29,12 +30,17 @@ namespace Project.GameStates
 
         private void GoToResolve()
         {
-            StateMachine.SwitchState(new WaitForTurnProcess(new TurnResolving(StateMachine), StateMachine));
+            StateMachine.SwitchState(new WaitForResolve(new ResolvingEffects(StateMachine), StateMachine));
         }
 
         public override void Update(float deltaTime)
         {
 
+        }
+
+        private void EndPlayerTurn()
+        {
+            StateMachine.SwitchState(new ResolveCardDraw(new ResolvingEffects(StateMachine), StateMachine));
         }
     }
 }

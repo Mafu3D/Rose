@@ -38,7 +38,7 @@ namespace Project.GameStates
 
         private void ExitChoosing()
         {
-            StateMachine.SwitchState(new WaitForTurnProcess(SuperState, StateMachine));
+            StateMachine.SwitchState(new EndOfTurn(SuperState, StateMachine));
         }
 
         private void Choice3()

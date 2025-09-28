@@ -48,7 +48,7 @@ namespace Project.GameStates
 
         private void ExitCombat()
         {
-            StateMachine.SwitchState(new WaitForTurnProcess(SuperState, StateMachine));
+            StateMachine.SwitchState(new EndOfTurn(SuperState, StateMachine));
         }
 
         public override void Update(float deltaTime)

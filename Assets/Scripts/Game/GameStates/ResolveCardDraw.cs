@@ -1,3 +1,4 @@
+using UnityEngine;
 using Project.Decks;
 using Project.States;
 using Project.UI.MainUI;
@@ -10,12 +11,14 @@ namespace Project.GameStates
 
         public override void Enter()
         {
+            Debug.Log("enter");
             if (GameManager.Instance.Grid.AreNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell))
             {
                 // MoveToNextState();
             }
             else
             {
+                Debug.Log("Drawing card");
                 DrawEncounterCard();
             }
         }
@@ -66,7 +69,7 @@ namespace Project.GameStates
 
         private void MoveToNextState()
         {
-            StateMachine.SwitchState(new WaitForTurnProcess(new TurnResolving(StateMachine), StateMachine));
+            StateMachine.SwitchState(new EndOfTurn(new ResolvingEffects(StateMachine), StateMachine));
         }
     }
 }

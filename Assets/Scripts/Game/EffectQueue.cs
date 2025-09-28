@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Project.GameplayEffects;
 using UnityEngine;
 
 namespace Project
@@ -17,7 +18,11 @@ namespace Project
 
         public void AddEffect(GameplayEffectStrategy effect) => queuedEffects.Add(effect);
         public void RemoveEffect(GameplayEffectStrategy effect) { if (queuedEffects.Contains(effect)) queuedEffects.Remove(effect); }
-        public void ClearQueue() => queuedEffects = new();
+        public void ClearQueue()
+        {
+            queuedEffects = new();
+            currentEffectIndex = 0;
+        }
         public GameplayEffectStrategy GetCurrentEffect()
         {
             if (queuedEffects != null) return queuedEffects[currentEffectIndex];
@@ -56,14 +61,12 @@ namespace Project
                 if (!ResolvingQueue)
                 {
                     OnResolveQueueStart?.Invoke();
-                    Debug.Log("Queue Start");
                     ResolvingQueue = true;
                 }
                 Status status = ResolveQueue();
                 if (status == Status.Complete)
                 {
                     OnResolveQueueEnd?.Invoke();
-                    Debug.Log("Queue End");
                     ClearQueue();
                     ResolvingQueue = false;
                 }

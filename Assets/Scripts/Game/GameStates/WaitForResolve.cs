@@ -2,13 +2,12 @@ using Project.States;
 
 namespace Project.GameStates
 {
-    public class WaitForTurnProcess : SubState
+    public class WaitForResolve : SubState
     {
-        public WaitForTurnProcess(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
+        public WaitForResolve(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
 
         public override void Enter()
         {
-
         }
 
         public override void Exit()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Project.Decks;
 using Project.GameNode;
+using Project.GameplayEffects;
 using Projejct.Decks.CardStrategies;
 using Sirenix.OdinInspector;
 using UnityEngine;

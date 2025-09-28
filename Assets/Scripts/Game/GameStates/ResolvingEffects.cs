@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Project.GameStates
 {
-    public class TurnResolving : State
+    public class ResolvingEffects : State
     {
-        public TurnResolving(StateMachine stateMachine) : base(stateMachine) { }
+        public ResolvingEffects(StateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
@@ -21,11 +21,18 @@ namespace Project.GameStates
 
         public override void Subscribe() {
             GameManager.Instance.EffectQueue.OnResolveQueueEnd += EndResolve;
+            GameManager.Instance.OnTresureChoiceStarted += GoToChoice;
          }
 
         public override void Unsubscribe() {
             GameManager.Instance.EffectQueue.OnResolveQueueEnd -= EndResolve;
+            GameManager.Instance.OnTresureChoiceStarted -= GoToChoice;
          }
+
+        private void GoToChoice()
+        {
+            StateMachine.SwitchState(new Choosing(new ResolvingEffects(StateMachine), StateMachine));
+        }
 
         private void EndResolve()
         {
@@ -47,11 +54,6 @@ namespace Project.GameStates
             StateMachine.SwitchState(new Choosing(this, StateMachine));
         }
 
-        private void EndTurn()
-        {
-            GameManager.Instance.DestroyMarkedNodes();
-            GameManager.Instance.IncrementTurn();
-            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
-        }
+
     }
 }

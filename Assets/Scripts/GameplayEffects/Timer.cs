@@ -3,7 +3,7 @@ using Project.GameNode;
 using Project.Items;
 using UnityEngine;
 
-namespace Project
+namespace Project.GameplayEffects
 {
     [CreateAssetMenu(fileName = "NewTimer", menuName = "Effects/Timer", order = 1)]
     public class Timer : GameplayEffectStrategy
@@ -30,7 +30,6 @@ namespace Project
         public override Status Start()
         {
             time += Time.deltaTime;
-            Debug.Log("start");
             return Status.Running;
         }
     }

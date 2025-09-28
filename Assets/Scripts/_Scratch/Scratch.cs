@@ -19,7 +19,7 @@ public class Scratch : MonoBehaviour
     int itemIndex;
 
     bool firstUpdate = true;
-    float timer = 5f;
+    float timer = 2f;
     float time;
     bool hasExecuted = false;
 
@@ -36,6 +36,7 @@ public class Scratch : MonoBehaviour
             FirstUpdate();
             firstUpdate = false;
         }
+        return;
         time += Time.deltaTime;
         if (time > timer && !hasExecuted)
         {

@@ -1,7 +1,7 @@
 using Project.GameNode;
 using UnityEngine;
 
-namespace Project
+namespace Project.GameplayEffects
 {
     public abstract class GameplayEffectStrategy : ScriptableObject
     {

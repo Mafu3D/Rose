@@ -13670,7 +13670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 943401407}
   UICanvas: {fileID: 0}
-  EncounterDeckData: {fileID: 11400000, guid: a52d215cec2418e4c93e99025946dab8, type: 2}
+  EncounterDeckData: {fileID: 11400000, guid: 811d811407eca4d45bb2c8f5965f1b01, type: 2}
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 450250885d333784fb28186849824ae1, type: 2}
   <TimeBetweenPlayerMoves>k__BackingField: 0.25

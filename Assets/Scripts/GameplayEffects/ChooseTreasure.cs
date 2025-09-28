@@ -3,7 +3,7 @@ using Project.GameNode;
 using Project.Items;
 using UnityEngine;
 
-namespace Project
+namespace Project.GameplayEffects
 {
     [CreateAssetMenu(fileName = "NewChooseTreasure", menuName = "Effects/Choose Treasure", order = 1)]
     public class ChooseTreaure : GameplayEffectStrategy

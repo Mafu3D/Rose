@@ -3,7 +3,7 @@ using Project.GameNode;
 using Project.Items;
 using UnityEngine;
 
-namespace Project
+namespace Project.GameplayEffects
 {
     [CreateAssetMenu(fileName = "NewNoEffect", menuName = "Effects/No Effect", order = 1)]
     public class NoEffect : GameplayEffectStrategy

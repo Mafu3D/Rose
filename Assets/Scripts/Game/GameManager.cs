@@ -88,6 +88,29 @@ namespace Project
             ItemDeck = InitializeItemDeck(ItemDeckData);
         }
 
+        // public void EndPlayerTurn()
+        // {
+
+        // }
+
+        // private void DrawEncounterCard()
+        // {
+        //     Card card = EncounterDeck.Draw();
+        //     if (card == null)
+        //     {
+        //         return;
+        //     }
+        //     if (card.CardType == CardType.Monster)
+        //     {
+        //         card = MonsterDeck.Draw();
+        //         if (card == null)
+        //         {
+        //             return;
+        //         }
+        //     }
+        //     MainUI.Instance.DisplayCard(card);
+        // }
+
         private Deck<Card> InitializeCardDeck(DeckData deckData)
         {
             Deck<Card> deck = new Deck<Card>();
