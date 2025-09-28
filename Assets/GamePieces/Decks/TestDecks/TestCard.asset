@@ -20,17 +20,11 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Strategies
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   Name: TestCard
   Sprite: {fileID: -9066083113907974341, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   CardType: 0
   DisplayText: I'm a test card!
   Value: 999
   NodeData: {fileID: 0}
-  GEStrategies:
-  - {fileID: 11400000, guid: ecef629296357ac46a863b7c2438cc3e, type: 2}
-  - {fileID: 11400000, guid: 576faad56e1948346b620935c5ac230c, type: 2}
-  - {fileID: 11400000, guid: d0017d359bd0702489f74df5c2dadd9d, type: 2}
+  Strategies: []

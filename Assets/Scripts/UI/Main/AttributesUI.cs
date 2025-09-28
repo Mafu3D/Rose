@@ -7,7 +7,7 @@ namespace Project.UI.BattleUI
 {
     public class AttributesUI : MonoBehaviour
     {
-        [SerializeField] CombatNode combatant;
+        [SerializeField] Node combatant;
         [SerializeField] TMP_Text healthText;
         [SerializeField] TMP_Text armorText;
         [SerializeField] TMP_Text speedText;

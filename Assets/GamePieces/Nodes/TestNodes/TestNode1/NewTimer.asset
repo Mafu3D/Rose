@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e558202a03a85c444890c98ad0f7ca15, type: 3}
-  m_Name: NewChooseTreasure
+  m_Script: {fileID: 11500000, guid: dfcb9ff3dde664040b9228bcf25f1ad5, type: 3}
+  m_Name: NewTimer
   m_EditorClassIdentifier: 
+  timer: 3

@@ -37,10 +37,5 @@ namespace Project.GameStates
         {
 
         }
-
-        private void EndPlayerTurn()
-        {
-            StateMachine.SwitchState(new ResolveCardDraw(new ResolvingEffects(StateMachine), StateMachine));
-        }
     }
 }

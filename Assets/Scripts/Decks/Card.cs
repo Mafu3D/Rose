@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Project.GameNode;
 using Project.GameplayEffects;
-using Projejct.Decks.CardStrategies;
 using UnityEngine;
 
 namespace Project.Decks
@@ -24,10 +23,7 @@ namespace Project.Decks
         public readonly Sprite Sprite;
         public readonly CardType CardType;
         public readonly int Value;
-        public readonly List<ICardStrategy> strategies;
-        public readonly List<GameplayEffectStrategy> gestrategies;
-        private int resolvingStrategyIndex;
-        private bool resolveingEffectHasStarted = false;
+        public readonly List<GameplayEffectStrategy> strategies;
 
         public Card(CardData data)
         {
@@ -37,39 +33,16 @@ namespace Project.Decks
             this.Sprite = data.Sprite;
             this.Value = data.Value;
             this.strategies = data.Strategies;
-            this.gestrategies = data.GEStrategies;
         }
 
-        public Status Resolve()
-        {
-            // while (resolvingStrategyIndex < gestrategies.Count)
-            // {
-            //     if (!resolveingEffectHasStarted)
-            //     {
-            //         gestrategies[resolvingStrategyIndex].Start();
-            //         resolveingEffectHasStarted = true;
-            //     }
-            //     Status status = gestrategies[resolvingStrategyIndex].Resolve();
-            //     if (status != Status.Complete)
-            //     {
-            //         return status;
-            //     }
-            //     resolvingStrategyIndex++;
-            //     gestrategies[resolvingStrategyIndex].Reset();
-            //     resolveingEffectHasStarted = false;
-            // }
-            return Status.Complete;
-        }
+        // public Status Resolve()
+        // {
+        //     return Status.Complete;
+        // }
 
         public void Execute()
         {
-            // Debug.Log($"{Name}: {DisplayText}");
-            // foreach (ICardStrategy strategy in strategies)
-            // {
-            //     strategy.Execute();
-            // }
-
-            foreach (GameplayEffectStrategy effect in gestrategies)
+            foreach (GameplayEffectStrategy effect in strategies)
             {
                 GameManager.Instance.EffectQueue.AddEffect(effect);
             }

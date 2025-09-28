@@ -46,10 +46,9 @@ namespace Project.GameStates
             EndPlayerTurn();
         }
 
-
         private void EndPlayerTurn()
         {
-            StateMachine.SwitchState(new ResolveCardDraw(new PlayerTurn(StateMachine), StateMachine));
+            StateMachine.SwitchState(new EndOfPlayerTurn(new PlayerTurn(StateMachine), StateMachine));
         }
     }
 }

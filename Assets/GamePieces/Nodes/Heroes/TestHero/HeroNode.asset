@@ -26,4 +26,14 @@ MonoBehaviour:
   Sprite: {fileID: 7463086174397488636, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   Priority: 0
   NodeType: 2
-  StatsData: {fileID: 11400000, guid: 1325e153fb89aa44297450eca0bceb34, type: 2}
+  CanBeUsedMultipleTimes: 0
+  DestroyAfterUsing: 0
+  AttributesData: {fileID: 11400000, guid: 1325e153fb89aa44297450eca0bceb34, type: 2}
+  OnEndTurnStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []
+  OnRoundStartStrategies: []
+  OnPlayerTurnEndStrategies: []
+  OnRoundEndStrategies: []

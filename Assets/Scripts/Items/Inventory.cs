@@ -15,13 +15,13 @@ namespace Project.Items
         private Item equippedWeapon;
         private List<Item> heldItems = new();
 
-        CombatNode ownerNode;
+        Node ownerNode;
 
         public event Action OnInventoryChanged;
 
         void Awake()
         {
-            ownerNode = GetComponent<CombatNode>();
+            ownerNode = GetComponent<Node>();
         }
 
         void Start()

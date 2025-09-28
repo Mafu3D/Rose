@@ -4,6 +4,7 @@ using System.Linq;
 using Project;
 using UnityEngine;
 using Project.GameNode;
+using Project.GameNode.Hero;
 
 namespace Project
 {
@@ -59,8 +60,6 @@ namespace Project
             this.cellSize = cellSize;
         }
 
-        // (6,-2) (6,-3) (6,-4) (5,-2) (5,-3) (5,-4) (7,-3) (7,-4)
-
         public void RegisterWalkableCells(List<Cell> cells)
         {
             foreach (Cell cell in cells)
@@ -93,7 +92,14 @@ namespace Project
             return false;
         }
 
-        public List<Node> GetNodesRegisteredToCell(Cell cell)
+        public bool TryGetNodesRegisteredToCell(Cell cell,  out List<Node> registeredNodes, bool excludeHeroes=true)
+        {
+            registeredNodes = GetNodesRegisteredToCell(cell, excludeHeroes);
+            if (registeredNodes.Count > 0) return true;
+            return false;
+        }
+
+        private List<Node> GetNodesRegisteredToCell(Cell cell, bool excludeHeroes=true)
         {
             List<Node> registeredNodes = new List<Node>();
             Cell registeredCell;
@@ -104,6 +110,7 @@ namespace Project
                 registeredCells.TryGetValue(registeredCell, out nodes);
                 if (nodes != null)
                 {
+                    if (excludeHeroes) nodes.RemoveAll(n => n is HeroNode);
                     registeredNodes = nodes;
                 }
             }

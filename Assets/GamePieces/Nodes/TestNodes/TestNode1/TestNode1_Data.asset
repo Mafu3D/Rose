@@ -15,50 +15,12 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 2e14adb78140ab04b8e26edffc3990ff, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: OnTurnResolveStrategies
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Project.GameNode.Strategies.INodeStrategy,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnPlayerEnterStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerExitStrategies
-      Entry: 6
-      Data: 
-    - Name: OnCreateStrategies
-      Entry: 6
-      Data: 
-    - Name: OnDestroyStrategies
-      Entry: 6
-      Data: 
-    - Name: OnRoundStartStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerTurnEndStrategies
-      Entry: 6
-      Data: 
-    - Name: OnRoundEndStrategies
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   DisplayName: Test Node 1
   Description: I'm the first test node!
   Sprite: {fileID: 6700204669442689607, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
@@ -66,3 +28,15 @@ MonoBehaviour:
   NodeType: 0
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
+  AttributesData: {fileID: 0}
+  OnEndTurnStrategies:
+  - {fileID: 11400000, guid: 52a43aef8e5324049a7057f2805255ce, type: 2}
+  - {fileID: 11400000, guid: 2e14adb78140ab04b8e26edffc3990ff, type: 2}
+  - {fileID: 11400000, guid: bd965e08293222f4399573465b1511b5, type: 2}
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []
+  OnRoundStartStrategies: []
+  OnPlayerTurnEndStrategies: []
+  OnRoundEndStrategies: []

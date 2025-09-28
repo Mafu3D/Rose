@@ -2,9 +2,9 @@ using Project.States;
 
 namespace Project.GameStates
 {
-    public class EndOfTurn : SubState
+    public class EndOfRound : SubState
     {
-        public EndOfTurn(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
+        public EndOfRound(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
 
         public override void Enter()
         {

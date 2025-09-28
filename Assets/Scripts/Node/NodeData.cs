@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Project.Attributes;
-using Project.GameNode.Strategies;
+using Project.GameplayEffects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,14 +20,17 @@ namespace Project.GameNode
         [SerializeField] public bool CanBeUsedMultipleTimes = false;
         [SerializeField] public bool DestroyAfterUsing = false;
 
+        [Header("Combat")]
+        [SerializeField] public AttributesData AttributesData;
+
         [Header("Strategies")]
-        [SerializeField] public List<INodeStrategy> OnTurnResolveStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnPlayerEnterStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnPlayerExitStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnCreateStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnDestroyStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnRoundStartStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnPlayerTurnEndStrategies = new List<INodeStrategy>();
-        [SerializeField] public List<INodeStrategy> OnRoundEndStrategies = new List<INodeStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnEndTurnStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnPlayerEnterStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnPlayerExitStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnCreateStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnDestroyStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnRoundStartStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnPlayerTurnEndStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnRoundEndStrategies = new List<GameplayEffectStrategy>();
     }
 }

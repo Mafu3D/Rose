@@ -20,41 +20,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: OnTurnResolveStrategies
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Project.GameNode.Strategies.INodeStrategy,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OnPlayerEnterStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerExitStrategies
-      Entry: 6
-      Data: 
-    - Name: OnCreateStrategies
-      Entry: 6
-      Data: 
-    - Name: OnDestroyStrategies
-      Entry: 6
-      Data: 
-    - Name: OnRoundStartStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerTurnEndStrategies
-      Entry: 6
-      Data: 
-    - Name: OnRoundEndStrategies
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   DisplayName: Orc
   Description: Doubles strength when bloodied
   Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
@@ -62,3 +28,12 @@ MonoBehaviour:
   NodeType: 3
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
+  AttributesData: {fileID: 11400000, guid: 726a2e8ecf860b843b211d5f04c09e0a, type: 2}
+  OnEndTurnStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []
+  OnRoundStartStrategies: []
+  OnPlayerTurnEndStrategies: []
+  OnRoundEndStrategies: []

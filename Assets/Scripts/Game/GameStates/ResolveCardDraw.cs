@@ -11,16 +11,7 @@ namespace Project.GameStates
 
         public override void Enter()
         {
-            Debug.Log("enter");
-            if (GameManager.Instance.Grid.AreNodesRegisteredToCell(GameManager.Instance.Hero.CurrentCell))
-            {
-                // MoveToNextState();
-            }
-            else
-            {
-                Debug.Log("Drawing card");
-                DrawEncounterCard();
-            }
+            DrawEncounterCard();
         }
 
         public override void Exit() { }
@@ -69,7 +60,7 @@ namespace Project.GameStates
 
         private void MoveToNextState()
         {
-            StateMachine.SwitchState(new EndOfTurn(new ResolvingEffects(StateMachine), StateMachine));
+            StateMachine.SwitchState(new EndOfRound(new ResolvingEffects(StateMachine), StateMachine));
         }
     }
 }

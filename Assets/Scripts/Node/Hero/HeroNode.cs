@@ -5,7 +5,7 @@ using Project.Attributes;
 
 namespace Project.GameNode.Hero
 {
-    public class HeroNode : CombatNode, IMovableNode
+    public class HeroNode : Node, IMovableNode
     {
         [SerializeField] public Player Player;
         [SerializeField] private int moveDistance = 1;

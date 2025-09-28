@@ -13,14 +13,14 @@ namespace Project.Items
     public class Item
     {
         public ItemData ItemData;
-        CombatNode ownerNode;
+        Node ownerNode;
         public Item(ItemData itemData)
         {
             this.ItemData = itemData;
 
         }
 
-        public void RegisterToNode(CombatNode ownerNode)
+        public void RegisterToNode(Node ownerNode)
         {
             this.ownerNode = ownerNode;
         }

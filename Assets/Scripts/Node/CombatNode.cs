@@ -1,29 +1,29 @@
-using System;
-using Project.Combat;
-using Project.Attributes;
-using UnityEngine;
+// using System;
+// using Project.Combat;
+// using Project.Attributes;
+// using UnityEngine;
 
-namespace Project.GameNode
-{
-    public class CombatNode : Node
-    {
-        [SerializeField] public AttributesData attributesData;
-        public CharacterAttributes Attributes;
+// namespace Project.GameNode
+// {
+//     public class CombatNode : Node
+//     {
+//         [SerializeField] public AttributesData attributesData;
+//         public CharacterAttributes Attributes;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            Attributes = new CharacterAttributes(attributesData);
-        }
+//         protected override void Awake()
+//         {
+//             base.Awake();
+//             Attributes = new CharacterAttributes(attributesData);
+//         }
 
-        public void Attack(out int value)
-        {
-            value = Attributes.GetAttributeValue(AttributeType.Strength);
-        }
+//         public void Attack(out int value)
+//         {
+//             value = Attributes.GetAttributeValue(AttributeType.Strength);
+//         }
 
-        public void ReceiveAttack(HitReport hitReport)
-        {
-            Attributes.DecreaseAttributeValue(AttributeType.Health, hitReport.Damage);
-        }
-    }
-}
+//         public void ReceiveAttack(HitReport hitReport)
+//         {
+//             Attributes.DecreaseAttributeValue(AttributeType.Health, hitReport.Damage);
+//         }
+//     }
+// }

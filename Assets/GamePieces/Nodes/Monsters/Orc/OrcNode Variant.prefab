@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1067044438179027488, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
     - target: {fileID: 6480882888262446655, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -64,8 +68,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrcNode Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6582607631212750363, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7483181370825314142, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5286621703769726601}
   m_SourcePrefab: {fileID: 100100000, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+--- !u!1 &4534305980478911969 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7483181370825314142, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+  m_PrefabInstance: {fileID: 6427919303609350847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5286621703769726601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534305980478911969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f7cb2daef6d6544b6f4c4f00d0ba0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NodeData: {fileID: 11400000, guid: 47ad9efd924de8d47920c9bbefb93701, type: 2}

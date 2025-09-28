@@ -22,6 +22,19 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Forest
+  Description: 
   Sprite: {fileID: 1467490156855167635, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   Priority: 0
   NodeType: 0
+  CanBeUsedMultipleTimes: 0
+  DestroyAfterUsing: 0
+  AttributesData: {fileID: 0}
+  OnEndTurnStrategies:
+  - {fileID: 11400000, guid: 950d84fe304cb2a4cb675f6895e51966, type: 2}
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []
+  OnRoundStartStrategies: []
+  OnPlayerTurnEndStrategies: []
+  OnRoundEndStrategies: []
