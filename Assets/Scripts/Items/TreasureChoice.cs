@@ -4,25 +4,25 @@ namespace Project.Items
 {
     public class TreasureChoice
     {
-        List<ItemData> itemDatas;
+        List<Item> items;
         public bool ItemHasBeenChosen = false;
-        public TreasureChoice(List<ItemData> itemDatas)
+        public TreasureChoice(List<Item> items)
         {
-            this.itemDatas = itemDatas;
+            this.items = items;
         }
 
         public void ChooseItem(int index)
         {
             if (!ItemHasBeenChosen)
             {
-                GameManager.Instance.Player.Inventory.AddItem(itemDatas[index]);
+                GameManager.Instance.Player.Inventory.AddItem(items[index]);
                 ItemHasBeenChosen = true;
             }
         }
 
-        public ItemData GetItemData(int index)
+        public Item GetItem(int index)
         {
-            return itemDatas[index];
+            return items[index];
         }
     }
 }

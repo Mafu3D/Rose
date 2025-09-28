@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
   m_Name: MagicOrb
   m_EditorClassIdentifier: 
-  Name: Iron Sword
+  Name: Magic Orb
   Description: A glowing magic crystal ball.
   Sprite: {fileID: 9048989797473250918, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   GoldValue: 3

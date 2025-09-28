@@ -14,11 +14,11 @@ namespace Project.UI.MainUI
 
         [SerializeField] GameObject attributesDisplayContainer;
 
-        public void DisplayItem(ItemData itemData, int choiceNumber)
+        public void DisplayItem(Item item, int choiceNumber)
         {
-            displayName.text = itemData.Name;
-            descriptionText.text = itemData.Description;
-            image.sprite = itemData.Sprite;
+            displayName.text = item.ItemData.Name;
+            descriptionText.text = item.ItemData.Description;
+            image.sprite = item.ItemData.Sprite;
             this.choiceNumber.text = choiceNumber.ToString();
 
             // [SerializeField] public int HealthModifier = 0;

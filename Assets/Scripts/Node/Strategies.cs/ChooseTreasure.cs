@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Project.Items;
 using UnityEngine;
 
 namespace Project.GameNode.Strategies
@@ -5,6 +7,8 @@ namespace Project.GameNode.Strategies
     [CreateAssetMenu(fileName = "NewChooseTreasure", menuName = "Nodes/ChooseTreasure", order = 1)]
     public class ChooseTreasure : ScriptableObject, INodeStrategy
     {
+        bool hasBeenUsed = false;
+
         public Status Resolve(Node other)
         {
             throw new System.NotImplementedException();
@@ -17,7 +21,7 @@ namespace Project.GameNode.Strategies
 
         public void ResetNode()
         {
-            throw new System.NotImplementedException();
+            hasBeenUsed = false;
         }
     }
 }

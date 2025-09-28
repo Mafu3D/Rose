@@ -8,6 +8,7 @@ using Project.States;
 using Project.PlayerSystem;
 using Project.GameStates;
 using Project.Decks;
+using Project.Items;
 
 namespace Project
 {
@@ -19,7 +20,7 @@ namespace Project
 
         [SerializeField] public DeckData EncounterDeckData;
         [SerializeField] public DeckData MonsterDeckData;
-        [SerializeField] public DeckData ItemDeckData;
+        [SerializeField] public ItemDeckData ItemDeckData;
 
         [field: SerializeField] public float TimeBetweenPlayerMoves { get; private set; } = 0.25f;
 
@@ -30,9 +31,9 @@ namespace Project
 
         public StateMachine StateMachine;
 
-        public Deck EncounterDeck;
-        public Deck MonsterDeck;
-        public Deck ItemDeck;
+        public Deck<Card> EncounterDeck;
+        public Deck<Card> MonsterDeck;
+        public Deck<Item> ItemDeck;
 
         public event Action OnStartPlayerTurn;
         public event Action OnEndPlayerTurn;
@@ -69,14 +70,24 @@ namespace Project
             StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
             Turn = 0;
 
-            EncounterDeck = InitializeDeck(EncounterDeckData);
-            MonsterDeck = InitializeDeck(MonsterDeckData);
+            EncounterDeck = InitializeCardDeck(EncounterDeckData);
+            MonsterDeck = InitializeCardDeck(MonsterDeckData);
+            ItemDeck = InitializeItemDeck(ItemDeckData);
         }
 
-        private Deck InitializeDeck(DeckData deckData)
+        private Deck<Card> InitializeCardDeck(DeckData deckData)
         {
-            Deck deck = new Deck();
-            deck.AddCards(deckData.UnpackCards());
+            Deck<Card> deck = new Deck<Card>();
+            deck.AddPermanent(deckData.UnpackCards());
+            deck.Reset();
+            deck.Shuffle();
+            return deck;
+        }
+
+        private Deck<Item> InitializeItemDeck(ItemDeckData deckData)
+        {
+            Deck<Item> deck = new Deck<Item>();
+            deck.AddPermanent(deckData.UnpackItems());
             deck.Reset();
             deck.Shuffle();
             return deck;

@@ -4,58 +4,91 @@ using UnityEngine;
 
 namespace Project.Decks
 {
-
-
-    public class Deck
+    public class Deck<T>
     {
-        public List<Card> StartingCards = new();
-        public List<Card> RemainingCards = new();
-        public int NumberRemaining => RemainingCards.Count;
+        private List<T> startingItems = new();
+        private List<T> currentItems = new();
+        public int CurrenCount => currentItems.Count;
+        public int TotalCount => startingItems.Count;
 
-        public void AddCards(List<Card> cardsToAdd)
+        public void AddPermanent(List<T> itemsToAdd)
         {
-            foreach (Card card in cardsToAdd)
+            foreach (T item in itemsToAdd)
             {
-                StartingCards.Add(card);
-                RemainingCards.Add(card);
+                startingItems.Add(item);
+                currentItems.Add(item);
+            }
+        }
+
+        public void AddToRemaining(List<T> itemsToAdd)
+        {
+            foreach (T item in itemsToAdd)
+            {
+                currentItems.Add(item);
             }
         }
 
         public void Shuffle()
         {
-            RemainingCards.Shuffle();
+            currentItems.Shuffle();
         }
 
         public void Reset()
         {
-            RemainingCards = new List<Card>(StartingCards);
+            currentItems = new List<T>(startingItems);
             Shuffle();
         }
 
-        public Card DrawCard(int index = 0)
+        public T Draw(int index = 0)
         {
-            if (RemainingCards.Count == 0 || index > RemainingCards.Count - 1)
+            if (currentItems.Count == 0 || index > currentItems.Count - 1)
             {
-                return null;
+                return default;
             }
 
-            Card drawnCard;
-            RemainingCards.Pop(index, out drawnCard);
-            return drawnCard;
+            T drawnItem;
+            currentItems.Pop(index, out drawnItem);
+            return drawnItem;
         }
 
-        public List<Card> DrawCards(int amount, int startIndex = 0)
+        public List<T> DrawMultiple(int amount, int startIndex = 0)
         {
-            List<Card> drawnCards = new();
+            List<T> drawn = new();
             for (int i = 0; i < amount; i++)
             {
-                Card card = DrawCard(startIndex); // Don't need to add i since the list is popped
-                if (card != null)
+                T item = Draw(startIndex); // Don't need to add i since the list is popped
+                if (item != null)
                 {
-                    drawnCards.Add(card);
+                    drawn.Add(item);
                 }
             }
-            return drawnCards;
+            return drawn;
         }
+
+        // public List<T> DrawMultipleNoDuplicates(int amount, int startIndex = 0)
+        // {
+        //     int count = currentItems.Count - startIndex;
+        //     List<T> remainingItems = new List<T>(currentItems.GetRange(startIndex, count));
+
+        //     int totalDrawn = 0;
+        //     List<T> drawn = new();
+        //     for (int i = 0; i < remainingItems.Count; i++)
+        //     {
+        //         T item = Draw(startIndex); // Don't need to add i since the list is popped
+        //         if (item != null && !drawn.Contains(item))
+        //         {
+        //             drawn.Add(item);
+        //             totalDrawn++;
+        //         }
+
+        //         if (totalDrawn == amount) continue;
+        //     }
+        //     return drawn;
+        // }
+    }
+
+    public interface IDrawable
+    {
+        public int GetItemHash();
     }
 }

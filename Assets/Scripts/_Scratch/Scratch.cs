@@ -17,22 +17,29 @@ public class Scratch : MonoBehaviour
 
     int itemIndex;
 
+    bool firstUpdate = true;
+
 
     void Start()
     {
-        TreasureChoice treasureChoice = new TreasureChoice(items);
-        MainUI.Instance.DisplayTreasureChoice(treasureChoice);
+
     }
 
     void Update()
     {
+        if (firstUpdate)
+        {
+            FirstUpdate();
+            firstUpdate = false;
+        }
         if (Input.GetMouseButton(0))
         {
             if (!lmbClicked)
             {
                 lmbClicked = true;
                 return;
-                itemIndex = inventory.AddItem(item);
+                Item newItem = new Item(item);
+                itemIndex = inventory.AddItem(newItem);
                 // CheckWorldPosForCell();
             }
         }
@@ -54,6 +61,20 @@ public class Scratch : MonoBehaviour
         {
             rmbClicked = false;
         }
+    }
+
+    private void FirstUpdate() {
+        // List<Item> choiceItems = new();
+        // foreach (ItemData itemData in items)
+        // {
+        //     Item item = new Item(itemData);
+        //     choiceItems.Add(item);
+        // }
+
+        List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
+
+        TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
+        MainUI.Instance.DisplayTreasureChoice(treasureChoice);
     }
 
     private void CheckWorldPosForCell()

@@ -43,7 +43,7 @@ namespace Project.GameStates
 
         private void DrawEncounterCard()
         {
-            card = GameManager.Instance.EncounterDeck.DrawCard();
+            card = GameManager.Instance.EncounterDeck.Draw();
             if (card == null)
             {
                 MoveToNextState();
@@ -51,7 +51,7 @@ namespace Project.GameStates
             }
             if (card.CardType == CardType.Monster)
             {
-                card = GameManager.Instance.MonsterDeck.DrawCard();
+                card = GameManager.Instance.MonsterDeck.Draw();
                 if (card == null)
                 {
                     MoveToNextState();

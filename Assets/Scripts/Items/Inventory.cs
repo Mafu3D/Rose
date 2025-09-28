@@ -34,7 +34,7 @@ namespace Project.Items
         public Item GetItemAtSlot(int index) => heldItems[index];
         public List<Item> GetHeldItems() => heldItems;
 
-        public Item SwapEquippedWeapon(ItemData itemData)
+        public Item SwapEquippedWeapon(Item item)
         {
             if (equippedWeapon != null)
             {
@@ -42,7 +42,6 @@ namespace Project.Items
                 equippedWeapon.DeregisterFromNode();
             }
 
-            Item item = new Item(itemData);
             equippedWeapon = item;
 
             item.RegisterToNode(ownerNode);
@@ -53,10 +52,10 @@ namespace Project.Items
             return equippedWeapon;
         }
 
-        public int AddItem(ItemData itemData)
+        public int AddItem(Item item)
         {
             // Check for max slots
-            Item item = new Item(itemData);
+
             heldItems.Add(item);
             item.RegisterToNode(ownerNode);
             item.OnEquip();
@@ -79,11 +78,13 @@ namespace Project.Items
         {
             foreach (ItemData itemData in startingHeldItemsData)
             {
-                AddItem(itemData);
+                Item item = new Item(itemData);
+                AddItem(item);
             }
             if (startingEquippedWeaponData)
             {
-                SwapEquippedWeapon(startingEquippedWeaponData);
+                Item item = new Item(startingEquippedWeaponData);
+                SwapEquippedWeapon(item);
             }
         }
     }
