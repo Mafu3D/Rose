@@ -1,10 +1,7 @@
 using UnityEngine;
 using Project.PlayerSystem;
-using Project.Grid;
-using Project.GameNode;
 using System;
 using Project.Attributes;
-using Project.Combat;
 
 namespace Project.GameNode.Hero
 {
@@ -38,13 +35,16 @@ namespace Project.GameNode.Hero
             {
                 GameManager.Instance.Grid.DeregisterFromCell(CurrentCell, this);
                 Cell destinationCell = GameManager.Instance.Grid.GetNeighborCell(CurrentCell, direction * moveDistance);
-                CurrentCell = destinationCell;
-                myRigidBody.MovePosition(destinationCell.Center);
-                GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
+                if (GameManager.Instance.Grid.TryGetCellInWalkableCells(destinationCell))
+                {
+                    CurrentCell = destinationCell;
+                    myRigidBody.MovePosition(destinationCell.Center);
+                    GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
 
-                MovesRemaining -= 1;
+                    MovesRemaining -= 1;
 
-                OnRemainingMovesChanged?.Invoke();
+                    OnRemainingMovesChanged?.Invoke();
+                }
             }
         }
 

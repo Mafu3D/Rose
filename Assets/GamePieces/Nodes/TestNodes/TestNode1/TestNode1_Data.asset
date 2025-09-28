@@ -64,3 +64,5 @@ MonoBehaviour:
   Sprite: {fileID: 6700204669442689607, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   Priority: 0
   NodeType: 0
+  CanBeUsedMultipleTimes: 0
+  DestroyAfterUsing: 1

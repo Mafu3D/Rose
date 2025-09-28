@@ -5,7 +5,7 @@ using Project;
 using UnityEngine;
 using Project.GameNode;
 
-namespace Project.Grid
+namespace Project
 {
     public struct Cell
     {
@@ -45,18 +45,41 @@ namespace Project.Grid
         public static bool operator !=(Cell left, Cell right) => !(left == right);
     }
 
-    public class GridManager
+    public class GameGrid
     {
         private Vector2 cellSize = new Vector2(1, 1);
 
         private Dictionary<Cell, List<Node>> registeredCells = new();
         private Dictionary<int, Cell> registeredKeys = new();
 
-        public GridManager(Vector2 cellSize) {
+        private Dictionary<int, Cell> walkableCells = new();
+
+        public GameGrid(Vector2 cellSize)
+        {
             this.cellSize = cellSize;
         }
 
-        public bool AreNodesRegisteredToCell(Cell cell, bool excludeHeroes=true)
+        // (6,-2) (6,-3) (6,-4) (5,-2) (5,-3) (5,-4) (7,-3) (7,-4)
+
+        public void RegisterWalkableCells(List<Cell> cells)
+        {
+            foreach (Cell cell in cells)
+            {
+                int hash = cell.GetHashCode();
+                if (!walkableCells.ContainsKey(hash))
+                {
+                    walkableCells.Add(hash, cell);
+                }
+            }
+        }
+
+        public bool TryGetCellInWalkableCells(Cell cell)
+        {
+            int hash = cell.GetHashCode();
+            return walkableCells.TryGetValue(hash, out _);
+        }
+
+        public bool AreNodesRegisteredToCell(Cell cell, bool excludeHeroes = true)
         {
             List<Node> registeredNodes = GetNodesRegisteredToCell(cell);
             if (registeredNodes.Count > 0)

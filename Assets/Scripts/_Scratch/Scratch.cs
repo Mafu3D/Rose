@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using Project;
-using Project.Decks;
-using Project.Grid;
 using Project.Items;
-using Project.UI.MainUI;
 using UnityEngine;
 
 public class Scratch : MonoBehaviour

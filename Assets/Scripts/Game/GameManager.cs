@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.Grid;
 using Project.GameNode.Hero;
 using Project.GameNode;
 using Project.States;
@@ -25,7 +24,7 @@ namespace Project
 
         [field: SerializeField] public float TimeBetweenPlayerMoves { get; private set; } = 0.25f;
 
-        public GridManager Grid;
+        public GameGrid Grid;
 
         public HeroNode Hero => Player.HeroNode;
         public int Turn { get; private set; }
@@ -48,7 +47,10 @@ namespace Project
         protected override void Awake()
         {
             base.Awake();
-            Grid = new GridManager(new Vector2(1, 1));
+
+            Grid = new GameGrid(new Vector2(1, 1));
+            TEMP_BUILD_MAP();
+
             StateMachine = new StateMachine();
         }
 
@@ -114,6 +116,86 @@ namespace Project
                 MainUI.Instance.DestroyTreasureChoice();
                 OnTresureChoiceEnded?.Invoke();
             }
+        }
+
+
+
+
+        private void TEMP_BUILD_MAP()
+        {
+            List<Cell> walkableCells = new List<Cell>();
+            List<int[]> coords = new List<int[]> {
+                new int[] {-5, 5},
+                new int[] {-4, 5},
+                new int[] {-3, 5},
+                new int[] {-2, 5},
+                new int[] {-1, 5},
+                new int[] {1, 5},
+                new int[] {2, 5},
+                new int[] {3, 5},
+                new int[] {4, 5},
+                new int[] {5, 5},
+                new int[] {5, 4},
+                new int[] {5, 3},
+                new int[] {5, 2},
+                new int[] {6, 2},
+                new int[] {7, 2},
+                new int[] {7, 1},
+                new int[] {8, 1},
+                new int[] {8, -1},
+                new int[] {8, -2},
+                new int[] {8, -3},
+                new int[] {7, -3},
+                new int[] {7, -4},
+                new int[] {6, -2},
+                new int[] {6, -3},
+                new int[] {6, -4},
+                new int[] {5, -2},
+                new int[] {5, -3},
+                new int[] {5, -4},
+                new int[] {5, -1},
+                new int[] {4, -1},
+                new int[] {3, -1},
+                new int[] {2, -1},
+                new int[] {1, -1},
+                new int[] {1, -2},
+                new int[] {1, -3},
+                new int[] {1, -4},
+                new int[] {-1, -4},
+                new int[] {-2, -4},
+                new int[] {-3, -4},
+                new int[] {-4, -4},
+                new int[] {-4, -3},
+                new int[] {-5, -3},
+                new int[] {-5, -2},
+                new int[] {-6, -3},
+                new int[] {-7, -3},
+                new int[] {-7, -2},
+                new int[] {-7, -1},
+                new int[] {-7, 1},
+                new int[] {-7, 2},
+                new int[] {-7, 3},
+                new int[] {-7, 4},
+                new int[] {-6, 4},
+                new int[] {-5, 4},
+                new int[] {-3, -3},
+                new int[] {-3, -2},
+                new int[] {-3, -1},
+                new int[] {-3, 1},
+                new int[] {-4, 1},
+                new int[] {-2, 1},
+                new int[] {-2, 2},
+                new int[] {-1, 2},
+                new int[] {-1, 3},
+                new int[] {-1, 4},
+                new int[] {6, 4}
+            };
+
+            foreach (int[] coord in coords)
+            {
+                walkableCells.Add(new Cell(coord[0], coord[1], new Vector2(1, 1)));
+            }
+            Grid.RegisterWalkableCells(walkableCells);
         }
     }
 }
