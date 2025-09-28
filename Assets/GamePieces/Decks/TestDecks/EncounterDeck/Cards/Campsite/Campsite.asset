@@ -27,3 +27,4 @@ MonoBehaviour:
   DisplayText: Regain 5 Hp when you end your turn here
   Strategies:
   - {fileID: 11400000, guid: 11247272764cba041b31045abdf0f0d6, type: 2}
+  - {fileID: 11400000, guid: 494ba1e4533712d439b43c95c3bc90f0, type: 2}

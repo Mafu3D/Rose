@@ -40,10 +40,17 @@ namespace Project
         public event Action OnEndPlayerTurn;
         public event Action OnEndTurn;
 
-        public TreasureChoice ActiveTreasureChoice;
+        public Choice<Item> ActiveTreasureChoice;
         public event Action OnTresureChoiceStarted;
         public event Action OnTresureChoiceEnded;
         public bool IsChoosingTreasure => ActiveTreasureChoice != null;
+
+
+        public Choice<Card> ActiveCardChoice;
+        public event Action OnCardChoiceStarted;
+        public event Action OnCardChoiceEnded;
+        public bool IsChoosingCard => ActiveCardChoice != null;
+
 
         private List<Node> nodesToBeDestroyed = new();
 
@@ -129,7 +136,7 @@ namespace Project
             return deck;
         }
 
-        public void StartNewTreasureChoice(TreasureChoice treasureChoice)
+        public void StartNewTreasureChoice(Choice<Item> treasureChoice)
         {
             ActiveTreasureChoice = treasureChoice;
             MainUI.Instance.DisplayTreasureChoice(treasureChoice);
@@ -143,6 +150,25 @@ namespace Project
                 ActiveTreasureChoice = null;
                 MainUI.Instance.DestroyTreasureChoice();
                 OnTresureChoiceEnded?.Invoke();
+            }
+        }
+
+        public void StartNewCardChoice(Choice<Card> cardChoice)
+        {
+            ActiveCardChoice = cardChoice;
+            MainUI.Instance.DisplayCards(ActiveCardChoice.GetAllItems());
+            // MainUI.Instance.DisplayTreasureChoice(cardChoice);
+            OnCardChoiceStarted?.Invoke();
+        }
+
+        public void EndCardChoice()
+        {
+            if (ActiveCardChoice != null)
+            {
+                ActiveCardChoice = null;
+                // MainUI.Instance.DestroyTreasureChoice();
+                MainUI.Instance.DestroyDisplayedCards();
+                OnCardChoiceEnded?.Invoke();
             }
         }
 

@@ -11,7 +11,7 @@ namespace Project.UI.MainUI
         [SerializeField] GameObject itemChoice02Container;
         [SerializeField] GameObject itemChoice03Container;
 
-        public void DisplayChoices(TreasureChoice treasureChoice)
+        public void DisplayChoices(Choice<Item> treasureChoice)
         {
             GameObject itemChoice01 = Instantiate(itemChoiceContainerPrefab, itemChoice01Container.transform.position, Quaternion.identity, itemChoice01Container.transform);
             ItemChoiceDisplay itemChoiceDisplay01 = itemChoice01.GetComponent<ItemChoiceDisplay>();

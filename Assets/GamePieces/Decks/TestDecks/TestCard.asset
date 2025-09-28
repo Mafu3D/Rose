@@ -25,6 +25,5 @@ MonoBehaviour:
   Sprite: {fileID: -9066083113907974341, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   CardType: 0
   DisplayText: I'm a test card!
-  Value: 999
-  NodeData: {fileID: 0}
-  Strategies: []
+  Strategies:
+  - {fileID: 11400000, guid: d0017d359bd0702489f74df5c2dadd9d, type: 2}

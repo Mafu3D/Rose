@@ -95,7 +95,7 @@ public class Scratch : MonoBehaviour
 
         // List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
 
-        // TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
+        // Choice<Item> treasureChoice = new Choice<Item(choiceItems);
         // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
 
 

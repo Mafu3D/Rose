@@ -21,9 +21,21 @@ namespace Project.GameplayEffects
         public override Status Start()
         {
             List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
-            TreasureChoice treasureChoice = new TreasureChoice(choiceItems);
+            Choice<Item> treasureChoice = new Choice<Item>(choiceItems, EquipChosenItem);
             GameManager.Instance.StartNewTreasureChoice(treasureChoice);
             return Status.Running;
+        }
+
+        private void EquipChosenItem(Item item) {
+            switch (item.ItemData.ItemType)
+            {
+                case ItemType.Weapon:
+                    GameManager.Instance.Player.Inventory.SwapEquippedWeapon(item);
+                    break;
+                default:
+                    GameManager.Instance.Player.Inventory.AddItem(item);
+                    break;
+            }
         }
     }
 }
