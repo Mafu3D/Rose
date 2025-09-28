@@ -9,8 +9,9 @@ namespace Project.GameNode
     public class MonsterNode : CombatNode, IMovableNode
     {
         bool hasSentBattleRequest;
-        public override Status Resolve()
+        public override Status OnTurnResolve()
         {
+            // base.OnTurnResolve();
             if (!BattleManager.Instance.IsActiveBattle && !hasSentBattleRequest)
             {
                 BattleManager.Instance.StartNewBattle(GameManager.Instance.Hero, this);
@@ -25,11 +26,6 @@ namespace Project.GameNode
             {
                 return Status.Complete;
             }
-        }
-
-        public override void Reset()
-        {
-            // Noop
         }
 
         public void Move(Vector2 direction)

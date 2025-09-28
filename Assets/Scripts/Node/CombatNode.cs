@@ -16,17 +16,6 @@ namespace Project.GameNode
             Attributes = new CharacterAttributes(attributesData);
         }
 
-        public override Status Resolve()
-        {
-            // Noop
-            return Status.Running;
-        }
-
-        public override void Reset()
-        {
-            // Noop
-        }
-
         public void Attack(out int value)
         {
             value = Attributes.GetAttributeValue(AttributeType.Strength);

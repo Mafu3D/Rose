@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: OrcNodeData
+  m_Name: TestNode1_Data
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 7ac0eccd6da42034f9d694d3b846a071, type: 2}
+    - {fileID: 11400000, guid: 39e9a440283882c41ac36f4aa7cd72d0, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -23,11 +25,17 @@ MonoBehaviour:
     SerializationNodes:
     - Name: OnTurnResolveStrategies
       Entry: 7
-      Data: 0|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[Project.GameNode.Strategies.IStrategy,
-        Assembly-CSharp]], Unity.Plastic.Antlr3.Runtime
+      Data: 0|System.Collections.Generic.List`1[[Project.GameNode.Strategies.IStrategy,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
       Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 13
       Data: 
@@ -55,8 +63,8 @@ MonoBehaviour:
     - Name: OnRoundEndStrategies
       Entry: 6
       Data: 
-  DisplayName: Orc
-  Description: Doubles strength when bloodied
-  Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  DisplayName: Test Node 1
+  Description: I'm the first test node!
+  Sprite: {fileID: 6700204669442689607, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   Priority: 0
-  NodeType: 3
+  NodeType: 0

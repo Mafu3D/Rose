@@ -61,12 +61,12 @@ namespace Project.GameStates
         {
             while (resolvingNodeIndex < nodesToResolve.Count)
             {
-                Status status = nodesToResolve[resolvingNodeIndex].Resolve();
+                Status status = nodesToResolve[resolvingNodeIndex].OnTurnResolve();
                 if (status != Status.Complete)
                 {
                     return status;
                 }
-                nodesToResolve[resolvingNodeIndex].Reset();
+                // nodesToResolve[resolvingNodeIndex].Reset();
                 resolvingNodeIndex++;
             }
             return Status.Complete;

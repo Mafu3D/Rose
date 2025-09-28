@@ -1,4 +1,5 @@
 using Project.GameNode;
+using Project.GameNode.Strategies;
 using Project.GameStates;
 using Project.States;
 using TMPro;
@@ -25,6 +26,12 @@ namespace Project.UI.DebugUI
                 else
                 {
                     textString += "None";
+                }
+
+                IStrategy strategy = resolvingNode.ResolvingStrategy;
+                if (strategy != null)
+                {
+                    textString += $"\n {strategy}";
                 }
             }
             else

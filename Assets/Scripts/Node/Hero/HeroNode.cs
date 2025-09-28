@@ -53,15 +53,5 @@ namespace Project.GameNode.Hero
             MovesRemaining = Math.Clamp(Attributes.GetAttributeValue(AttributeType.Speed), 1, 99);
             OnRemainingMovesChanged?.Invoke();
         }
-
-        public override Status Resolve()
-        {
-            return Status.Complete;
-        }
-
-        public override void Reset()
-        {
-            //Noop
-        }
     }
 }

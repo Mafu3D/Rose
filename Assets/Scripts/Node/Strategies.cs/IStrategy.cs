@@ -2,6 +2,10 @@ namespace Project.GameNode.Strategies
 {
     public interface IStrategy
     {
-        public void Execute();
+        public Status Resolve(Node other);
+
+        public void Reset();
+
+        public void ResetNode();
     }
 }
