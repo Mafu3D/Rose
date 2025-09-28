@@ -29,14 +29,8 @@ namespace Project.UI.BattleUI
         {
             MainContainer.SetActive(true);
 
-            LeftCombatantUI.InitializeCombatant(activeBattle.Left,
-                                                activeBattle.Left.NodeData.Sprite,
-                                                activeBattle.Left.NodeData.DisplayName,
-                                                "");
-            RightCombatantUI.InitializeCombatant(activeBattle.Right,
-                                                 activeBattle.Right.NodeData.Sprite,
-                                                 activeBattle.Right.NodeData.DisplayName,
-                                                 activeBattle.Right.NodeData.Description);
+            LeftCombatantUI.InitializeCombatant(activeBattle.Left);
+            RightCombatantUI.InitializeCombatant(activeBattle.Right);
 
             BattleLog.text = "";
 

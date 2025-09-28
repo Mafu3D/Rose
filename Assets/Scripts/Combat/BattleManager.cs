@@ -1,6 +1,7 @@
 using System;
 using Project.GameNode;
 using Project.UI.BattleUI;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace Project.Combat
@@ -17,12 +18,21 @@ namespace Project.Combat
         public event Action OnBattleEnd;
 
 
-        public void StartNewBattle(CombatNode left, CombatNode right)
+        public void StartNewBattle(Combatant left, Combatant right, Action<BattleResolution, Combatant, Combatant> finished)
         {
-            ActiveBattle = new Battle(left, right);
+            ActiveBattle = new Battle(left, right, finished);
             ActiveBattle.StartBattle();
             OnBattleStart?.Invoke();
             BattleUI.Instance.OpenBattleUI();
+        }
+
+        public BattleResolution GetActiveBattleResolution()
+        {
+            if (IsActiveBattle)
+            {
+                return ActiveBattle.GetBattleResolution();
+            }
+            return BattleResolution.None;
         }
 
         public Status Proceed()

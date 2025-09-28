@@ -23,23 +23,25 @@ namespace Project.Combat
 
     public class Battle
     {
-        public readonly CombatNode Left;
-        public readonly CombatNode Right;
+        public readonly Combatant Left;
+        public readonly Combatant Right;
         public int Round;
         public int Turn;
-        CombatNode[] combatantOrder = new CombatNode[2];
+        Combatant[] combatantOrder = new Combatant[2];
         BattleState battleState = BattleState.NotStarted;
         BattleResolution battleResolution = BattleResolution.None;
 
         float timer;
 
         public event Action<string> OnBattleAction;
+        Action<BattleResolution, Combatant, Combatant> finishedCallback;
 
 
-        public Battle(CombatNode left, CombatNode right)
+        public Battle(Combatant left, Combatant right, Action<BattleResolution, Combatant, Combatant> finished)
         {
             this.Left = left;
             this.Right = right;
+            finishedCallback = finished;
         }
 
         public void StartBattle()
@@ -52,6 +54,11 @@ namespace Project.Combat
         public BattleResolution Proceed()
         {
             ProcessBattle();
+            return battleResolution;
+        }
+
+        public BattleResolution GetBattleResolution()
+        {
             return battleResolution;
         }
 
@@ -71,6 +78,7 @@ namespace Project.Combat
                     if (battleResolution != BattleResolution.None)
                     {
                         battleState = BattleState.Complete;
+                        FinishBattle();
                     }
                     else
                     {
@@ -86,6 +94,7 @@ namespace Project.Combat
                     if (battleResolution != BattleResolution.None)
                     {
                         battleState = BattleState.Complete;
+                        FinishBattle();
                     }
                     else
                     {
@@ -109,7 +118,7 @@ namespace Project.Combat
 
         private void DetermineCombatantOrder()
         {
-            combatantOrder = new CombatNode[2];
+            combatantOrder = new Combatant[2];
 
             if (Left.Attributes.GetAttributeValue(Attributes.AttributeType.Speed) > Right.Attributes.GetAttributeValue(Attributes.AttributeType.Speed))
             {
@@ -136,12 +145,12 @@ namespace Project.Combat
             if (i == 0)
             {
                 combatantOrder[1].ReceiveAttack(hitReport);
-                message = $"{combatantOrder[1].NodeData.DisplayName} took {hitReport.Damage} dmg";
+                message = $"{combatantOrder[1].DisplayName} took {hitReport.Damage} dmg";
             }
             else
             {
                 combatantOrder[0].ReceiveAttack(hitReport);
-                message = $"{combatantOrder[0].NodeData.DisplayName} took {hitReport.Damage} dmg";
+                message = $"{combatantOrder[0].DisplayName} took {hitReport.Damage} dmg";
             }
 
             OnBattleAction?.Invoke(message);
@@ -168,7 +177,7 @@ namespace Project.Combat
 
         private void FinishBattle()
         {
-
+            finishedCallback(battleResolution, Left, Right);
         }
     }
 }

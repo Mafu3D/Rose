@@ -38,7 +38,7 @@ namespace Project.GameStates
 
         private void ExitChoosing()
         {
-            StateMachine.SwitchState(new EndOfTurn(SuperState, StateMachine));
+            StateMachine.SwitchState(new WaitForResolve(new ResolvingEffects(StateMachine), StateMachine));
         }
 
         private void Choice3()
@@ -57,11 +57,6 @@ namespace Project.GameStates
         {
             GameManager.Instance.ActiveTreasureChoice.ChooseItem(0);
             GameManager.Instance.EndTreasureChoice();
-        }
-
-        private void ExitChoice()
-        {
-
         }
 
         public override void Update(float deltaTime)

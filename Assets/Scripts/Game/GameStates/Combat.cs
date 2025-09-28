@@ -22,13 +22,13 @@ namespace Project.GameStates
         public override void Subscribe()
         {
             GameManager.Instance.Player.InputReader.OnProceedInput += Proceed;
-            // BattleManager.Instance.OnBattleEnd += ExitCombat;
+            BattleManager.Instance.OnBattleEnd += ExitCombat;
         }
 
         public override void Unsubscribe()
         {
             GameManager.Instance.Player.InputReader.OnProceedInput -= Proceed;
-            // BattleManager.Instance.OnBattleEnd -= ExitCombat;
+            BattleManager.Instance.OnBattleEnd -= ExitCombat;
         }
 
         private void Proceed()
@@ -48,7 +48,7 @@ namespace Project.GameStates
 
         private void ExitCombat()
         {
-            StateMachine.SwitchState(new EndOfTurn(SuperState, StateMachine));
+            StateMachine.SwitchState(new WaitForResolve(new ResolvingEffects(StateMachine), StateMachine));
         }
 
         public override void Update(float deltaTime)

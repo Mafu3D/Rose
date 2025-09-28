@@ -1,3 +1,4 @@
+using Project.Combat;
 using Project.GameNode;
 using TMPro;
 using UnityEngine;
@@ -17,15 +18,15 @@ namespace Project.UI.BattleUI
         [SerializeField] TMP_Text magicText;
         [SerializeField] TMP_Text dexterityText;
 
-        CombatNode combatant;
+        Combatant combatant;
 
-        public void InitializeCombatant(CombatNode combatantNode, Sprite sprite, string name, string description)
+        public void InitializeCombatant(Combatant combatant)
         {
-            image.sprite = sprite;
-            displayName.text = name;
-            this.description.text = description;
+            image.sprite = combatant.Sprite;
+            displayName.text = combatant.DisplayName;
+            this.description.text = combatant.Description;
 
-            combatant = combatantNode;
+            this.combatant = combatant;
 
             UpdateStats();
         }

@@ -22,12 +22,19 @@ namespace Project.GameStates
         public override void Subscribe() {
             GameManager.Instance.EffectQueue.OnResolveQueueEnd += EndResolve;
             GameManager.Instance.OnTresureChoiceStarted += GoToChoice;
+            BattleManager.Instance.OnBattleStart += GoToBattle;
          }
 
         public override void Unsubscribe() {
             GameManager.Instance.EffectQueue.OnResolveQueueEnd -= EndResolve;
             GameManager.Instance.OnTresureChoiceStarted -= GoToChoice;
+            BattleManager.Instance.OnBattleStart -= GoToBattle;
          }
+
+        private void GoToBattle()
+        {
+            StateMachine.SwitchState(new Combat(new ResolvingEffects(StateMachine), StateMachine));
+        }
 
         private void GoToChoice()
         {
@@ -42,18 +49,5 @@ namespace Project.GameStates
         public override void Update(float deltaTime)
         {
         }
-
-        private void EnterCombat()
-        {
-            StateMachine.SwitchState(new Combat(this, StateMachine));
-        }
-
-
-        private void EnterChoosing()
-        {
-            StateMachine.SwitchState(new Choosing(this, StateMachine));
-        }
-
-
     }
 }
