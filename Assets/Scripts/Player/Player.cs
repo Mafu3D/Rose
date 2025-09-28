@@ -1,4 +1,5 @@
 using Project.GameNode.Hero;
+using Project.Items;
 using UnityEngine;
 
 namespace Project.PlayerSystem
@@ -7,6 +8,7 @@ namespace Project.PlayerSystem
     {
         [SerializeField] public Input.InputReader InputReader;
         [SerializeField] public HeroNode HeroNode;
+        [SerializeField] public Inventory Inventory;
         public Camera PlayerCamera { get; private set; }
 
         void Awake()

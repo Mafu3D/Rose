@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Project.GameNode.Strategies
 {
-    [CreateAssetMenu(fileName = "NewModifyAttributes", menuName = "Nodes/Modify Attributes", order = 0)]
+    [CreateAssetMenu(fileName = "NewModifyAttributes", menuName = "Nodes/Modify Attributes", order = 1)]
     public class ModifyAttributes : ScriptableObject, INodeStrategy
     {
         [SerializeField] bool CanBeUsedMultipleTimes = false;

@@ -3,6 +3,7 @@ using Project;
 using Project.Decks;
 using Project.Grid;
 using Project.Items;
+using Project.UI.MainUI;
 using UnityEngine;
 
 public class Scratch : MonoBehaviour
@@ -10,6 +11,7 @@ public class Scratch : MonoBehaviour
     [SerializeField] GameObject hitPointObject;
     [SerializeField] Inventory inventory;
     [SerializeField] ItemData item;
+    [SerializeField] List<ItemData> items;
     bool lmbClicked = false;
     bool rmbClicked = false;
 
@@ -18,6 +20,8 @@ public class Scratch : MonoBehaviour
 
     void Start()
     {
+        TreasureChoice treasureChoice = new TreasureChoice(items);
+        MainUI.Instance.DisplayTreasureChoice(treasureChoice);
     }
 
     void Update()

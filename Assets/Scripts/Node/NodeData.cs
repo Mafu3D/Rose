@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Project.GameNode
 {
-    [CreateAssetMenu(fileName = "NodeData", menuName = "NodeData", order = 0)]
+    [CreateAssetMenu(fileName = "NodeData", menuName = "Nodes/NodeData", order = 0)]
     public class NodeData : SerializedScriptableObject
     {
         [SerializeField] public string DisplayName;
