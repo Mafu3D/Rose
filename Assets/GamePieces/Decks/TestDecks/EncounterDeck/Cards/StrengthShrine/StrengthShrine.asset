@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Orc
+  m_Name: StrengthShrine
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Orc
-  Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  CardType: 4
-  DisplayText: Run! it's a nasty orc!
+  Name: Strength Shrine
+  Sprite: {fileID: -8218794040945226646, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  CardType: 0
+  DisplayText: Increase your Strength by 1
   Strategies:
-  - {fileID: 11400000, guid: 9aae7ccdd35b15b4f9b1c9f4874a2a23, type: 2}
+  - {fileID: 11400000, guid: aa1b8508b12e89b44b2120972f922cec, type: 2}

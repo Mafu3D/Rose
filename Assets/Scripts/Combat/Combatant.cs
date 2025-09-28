@@ -1,3 +1,4 @@
+using System;
 using Project.Attributes;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace Project.Combat
 
         public void ReceiveAttack(HitReport hitReport)
         {
-            Attributes.DecreaseAttributeValue(AttributeType.Health, hitReport.Damage);
+            Attributes.ModifyAttributeValue(AttributeType.Health, -Math.Abs(hitReport.Damage));
         }
     }
 }

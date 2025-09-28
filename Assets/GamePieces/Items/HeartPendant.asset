@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: Jordans
+  m_Name: HeartPendant
   m_EditorClassIdentifier: 
-  Name: Jordans
-  Description: brrrrrrrrrrrrt
-  Sprite: {fileID: -1603600227877920923, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 10
+  Name: Heart Pendant
+  Description: Gain 3 max health
+  Sprite: {fileID: 3996424042659583036, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  GoldValue: 0
   ItemType: 0
-  HealthModifier: 0
-  MaxHealthModifier: 0
+  HealthModifier: 3
+  MaxHealthModifier: 3
   ArmorModifier: 0
   MaxArmorModifier: 0
   StrengthModifier: 0
@@ -27,5 +27,5 @@ MonoBehaviour:
   MaxMagicModifier: 0
   DexterityModifier: 0
   MaxDexterityModifier: 0
-  SpeedModifier: 2
+  SpeedModifier: 0
   MaxSpeedModifier: 0

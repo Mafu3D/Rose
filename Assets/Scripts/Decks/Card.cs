@@ -22,7 +22,6 @@ namespace Project.Decks
         public readonly string DisplayText;
         public readonly Sprite Sprite;
         public readonly CardType CardType;
-        public readonly int Value;
         public readonly List<GameplayEffectStrategy> strategies;
 
         public Card(CardData data)
@@ -31,7 +30,6 @@ namespace Project.Decks
             this.DisplayText = data.DisplayText;
             this.CardType = data.CardType;
             this.Sprite = data.Sprite;
-            this.Value = data.Value;
             this.strategies = data.Strategies;
         }
 

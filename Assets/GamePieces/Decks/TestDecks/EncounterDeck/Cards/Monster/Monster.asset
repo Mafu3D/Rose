@@ -20,23 +20,9 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Strategies
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Projejct.Decks.CardStrategies.IStrategy,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   Name: Monster Attack
   Sprite: {fileID: 0}
   CardType: 4
   DisplayText: It's a monster attack!
-  Value: 0
-  NodeData: {fileID: 0}
+  Strategies: []

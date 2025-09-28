@@ -15,32 +15,15 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 8c49e9f16ce5fe745977154d2101dba1, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Strategies
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Projejct.Decks.CardStrategies.IStrategy,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   Name: Skeleton
   Sprite: {fileID: -3558442656048911363, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   CardType: 4
   DisplayText: Oh no! It's a spooky scary skeleton!
-  Value: 0
-  NodeData: {fileID: 11400000, guid: 47ad9efd924de8d47920c9bbefb93701, type: 2}
+  Strategies:
+  - {fileID: 11400000, guid: e63402db059c79e4688812b0a4047bd9, type: 2}

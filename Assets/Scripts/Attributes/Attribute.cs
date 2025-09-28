@@ -17,10 +17,11 @@ namespace Project.Attributes
     {
         public readonly AttributeType Type;
         public readonly int StartingValue;
-        public readonly int MaxValue;
+        public int MaxValue;
         public int BaseValue;
 
-        private List<int> statModifiers = new();
+        private List<int> baseValueModifiers = new();
+        private List<int> maxValueModifiers = new();
 
         public Attribute(AttributeType type, int startingValue, int maxValue = 99)
         {
@@ -33,33 +34,56 @@ namespace Project.Attributes
         public int GetValue()
         {
             int value = BaseValue;
-            foreach (int modifier in statModifiers)
+            foreach (int modifier in baseValueModifiers)
+            {
+                value = Math.Clamp(value + modifier, -99, MaxValue);
+            }
+            return value;
+        }
+
+        public int GetMaxValue()
+        {
+            int value = MaxValue;
+            foreach (int modifier in maxValueModifiers)
             {
                 value += modifier;
             }
             return value;
         }
 
-        public void IncreaseValue(int amount)
+        public void ModifyValue(int amount)
         {
             BaseValue = Math.Clamp(BaseValue + amount, 0, MaxValue);
         }
 
-        public void DecreaseValue(int amount)
+        public void ModifyMaxValue(int amount)
         {
-            BaseValue = Math.Clamp(BaseValue - amount, 0, MaxValue);
+            MaxValue = Math.Clamp(MaxValue + amount, 0, 99);
         }
 
-        public void RegisterAttributeModifier(int modifier)
+        public void RegisterBaseAttributeModifier(int modifier)
         {
-            statModifiers.Add(modifier);
+            baseValueModifiers.Add(modifier);
         }
 
-        public void DeregisterAttributeModifier(int modifier)
+        public void DeregisterBaseAttributeModifier(int modifier)
         {
-            if (statModifiers.Contains(modifier))
+            if (baseValueModifiers.Contains(modifier))
             {
-                statModifiers.Remove(modifier);
+                baseValueModifiers.Remove(modifier);
+            }
+        }
+
+        public void RegisterMaxAttributeModifier(int modifier)
+        {
+            maxValueModifiers.Add(modifier);
+        }
+
+        public void DeregisterMaxAttributeModifier(int modifier)
+        {
+            if (maxValueModifiers.Contains(modifier))
+            {
+                maxValueModifiers.Remove(modifier);
             }
         }
     }

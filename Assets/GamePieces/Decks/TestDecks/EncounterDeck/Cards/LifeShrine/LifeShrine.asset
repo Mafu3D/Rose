@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Orc
+  m_Name: LifeShrine
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Orc
-  Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  CardType: 4
-  DisplayText: Run! it's a nasty orc!
+  Name: Life Shrine
+  Sprite: {fileID: -8529683765627389468, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  CardType: 0
+  DisplayText: Gain 5 max health.
   Strategies:
-  - {fileID: 11400000, guid: 9aae7ccdd35b15b4f9b1c9f4874a2a23, type: 2}
+  - {fileID: 11400000, guid: 43a96a2ccf6406b4f8ba9b488883cfee, type: 2}

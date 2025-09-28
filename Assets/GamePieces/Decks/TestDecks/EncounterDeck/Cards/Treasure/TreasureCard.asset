@@ -15,32 +15,15 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: b53bea2da7cbcf64aae7e0b2dd839cc8, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: Strategies
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Projejct.Decks.CardStrategies.ICardStrategy,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   Name: Treasure!
   Sprite: {fileID: -6233324742180810156, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   CardType: 2
   DisplayText: Choose one of three items
-  Value: 0
-  NodeData: {fileID: 0}
+  Strategies:
+  - {fileID: 11400000, guid: 8ce932870d1cf354e871abeaf4f7260b, type: 2}

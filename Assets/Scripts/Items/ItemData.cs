@@ -14,11 +14,17 @@ namespace Project.Items
 
         [Header("Modifiers")]
         [SerializeField] public int HealthModifier = 0;
+        [SerializeField] public int MaxHealthModifier = 0;
         [SerializeField] public int ArmorModifier = 0;
+        [SerializeField] public int MaxArmorModifier = 0;
         [SerializeField] public int StrengthModifier = 0;
+        [SerializeField] public int MaxStrengthModifier = 0;
         [SerializeField] public int MagicModifier = 0;
+        [SerializeField] public int MaxMagicModifier = 0;
         [SerializeField] public int DexterityModifier = 0;
+        [SerializeField] public int MaxDexterityModifier = 0;
         [SerializeField] public int SpeedModifier = 0;
+        [SerializeField] public int MaxSpeedModifier = 0;
 
         // On Combat Start Strategies
 

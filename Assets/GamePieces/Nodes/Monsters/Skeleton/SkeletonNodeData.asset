@@ -20,31 +20,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: OnTurnResolveStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerEnterStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerExitStrategies
-      Entry: 6
-      Data: 
-    - Name: OnCreateStrategies
-      Entry: 6
-      Data: 
-    - Name: OnDestroyStrategies
-      Entry: 6
-      Data: 
-    - Name: OnRoundStartStrategies
-      Entry: 6
-      Data: 
-    - Name: OnPlayerTurnEndStrategies
-      Entry: 6
-      Data: 
-    - Name: OnRoundEndStrategies
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   DisplayName: Skeleton
   Description: Chance to survive fatal damage
   Sprite: {fileID: -3558442656048911363, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
@@ -52,3 +28,12 @@ MonoBehaviour:
   NodeType: 3
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
+  AttributesData: {fileID: 11400000, guid: 5a24b4c12d60ef948b7f3287c9d45bcf, type: 2}
+  OnEndTurnStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []
+  OnRoundStartStrategies: []
+  OnPlayerTurnEndStrategies: []
+  OnRoundEndStrategies: []

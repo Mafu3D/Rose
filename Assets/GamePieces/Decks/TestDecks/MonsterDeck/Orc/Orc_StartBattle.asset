@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6283bb658c436f246aa210ab7ca730fd, type: 3}
-  m_Name: Orc_CreateNode
+  m_Script: {fileID: 11500000, guid: 9559b1472856e024bb7e5b3505bb172c, type: 3}
+  m_Name: Orc_StartBattle
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 4534305980478911969, guid: f9350a9facb7f40419592515af5766aa, type: 3}
+  enemyNodeData: {fileID: 11400000, guid: 47ad9efd924de8d47920c9bbefb93701, type: 2}

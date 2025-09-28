@@ -9,7 +9,7 @@ namespace Project.Attributes
 
         public CharacterAttributes(AttributesData data)
         {
-            Attributes.Add(AttributeType.Health, new Attribute(AttributeType.Health, data.Health));
+            Attributes.Add(AttributeType.Health, new Attribute(AttributeType.Health, data.Health, data.Health));
             Attributes.Add(AttributeType.Armor, new Attribute(AttributeType.Armor, data.Armor));
             Attributes.Add(AttributeType.Strength, new Attribute(AttributeType.Strength, data.Strength));
             Attributes.Add(AttributeType.Magic, new Attribute(AttributeType.Magic, data.Magic));
@@ -27,21 +27,31 @@ namespace Project.Attributes
             return 0;
         }
 
-        public void IncreaseAttributeValue(AttributeType type, int amount)
+        public int GetMaxAttributeValue(AttributeType type)
         {
             Attribute attribute;
             if (Attributes.TryGetValue(type, out attribute))
             {
-                attribute.IncreaseValue(amount);
+                return attribute.GetMaxValue();
+            }
+            return 0;
+        }
+
+        public void ModifyAttributeValue(AttributeType type, int amount)
+        {
+            Attribute attribute;
+            if (Attributes.TryGetValue(type, out attribute))
+            {
+                attribute.ModifyValue(amount);
             }
         }
 
-        public void DecreaseAttributeValue(AttributeType type, int amount)
+        public void ModifyMaxAttributeValue(AttributeType type, int amount)
         {
             Attribute attribute;
             if (Attributes.TryGetValue(type, out attribute))
             {
-                attribute.DecreaseValue(amount);
+                attribute.ModifyMaxValue(amount);
             }
         }
 
@@ -50,7 +60,16 @@ namespace Project.Attributes
             Attribute attribute;
             if (Attributes.TryGetValue(type, out attribute))
             {
-                attribute.RegisterAttributeModifier(value);
+                attribute.RegisterBaseAttributeModifier(value);
+            }
+        }
+
+        public void RegisterMaxAttributeModifier(AttributeType type, int value)
+        {
+            Attribute attribute;
+            if (Attributes.TryGetValue(type, out attribute))
+            {
+                attribute.RegisterMaxAttributeModifier(value);
             }
         }
 
@@ -59,7 +78,16 @@ namespace Project.Attributes
             Attribute attribute;
             if (Attributes.TryGetValue(type, out attribute))
             {
-                attribute.DeregisterAttributeModifier(value);
+                attribute.DeregisterBaseAttributeModifier(value);
+            }
+        }
+
+        public void DeregisterMaxAttributeModifier(AttributeType type, int value)
+        {
+            Attribute attribute;
+            if (Attributes.TryGetValue(type, out attribute))
+            {
+                attribute.DeregisterMaxAttributeModifier(value);
             }
         }
     }

@@ -9,7 +9,6 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewStartBattle", menuName = "Effects/Start Battle", order = 1)]
     public class StartBattle : GameplayEffectStrategy
     {
-        [SerializeField] AttributesData enemyAttributesData;
         [SerializeField] NodeData enemyNodeData;
 
         public override void Reset()
@@ -41,7 +40,7 @@ namespace Project.GameplayEffects
                                            GameManager.Instance.Hero.NodeData.Description,
                                            GameManager.Instance.Hero.NodeData.Sprite);
 
-            CharacterAttributes enemyAttributes = new CharacterAttributes(enemyAttributesData);
+            CharacterAttributes enemyAttributes = new CharacterAttributes(enemyNodeData.AttributesData);
             Combatant right = new Combatant(enemyAttributes,
                                             enemyNodeData.DisplayName,
                                             enemyNodeData.Description,

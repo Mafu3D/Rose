@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: Jordans
+  m_Name: StrengthAmulet
   m_EditorClassIdentifier: 
-  Name: Jordans
-  Description: brrrrrrrrrrrrt
-  Sprite: {fileID: -1603600227877920923, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 10
+  Name: StrengthAmulet
+  Description: Increase strength by 1
+  Sprite: {fileID: -1328562665872079976, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  GoldValue: 0
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 0
+  StrengthModifier: 1
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
   DexterityModifier: 0
   MaxDexterityModifier: 0
-  SpeedModifier: 2
+  SpeedModifier: 0
   MaxSpeedModifier: 0

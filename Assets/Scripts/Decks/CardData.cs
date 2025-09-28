@@ -14,8 +14,6 @@ namespace Project.Decks
         [SerializeField] public Sprite Sprite;
         [SerializeField] public CardType CardType;
         [SerializeField] public string DisplayText;
-        [SerializeField] public int Value;
-        [SerializeField] public NodeData NodeData;
         [SerializeField] public List<GameplayEffectStrategy> Strategies;
     }
 }

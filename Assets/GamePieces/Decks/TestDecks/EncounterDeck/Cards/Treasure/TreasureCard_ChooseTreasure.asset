@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6283bb658c436f246aa210ab7ca730fd, type: 3}
-  m_Name: TreasureCard_CreateNode
+  m_Script: {fileID: 11500000, guid: e558202a03a85c444890c98ad0f7ca15, type: 3}
+  m_Name: TreasureCard_ChooseTreasure
   m_EditorClassIdentifier: 
-  nodePrefab: {fileID: 360491228563786126, guid: 0aa4e610f0b08a243afbb1ec59bf988c, type: 3}
