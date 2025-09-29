@@ -36,38 +36,49 @@ namespace Project.Attributes
 
         public int GetValue()
         {
+            // int preMod = BaseValue;
             int value = BaseValue;
             foreach (int modifier in baseValueModifiers)
             {
-                value = Math.Clamp(value + modifier, -99, MaxValue);
+                value = Math.Clamp(value + modifier, 0, GetMaxValue());
             }
+            // Debug.Log($"Get Base {Type}: {preMod} >>> {value}");
             return value;
         }
 
         public int GetMaxValue()
         {
+            // int preMod = MaxValue;
             int value = MaxValue;
             foreach (int modifier in maxValueModifiers)
             {
                 value += modifier;
             }
+            //  Debug.Log($"Get Max {Type}: {preMod} >>> {value}");
             return value;
         }
 
         public void ModifyValue(int amount)
         {
-            BaseValue = Math.Clamp(BaseValue + amount, 0, MaxValue);
+            // int preBase = BaseValue;
+            // int preCalc = BaseValue + amount;
+            BaseValue = Math.Clamp(BaseValue + amount, 0, GetMaxValue());
             OnValueChanged?.Invoke();
+            // Debug.Log($"Modify Base {Type}: {BaseValue} / {MaxValue} --- {BaseValue} + {amount} = {preCalc}");
         }
 
         public void ModifyMaxValue(int amount)
         {
+            // int preMax = MaxValue;
+            // int preCalc = MaxValue + amount;
             MaxValue = Math.Clamp(MaxValue + amount, 0, 99);
             OnValueChanged?.Invoke();
+            // Debug.Log($"Modify Max {Type}: {MaxValue} --- {preMax} + {amount} = {preCalc}");
         }
 
         public void RegisterBaseAttributeModifier(int modifier)
         {
+            // Debug.Log($"Register to Base {Type}: {modifier}");
             baseValueModifiers.Add(modifier);
             OnValueChanged?.Invoke();
         }
@@ -76,6 +87,7 @@ namespace Project.Attributes
         {
             if (baseValueModifiers.Contains(modifier))
             {
+                // Debug.Log($"Deregister to Base {Type}: {modifier}");
                 baseValueModifiers.Remove(modifier);
             }
             OnValueChanged?.Invoke();
@@ -83,6 +95,7 @@ namespace Project.Attributes
 
         public void RegisterMaxAttributeModifier(int modifier)
         {
+            // Debug.Log($"Register to Max {Type}: {modifier}");
             maxValueModifiers.Add(modifier);
             OnValueChanged?.Invoke();
         }
@@ -91,18 +104,10 @@ namespace Project.Attributes
         {
             if (maxValueModifiers.Contains(modifier))
             {
+                // Debug.Log($"Deregister to Max {Type}: {modifier}");
                 maxValueModifiers.Remove(modifier);
             }
             OnValueChanged?.Invoke();
         }
     }
-
-    // public struct StatModifier {
-    //     public readonly int Value;
-
-    //     public StatModifier(int value)
-    //     {
-    //         this.Value = value;
-    //     }
-    // }
 }

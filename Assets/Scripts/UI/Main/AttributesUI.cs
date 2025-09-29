@@ -33,7 +33,7 @@ namespace Project.UI.BattleUI
             UpdateDexterity();
         }
 
-        void OnDisable()
+        void OnDestroy()
         {
             combatant.Attributes.GetAttribute(Attributes.AttributeType.Health).OnValueChanged -= UpdateHealth;
             combatant.Attributes.GetAttribute(Attributes.AttributeType.Armor).OnValueChanged -= UpdateArmor;
