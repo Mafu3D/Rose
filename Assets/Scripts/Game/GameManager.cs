@@ -104,14 +104,22 @@ namespace Project
 
             // Declare States
             var roundStartState = new RoundStartState("RoundStart", this);
-            var roundStartResolveState = new ResolveEffectsState("RoundStartResolve",this);
-            var turnStartState = new TurnStartState("TurnStart",this);
-            var turnStartResolveState = new ResolveEffectsState("TurnStartResolve",this);
-            var playerMoveState = new PlayerMoveState("PlayerMove",this);
-            var playerMoveResolveState = new ResolveEffectsState("PlayerMoveResolve",this);
-            var playerMoveEndResolveState = new ResolveEffectsState("PlayerMoveEndResolve",this);
-            var endOfTurnState = new EndOfTurnState("EndOfTurn",this);
-            var endOfTurnResolveState = new ResolveEffectsState("EndOfTurnResolve",this);
+            var roundStartResolveState = new ResolveEffectsState("RoundStartResolve", this);
+
+            var turnStartState = new TurnStartState("TurnStart", this);
+            var turnStartResolveState = new ResolveEffectsState("TurnStartResolve", this);
+
+            var playerMoveState = new PlayerMoveState("PlayerMove", this);
+            var playerMoveResolveState = new ResolveEffectsState("PlayerMoveResolve", this);
+            var playerMoveEndResolveState = new ResolveEffectsState("PlayerMoveEndResolve", this);
+
+            var endOfTurnState = new EndOfTurnState("EndOfTurn", this);
+            var endOfTurnResolveState = new ResolveEffectsState("EndOfTurnResolve", this);
+
+            // Debug.Log(roundStartResolveState);
+            // Debug.Log(endOfTurnResolveState);
+            // Debug.Log(roundStartResolveState == endOfTurnResolveState);
+            // Debug.Log(Object.ReferenceEquals(roundStartResolveState, endOfTurnResolveState));
 
             // Define Transitions
             At(roundStartState, roundStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
@@ -144,6 +152,8 @@ namespace Project
         #endregion
 
         #region Game Loop
+        // Everthing about the game stat itself should be updated here! (What turn is it, shuffling decks, etc.)
+
         public void StartNewRound()
         {
             Round += 1;
@@ -172,6 +182,14 @@ namespace Project
         }
 
         #endregion
+
+
+
+
+
+
+
+
 
         private Deck<Card> InitializeCardDeck(DeckData deckData)
         {
@@ -248,6 +266,8 @@ namespace Project
         }
 
 
+
+        #region Temp Shit
         private void TEMP_BUILD_MAP()
         {
             List<Cell> walkableCells = new List<Cell>();
@@ -330,7 +350,6 @@ namespace Project
             }
             Grid.RegisterWalkableCells(walkableCells);
         }
+        #endregion
     }
 }
-
-

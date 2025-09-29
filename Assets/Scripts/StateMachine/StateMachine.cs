@@ -68,7 +68,7 @@ namespace Project.States
 
         StateNode GetOrAddNode(IState state)
         {
-            var node = nodes.GetValueOrDefault(state.GetType());
+            StateNode node = nodes.GetValueOrDefault(state.GetType());
 
             if (node == null)
             {

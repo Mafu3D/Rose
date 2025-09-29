@@ -10,7 +10,6 @@ namespace Project.States
         protected GameManager GameManager;
         public string Name => name;
         private string name;
-        public event Action Exit;
 
         public BaseState(string name, GameManager gameManager)
         {

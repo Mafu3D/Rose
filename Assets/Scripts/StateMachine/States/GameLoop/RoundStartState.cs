@@ -9,15 +9,15 @@ namespace Project.GameLoop.States
 
         public override void OnEnter()
         {
+            Debug.Log($"Enter: {Name}");
             GameManager.PhaseSwitch.StartNewPhase();
-            Debug.Log("Enter: Round Start");
 
         }
 
         public override void Update()
         {
-            GameManager.PhaseSwitch.CompletePhase();
             GameManager.StartNewTurn();
+            GameManager.PhaseSwitch.CompletePhase();
         }
 
         public override void OnExit() { }

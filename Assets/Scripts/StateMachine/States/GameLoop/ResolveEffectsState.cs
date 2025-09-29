@@ -9,13 +9,13 @@ namespace Project.GameLoop.States
 
         public override void OnEnter()
         {
-            GameManager.PhaseSwitch.StartNewPhase();
-            Debug.Log("Enter: Resolve Effects");
+            Debug.Log($"Enter: {Name}");
+            // GameManager.PhaseSwitch.StartNewPhase();
         }
 
         public override void Update()
         {
-            GameManager.PhaseSwitch.CompletePhase();
+            // GameManager.PhaseSwitch.CompletePhase();
         }
 
         public override void OnExit() { }
