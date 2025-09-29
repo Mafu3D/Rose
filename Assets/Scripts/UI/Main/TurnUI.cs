@@ -11,7 +11,7 @@ namespace Project.UI.MainUI
 
         void Start()
         {
-            GameManager.Instance.OnStartPlayerTurn += UpdateTurnTracker;
+            GameManager.Instance.OnRoundStartPhaseStart += UpdateTurnTracker;
             UpdateTurnTracker();
         }
 

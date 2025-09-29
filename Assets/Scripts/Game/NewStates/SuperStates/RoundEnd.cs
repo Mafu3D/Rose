@@ -1,29 +1,28 @@
+using System;
 using Project.States;
+using UnityEngine;
 
 namespace Project.GameStates
 {
-    public class EndOfRound : SubState
+    public class RoundEnd : State
     {
-        public EndOfRound(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
+        public RoundEnd(StateMachine stateMachine) : base(stateMachine) { }
 
         public override void Enter()
         {
-            EndTurn();
+            Continue();
         }
 
         public override void Exit()
         {
-
         }
 
         public override void Subscribe()
         {
-
         }
 
         public override void Unsubscribe()
         {
-
         }
 
         public override void Update(float deltaTime)
@@ -31,11 +30,10 @@ namespace Project.GameStates
 
         }
 
-        private void EndTurn()
+        private void Continue()
         {
-            GameManager.Instance.DestroyMarkedNodes();
             GameManager.Instance.StartRoundStartPhase();
-            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
+            StateMachine.SwitchState(new ResolvingEffects(new RoundStart(StateMachine), StateMachine));
         }
     }
 }

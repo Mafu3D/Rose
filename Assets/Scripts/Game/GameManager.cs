@@ -12,6 +12,16 @@ using Project.UI.MainUI;
 
 namespace Project
 {
+    public enum GamePhase
+    {
+        NotStarted,
+        RoundStart,
+        PlayerTurn,
+        EndOfTurn,
+        Draw,
+        ActivateTiles,
+        RoundEnd
+    }
 
     public class GameManager : Singleton<GameManager>
     {
@@ -30,6 +40,7 @@ namespace Project
         [SerializeField] public float TimeBetweenPlayerMoves = 0.25f;
 
         public GameGrid Grid;
+        public GamePhase CurrentPhase = GamePhase.NotStarted;
 
         public HeroNode Hero => Player.HeroNode;
         public int Turn { get; private set; }
@@ -41,9 +52,13 @@ namespace Project
         public Deck<Card> MonsterDeck;
         public Deck<Item> ItemDeck;
 
-        public event Action OnStartPlayerTurn;
-        public event Action OnEndPlayerTurn;
-        public event Action OnEndTurn;
+        public event Action OnRoundStartPhaseStart;
+        public event Action OnPlayerTurnPhaseStart;
+        public event Action OnEndOfTurnPhaseStart;
+        public event Action OnDrawPhaseStart;
+        public event Action OnActivateTilesPhaseStart;
+        public event Action OnRoundEndPhaseStart;
+
 
         public Choice<Item> ActiveTreasureChoice;
         public event Action OnTresureChoiceStarted;
@@ -83,27 +98,61 @@ namespace Project
             StateMachine.Update();
         }
 
-        public void IncrementTurn()
-        {
-            Turn += 1;
-            Hero.ResetMovesRemaining();
-            OnStartPlayerTurn?.Invoke();
-        }
-
         public void StartGame()
         {
-            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
+            CurrentPhase = GamePhase.RoundStart;
+            StateMachine.SwitchState(new NoPlayerInput(new RoundStart(StateMachine), StateMachine));
             Turn = 0;
 
             EncounterDeck = InitializeCardDeck(EncounterDeckData);
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
+
+            OnRoundStartPhaseStart?.Invoke();
         }
 
-        // public void EndPlayerTurn()
-        // {
+        public void StartRoundStartPhase()
+        {
+            Turn += 1;
+            CurrentPhase = GamePhase.RoundStart;
+            OnRoundStartPhaseStart?.Invoke();
+            // EffectQueue.ResolveQueue();
+        }
 
-        // }
+        public void StartPlayerTurnPhase()
+        {
+            CurrentPhase = GamePhase.PlayerTurn;
+            OnPlayerTurnPhaseStart?.Invoke();
+            // EffectQueue.ResolveQueue();
+        }
+
+        public void StartEndOfTurnPhase()
+        {
+            CurrentPhase = GamePhase.EndOfTurn;
+            OnEndOfTurnPhaseStart?.Invoke();
+            // EffectQueue.ResolveQueue();
+        }
+
+        public void StartDrawPhase()
+        {
+            CurrentPhase = GamePhase.ActivateTiles;
+            OnDrawPhaseStart?.Invoke();
+            // EffectQueue.ResolveQueue();
+        }
+
+        public void StartActivateTilesPhase()
+        {
+            CurrentPhase = GamePhase.ActivateTiles;
+            OnActivateTilesPhaseStart?.Invoke();
+            // EffectQueue.ResolveQueue();
+        }
+
+        public void StartRoundEndPhase()
+        {
+            CurrentPhase = GamePhase.RoundEnd;
+            OnRoundEndPhaseStart?.Invoke();
+            // EffectQueue.ResolveQueue();
+        }
 
         // private void DrawEncounterCard()
         // {

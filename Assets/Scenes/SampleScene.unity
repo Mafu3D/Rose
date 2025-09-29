@@ -13549,12 +13549,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 943401407}
   UICanvas: {fileID: 0}
-  EncounterDeckData: {fileID: 11400000, guid: a52d215cec2418e4c93e99025946dab8, type: 2}
+  EncounterDeckData: {fileID: 11400000, guid: a46161399025a8540b97b068fe572820, type: 2}
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 450250885d333784fb28186849824ae1, type: 2}
   AutoBattle: 1
   AutoBattleSpeed: 1
   TimeBetweenPlayerMoves: 0.25
+  CurrentPhase: 0
 --- !u!4 &1639557477
 Transform:
   m_ObjectHideFlags: 0

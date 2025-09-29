@@ -1,41 +1,41 @@
-using System;
-using Project.States;
-using UnityEngine;
+// using System;
+// using Project.States;
+// using UnityEngine;
 
-namespace Project.GameStates
-{
-    public class PlayerTurn : State
-    {
-        public PlayerTurn(StateMachine stateMachine) : base(stateMachine) { }
+// namespace Project.GameStates
+// {
+//     public class PlayerTurn : State
+//     {
+//         public PlayerTurn(StateMachine stateMachine) : base(stateMachine) { }
 
-        public override void Enter()
-        {
+//         public override void Enter()
+//         {
 
-        }
+//         }
 
-        public override void Exit()
-        {
+//         public override void Exit()
+//         {
 
-        }
+//         }
 
-        public override void Subscribe()
-        {
-            GameManager.Instance.EffectQueue.OnResolveQueueStart += GoToResolve;
-        }
+//         public override void Subscribe()
+//         {
+//             GameManager.Instance.EffectQueue.OnResolveQueueStart += GoToResolve;
+//         }
 
-        public override void Unsubscribe()
-        {
-            GameManager.Instance.EffectQueue.OnResolveQueueStart -= GoToResolve;
-        }
+//         public override void Unsubscribe()
+//         {
+//             GameManager.Instance.EffectQueue.OnResolveQueueStart -= GoToResolve;
+//         }
 
-        private void GoToResolve()
-        {
-            StateMachine.SwitchState(new WaitForResolve(new ResolvingEffects(StateMachine), StateMachine));
-        }
+//         private void GoToResolve()
+//         {
+//             StateMachine.SwitchState(new WaitForResolve(new ResolvingEffects(StateMachine), StateMachine));
+//         }
 
-        public override void Update(float deltaTime)
-        {
+//         public override void Update(float deltaTime)
+//         {
 
-        }
-    }
-}
+//         }
+//     }
+// }
