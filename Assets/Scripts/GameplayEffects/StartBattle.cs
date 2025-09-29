@@ -10,6 +10,7 @@ namespace Project.GameplayEffects
     public class StartBattle : GameplayEffectStrategy
     {
         [SerializeField] NodeData enemyNodeData;
+        [SerializeField] GameObject enemyNodePrefab;
 
         public override void Reset()
         {
@@ -17,7 +18,7 @@ namespace Project.GameplayEffects
 
         public override Status Resolve()
         {
-            if (!BattleManager.Instance.IsActiveBattleConcluded()) return Status.Running;
+            if (BattleManager.Instance.IsActiveBattle) return Status.Running;
             return Status.Complete;
         }
 
@@ -34,26 +35,21 @@ namespace Project.GameplayEffects
                                             enemyNodeData.Description,
                                             enemyNodeData.Sprite);
 
-            BattleManager.Instance.StartNewBattle(left, right, DummyAnnounce);
+            BattleManager.Instance.StartNewBattle(left, right, BattleConclusion);
             return Status.Running;
         }
 
-        public void DummyAnnounce(BattleReport battleReport, Combatant left, Combatant right)
+        private void BattleConclusion(BattleReport battleReport, Combatant left, Combatant right)
         {
-            if (battleReport.BattleDecided)
+            // TODO: Create any nodes if the battle wasnt won
+            switch (battleReport.Resolution)
             {
-                if (battleReport.WinnerIndex == 0)
-                {
-                    Debug.Log($"The hero has won!");
-                }
-                if (battleReport.WinnerIndex == 1)
-                {
-                    Debug.Log($"The hero was defeated!");
-                }
-            }
-            else
-            {
-                Debug.Log("The battle ended before it could be decided!");
+                case Combat.Resolution.RanAway:
+                case Combat.Resolution.Stole:
+                    GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
+                    Node node = gameObject.GetComponent<Node>();
+                    node.RegisterToGrid();
+                    break;
             }
         }
     }

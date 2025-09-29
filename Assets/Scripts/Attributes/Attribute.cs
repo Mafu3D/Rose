@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Project.Attributes
 {
@@ -22,6 +23,8 @@ namespace Project.Attributes
 
         private List<int> baseValueModifiers = new();
         private List<int> maxValueModifiers = new();
+
+        public event Action OnValueChanged;
 
         public Attribute(AttributeType type, int startingValue, int maxValue = 99)
         {
@@ -54,16 +57,19 @@ namespace Project.Attributes
         public void ModifyValue(int amount)
         {
             BaseValue = Math.Clamp(BaseValue + amount, 0, MaxValue);
+            OnValueChanged?.Invoke();
         }
 
         public void ModifyMaxValue(int amount)
         {
             MaxValue = Math.Clamp(MaxValue + amount, 0, 99);
+            OnValueChanged?.Invoke();
         }
 
         public void RegisterBaseAttributeModifier(int modifier)
         {
             baseValueModifiers.Add(modifier);
+            OnValueChanged?.Invoke();
         }
 
         public void DeregisterBaseAttributeModifier(int modifier)
@@ -72,11 +78,13 @@ namespace Project.Attributes
             {
                 baseValueModifiers.Remove(modifier);
             }
+            OnValueChanged?.Invoke();
         }
 
         public void RegisterMaxAttributeModifier(int modifier)
         {
             maxValueModifiers.Add(modifier);
+            OnValueChanged?.Invoke();
         }
 
         public void DeregisterMaxAttributeModifier(int modifier)
@@ -85,6 +93,7 @@ namespace Project.Attributes
             {
                 maxValueModifiers.Remove(modifier);
             }
+            OnValueChanged?.Invoke();
         }
     }
 

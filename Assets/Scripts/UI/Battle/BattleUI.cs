@@ -1,8 +1,6 @@
-using Project;
 using Project.Combat;
-using Project.GameNode;
-using Project.GameNode.Hero;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.UI.BattleUI
@@ -41,36 +39,32 @@ namespace Project.UI.BattleUI
         {
             MainContainer.SetActive(true);
 
-            LeftCombatantUI.InitializeCombatant(activeBattle.Left);
-            RightCombatantUI.InitializeCombatant(activeBattle.Right);
+            LeftCombatantUI.InitializeCombatant(activeBattle.Hero);
+            RightCombatantUI.InitializeCombatant(activeBattle.Enemy);
 
             BattleLog.text = "";
 
             activeBattle.OnBattleMessage += UpdateBattleLog;
-            activeBattle.OnBattleInitiated += UpdateBattleUI;
-            activeBattle.OnBattleStart += UpdateBattleUI;
-            activeBattle.OnBattleDecided += UpdateBattleUI;
-            activeBattle.OnBattleConclude += UpdateBattleUI;
-            activeBattle.OnChooseRun += UpdateBattleUI;
-            activeBattle.OnChooseSteal += UpdateBattleUI;
+            activeBattle.OnPhaseChanged += UpdateBattleUI;
+            // activeBattle.OnChooseRun += UpdateBattleUI;
+            // activeBattle.OnChooseSteal += UpdateBattleUI;
         }
 
-        public void UpdateBattleUI()
+        public void UpdateBattleUI(BattlePhase phase)
         {
-            BattleState battleState = BattleManager.Instance.ActiveBattle.GetBattleState();
-            switch (battleState)
+            switch (phase)
             {
-                case BattleState.Prebattle:
+                case BattlePhase.Prebattle:
                     ShowPreBattleUI();
                     break;
 
-                case BattleState.Start:
-                case BattleState.FirstTurn:
-                case BattleState.SecondTurn:
+                case BattlePhase.Start:
+                // case BattlePhase.FirstTurn:
+                // case BattlePhase.SecondTurn:
                     ShowActiveBattleUI();
                     break;
 
-                case BattleState.PostBattle:
+                case BattlePhase.PostBattle:
                     ShowPostBattleUI();
                     break;
             }
@@ -82,15 +76,25 @@ namespace Project.UI.BattleUI
             ActiveBattleContainer.SetActive(false);
             PostbattleContainer.SetActive(true);
 
-            if (BattleManager.Instance.ActiveBattle.GetLastBattleReport().WinnerIndex == 0)
+            switch (BattleManager.Instance.ActiveBattle.GetLatestBattleReport().Resolution)
             {
-                ResultTitleText.text = "Victory";
+                case Combat.Resolution.Victory:
+                    ResultTitleText.text = "Victory";
+                    break;
+                case Combat.Resolution.Defeat:
+                    ResultTitleText.text = "Defeat";
+                    break;
+                case Combat.Resolution.RanAway:
+                    ResultTitleText.text = "Ran Away";
+                    break;
+                case Combat.Resolution.Stole:
+                    ResultTitleText.text = "You Stole!";
+                    break;
+                default:
+                    ResultTitleText.text = "No Resolution";
+                    break;
             }
-            else
-            {
-                ResultTitleText.text = "Defeat";
-            }
-            ResultMessageText.text = BattleManager.Instance.ActiveBattle.GetLastBattleReport().Message;
+            ResultMessageText.text = BattleManager.Instance.ActiveBattle.GetLatestBattleReport().Message;
         }
 
         private void ShowActiveBattleUI()
@@ -111,12 +115,9 @@ namespace Project.UI.BattleUI
         {
 
             activeBattle.OnBattleMessage -= UpdateBattleLog;
-            activeBattle.OnBattleInitiated -= UpdateBattleUI;
-            activeBattle.OnBattleStart -= UpdateBattleUI;
-            activeBattle.OnBattleDecided -= UpdateBattleUI;
-            activeBattle.OnBattleConclude -= UpdateBattleUI;
-            activeBattle.OnChooseRun -= UpdateBattleUI;
-            activeBattle.OnChooseSteal -= UpdateBattleUI;
+            activeBattle.OnPhaseChanged -= UpdateBattleUI;
+            // activeBattle.OnChooseRun -= UpdateBattleUI;
+            // activeBattle.OnChooseSteal -= UpdateBattleUI;
 
             MainContainer.SetActive(false);
         }

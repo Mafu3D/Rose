@@ -25,26 +25,38 @@ namespace Project.Combat
             ActiveBattle.InitiateBattle();
             OnNewBattleInitiated?.Invoke();
         }
-        public bool IsActiveBattleConcluded()
-        {
-            // Could clean this up
-            if (IsActiveBattle)
-            {
-                if (ActiveBattle.GetBattleState() == BattleState.Conclude)
-                {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        }
+
+        // public bool IsActiveBattleConcluded()
+        // {
+        //     // Could clean this up
+        //     // Debug.Log("active: " + IsActiveBattle);
+        //     // if (IsActiveBattle)
+        //     // {
+        //     //     Debug.Log("conclude: " + (ActiveBattle.GetBattleState() == BattleState.Conclude));
+        //     //     if (ActiveBattle.GetBattleState() == BattleState.Conclude)
+        //     //     {
+        //     //         return true;
+        //     //     }
+        //     //     return false;
+        //     // }
+        //     // return true;
+        //     if (IsActiveBattle)
+        //     {
+        //         BattleReport battleReport = ActiveBattle.GetLastBattleReport();
+        //         if (battleReport.BattleConcluded)
+        //         {
+
+        //         }
+        //     }
+        //     return false;
+        // }
 
         public Status Proceed()
         {
             if (ActiveBattle == null) return Status.Complete;
             ActiveBattle.Proceed();
-            BattleState battleState = ActiveBattle.GetBattleState();
-            if (battleState == BattleState.Conclude)
+            BattlePhase battleState = ActiveBattle.GetPhase();
+            if (battleState == BattlePhase.Conclude)
             {
                 BattleUI.Instance.CloseBattleUI();
                 EndActiveBattle();

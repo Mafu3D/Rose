@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Orc_StartBattle
   m_EditorClassIdentifier: 
   enemyNodeData: {fileID: 11400000, guid: 47ad9efd924de8d47920c9bbefb93701, type: 2}
+  enemyNodePrefab: {fileID: 4534305980478911969, guid: f9350a9facb7f40419592515af5766aa, type: 3}

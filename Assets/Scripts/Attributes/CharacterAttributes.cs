@@ -17,6 +17,16 @@ namespace Project.Attributes
             Attributes.Add(AttributeType.Speed, new Attribute(AttributeType.Speed, data.Speed));
         }
 
+        public Attribute GetAttribute(AttributeType type)
+        {
+            Attribute attribute;
+            if (Attributes.TryGetValue(type, out attribute))
+            {
+                return attribute;
+            }
+            return default;
+        }
+
         public int GetAttributeValue(AttributeType type)
         {
             Attribute attribute;

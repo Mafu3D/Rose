@@ -68,7 +68,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonNode Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7512119350408021164, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+      propertyPath: NodeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c8a7f0cb796f4b4cb951392eaa50e2d, type: 2}
+    m_RemovedComponents:
+    - {fileID: 6582607631212750363, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
