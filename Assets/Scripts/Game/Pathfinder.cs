@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project
@@ -29,56 +30,49 @@ namespace Project
                 path.Add(cell);
             }
         }
+        public void DeregisterFromPath(Cell cell)
+        {
+            if (registeredPathCells.ContainsKey(cell.GetHashCode()))
+            {
+                registeredPathCells.Remove(cell.GetHashCode());
+                path.Remove(cell);
+            }
+        }
         public bool TryGetCellInPath(Cell cell) => registeredPathCells.TryGetValue(cell.GetHashCode(), out _);
         public void RegisterToInvalidCells(Cell cell) { if (!invalidCells.ContainsKey(cell.GetHashCode())) invalidCells.Add(cell.GetHashCode(), cell); }
         public bool TryGetCellInInvalidCells(Cell cell) => invalidCells.TryGetValue(cell.GetHashCode(), out _);
 
         public List<Cell> CalculatePath()
         {
-            // only invalidate nodes that were actually checked
+            // Initialize
+            RegisterToInvalidCells(start);
+            // List<Cell> potentialStartingPoints;
+            // EvaluateNeighbors(start, out potentialStartingPoints, out _);
+
 
             Cell current = start;
             int i = 0;
             while (current != end)
             {
-                Cell[] neighbors = grid.GetAllNeighbors(current);
+                List<Cell> validNeighbors;
+                List<Cell> invalidNeighbors;
+                EvaluateNeighbors(current, out validNeighbors, out invalidNeighbors);
 
-                Cell next;
-                Cell bestNeighbor = neighbors[0];
-                List<Cell> invalidNeighbors = new();
-                int lowestF = 99999999;
-                Debug.Log(current);
-                foreach (Cell neighbor in neighbors)
+                if (validNeighbors.Count == 0)
                 {
-                    // Do not check cells that have already been marked as invalidated, are already in the path, or are not walkable
-                    if (TryGetCellInInvalidCells(neighbor) || TryGetCellInPath(neighbor) || !grid.TryGetCellInWalkableCells(neighbor)) continue;
-
-                    int g = DistanceBetween(neighbor, start);
-                    int h = DistanceBetween(end, neighbor);
-                    int f = g + h;
-                    if (f < lowestF)
-                    {
-                        lowestF = f;
-                        if (bestNeighbor != neighbor)
-                        {
-                            invalidNeighbors.Add(bestNeighbor);
-                            bestNeighbor = neighbor;
-                        }
-                    }
-                    else
-                    {
-                        invalidNeighbors.Add(bestNeighbor);
-                    }
+                    Cell lastCell = path.Last();
+                    DeregisterFromPath(lastCell);
+                    RegisterToInvalidCells(lastCell);
+                    current = path.Last();
+                    // Debug.Log($"ran out of valid neighbors at cell: {current}!");
+                    // break;
                 }
-                foreach (Cell invalidNeighbor in invalidNeighbors)
+                else
                 {
-                    RegisterToInvalidCells(invalidNeighbor);
+                    Cell next = validNeighbors[0];
+                    RegisterToPath(next);
+                    current = next;
                 }
-                next = bestNeighbor;
-                Debug.Log(invalidCells.Count);
-
-                RegisterToPath(next);
-                current = next;
 
                 i++;
                 if (i > 1000)
@@ -88,6 +82,59 @@ namespace Project
                 }
             }
             return path;
+        }
+
+        private void EvaluateNeighbors(Cell cell, out List<Cell> validNeighbors, out List<Cell> invalidNeighbors)
+        {
+            Debug.Log($"Evaluating {cell}");
+
+            validNeighbors = new();
+            invalidNeighbors = new();
+
+            Cell[] neighbors = grid.GetAllNeighbors(cell);
+
+            int lowestF = 99999999; // Some really big number
+            foreach (Cell neighbor in neighbors)
+            {
+                // Do not check cells that have already been marked as invalidated, are already in the path, or are not walkable
+                if (TryGetCellInInvalidCells(neighbor) || TryGetCellInPath(neighbor) || !grid.TryGetCellInWalkableCells(neighbor)) continue;
+
+                int g = DistanceBetween(neighbor, start);
+                int h = DistanceBetween(end, neighbor);
+                int f = g + h;
+                Debug.Log($"Checking {neighbor} - g: {g}, h: {h}, f: {f}");
+                if (f < lowestF)
+                {
+                    lowestF = f;
+                    validNeighbors.Clear();
+                    validNeighbors.Add(neighbor);
+                }
+                else if (f == lowestF)
+                {
+                    validNeighbors.Add(neighbor);
+                }
+                else
+                {
+                    invalidNeighbors.Add(neighbor);
+                }
+            }
+            foreach (Cell invalidNeighbor in invalidNeighbors)
+            {
+                RegisterToInvalidCells(invalidNeighbor);
+            }
+            string result = "Potential Cells: ";
+            if (validNeighbors.Count > 0)
+            {
+                foreach (Cell c in validNeighbors)
+                {
+                    result += $"{c} ";
+                }
+            }
+            else
+            {
+                result += "None";
+            }
+            Debug.Log(result);
         }
 
         private int DistanceBetween(Cell A, Cell B)
