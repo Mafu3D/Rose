@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameNode.Hero;
 using Project.Items;
+using Project.Combat.BattleStateMachine;
 using UnityEngine;
 
 namespace Project.Combat
@@ -76,21 +77,36 @@ namespace Project.Combat
         private bool ranAway;
         private bool avoidedRunDamage;
 
+        public StateMachine StateMachine;
+
 
         public Battle(Combatant hero, Combatant enemy, Action<BattleReport, Combatant, Combatant> finished)
         {
             this.Hero = hero;
             this.Enemy = enemy;
             finishedCallback = finished;
+
+            // State Machine
+            StateMachine = new StateMachine();
+
+
+            // Declare States
+            // var preBattleState = new PreBattleState(this);
+            // var startBattleState = new StartBattleState(this);
+
+            // // Define Transitions
+            // At(preBattleState, startBattleState, new FuncPredicate(() => true));
         }
+
+        // void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
+        // void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
 
         public void InitiateBattle()
         {
+            StateMachine.SwitchState(new PreBattle(StateMachine, this));
+            return;
             phase = BattlePhase.Prebattle;
-            List<PrebattleActions> prebattleChoices = new List<PrebattleActions> { PrebattleActions.Fight, PrebattleActions.Steal, PrebattleActions.Run };
-            PreBattleChoice = new Choice<PrebattleActions>(prebattleChoices, ResolvePrebattleChoice);
             OnPhaseChanged?.Invoke(phase);
-
         }
 
         private void ResolvePrebattleChoice(PrebattleActions actionChoice)
