@@ -13,11 +13,11 @@ namespace Project.GameplayEffects
         [SerializeField] GameObject nodePrefab;
         // [SerializeField] NodeData nodeData;
 
-        public override void Reset() { }
+        public override void ResetEffect(Node user, Node target) { }
 
-        public override Status Resolve() => Status.Complete;
+        public override Status ResolveEffect(Node user, Node target) => Status.Complete;
 
-        public override Status Start()
+        public override Status StartEffect(Node user, Node target)
         {
             // if (nodeData != null)
             // {

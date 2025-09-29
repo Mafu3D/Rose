@@ -48,7 +48,7 @@ namespace Project.GameStates
 
         private void EndPlayerTurn()
         {
-            StateMachine.SwitchState(new EndOfPlayerTurn(new PlayerTurn(StateMachine), StateMachine));
+            StateMachine.SwitchState(new EndOfTurn(new ResolvingEffects(StateMachine), StateMachine));
         }
     }
 }

@@ -10,13 +10,13 @@ namespace Project.GameplayEffects
     {
         [SerializeField] string ToSay;
 
-        public override void Reset() { }
+        public override void ResetEffect(Node user, Node target) { }
 
-        public override Status Resolve() => Status.Complete;
+        public override Status ResolveEffect(Node user, Node target) => Status.Complete;
 
-        public override Status Start()
+        public override Status StartEffect(Node user, Node target)
         {
-            Debug.Log(ToSay);
+            Debug.Log($"{user.name}: {ToSay}");
             return Status.Complete;
         }
     }

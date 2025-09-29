@@ -8,17 +8,18 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewNoEffect", menuName = "Effects/No Effect", order = 1)]
     public class NoEffect : GameplayEffectStrategy
     {
-        public override void Reset()
+        public override void ResetEffect(Node user, Node target)
         {
         }
 
-        public override Status Resolve()
+        public override Status ResolveEffect(Node user, Node target)
         {
             return Status.Complete;
         }
 
-        public override Status Start()
+        public override Status StartEffect(Node user, Node target)
         {
+            Debug.Log($"{user.name} performed no effect.");
             return Status.Running;
         }
     }

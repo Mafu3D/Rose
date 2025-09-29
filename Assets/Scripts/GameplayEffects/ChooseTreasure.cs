@@ -8,17 +8,17 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewChooseTreasure", menuName = "Effects/Choose Treasure", order = 1)]
     public class ChooseTreaure : GameplayEffectStrategy
     {
-        public override void Reset()
+        public override void ResetEffect(Node user, Node target)
         {
         }
 
-        public override Status Resolve()
+        public override Status ResolveEffect(Node user, Node target)
         {
             if (GameManager.Instance.IsChoosingTreasure) return Status.Running;
             return Status.Complete;
         }
 
-        public override Status Start()
+        public override Status StartEffect(Node user, Node target)
         {
             List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
             Choice<Item> treasureChoice = new Choice<Item>(choiceItems, EquipChosenItem);

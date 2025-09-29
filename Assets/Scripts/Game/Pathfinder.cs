@@ -14,12 +14,14 @@ namespace Project
         List<Cell> path = new();
         private Dictionary<int, Cell> registeredPathCells = new();
         private Dictionary<int, Cell> invalidCells = new();
+        bool debug = false;
 
-        public Pathfinder(GameGrid grid, Cell start, Cell end)
+        public Pathfinder(GameGrid grid, Cell start, Cell end, bool debug = false)
         {
             this.grid = grid;
             this.start = start;
             this.end = end;
+            this.debug = debug;
         }
 
         public void RegisterToPath(Cell cell)
@@ -46,12 +48,9 @@ namespace Project
         {
             // Initialize
             RegisterToInvalidCells(start);
-            // List<Cell> potentialStartingPoints;
-            // EvaluateNeighbors(start, out potentialStartingPoints, out _);
-
 
             Cell current = start;
-            int i = 0;
+            int iters = 0;
             while (current != end)
             {
                 List<Cell> validNeighbors;
@@ -64,8 +63,6 @@ namespace Project
                     DeregisterFromPath(lastCell);
                     RegisterToInvalidCells(lastCell);
                     current = path.Last();
-                    // Debug.Log($"ran out of valid neighbors at cell: {current}!");
-                    // break;
                 }
                 else
                 {
@@ -74,11 +71,10 @@ namespace Project
                     current = next;
                 }
 
-                i++;
-                if (i > 1000)
+                iters++;
+                if (iters > 1000)
                 {
-                    Debug.Log("too many iterations!");
-                    break;
+                    throw new Exception("Pathfinding exceeded safety iterations!");
                 }
             }
             return path;
@@ -86,7 +82,7 @@ namespace Project
 
         private void EvaluateNeighbors(Cell cell, out List<Cell> validNeighbors, out List<Cell> invalidNeighbors)
         {
-            Debug.Log($"Evaluating {cell}");
+            if(debug)  Debug.Log($"Evaluating {cell}");
 
             validNeighbors = new();
             invalidNeighbors = new();
@@ -102,7 +98,9 @@ namespace Project
                 int g = DistanceBetween(neighbor, start);
                 int h = DistanceBetween(end, neighbor);
                 int f = g + h;
-                Debug.Log($"Checking {neighbor} - g: {g}, h: {h}, f: {f}");
+
+                if (debug) Debug.Log($"Checking {neighbor} - g: {g}, h: {h}, f: {f}");
+
                 if (f < lowestF)
                 {
                     lowestF = f;
@@ -122,19 +120,23 @@ namespace Project
             {
                 RegisterToInvalidCells(invalidNeighbor);
             }
-            string result = "Potential Cells: ";
-            if (validNeighbors.Count > 0)
+
+            if (debug)
             {
-                foreach (Cell c in validNeighbors)
+                string result = "Potential Cells: ";
+                if (validNeighbors.Count > 0)
                 {
-                    result += $"{c} ";
+                    foreach (Cell c in validNeighbors)
+                    {
+                        result += $"{c} ";
+                    }
                 }
+                else
+                {
+                    result += "None";
+                }
+                Debug.Log(result);
             }
-            else
-            {
-                result += "None";
-            }
-            Debug.Log(result);
         }
 
         private int DistanceBetween(Cell A, Cell B)

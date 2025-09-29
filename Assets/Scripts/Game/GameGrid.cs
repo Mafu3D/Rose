@@ -58,6 +58,19 @@ namespace Project
             this.cellSize = cellSize;
         }
 
+        public List<Node> GetAllRegisteredNodes()
+        {
+            List<Node> allRegisteredNodes = new();
+            foreach (Cell cell in registeredCells.Keys)
+            {
+                foreach (Node node in registeredCells[cell])
+                {
+                    allRegisteredNodes.Add(node);
+                }
+            }
+            return allRegisteredNodes;
+        }
+
         public void RegisterWalkableCells(List<Cell> cells)
         {
             foreach (Cell cell in cells)

@@ -12,17 +12,17 @@ namespace Project.GameplayEffects
         [SerializeField] NodeData enemyNodeData;
         [SerializeField] GameObject enemyNodePrefab;
 
-        public override void Reset()
+        public override void ResetEffect(Node user, Node target)
         {
         }
 
-        public override Status Resolve()
+        public override Status ResolveEffect(Node user, Node target)
         {
             if (BattleManager.Instance.IsActiveBattle) return Status.Running;
             return Status.Complete;
         }
 
-        public override Status Start()
+        public override Status StartEffect(Node user, Node target)
         {
             Combatant left = new Combatant(GameManager.Instance.Hero.Attributes,
                                            GameManager.Instance.Hero.NodeData.DisplayName,

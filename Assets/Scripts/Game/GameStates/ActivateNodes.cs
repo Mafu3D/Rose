@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using Project.GameNode;
 namespace Project.GameStates
 {
-    public class EndOfPlayerTurn : SubState
+    public class ActivateNodes : SubState
     {
         Card card;
-        public EndOfPlayerTurn(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
+        public ActivateNodes(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
 
         public override void Enter()
         {
@@ -18,7 +18,7 @@ namespace Project.GameStates
             {
                 foreach (Node node in registeredNodes)
                 {
-                    node.ExecuteOnEndTurn();
+                    node.ExecuteOnActivate();
                     StateMachine.SwitchState(new EndOfRound(new ResolvingEffects(StateMachine), StateMachine));
                     // TODO: Need to only move to end of round after effect queue is finished
                 }

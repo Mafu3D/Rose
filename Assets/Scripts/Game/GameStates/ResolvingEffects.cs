@@ -43,7 +43,7 @@ namespace Project.GameStates
 
         private void EndResolve()
         {
-            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
+            StateMachine.SwitchState(StateMachine.PreviousState);
         }
 
         public override void Update(float deltaTime)

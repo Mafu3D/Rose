@@ -11,12 +11,12 @@ namespace Project.GameplayEffects
         [SerializeField] float timer;
         float time;
 
-        public override void Reset()
+        public override void ResetEffect(Node user, Node target)
         {
             time = 0f;
         }
 
-        public override Status Resolve()
+        public override Status ResolveEffect(Node user, Node target)
         {
             if (time > timer)
             {
@@ -27,8 +27,9 @@ namespace Project.GameplayEffects
             return Status.Running;
         }
 
-        public override Status Start()
+        public override Status StartEffect(Node user, Node target)
         {
+            Debug.Log($"{user.name} started a new timer for {timer} seconds!");
             time += Time.deltaTime;
             return Status.Running;
         }

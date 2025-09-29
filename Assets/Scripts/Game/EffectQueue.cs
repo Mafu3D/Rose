@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Project.GameNode;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -10,22 +11,46 @@ namespace Project
         Complete
     }
 
+    public struct EffectReferences
+    {
+        public Node User;
+        public Node Target;
+
+        public EffectReferences(Node user, Node target)
+        {
+            this.User = user;
+            this.Target = target;
+        }
+    }
+
     public class EffectQueue
     {
-        public List<GameplayEffectStrategy> queuedEffects = new();
+        public List<GameplayEffectStrategy> queue = new();
+        public Dictionary<GameplayEffectStrategy, EffectReferences> registeredEffects = new();
         private int currentEffectIndex;
         private bool currentEffectHasStarted = false;
 
-        public void AddEffect(GameplayEffectStrategy effect) => queuedEffects.Add(effect);
-        public void RemoveEffect(GameplayEffectStrategy effect) { if (queuedEffects.Contains(effect)) queuedEffects.Remove(effect); }
+        public void QueueEffect(GameplayEffectStrategy effect, Node user, Node target)
+        {
+            queue.Add(effect);
+            EffectReferences references = new EffectReferences(user, target);
+            registeredEffects.Add(effect, references);
+        }
+        public void RemoveEffect(GameplayEffectStrategy effect)
+        {
+            if (queue.Contains(effect))
+            {
+                queue.Remove(effect);
+            }
+        }
         public void ClearQueue()
         {
-            queuedEffects = new();
+            queue = new();
             currentEffectIndex = 0;
         }
         public GameplayEffectStrategy GetCurrentEffect()
         {
-            if (queuedEffects != null) return queuedEffects[currentEffectIndex];
+            if (queue != null) return queue[currentEffectIndex];
             return null;
         }
 
@@ -35,19 +60,22 @@ namespace Project
 
         private Status ResolveQueue()
         {
-            while (currentEffectIndex < queuedEffects.Count)
+            while (currentEffectIndex < queue.Count)
             {
+                GameplayEffectStrategy currentEffect = queue[currentEffectIndex];
+                EffectReferences references;
+                registeredEffects.TryGetValue(currentEffect, out references);
                 if (!currentEffectHasStarted)
                 {
-                    queuedEffects[currentEffectIndex].Start();
+                    currentEffect.StartEffect(references.User, references.Target);
                     currentEffectHasStarted = true;
                 }
-                Status status = queuedEffects[currentEffectIndex].Resolve();
+                Status status = currentEffect.ResolveEffect(references.User, references.Target);
                 if (status != Status.Complete)
                 {
                     return status;
                 }
-                queuedEffects[currentEffectIndex].Reset();
+                currentEffect.ResetEffect(references.User, references.Target);
                 currentEffectIndex++;
                 currentEffectHasStarted = false;
             }
@@ -56,7 +84,7 @@ namespace Project
 
         public void Update()
         {
-            if (queuedEffects.Count > 0)
+            if (queue.Count > 0)
             {
                 if (!ResolvingQueue)
                 {
