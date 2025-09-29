@@ -39,15 +39,15 @@ namespace Project
             {
                 if (!currentEffectHasStarted)
                 {
-                    queuedEffects[currentEffectIndex].Start();
+                    queuedEffects[currentEffectIndex].StartEffect();
                     currentEffectHasStarted = true;
                 }
-                Status status = queuedEffects[currentEffectIndex].Resolve();
+                Status status = queuedEffects[currentEffectIndex].ResolveEffect();
                 if (status != Status.Complete)
                 {
                     return status;
                 }
-                queuedEffects[currentEffectIndex].Reset();
+                queuedEffects[currentEffectIndex].ResetEffect();
                 currentEffectIndex++;
                 currentEffectHasStarted = false;
             }

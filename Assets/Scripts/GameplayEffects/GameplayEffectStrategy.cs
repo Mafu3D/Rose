@@ -5,8 +5,8 @@ namespace Project.GameplayEffects
 {
     public abstract class GameplayEffectStrategy : ScriptableObject
     {
-        public abstract Status Start();
-        public abstract Status Resolve();
-        public abstract void Reset();
+        public abstract Status StartEffect();
+        public abstract Status ResolveEffect();
+        public abstract void ResetEffect();
     }
 }

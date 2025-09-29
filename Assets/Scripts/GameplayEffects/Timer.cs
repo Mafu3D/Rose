@@ -11,12 +11,12 @@ namespace Project.GameplayEffects
         [SerializeField] float timer;
         float time;
 
-        public override void Reset()
+        public override void ResetEffect()
         {
             time = 0f;
         }
 
-        public override Status Resolve()
+        public override Status ResolveEffect()
         {
             if (time > timer)
             {
@@ -27,7 +27,7 @@ namespace Project.GameplayEffects
             return Status.Running;
         }
 
-        public override Status Start()
+        public override Status StartEffect()
         {
             time += Time.deltaTime;
             return Status.Running;

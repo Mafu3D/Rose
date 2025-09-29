@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameNode.Hero;
+using Project.Items;
 using UnityEngine;
 
 namespace Project.Combat
@@ -242,6 +243,10 @@ namespace Project.Combat
             Turn = 0;
             OnChooseFight?.Invoke();
             OnPhaseChanged?.Invoke(phase);
+            DetermineCombatantOrder();
+
+
+
             NewRound();
         }
 
@@ -283,7 +288,8 @@ namespace Project.Combat
             }
         }
 
-        private void DoAttack(Combatant attacker, Combatant defender) {
+        private void DoAttack(Combatant attacker, Combatant defender)
+        {
             int attackValue;
             attacker.Attack(out attackValue);
             HitReport hitReport = new HitReport(attackValue);
@@ -346,6 +352,40 @@ namespace Project.Combat
         private void ConcludeBattle()
         {
             finishedCallback(latestBattleReport, Hero, Enemy);
+        }
+
+        private void TriggerEffects()
+        {
+            int i = 0;
+            foreach (Combatant combatant in combatantOrder)
+            {
+                Combatant user;
+                Combatant target;
+                if (i == 0)
+                {
+                    user = combatantOrder[0];
+                    target = combatantOrder[1];
+                }
+                else
+                {
+                    user = combatantOrder[1];
+                    target = combatantOrder[0];
+                }
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    if (items.Count > 0)
+                    {
+                        foreach (Item item in items)
+                        {
+                            foreach (CombatEffectStrategy effect in item.ItemData.OnCombatStartStrategies)
+                            {
+                                effect.StartEffect(user, target);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

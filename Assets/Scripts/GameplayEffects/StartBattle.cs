@@ -3,6 +3,8 @@ namespace Project.GameplayEffects
     using Project.Attributes;
     using Project.Combat;
     using Project.GameNode;
+    using Project.Items;
+    using Unity.VisualScripting;
     using Unity.VisualScripting.Antlr3.Runtime.Misc;
     using UnityEngine;
 
@@ -12,28 +14,30 @@ namespace Project.GameplayEffects
         [SerializeField] NodeData enemyNodeData;
         [SerializeField] GameObject enemyNodePrefab;
 
-        public override void Reset()
+        public override void ResetEffect()
         {
         }
 
-        public override Status Resolve()
+        public override Status ResolveEffect()
         {
             if (BattleManager.Instance.IsActiveBattle) return Status.Running;
             return Status.Complete;
         }
 
-        public override Status Start()
+        public override Status StartEffect()
         {
             Combatant left = new Combatant(GameManager.Instance.Hero.Attributes,
                                            GameManager.Instance.Hero.NodeData.DisplayName,
                                            GameManager.Instance.Hero.NodeData.Description,
-                                           GameManager.Instance.Hero.NodeData.Sprite);
+                                           GameManager.Instance.Hero.NodeData.Sprite,
+                                           GameManager.Instance.Hero.gameObject.GetComponent<Inventory>());
 
             CharacterAttributes enemyAttributes = new CharacterAttributes(enemyNodeData.AttributesData);
             Combatant right = new Combatant(enemyAttributes,
                                             enemyNodeData.DisplayName,
                                             enemyNodeData.Description,
-                                            enemyNodeData.Sprite);
+                                            enemyNodeData.Sprite,
+                                            null);
 
             BattleManager.Instance.StartNewBattle(left, right, BattleConclusion);
             return Status.Running;

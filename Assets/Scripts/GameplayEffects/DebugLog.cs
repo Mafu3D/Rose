@@ -10,11 +10,11 @@ namespace Project.GameplayEffects
     {
         [SerializeField] string ToSay;
 
-        public override void Reset() { }
+        public override void ResetEffect() { }
 
-        public override Status Resolve() => Status.Complete;
+        public override Status ResolveEffect() => Status.Complete;
 
-        public override Status Start()
+        public override Status StartEffect()
         {
             Debug.Log(ToSay);
             return Status.Complete;

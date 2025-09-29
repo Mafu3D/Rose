@@ -13,10 +13,10 @@ namespace Project.GameplayEffects
         [SerializeField] int BaseValueModifier;
         [SerializeField] int MaxValueModifier;
 
-        public override void Reset() { }
-        public override Status Resolve() { return Status.Complete; }
+        public override void ResetEffect() { }
+        public override Status ResolveEffect() { return Status.Complete; }
 
-        public override Status Start()
+        public override Status StartEffect()
         {
             HeroNode heroNode = GameManager.Instance.Player.HeroNode;
             if (AttributeType == AttributeType.Health)

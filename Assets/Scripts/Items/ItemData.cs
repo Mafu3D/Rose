@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Items
@@ -25,6 +26,15 @@ namespace Project.Items
         [SerializeField] public int MaxDexterityModifier = 0;
         [SerializeField] public int SpeedModifier = 0;
         [SerializeField] public int MaxSpeedModifier = 0;
+
+        [Header("Strategies")]
+
+        [SerializeField] public List<CombatEffectStrategy> OnCombatStartStrategies = new();
+        [SerializeField] public List<CombatEffectStrategy> OnCombatEndStrategies = new();
+        [SerializeField] public List<CombatEffectStrategy> OnTurnStartStrategies = new();
+        [SerializeField] public List<CombatEffectStrategy> OnTurnEndStrategies = new();
+        [SerializeField] public List<CombatEffectStrategy> OnHitStrategies = new();
+        [SerializeField] public List<CombatEffectStrategy> OnReceiveHitStrategies = new();
 
         // On Combat Start Strategies
 

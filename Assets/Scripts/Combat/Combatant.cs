@@ -1,5 +1,6 @@
 using System;
 using Project.Attributes;
+using Project.Items;
 using UnityEngine;
 
 namespace Project.Combat
@@ -10,14 +11,15 @@ namespace Project.Combat
         public string DisplayName;
         public string Description;
         public Sprite Sprite;
+        public Inventory Inventory;
 
-        public Combatant(CharacterAttributes attributes, string displayName, string description, Sprite sprite)
+        public Combatant(CharacterAttributes attributes, string displayName, string description, Sprite sprite, Inventory inventory)
         {
             this.Attributes = attributes;
             this.DisplayName = displayName;
             this.Description = description;
             this.Sprite = sprite;
-
+            this.Inventory = inventory;
         }
 
         public void Attack(out int value)
