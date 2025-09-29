@@ -15,14 +15,19 @@ namespace Project
 
     public class GameManager : Singleton<GameManager>
     {
+        [Header("References I need to move out later")]
         [SerializeField] public Player Player;
         [SerializeField] public GameObject UICanvas;
 
+        [Header("Game Parameters")]
         [SerializeField] public DeckData EncounterDeckData;
         [SerializeField] public DeckData MonsterDeckData;
         [SerializeField] public ItemDeckData ItemDeckData;
 
-        [field: SerializeField] public float TimeBetweenPlayerMoves { get; private set; } = 0.25f;
+        [Header("Game Settings")]
+        [SerializeField] public bool AutoBattle = true;
+        [SerializeField] public float AutoBattleSpeed = 1f;
+        [SerializeField] public float TimeBetweenPlayerMoves = 0.25f;
 
         public GameGrid Grid;
 

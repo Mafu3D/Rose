@@ -1,6 +1,7 @@
 using System;
 using Project.Combat;
 using Project.States;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Project.GameStates
@@ -8,6 +9,8 @@ namespace Project.GameStates
     public class Combat : SubState
     {
         public Combat(State superState, StateMachine stateMachine) : base(superState, stateMachine) { }
+
+        float autoBattleTimer = 0f;
 
         public override void Enter()
         {
@@ -55,6 +58,21 @@ namespace Project.GameStates
 
         public override void Update(float deltaTime)
         {
+            if (BattleManager.Instance.IsActiveBattle) {
+
+                if (GameManager.Instance.AutoBattle &&
+                    BattleManager.Instance.ActiveBattle.GetPhase() == BattlePhase.Start ||
+                    BattleManager.Instance.ActiveBattle.GetPhase() == BattlePhase.FirstTurn ||
+                    BattleManager.Instance.ActiveBattle.GetPhase() == BattlePhase.SecondTurn)
+                {
+                    autoBattleTimer += Time.deltaTime;
+                    if (autoBattleTimer > GameManager.Instance.AutoBattleSpeed)
+                    {
+                        Proceed();
+                        autoBattleTimer = 0f;
+                    }
+                }
+            }
 
         }
     }
