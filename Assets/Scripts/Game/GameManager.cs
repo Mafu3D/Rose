@@ -5,10 +5,11 @@ using Project.GameNode.Hero;
 using Project.GameNode;
 using Project.States;
 using Project.PlayerSystem;
-using Project.GameStates;
 using Project.Decks;
 using Project.Items;
 using Project.UI.MainUI;
+using Project.GameLoop.States;
+using UnityEngine.Events;
 
 namespace Project
 {
@@ -32,18 +33,23 @@ namespace Project
         public GameGrid Grid;
 
         public HeroNode Hero => Player.HeroNode;
-        public int Turn { get; private set; }
+        public int Round { get; private set; }
 
         public StateMachine StateMachine;
         public EffectQueue EffectQueue;
+        public PhaseSwitch PhaseSwitch;
 
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
         public Deck<Item> ItemDeck;
 
-        public event Action OnStartPlayerTurn;
-        public event Action OnEndPlayerTurn;
-        public event Action OnEndTurn;
+        public event UnityAction OnGameStartEvent;
+        public event UnityAction OnRoundStartEvent;
+        // public event Action OnTurnStartEvent;
+        public event UnityAction OnTurnStartEvent;
+        public event UnityAction OnPlayerMoveStartEvent;
+        public event UnityAction OnPlayerMoveEvent;
+        public event UnityAction OnEndOfTurnEvent;
 
         public Choice<Item> ActiveTreasureChoice;
         public event Action OnTresureChoiceStarted;
@@ -59,15 +65,11 @@ namespace Project
 
         private List<Node> nodesToBeDestroyed = new();
 
+        public bool GameHasStarted { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
-
-            Grid = new GameGrid(new Vector2(1, 1));
-            TEMP_BUILD_MAP();
-
-            StateMachine = new StateMachine();
-            EffectQueue = new EffectQueue();
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -83,45 +85,93 @@ namespace Project
             StateMachine.Update();
         }
 
-        public void IncrementTurn()
-        {
-            Turn += 1;
-            Hero.ResetMovesRemaining();
-            OnStartPlayerTurn?.Invoke();
-        }
+        #region Start New Game
 
         public void StartGame()
         {
-            StateMachine.SwitchState(new PlayerMove(new PlayerTurn(StateMachine), StateMachine));
-            Turn = 0;
+            Grid = new GameGrid(new Vector2(1, 1));
+            TEMP_BUILD_MAP();
 
             EncounterDeck = InitializeCardDeck(EncounterDeckData);
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
+
+            PhaseSwitch = new PhaseSwitch();
+            EffectQueue = new EffectQueue();
+
+            // State Machine
+            StateMachine = new StateMachine();
+
+            // Declare States
+            var roundStartState = new RoundStartState("RoundStart", this);
+            var roundStartResolveState = new ResolveEffectsState("RoundStartResolve",this);
+            var turnStartState = new TurnStartState("TurnStart",this);
+            var turnStartResolveState = new ResolveEffectsState("TurnStartResolve",this);
+            var playerMoveState = new PlayerMoveState("PlayerMove",this);
+            var playerMoveResolveState = new ResolveEffectsState("PlayerMoveResolve",this);
+            var playerMoveEndResolveState = new ResolveEffectsState("PlayerMoveEndResolve",this);
+            var endOfTurnState = new EndOfTurnState("EndOfTurn",this);
+            var endOfTurnResolveState = new ResolveEffectsState("EndOfTurnResolve",this);
+
+            // Define Transitions
+            At(roundStartState, roundStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            At(roundStartResolveState, turnStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            At(turnStartState, turnStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            At(turnStartResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            At(playerMoveState, playerMoveResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            At(playerMoveResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => Hero.MovesRemaining == 0));
+            At(playerMoveEndResolveState, endOfTurnState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            At(endOfTurnState, endOfTurnResolveState, new ActionPredicate(OnRoundStartEvent));
+            At(endOfTurnResolveState, roundStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            // Set initial state
+            StateMachine.SetState(roundStartState);
+
+            OnGameStartEvent?.Invoke();
+            Round = 0;
+            StartNewRound();
         }
 
-        // public void EndPlayerTurn()
-        // {
+        void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
+        void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
 
-        // }
+        #endregion
 
-        // private void DrawEncounterCard()
-        // {
-        //     Card card = EncounterDeck.Draw();
-        //     if (card == null)
-        //     {
-        //         return;
-        //     }
-        //     if (card.CardType == CardType.Monster)
-        //     {
-        //         card = MonsterDeck.Draw();
-        //         if (card == null)
-        //         {
-        //             return;
-        //         }
-        //     }
-        //     MainUI.Instance.DisplayCard(card);
-        // }
+        #region Game Loop
+        public void StartNewRound()
+        {
+            Round += 1;
+            Hero.ResetMovesRemaining();
+            OnRoundStartEvent?.Invoke();
+        }
+
+        public void StartNewTurn()
+        {
+            OnTurnStartEvent?.Invoke();
+        }
+
+        public void StartNewPlayerMove()
+        {
+            OnPlayerMoveStartEvent?.Invoke();
+        }
+
+        public void ProcessPlayerMove()
+        {
+            OnPlayerMoveEvent?.Invoke();
+        }
+
+        public void StartNewEndOfTurn()
+        {
+            OnEndOfTurnEvent?.Invoke();
+        }
+
+        #endregion
 
         private Deck<Card> InitializeCardDeck(DeckData deckData)
         {

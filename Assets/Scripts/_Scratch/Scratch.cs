@@ -28,7 +28,7 @@ public class Scratch : MonoBehaviour
 
     void Start()
     {
-
+        time = 0f;
     }
 
     void Update()
@@ -38,8 +38,9 @@ public class Scratch : MonoBehaviour
             FirstUpdate();
             firstUpdate = false;
         }
-        return;
         time += Time.deltaTime;
+        // Debug.Log(time);
+        return;
         if (time > timer && !hasExecuted)
         {
             card = new Card(cardData);
@@ -99,6 +100,8 @@ public class Scratch : MonoBehaviour
 
         // Choice<Item> treasureChoice = new Choice<Item(choiceItems);
         // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
+
+        return;
 
         Cell start = GameManager.Instance.Grid.WorldPositionToCell(startNode.transform.position);
         GameObject startGO = Instantiate(hitPointObject, new Vector3(start.Center.x, start.Center.y, 0), Quaternion.identity);

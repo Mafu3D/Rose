@@ -11,13 +11,13 @@ namespace Project.UI.MainUI
 
         void Start()
         {
-            GameManager.Instance.OnStartPlayerTurn += UpdateTurnTracker;
+            GameManager.Instance.OnRoundStartEvent += UpdateTurnTracker;
             UpdateTurnTracker();
         }
 
         private void UpdateTurnTracker()
         {
-            turnText.text = $"Turn: {GameManager.Instance.Turn.ToString("D3")}";
+            turnText.text = $"Turn: {GameManager.Instance.Round.ToString("D3")}";
         }
     }
 }

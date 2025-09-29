@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Project.GameplayEffects;
-using UnityEngine;
 
 namespace Project
 {
@@ -12,58 +11,63 @@ namespace Project
 
     public class EffectQueue
     {
-        public List<GameplayEffectStrategy> queuedEffects = new();
+        public List<GameplayEffectStrategy> queue = new List<GameplayEffectStrategy>();
         private int currentEffectIndex;
         private bool currentEffectHasStarted = false;
+        public event Action OnResolveQueueStart;
+        public event Action OnResolveQueueEnd;
+        public bool QueueNeedsToBeResolved => queue.Count > 0;
+        public bool ResolvingQueue = false;
 
-        public void AddEffect(GameplayEffectStrategy effect) => queuedEffects.Add(effect);
-        public void RemoveEffect(GameplayEffectStrategy effect) { if (queuedEffects.Contains(effect)) queuedEffects.Remove(effect); }
-        public void ClearQueue()
-        {
-            queuedEffects = new();
-            currentEffectIndex = 0;
-        }
         public GameplayEffectStrategy GetCurrentEffect()
         {
-            if (queuedEffects != null) return queuedEffects[currentEffectIndex];
+            if (queue != null) return queue[currentEffectIndex];
             return null;
         }
 
-        public event Action OnResolveQueueStart;
-        public event Action OnResolveQueueEnd;
-        public bool ResolvingQueue = false;
-
-        private Status ResolveQueue()
+        public void AddEffect(GameplayEffectStrategy effect) => queue.Add(effect);
+        public void RemoveEffect(GameplayEffectStrategy effect) { if (queue.Contains(effect)) queue.Remove(effect); }
+        public void ClearQueue()
         {
-            while (currentEffectIndex < queuedEffects.Count)
+            queue = new();
+            currentEffectIndex = 0;
+        }
+
+        private Status IterateThroughQueue()
+        {
+            while (currentEffectIndex < queue.Count)
             {
                 if (!currentEffectHasStarted)
                 {
-                    queuedEffects[currentEffectIndex].StartEffect();
+                    queue[currentEffectIndex].StartEffect();
                     currentEffectHasStarted = true;
                 }
-                Status status = queuedEffects[currentEffectIndex].ResolveEffect();
+                Status status = queue[currentEffectIndex].ResolveEffect();
                 if (status != Status.Complete)
                 {
                     return status;
                 }
-                queuedEffects[currentEffectIndex].ResetEffect();
+                queue[currentEffectIndex].ResetEffect();
                 currentEffectIndex++;
                 currentEffectHasStarted = false;
             }
             return Status.Complete;
         }
 
+        public void ResolveQueue()
+        {
+            if (QueueNeedsToBeResolved)
+            {
+                ResolvingQueue = true;
+                OnResolveQueueStart?.Invoke();
+            }
+        }
+
         public void Update()
         {
-            if (queuedEffects.Count > 0)
+            if (ResolvingQueue)
             {
-                if (!ResolvingQueue)
-                {
-                    OnResolveQueueStart?.Invoke();
-                    ResolvingQueue = true;
-                }
-                Status status = ResolveQueue();
+                Status status = IterateThroughQueue();
                 if (status == Status.Complete)
                 {
                     OnResolveQueueEnd?.Invoke();

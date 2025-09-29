@@ -24,6 +24,11 @@ namespace Project.GameNode.Hero
 
         protected override void Start()
         {
+            GameManager.Instance.OnGameStartEvent += Initialize;
+        }
+
+        private void Initialize()
+        {
             CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
             GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
             ResetMovesRemaining();

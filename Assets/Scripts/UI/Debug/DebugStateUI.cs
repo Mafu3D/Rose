@@ -10,7 +10,7 @@ namespace Project.UI.DebugUI
 
         void Update()
         {
-            string textString = $"State: {GameManager.Instance.StateMachine.CurrentSuperState} > {GameManager.Instance.StateMachine.CurrentState}";
+            string textString = $"State: {GameManager.Instance.StateMachine.Current}";
             stateText.text = textString;
         }
     }
