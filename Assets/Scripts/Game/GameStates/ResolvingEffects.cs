@@ -22,18 +22,18 @@ namespace Project.GameStates
         public override void Subscribe() {
             GameManager.Instance.EffectQueue.OnResolveQueueEnd += EndResolve;
             GameManager.Instance.OnTresureChoiceStarted += GoToChoice;
-            BattleManager.Instance.OnBattleStart += GoToBattle;
+            BattleManager.Instance.OnNewBattleInitiated += GoToBattle;
          }
 
         public override void Unsubscribe() {
             GameManager.Instance.EffectQueue.OnResolveQueueEnd -= EndResolve;
             GameManager.Instance.OnTresureChoiceStarted -= GoToChoice;
-            BattleManager.Instance.OnBattleStart -= GoToBattle;
+            BattleManager.Instance.OnNewBattleInitiated -= GoToBattle;
          }
 
         private void GoToBattle()
         {
-            StateMachine.SwitchState(new Combat(new ResolvingEffects(StateMachine), StateMachine));
+            StateMachine.SwitchState(new Precombat(new ResolvingEffects(StateMachine), StateMachine));
         }
 
         private void GoToChoice()

@@ -1,24 +1,42 @@
 using System;
+using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameNode.Hero;
 using UnityEngine;
 
 namespace Project.Combat
 {
+    public struct BattleReport
+    {
+        public bool BattleDecided;
+        public int WinnerIndex;
+        public string Message;
+        public BattleReport(bool battleDecided, int winnerIndex, string message)
+        {
+            this.BattleDecided = battleDecided;
+            this.WinnerIndex = winnerIndex;
+            this.Message = message;
+        }
+    }
+
     public enum BattleState
     {
         NotStarted,
-        RoundStart,
-        TurnOne,
-        TurnTwo,
-        Complete
+        Prebattle,
+        Run,
+        Steal,
+        Start,
+        FirstTurn,
+        SecondTurn,
+        PostBattle,
+        Conclude
     }
 
-    public enum BattleResolution
+    public enum PrebattleActions
     {
-        None,
-        LeftSideWon,
-        RightSideWon
+        Fight,
+        Steal,
+        Run
     }
 
     public class Battle
@@ -29,83 +47,155 @@ namespace Project.Combat
         public int Turn;
         Combatant[] combatantOrder = new Combatant[2];
         BattleState battleState = BattleState.NotStarted;
-        BattleResolution battleResolution = BattleResolution.None;
 
-        float timer;
+        BattleReport lastBattleReport = new BattleReport();
 
-        public event Action<string> OnBattleAction;
-        Action<BattleResolution, Combatant, Combatant> finishedCallback;
+        Action<BattleReport, Combatant, Combatant> finishedCallback;
+        public BattleReport GetLastBattleReport() => lastBattleReport;
+        public BattleState GetBattleState() => battleState;
+
+        public Choice<PrebattleActions> PreBattleChoice;
+
+        public event Action<string> OnBattleMessage;
+        public event Action OnBattleInitiated;
+        public event Action OnBattleStart;
+        public event Action OnBattleDecided;
+        public event Action OnBattleConclude;
+        public event Action OnChooseRun;
+        public event Action OnChooseSteal;
 
 
-        public Battle(Combatant left, Combatant right, Action<BattleResolution, Combatant, Combatant> finished)
+        public Battle(Combatant left, Combatant right, Action<BattleReport, Combatant, Combatant> finished)
         {
             this.Left = left;
             this.Right = right;
             finishedCallback = finished;
         }
 
-        public void StartBattle()
+        public void InitiateBattle()
         {
-            Round = 0;
-            Turn = 0;
-            NewRound();
+            battleState = BattleState.Prebattle;
+            List<PrebattleActions> prebattleChoices = new List<PrebattleActions> { PrebattleActions.Fight, PrebattleActions.Steal, PrebattleActions.Run };
+            PreBattleChoice = new Choice<PrebattleActions>(prebattleChoices, ResolvePrebattleChoice);
+            OnBattleInitiated?.Invoke();
+
         }
 
-        public BattleResolution Proceed()
+        private void ResolvePrebattleChoice(PrebattleActions actionChoice)
+        {
+            switch (actionChoice)
+            {
+                case PrebattleActions.Fight:
+                    ChooseFight();
+                    break;
+                case PrebattleActions.Steal:
+                    ChooseSteal();
+                    break;
+                case PrebattleActions.Run:
+                    ChooseRun();
+                    break;
+            }
+            PreBattleChoice = null;
+        }
+
+        private void ChooseFight()
+        {
+            Debug.Log("I choose to fight!");
+            StartBattle();
+        }
+
+        private void ChooseSteal()
+        {
+            Debug.Log("I choose to steal!");
+            battleState = BattleState.Steal;
+            OnChooseSteal?.Invoke();
+        }
+
+        private void ChooseRun()
+        {
+            Debug.Log("I choose to run!!!");
+            battleState = BattleState.Run;
+            OnChooseRun?.Invoke();
+        }
+
+        public void Proceed()
         {
             ProcessBattle();
-            return battleResolution;
-        }
-
-        public BattleResolution GetBattleResolution()
-        {
-            return battleResolution;
+            Debug.Log(battleState);
         }
 
         private BattleState ProcessBattle()
         {
             switch (battleState)
             {
-                case BattleState.NotStarted:
-                    battleState = BattleState.TurnOne;
+                case BattleState.Prebattle:
                     return battleState;
 
-                case BattleState.TurnOne:
+                case BattleState.Start:
+                    battleState = BattleState.FirstTurn;
+                    return battleState;
+
+                case BattleState.FirstTurn:
                     IncrementTurn();
                     ProcessAttack(0);
 
-                    battleResolution = CheckForCombatResolution();
-                    if (battleResolution != BattleResolution.None)
+
+                    CreateBattleReport();
+                    if (lastBattleReport.BattleDecided)
                     {
-                        battleState = BattleState.Complete;
-                        FinishBattle();
+                        battleState = BattleState.PostBattle;
+                        OnBattleDecided?.Invoke();
                     }
                     else
                     {
-                        battleState = BattleState.TurnTwo;
+                        battleState = BattleState.SecondTurn;
                     }
                     return battleState;
 
-                case BattleState.TurnTwo:
+                case BattleState.SecondTurn:
                     IncrementTurn();
                     ProcessAttack(1);
 
-                    battleResolution = CheckForCombatResolution();
-                    if (battleResolution != BattleResolution.None)
+                    if (lastBattleReport.BattleDecided)
                     {
-                        battleState = BattleState.Complete;
-                        FinishBattle();
+                        battleState = BattleState.PostBattle;
+                        OnBattleDecided?.Invoke();
                     }
                     else
                     {
                         NewRound();
-                        battleState = BattleState.TurnOne;
+                        battleState = BattleState.FirstTurn;
                     }
                     return battleState;
-                case BattleState.Complete:
+
+                case BattleState.Run:
+                    Debug.Log("You ran away!");
+                    battleState = BattleState.Conclude;
+                    return battleState;
+
+                case BattleState.Steal:
+                    Debug.Log("You got some gold!");
+                    battleState = BattleState.Conclude;
+                    return battleState;
+
+                case BattleState.PostBattle:
+                    battleState = BattleState.Conclude;
+                    return battleState;
+
+                case BattleState.Conclude:
+                    ConcludeBattle();
                     return battleState;
             }
             return battleState;
+        }
+
+        private void StartBattle()
+        {
+            battleState = BattleState.Start;
+            Round = 0;
+            Turn = 0;
+            OnBattleStart?.Invoke();
+            NewRound();
         }
 
         private void NewRound()
@@ -113,7 +203,6 @@ namespace Project.Combat
             Round += 1;
             ResetTurns();
             DetermineCombatantOrder();
-
         }
 
         private void DetermineCombatantOrder()
@@ -153,31 +242,40 @@ namespace Project.Combat
                 message = $"{combatantOrder[0].DisplayName} took {hitReport.Damage} dmg";
             }
 
-            OnBattleAction?.Invoke(message);
-
-            CheckForCombatResolution();
+            OnBattleMessage?.Invoke(message);
         }
 
-        private BattleResolution CheckForCombatResolution()
+        private void CreateBattleReport()
         {
+            bool battleDecided;
+            int winnerIndex;
+            string message;
+
             if (Left.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
-                battleResolution = BattleResolution.RightSideWon;
+                battleDecided = true;
+                winnerIndex = 1;
+                message = $"{Right.DisplayName} has defeated {Left.DisplayName}";
             }
             else if (Right.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
-                battleResolution = BattleResolution.LeftSideWon;
+                battleDecided = true;
+                winnerIndex = 0;
+                message = $"{Left.DisplayName} has defeated {Right.DisplayName}";
             }
             else
             {
-                battleResolution = BattleResolution.None;
+                battleDecided = false;
+                winnerIndex = default;
+                message = $"The battle was not decided";
             }
-            return battleResolution;
+
+            lastBattleReport = new BattleReport(battleDecided, winnerIndex, message);
         }
 
-        private void FinishBattle()
+        private void ConcludeBattle()
         {
-            finishedCallback(battleResolution, Left, Right);
+            finishedCallback(lastBattleReport, Left, Right);
         }
     }
 }

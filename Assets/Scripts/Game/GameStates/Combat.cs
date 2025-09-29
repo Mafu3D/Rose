@@ -22,13 +22,15 @@ namespace Project.GameStates
         public override void Subscribe()
         {
             GameManager.Instance.Player.InputReader.OnProceedInput += Proceed;
-            BattleManager.Instance.OnBattleEnd += ExitCombat;
+
+            BattleManager.Instance.OnBattleConcluded += ExitCombat;
         }
 
         public override void Unsubscribe()
         {
             GameManager.Instance.Player.InputReader.OnProceedInput -= Proceed;
-            BattleManager.Instance.OnBattleEnd -= ExitCombat;
+
+            BattleManager.Instance.OnBattleConcluded -= ExitCombat;
         }
 
         private void Proceed()

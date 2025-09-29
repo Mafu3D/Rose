@@ -17,20 +17,8 @@ namespace Project.GameplayEffects
 
         public override Status Resolve()
         {
-            if (BattleManager.Instance.IsActiveBattle)
-            {
-                switch (BattleManager.Instance.GetActiveBattleResolution())
-                {
-                    case BattleResolution.None:
-                        return Status.Running;
-                    default:
-                        return Status.Complete;
-                }
-            }
-            else
-            {
-                return Status.Complete;
-            }
+            if (!BattleManager.Instance.IsActiveBattleConcluded()) return Status.Running;
+            return Status.Complete;
         }
 
         public override Status Start()
@@ -46,15 +34,27 @@ namespace Project.GameplayEffects
                                             enemyNodeData.Description,
                                             enemyNodeData.Sprite);
 
-            BattleManager.Instance.StartNewBattle(left, right, Dummy);
+            BattleManager.Instance.StartNewBattle(left, right, DummyAnnounce);
             return Status.Running;
         }
 
-        public void Dummy(BattleResolution resolution, Combatant left, Combatant right)
+        public void DummyAnnounce(BattleReport battleReport, Combatant left, Combatant right)
         {
-            Debug.Log(resolution);
-            Debug.Log(left);
-            Debug.Log(right);
+            if (battleReport.BattleDecided)
+            {
+                if (battleReport.WinnerIndex == 0)
+                {
+                    Debug.Log($"The hero has won!");
+                }
+                if (battleReport.WinnerIndex == 1)
+                {
+                    Debug.Log($"The hero was defeated!");
+                }
+            }
+            else
+            {
+                Debug.Log("The battle ended before it could be decided!");
+            }
         }
     }
 }

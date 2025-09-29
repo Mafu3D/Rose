@@ -14,40 +14,43 @@ namespace Project.Combat
 
         public Battle ActiveBattle;
         public bool IsActiveBattle => ActiveBattle != null;
-        public event Action OnBattleStart;
-        public event Action OnBattleEnd;
+        public event Action OnNewBattleInitiated;
+        public event Action OnBattleConcluded;
 
 
-        public void StartNewBattle(Combatant left, Combatant right, Action<BattleResolution, Combatant, Combatant> finished)
+        public void StartNewBattle(Combatant left, Combatant right, Action<BattleReport, Combatant, Combatant> finished)
         {
             ActiveBattle = new Battle(left, right, finished);
-            ActiveBattle.StartBattle();
-            OnBattleStart?.Invoke();
             BattleUI.Instance.OpenBattleUI();
+            ActiveBattle.InitiateBattle();
+            OnNewBattleInitiated?.Invoke();
         }
-
-        public BattleResolution GetActiveBattleResolution()
+        public bool IsActiveBattleConcluded()
         {
+            // Could clean this up
             if (IsActiveBattle)
             {
-                return ActiveBattle.GetBattleResolution();
+                if (ActiveBattle.GetBattleState() == BattleState.Conclude)
+                {
+                    return true;
+                }
+                return false;
             }
-            return BattleResolution.None;
+            return false;
         }
 
         public Status Proceed()
         {
             if (ActiveBattle == null) return Status.Complete;
-
-            switch (ActiveBattle.Proceed())
+            ActiveBattle.Proceed();
+            BattleState battleState = ActiveBattle.GetBattleState();
+            if (battleState == BattleState.Conclude)
             {
-                case BattleResolution.None:
-                    return Status.Running;
-                default:
-                    BattleUI.Instance.CloseBattleUI();
-                    EndActiveBattle();
-                    return Status.Complete;
+                BattleUI.Instance.CloseBattleUI();
+                EndActiveBattle();
+                return Status.Complete;
             }
+            return Status.Running;
         }
 
         public void EndActiveBattle()
@@ -56,7 +59,7 @@ namespace Project.Combat
             {
                 ActiveBattle = null;
             }
-            OnBattleEnd?.Invoke();
+            OnBattleConcluded?.Invoke();
         }
     }
 }
