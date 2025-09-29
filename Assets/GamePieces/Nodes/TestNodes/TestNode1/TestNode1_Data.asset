@@ -29,10 +29,7 @@ MonoBehaviour:
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
   AttributesData: {fileID: 0}
-  OnEndTurnStrategies:
-  - {fileID: 11400000, guid: 52a43aef8e5324049a7057f2805255ce, type: 2}
-  - {fileID: 11400000, guid: 2e14adb78140ab04b8e26edffc3990ff, type: 2}
-  - {fileID: 11400000, guid: bd965e08293222f4399573465b1511b5, type: 2}
+  OnEndTurnStrategies: []
   OnPlayerEnterStrategies: []
   OnPlayerExitStrategies: []
   OnCreateStrategies: []

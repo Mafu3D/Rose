@@ -5,6 +5,7 @@ using Project;
 using UnityEngine;
 using Project.GameNode;
 using Project.GameNode.Hero;
+using System.IO;
 
 namespace Project
 {
@@ -38,9 +39,6 @@ namespace Project
         public override int GetHashCode() => hashCode;
         public bool Equals(Cell other) => x == other.x && y == other.y;
         public override bool Equals(object obj) => obj is Cell other && Equals(other);
-
-        // public static bool operator ==(Cell left, Cell right) => left.x == right.x && left.y == right.y;
-        // public static bool operator !=(Cell left, Cell right) => !(left == right);
 
         public static bool operator ==(Cell left, Cell right) => left.hashCode == right.hashCode;
         public static bool operator !=(Cell left, Cell right) => !(left == right);
@@ -92,14 +90,14 @@ namespace Project
             return false;
         }
 
-        public bool TryGetNodesRegisteredToCell(Cell cell,  out List<Node> registeredNodes, bool excludeHeroes=true)
+        public bool TryGetNodesRegisteredToCell(Cell cell, out List<Node> registeredNodes, bool excludeHeroes = true)
         {
             registeredNodes = GetNodesRegisteredToCell(cell, excludeHeroes);
             if (registeredNodes.Count > 0) return true;
             return false;
         }
 
-        private List<Node> GetNodesRegisteredToCell(Cell cell, bool excludeHeroes=true)
+        private List<Node> GetNodesRegisteredToCell(Cell cell, bool excludeHeroes = true)
         {
             List<Node> registeredNodes = new List<Node>();
             Cell registeredCell;
@@ -184,7 +182,6 @@ namespace Project
         {
             int x = worldPosition.x >= 0 ? (int)worldPosition.x + 1 : (int)worldPosition.x - 1;
             int y = worldPosition.y >= 0 ? (int)worldPosition.y + 1 : (int)worldPosition.y - 1;
-            // Vector2 cellPos = new Vector2(Mathf.Floor(worldPosition.x + 1f), Mathf.Floor(worldPosition.y + 1f));
             return new Cell(x, y, cellSize);
         }
 
@@ -192,6 +189,30 @@ namespace Project
         {
             Vector2 worldPosition = cell.Center + direction;
             return WorldPositionToCell(worldPosition);
+        }
+
+        public List<Cell> GetPathBetweenTwoCells(Cell start, Cell end)
+        {
+            Pathfinder pathfinder = new Pathfinder(this, start, end);
+            return pathfinder.CalculatePath();
+        }
+
+        public Cell[] GetAllNeighbors(Cell cell)
+        {
+            Cell[] neighbors = new Cell[4];
+            neighbors[0] = GetNeighborCell(cell, new Vector2(0, 1));
+            neighbors[1] = GetNeighborCell(cell, new Vector2(1, 0));
+            neighbors[2] = GetNeighborCell(cell, new Vector2(0, -1));
+            neighbors[3] = GetNeighborCell(cell, new Vector2(-1, 0));
+            return neighbors;
+        }
+
+        private int CellsBetween(Cell A, Cell B)
+        {
+            Vector2 difference = A.Center - B.Center;
+            difference.x = Math.Abs(difference.x);
+            difference.y = Math.Abs(difference.y);
+            return (int)difference.x + (int)difference.y;
         }
     }
 }

@@ -12,6 +12,8 @@ public class Scratch : MonoBehaviour
     [SerializeField] ItemData item;
     [SerializeField] List<ItemData> items;
     [SerializeField] CardData cardData;
+    [SerializeField] Node startNode;
+    [SerializeField] Node endNode;
     Card card;
     bool lmbClicked = false;
     bool rmbClicked = false;
@@ -98,8 +100,18 @@ public class Scratch : MonoBehaviour
         // Choice<Item> treasureChoice = new Choice<Item(choiceItems);
         // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
 
-
-
+        Cell start = GameManager.Instance.Grid.WorldPositionToCell(startNode.transform.position);
+        GameObject startGO = Instantiate(hitPointObject, new Vector3(start.Center.x, start.Center.y, 0), Quaternion.identity);
+        startGO.name = "start";
+        Cell end = GameManager.Instance.Grid.WorldPositionToCell(endNode.transform.position);
+        GameObject endGO = Instantiate(hitPointObject, new Vector3(end.Center.x, end.Center.y, 0), Quaternion.identity);
+        endGO.name = "end";
+        List<Cell> path = GameManager.Instance.Grid.GetPathBetweenTwoCells(start, end);
+        Debug.Log(path.Count);
+        foreach (Cell cell in path)
+        {
+            Instantiate(hitPointObject, new Vector3(cell.Center.x, cell.Center.y, 0), Quaternion.identity);
+        }
     }
 
     private void CheckWorldPosForCell()
