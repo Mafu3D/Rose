@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Project.GameNode.Hero;
 using Project.GameNode;
-using Project.States;
 using Project.PlayerSystem;
 using Project.Decks;
 using Project.Items;
 using Project.UI.MainUI;
-using Project.GameLoop.States;
+using Project.GameLoop;
 using UnityEngine.Events;
 
 namespace Project
@@ -37,7 +36,6 @@ namespace Project
 
         public StateMachine StateMachine;
         public EffectQueue EffectQueue;
-        public PhaseSwitch PhaseSwitch;
 
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
@@ -96,58 +94,58 @@ namespace Project
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
 
-            PhaseSwitch = new PhaseSwitch();
             EffectQueue = new EffectQueue();
 
             // State Machine
             StateMachine = new StateMachine();
+            StateMachine.SetInitialState(new RoundStartState("Initial Round Start", StateMachine, this));
 
-            // Declare States
-            var roundStartState = new RoundStartState("RoundStart", this);
-            var roundStartResolveState = new ResolveEffectsState("RoundStartResolve", this);
+            // // Declare States
+            // var roundStartState = new RoundStartState("RoundStart", this);
+            // var roundStartResolveState = new ResolveEffectsState("RoundStartResolve", this);
 
-            var turnStartState = new TurnStartState("TurnStart", this);
-            var turnStartResolveState = new ResolveEffectsState("TurnStartResolve", this);
+            // var turnStartState = new TurnStartState("TurnStart", this);
+            // var turnStartResolveState = new ResolveEffectsState("TurnStartResolve", this);
 
-            var playerMoveState = new PlayerMoveState("PlayerMove", this);
-            var playerMoveResolveState = new ResolveEffectsState("PlayerMoveResolve", this);
-            var playerMoveEndResolveState = new ResolveEffectsState("PlayerMoveEndResolve", this);
+            // var playerMoveState = new PlayerMoveState("PlayerMove", this);
+            // var playerMoveResolveState = new ResolveEffectsState("PlayerMoveResolve", this);
+            // var playerMoveEndResolveState = new ResolveEffectsState("PlayerMoveEndResolve", this);
 
-            var endOfTurnState = new EndOfTurnState("EndOfTurn", this);
-            var endOfTurnResolveState = new ResolveEffectsState("EndOfTurnResolve", this);
+            // var endOfTurnState = new EndOfTurnState("EndOfTurn", this);
+            // var endOfTurnResolveState = new ResolveEffectsState("EndOfTurnResolve", this);
 
-            // Debug.Log(roundStartResolveState);
-            // Debug.Log(endOfTurnResolveState);
-            // Debug.Log(roundStartResolveState == endOfTurnResolveState);
-            // Debug.Log(Object.ReferenceEquals(roundStartResolveState, endOfTurnResolveState));
+            // // Debug.Log(roundStartResolveState);
+            // // Debug.Log(endOfTurnResolveState);
+            // // Debug.Log(roundStartResolveState == endOfTurnResolveState);
+            // // Debug.Log(Object.ReferenceEquals(roundStartResolveState, endOfTurnResolveState));
 
-            // Define Transitions
-            At(roundStartState, roundStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
-            At(roundStartResolveState, turnStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+            // // Define Transitions
+            // At(roundStartState, roundStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(roundStartResolveState, turnStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
 
-            At(turnStartState, turnStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
-            At(turnStartResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+            // At(turnStartState, turnStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(turnStartResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
 
-            At(playerMoveState, playerMoveResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
-            At(playerMoveResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+            // At(playerMoveState, playerMoveResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(playerMoveResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
 
-            At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
-            At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => Hero.MovesRemaining == 0));
-            At(playerMoveEndResolveState, endOfTurnState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+            // At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => Hero.MovesRemaining == 0));
+            // At(playerMoveEndResolveState, endOfTurnState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
 
-            At(endOfTurnState, endOfTurnResolveState, new ActionPredicate(OnRoundStartEvent));
-            At(endOfTurnResolveState, roundStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+            // At(endOfTurnState, endOfTurnResolveState, new ActionPredicate(OnRoundStartEvent));
+            // At(endOfTurnResolveState, roundStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
 
-            // Set initial state
-            StateMachine.SetState(roundStartState);
+            // // Set initial state
+            // StateMachine.SetState(roundStartState);
 
             OnGameStartEvent?.Invoke();
             Round = 0;
             StartNewRound();
         }
 
-        void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
-        void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
+        // void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
+        // void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
 
         #endregion
 

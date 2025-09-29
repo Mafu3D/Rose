@@ -1,7 +1,7 @@
 using Project.States;
 using UnityEngine;
 
-namespace Project.GameLoop.States
+namespace Project.States
 {
     public class EndOfTurnState : BaseState
     {
@@ -10,12 +10,12 @@ namespace Project.GameLoop.States
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
-            GameManager.PhaseSwitch.StartNewPhase();
+            // GameManager.PhaseSwitch.StartNewPhase();
         }
 
         public override void Update()
         {
-            GameManager.PhaseSwitch.CompletePhase();
+            // GameManager.PhaseSwitch.CompletePhase();
             GameManager.StartNewRound();
         }
 

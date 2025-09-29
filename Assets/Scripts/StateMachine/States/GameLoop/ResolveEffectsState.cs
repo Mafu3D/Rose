@@ -1,7 +1,7 @@
 using Project.States;
 using UnityEngine;
 
-namespace Project.GameLoop.States
+namespace Project.States
 {
     public class ResolveEffectsState : BaseState
     {

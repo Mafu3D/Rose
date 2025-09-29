@@ -1,28 +1,24 @@
 using System;
-using Project.States;
 using UnityEngine;
 
-namespace Project.States
+namespace Project.GameLoop
 {
-    public class PlayerMoveState : BaseState
+    public class PlayerMoveState : State
     {
-        public PlayerMoveState(string name, GameManager gameManager) : base(name, gameManager) { }
+        public PlayerMoveState(string name,
+                                StateMachine stateMachine,
+                                GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
         float timeInState;
 
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
-            // GameManager.PhaseSwitch.StartNewPhase();
-
-            // GameManager.PhaseSwitch.CompletePhase();
-            GameManager.StartNewEndOfTurn();
-            return;
 
             GameManager.Player.InputReader.OnProceedInput += ProceedEarly;
         }
 
-        public override void Update()
+        public override void Update(float time)
         {
             timeInState += Time.deltaTime;
             if (timeInState > GameManager.TimeBetweenPlayerMoves)
@@ -43,7 +39,7 @@ namespace Project.States
         private void ProceedEarly()
         {
             GameManager.StartNewEndOfTurn();
-            // GameManager.PhaseSwitch.CompletePhase();
+            StateMachine.SwitchState(new PlayerMoveResolveState("Player Move Resolve", StateMachine, GameManager));
         }
     }
 }
