@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 537987619709514657}
   - component: {fileID: 6045612781645597719}
   m_Layer: 5
-  m_Name: CardContainer
+  m_Name: CardDisplayContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

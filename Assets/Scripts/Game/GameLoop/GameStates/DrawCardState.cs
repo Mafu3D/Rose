@@ -1,3 +1,5 @@
+using System;
+using Project.Decks;
 using Project.GameNode;
 using Project.GameplayEffects;
 using UnityEngine;
@@ -13,23 +15,58 @@ namespace Project.GameLoop
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
-            foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+            GameManager.Player.InputReader.OnProceedInput += Proceed;
+            GameManager.Player.InputReader.OnChoice1Input += ChooseOptionOne;
+            GameManager.Player.InputReader.OnChoice2Input += ChooseOptionTwo;
+            GameManager.Player.InputReader.OnChoice3Input += ChooseOptionThree;
+
+            GameManager.CardDrawManager.DrawCards(GameManager.EncounterDeck, 2);
+        }
+
+        private void ChooseOptionThree()
+        {
+            GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(2);
+        }
+
+        private void ChooseOptionTwo()
+        {
+            GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(1);
+        }
+
+        private void ChooseOptionOne()
+        {
+            GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(0);
+        }
+
+        private void Proceed()
+        {
+            if (GameManager.CardDrawManager.ActiveCardChoice.NumberOfChoices == 1)
             {
-                foreach (GameplayEffectStrategy effect in node.NodeData.OnDrawCardStrategies)
-                {
-                    GameManager.EffectQueue.AddEffect(effect);
-                }
+                GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(0);
             }
         }
 
         public override void Update(float time)
         {
-            if (TimeInState > GameManager.Instance.MinTimeBetweenPhases)
+            if (!GameManager.CardDrawManager.CardChoiceIsActive)
             {
+                foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+                {
+                    foreach (GameplayEffectStrategy effect in node.NodeData.OnDrawCardStrategies)
+                    {
+                        GameManager.EffectQueue.AddEffect(effect);
+                    }
+                }
                 StateMachine.SwitchState(new DrawCardResolveState("Draw Card Resolve", StateMachine, GameManager));
             }
         }
 
-        public override void OnExit() { }
+        public override void OnExit()
+        {
+            GameManager.Player.InputReader.OnProceedInput -= Proceed;
+            GameManager.Player.InputReader.OnChoice1Input -= ChooseOptionOne;
+            GameManager.Player.InputReader.OnChoice2Input -= ChooseOptionTwo;
+            GameManager.Player.InputReader.OnChoice3Input -= ChooseOptionThree;
+        }
     }
 }

@@ -9,6 +9,7 @@ using Project.Items;
 using Project.UI.MainUI;
 using Project.GameLoop;
 using UnityEngine.Events;
+using Project.Core;
 
 namespace Project
 {
@@ -38,6 +39,7 @@ namespace Project
         public StateMachine StateMachine;
         public EffectQueue EffectQueue;
 
+        public CardDrawManager CardDrawManager;
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
         public Deck<Item> ItemDeck;
@@ -96,6 +98,8 @@ namespace Project
             EncounterDeck = InitializeCardDeck(EncounterDeckData);
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
+
+            CardDrawManager = new CardDrawManager();
 
             EffectQueue = new EffectQueue();
 
@@ -242,24 +246,24 @@ namespace Project
             }
         }
 
-        public void StartNewCardChoice(Choice<Card> cardChoice)
-        {
-            ActiveCardChoice = cardChoice;
-            MainUI.Instance.DisplayCards(ActiveCardChoice.GetAllItems());
-            // MainUI.Instance.DisplayTreasureChoice(cardChoice);
-            OnCardChoiceStarted?.Invoke();
-        }
+        // public void StartNewCardChoice(Choice<Card> cardChoice)
+        // {
+        //     ActiveCardChoice = cardChoice;
+        //     MainUI.Instance.DisplayCards(ActiveCardChoice.GetAllItems());
+        //     // MainUI.Instance.DisplayTreasureChoice(cardChoice);
+        //     OnCardChoiceStarted?.Invoke();
+        // }
 
-        public void EndCardChoice()
-        {
-            if (ActiveCardChoice != null)
-            {
-                ActiveCardChoice = null;
-                // MainUI.Instance.DestroyTreasureChoice();
-                MainUI.Instance.DestroyDisplayedCards();
-                OnCardChoiceEnded?.Invoke();
-            }
-        }
+        // public void EndCardChoice()
+        // {
+        //     if (ActiveCardChoice != null)
+        //     {
+        //         ActiveCardChoice = null;
+        //         // MainUI.Instance.DestroyTreasureChoice();
+        //         MainUI.Instance.DestroyDisplayedCards();
+        //         OnCardChoiceEnded?.Invoke();
+        //     }
+        // }
 
         public void MarkNodeForDestroy(Node node)
         {
