@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameplayEffects;
 using UnityEngine;
@@ -41,14 +42,7 @@ namespace Project.GameLoop
                 if (movementInput != Vector2.zero)
                 {
                     GameManager.Player.HeroNode.Move(movementInput);
-                    foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
-                    {
-                        foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerMoveStrategies)
-                        {
-                            GameManager.EffectQueue.AddEffect(effect);
-                        }
-                    }
-                    StateMachine.SwitchState(new PlayerMoveResolveState("Player Move Resolve", StateMachine, GameManager));
+                    Resolve();
                 }
             }
         }
@@ -61,6 +55,31 @@ namespace Project.GameLoop
         private void Proceed()
         {
             StateMachine.SwitchState(new PlayerMoveEndResolveState("Player Move End Resolve", StateMachine, GameManager));
+        }
+
+        private void Resolve()
+        {
+            foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+            {
+                foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerMoveStrategies)
+                {
+                    GameManager.EffectQueue.AddEffect(effect);
+                }
+            }
+
+            Cell heroCell = GameManager.Player.HeroNode.CurrentCell;
+            List<Node> registeredNodes;
+            if (GameManager.Grid.TryGetNodesRegisteredToCell(heroCell, out registeredNodes))
+            {
+                foreach (Node node in registeredNodes)
+                {
+                    foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerEnterStrategies)
+                    {
+                        GameManager.EffectQueue.AddEffect(effect);
+                    }
+                }
+            }
+            StateMachine.SwitchState(new PlayerMoveResolveState("Player Move Resolve", StateMachine, GameManager));
         }
     }
 }
