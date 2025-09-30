@@ -13373,7 +13373,7 @@ MonoBehaviour:
   AutoBattle: 1
   AutoBattleSpeed: 1
   MinTimeBetweenPlayerMoves: 0.25
-  MinTimeBetweenPhases: 1
+  MinTimeBetweenPhases: 0.2
 --- !u!4 &1639557477
 Transform:
   m_ObjectHideFlags: 0

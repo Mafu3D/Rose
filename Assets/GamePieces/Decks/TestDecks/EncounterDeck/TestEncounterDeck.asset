@@ -16,7 +16,6 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 83c88ac918b29f34291b14e1af0a3306, type: 2}
     - {fileID: 11400000, guid: f92b247e392f795469332780e64a7623, type: 2}
     - {fileID: 11400000, guid: 390bbdf083d276b4fbfc8d998c90b804, type: 2}
     - {fileID: 11400000, guid: 9b113ff7b553ce748a6a63f60fba7b6f, type: 2}
@@ -39,7 +38,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -48,7 +47,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 3
-      Data: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -60,7 +59,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 3
-      Data: 3
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -72,18 +71,6 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 3
-    - Name: $v
-      Entry: 3
       Data: 7
     - Name: 
       Entry: 8
@@ -93,7 +80,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 10
-      Data: 4
+      Data: 3
     - Name: $v
       Entry: 3
       Data: 3

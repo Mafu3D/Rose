@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameLoop;
 using Project.Items;
 using UnityEngine;
 
@@ -23,6 +23,7 @@ namespace Project.GameplayEffects
             List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
             Choice<Item> treasureChoice = new Choice<Item>(choiceItems, EquipChosenItem);
             GameManager.Instance.StartNewTreasureChoice(treasureChoice);
+            GameManager.Instance.StateMachine.SwitchState(new SelectingItemState("Selecting Item State", GameManager.Instance.StateMachine, GameManager.Instance));
             return Status.Running;
         }
 
