@@ -86,7 +86,7 @@ namespace Project
 
         private void EvaluateNeighbors(Cell cell, out List<Cell> validNeighbors, out List<Cell> invalidNeighbors)
         {
-            Debug.Log($"Evaluating {cell}");
+            // Debug.Log($"Evaluating {cell}");
 
             validNeighbors = new();
             invalidNeighbors = new();
@@ -102,7 +102,7 @@ namespace Project
                 int g = DistanceBetween(neighbor, start);
                 int h = DistanceBetween(end, neighbor);
                 int f = g + h;
-                Debug.Log($"Checking {neighbor} - g: {g}, h: {h}, f: {f}");
+                // Debug.Log($"Checking {neighbor} - g: {g}, h: {h}, f: {f}");
                 if (f < lowestF)
                 {
                     lowestF = f;
@@ -122,19 +122,19 @@ namespace Project
             {
                 RegisterToInvalidCells(invalidNeighbor);
             }
-            string result = "Potential Cells: ";
-            if (validNeighbors.Count > 0)
-            {
-                foreach (Cell c in validNeighbors)
-                {
-                    result += $"{c} ";
-                }
-            }
-            else
-            {
-                result += "None";
-            }
-            Debug.Log(result);
+            // string result = "Potential Cells: ";
+            // if (validNeighbors.Count > 0)
+            // {
+            //     foreach (Cell c in validNeighbors)
+            //     {
+            //         result += $"{c} ";
+            //     }
+            // }
+            // else
+            // {
+            //     result += "None";
+            // }
+            // Debug.Log(result);
         }
 
         private int DistanceBetween(Cell A, Cell B)

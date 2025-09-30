@@ -42,6 +42,7 @@ namespace Project.GameLoop
                 if (movementInput != Vector2.zero)
                 {
                     GameManager.Player.HeroNode.Move(movementInput);
+                    GameManager.OnPlayerMove();
                     Resolve();
                 }
             }
