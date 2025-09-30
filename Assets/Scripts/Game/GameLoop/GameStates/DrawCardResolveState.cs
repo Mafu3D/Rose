@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Project.GameLoop
 {
-    public class TurnStartResolveState : State
+    public class DrawCardResolveState : State
     {
-        public TurnStartResolveState(string name,
+        public DrawCardResolveState(string name,
                                 StateMachine stateMachine,
                                 GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
@@ -18,8 +18,7 @@ namespace Project.GameLoop
         {
             if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
             {
-                GameManager.OnStartPlayerMove();
-                StateMachine.SwitchState(new PlayerMoveState("Player Move", StateMachine, GameManager));
+                StateMachine.SwitchState(new EndOfRoundState("Round End", StateMachine, GameManager));
             }
         }
 

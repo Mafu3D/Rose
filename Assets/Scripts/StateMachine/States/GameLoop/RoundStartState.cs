@@ -16,7 +16,7 @@ namespace Project.States
 
         public override void Update()
         {
-            GameManager.StartNewTurn();
+            GameManager.OnNewTurn();
             // GameManager.PhaseSwitch.CompletePhase();
         }
 

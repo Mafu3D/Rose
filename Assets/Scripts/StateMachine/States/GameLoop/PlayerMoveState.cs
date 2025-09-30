@@ -16,7 +16,7 @@ namespace Project.States
             // GameManager.PhaseSwitch.StartNewPhase();
 
             // GameManager.PhaseSwitch.CompletePhase();
-            GameManager.StartNewEndOfTurn();
+            GameManager.OnEndOfTurn();
             return;
 
             GameManager.Player.InputReader.OnProceedInput += ProceedEarly;
@@ -42,7 +42,7 @@ namespace Project.States
 
         private void ProceedEarly()
         {
-            GameManager.StartNewEndOfTurn();
+            GameManager.OnEndOfTurn();
             // GameManager.PhaseSwitch.CompletePhase();
         }
     }

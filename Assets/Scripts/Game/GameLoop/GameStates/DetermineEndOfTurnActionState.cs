@@ -1,13 +1,12 @@
-using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameplayEffects;
 using UnityEngine;
 
 namespace Project.GameLoop
 {
-    public class TurnStartState : State
+    public class DetermineEndOfTurnActionState : State
     {
-        public TurnStartState(string name,
+        public DetermineEndOfTurnActionState(string name,
                                 StateMachine stateMachine,
                                 GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
@@ -17,7 +16,7 @@ namespace Project.GameLoop
 
             foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
             {
-                foreach (GameplayEffectStrategy effect in node.NodeData.OnTurnStartStrategies)
+                foreach (GameplayEffectStrategy effect in node.NodeData.OnRoundStartStrategies)
                 {
                     GameManager.EffectQueue.AddEffect(effect);
                 }
@@ -28,7 +27,7 @@ namespace Project.GameLoop
         {
             if (TimeInState > GameManager.Instance.MinTimeBetweenPhases)
             {
-                StateMachine.SwitchState(new TurnStartResolveState("Turn Start Resolve", StateMachine, GameManager));
+                StateMachine.SwitchState(new RoundStartResolveState("Round Start Resolve", StateMachine, GameManager));
             }
         }
 

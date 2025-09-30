@@ -16,7 +16,7 @@ namespace Project.States
         public override void Update()
         {
             // GameManager.PhaseSwitch.CompletePhase();
-            GameManager.StartNewRound();
+            GameManager.OnNewRound();
         }
 
         public override void OnExit() { }

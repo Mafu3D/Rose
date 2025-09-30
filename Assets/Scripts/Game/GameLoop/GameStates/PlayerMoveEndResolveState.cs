@@ -18,6 +18,7 @@ namespace Project.GameLoop
         {
             if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
             {
+                GameManager.OnEndOfTurn();
                 StateMachine.SwitchState(new EndOfTurnState("End Of Turn", StateMachine, GameManager));
             }
         }

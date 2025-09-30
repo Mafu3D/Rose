@@ -18,6 +18,7 @@ namespace Project.GameLoop
         {
             if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
             {
+                GameManager.OnNewTurn();
                 StateMachine.SwitchState(new TurnStartState("Turn Start", StateMachine, GameManager));
             }
         }

@@ -60,7 +60,6 @@ namespace Project.GameLoop
 
         private void Proceed()
         {
-            GameManager.StartNewEndOfTurn();
             StateMachine.SwitchState(new PlayerMoveEndResolveState("Player Move End Resolve", StateMachine, GameManager));
         }
     }

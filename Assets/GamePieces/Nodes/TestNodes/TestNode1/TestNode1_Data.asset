@@ -29,6 +29,8 @@ MonoBehaviour:
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
   AttributesData: {fileID: 0}
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 0adb7c3738cfdbb44b63a7ce9f04bf32, type: 2}
   OnRoundStartStrategies:
   - {fileID: 11400000, guid: 8c92647787acc5c4eba4d2b484f48585, type: 2}
   OnTurnStartStrategies:
@@ -41,6 +43,7 @@ MonoBehaviour:
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies:
   - {fileID: 11400000, guid: 37e48cd433efe2242aaaca6747cac6ee, type: 2}
+  OnEndOfRoundStrategies:
+  - {fileID: 11400000, guid: 1e5e6600a1f03f646b4ff04463d7dec8, type: 2}
   OnCreateStrategies: []
   OnDestroyStrategies: []
-  OnRoundEndStrategies: []

@@ -42,13 +42,15 @@ namespace Project
         public Deck<Card> MonsterDeck;
         public Deck<Item> ItemDeck;
 
-        public event UnityAction OnGameStartEvent;
-        public event UnityAction OnRoundStartEvent;
-        // public event Action OnTurnStartEvent;
-        public event UnityAction OnTurnStartEvent;
-        public event UnityAction OnPlayerMoveStartEvent;
-        public event UnityAction OnPlayerMoveEvent;
-        public event UnityAction OnEndOfTurnEvent;
+        public event Action OnGameStartEvent;
+        public event Action OnRoundStartEvent;
+        public event Action OnTurnStartEvent;
+        public event Action OnPlayerMoveStartEvent;
+        public event Action OnPlayerMoveEvent;
+        public event Action OnEndOfTurnEvent;
+        public event Action OnActivateTilesEvent;
+        public event Action OnDrawCardEvent;
+        public event Action OnEndOfRoundEvent;
 
         public Choice<Item> ActiveTreasureChoice;
         public event Action OnTresureChoiceStarted;
@@ -142,7 +144,7 @@ namespace Project
 
             OnGameStartEvent?.Invoke();
             Round = 0;
-            StartNewRound();
+            OnNewRound();
         }
 
         // void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
@@ -153,31 +155,46 @@ namespace Project
         #region Game Loop
         // Everthing about the game stat itself should be updated here! (What turn is it, shuffling decks, etc.)
 
-        public void StartNewRound()
+        public void OnNewRound()
         {
             Round += 1;
             Hero.ResetMovesRemaining();
             OnRoundStartEvent?.Invoke();
         }
 
-        public void StartNewTurn()
+        public void OnNewTurn()
         {
             OnTurnStartEvent?.Invoke();
         }
 
-        public void StartNewPlayerMove()
+        public void OnStartPlayerMove()
         {
             OnPlayerMoveStartEvent?.Invoke();
         }
 
-        public void ProcessPlayerMove()
+        public void OnPlayerMove()
         {
             OnPlayerMoveEvent?.Invoke();
         }
 
-        public void StartNewEndOfTurn()
+        public void OnEndOfTurn()
         {
             OnEndOfTurnEvent?.Invoke();
+        }
+
+        public void OnActivateTiles()
+        {
+            OnActivateTilesEvent?.Invoke();
+        }
+
+        public void OnDrawCard()
+        {
+            OnDrawCardEvent?.Invoke();
+        }
+
+        public void OnEndOfRound()
+        {
+            OnEndOfRoundEvent?.Invoke();
         }
 
         #endregion

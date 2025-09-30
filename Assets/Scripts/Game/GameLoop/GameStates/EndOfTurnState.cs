@@ -26,7 +26,6 @@ namespace Project.GameLoop
         {
             if (TimeInState > GameManager.Instance.MinTimeBetweenPhases)
             {
-                GameManager.StartNewRound();
                 StateMachine.SwitchState(new EndOfTurnResolveState("End Of Turn Resolve", StateMachine, GameManager));
             }
         }

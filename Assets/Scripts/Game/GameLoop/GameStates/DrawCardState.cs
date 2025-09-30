@@ -1,23 +1,21 @@
-using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameplayEffects;
 using UnityEngine;
 
 namespace Project.GameLoop
 {
-    public class TurnStartState : State
+    public class DrawCardState : State
     {
-        public TurnStartState(string name,
+        public DrawCardState(string name,
                                 StateMachine stateMachine,
                                 GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
-
             foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
             {
-                foreach (GameplayEffectStrategy effect in node.NodeData.OnTurnStartStrategies)
+                foreach (GameplayEffectStrategy effect in node.NodeData.OnDrawCardStrategies)
                 {
                     GameManager.EffectQueue.AddEffect(effect);
                 }
@@ -28,7 +26,7 @@ namespace Project.GameLoop
         {
             if (TimeInState > GameManager.Instance.MinTimeBetweenPhases)
             {
-                StateMachine.SwitchState(new TurnStartResolveState("Turn Start Resolve", StateMachine, GameManager));
+                StateMachine.SwitchState(new DrawCardResolveState("Draw Card Resolve", StateMachine, GameManager));
             }
         }
 

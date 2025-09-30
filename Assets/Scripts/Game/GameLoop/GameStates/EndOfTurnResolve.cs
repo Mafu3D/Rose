@@ -18,7 +18,7 @@ namespace Project.GameLoop
         {
             if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
             {
-                StateMachine.SwitchState(new RoundStartState("Round Start", StateMachine, GameManager));
+                StateMachine.SwitchState(new ActivateTilesState("Activate Tiles", StateMachine, GameManager));
             }
         }
 
