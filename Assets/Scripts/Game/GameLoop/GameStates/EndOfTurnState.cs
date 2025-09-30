@@ -1,3 +1,5 @@
+using Project.GameNode;
+using Project.GameplayEffects;
 using UnityEngine;
 
 namespace Project.GameLoop
@@ -11,12 +13,22 @@ namespace Project.GameLoop
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
+            foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+            {
+                foreach (GameplayEffectStrategy effect in node.NodeData.OnEndOfTurnStrategies)
+                {
+                    GameManager.EffectQueue.AddEffect(effect);
+                }
+            }
         }
 
         public override void Update(float time)
         {
-            GameManager.StartNewRound();
-            StateMachine.SwitchState(new EndOfTurnResolveState("End Of Turn Resolve", StateMachine, GameManager));
+            if (TimeInState > GameManager.Instance.MinTimeBetweenPhases)
+            {
+                GameManager.StartNewRound();
+                StateMachine.SwitchState(new EndOfTurnResolveState("End Of Turn Resolve", StateMachine, GameManager));
+            }
         }
 
         public override void OnExit() { }

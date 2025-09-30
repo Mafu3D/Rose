@@ -25,7 +25,7 @@ namespace Project.States
         public override void Update()
         {
             timeInState += Time.deltaTime;
-            if (timeInState > GameManager.TimeBetweenPlayerMoves)
+            if (timeInState > GameManager.MinTimeBetweenPlayerMoves)
             {
                 Vector2 movementInput = GameManager.Player.InputReader.MovementValue;
                 if (movementInput != Vector2.zero)

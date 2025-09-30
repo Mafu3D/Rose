@@ -24,13 +24,18 @@ namespace Project.GameNode
         [SerializeField] public AttributesData AttributesData;
 
         [Header("Strategies")]
-        [SerializeField] public List<GameplayEffectStrategy> OnEndTurnStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnRoundStartStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnTurnStartStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnPlayerMoveStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnPlayerMoveEndStrategies = new List<GameplayEffectStrategy>();
         [SerializeField] public List<GameplayEffectStrategy> OnPlayerEnterStrategies = new List<GameplayEffectStrategy>();
         [SerializeField] public List<GameplayEffectStrategy> OnPlayerExitStrategies = new List<GameplayEffectStrategy>();
+        [SerializeField] public List<GameplayEffectStrategy> OnEndOfTurnStrategies = new List<GameplayEffectStrategy>();
+
+
+
         [SerializeField] public List<GameplayEffectStrategy> OnCreateStrategies = new List<GameplayEffectStrategy>();
         [SerializeField] public List<GameplayEffectStrategy> OnDestroyStrategies = new List<GameplayEffectStrategy>();
-        [SerializeField] public List<GameplayEffectStrategy> OnRoundStartStrategies = new List<GameplayEffectStrategy>();
-        [SerializeField] public List<GameplayEffectStrategy> OnPlayerTurnEndStrategies = new List<GameplayEffectStrategy>();
         [SerializeField] public List<GameplayEffectStrategy> OnRoundEndStrategies = new List<GameplayEffectStrategy>();
     }
 }

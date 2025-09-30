@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Project.Attributes;
 using Project.GameplayEffects;
@@ -46,20 +47,26 @@ namespace Project.GameNode
 
         protected virtual void Start()
         {
+            GameManager.Instance.OnGameStartEvent += Initialize;
+        }
+
+        private void Initialize()
+        {
             RegisterToGrid();
             ResetNode();
         }
 
         private void ResetNode()
         {
-            if (NodeData.OnEndTurnStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnEndTurnStrategies) strategy.ResetEffect();
-            if (NodeData.OnPlayerEnterStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnPlayerEnterStrategies) strategy.ResetEffect();
-            if (NodeData.OnPlayerExitStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnPlayerExitStrategies) strategy.ResetEffect();
-            if (NodeData.OnCreateStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnCreateStrategies) strategy.ResetEffect();
-            if (NodeData.OnDestroyStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnDestroyStrategies) strategy.ResetEffect();
-            if (NodeData.OnRoundStartStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnRoundStartStrategies) strategy.ResetEffect();
-            if (NodeData.OnPlayerTurnEndStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnPlayerTurnEndStrategies) strategy.ResetEffect();
-            if (NodeData.OnRoundEndStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnRoundEndStrategies) strategy.ResetEffect();
+            // if (NodeData.OnRoundStartStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnRoundStartStrategies) strategy.ResetEffect();
+            // if (NodeData.OnTurnStartStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnTurnStartStrategies) strategy.ResetEffect();
+            // if (NodeData.OnPlayerMoveStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnPlayerMoveStrategies) strategy.ResetEffect();
+            // if (NodeData.OnPlayerEnterStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnPlayerEnterStrategies) strategy.ResetEffect();
+            // if (NodeData.OnPlayerExitStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnPlayerExitStrategies) strategy.ResetEffect();
+            // if (NodeData.OnEndOfTurnStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnEndOfTurnStrategies) strategy.ResetEffect();
+            // if (NodeData.OnCreateStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnCreateStrategies) strategy.ResetEffect();
+            // if (NodeData.OnDestroyStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnDestroyStrategies) strategy.ResetEffect();
+            // if (NodeData.OnRoundEndStrategies != null) foreach (GameplayEffectStrategy strategy in NodeData.OnRoundEndStrategies) strategy.ResetEffect();
             usedNodes = new();
         }
 
@@ -68,24 +75,6 @@ namespace Project.GameNode
             CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
             GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
             Debug.Log($"Registering {this} to Cell {CurrentCell.ToString()}");
-        }
-
-        public void OnPlayerEnter()
-        {
-            ExecuteStrategies(NodeData.OnPlayerEnterStrategies);
-        }
-
-        public void ExecuteOnEndTurn()
-        {
-            ExecuteStrategies(NodeData.OnEndTurnStrategies);
-        }
-
-        private void ExecuteStrategies(List<GameplayEffectStrategy> strategies)
-        {
-            foreach (GameplayEffectStrategy effect in strategies)
-            {
-                GameManager.Instance.EffectQueue.AddEffect(effect);
-            }
         }
 
         public void ResetStrategies(List<GameplayEffectStrategy> strategies)

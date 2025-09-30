@@ -115,6 +115,19 @@ namespace Project
             return registeredNodes.OrderByDescending(x => x.NodeData.Priority).ToList();
         }
 
+        public List<Node> GetAllRegisteredNodes()
+        {
+            List<Node> registeredNodes = new();
+            foreach (KeyValuePair<Cell, List<Node>> cells in registeredCells)
+            {
+                foreach (Node node in cells.Value)
+                {
+                    registeredNodes.Add(node);
+                }
+            }
+            return registeredNodes;
+        }
+
         public void RegisterToCell(Cell cell, Node node)
         {
             Cell registeredCell;

@@ -1,4 +1,6 @@
 using System;
+using Project.GameNode;
+using Project.GameplayEffects;
 using UnityEngine;
 
 namespace Project.GameLoop
@@ -15,31 +17,51 @@ namespace Project.GameLoop
         {
             Debug.Log($"Enter: {Name}");
 
-            GameManager.Player.InputReader.OnProceedInput += ProceedEarly;
+            GameManager.Player.InputReader.OnProceedInput += Proceed;
+
+            if (GameManager.Player.HeroNode.MovesRemaining == 0)
+            {
+                foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+                {
+                    foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerMoveEndStrategies)
+                    {
+                        GameManager.EffectQueue.AddEffect(effect);
+                    }
+                }
+                Proceed();
+            }
         }
 
         public override void Update(float time)
         {
             timeInState += Time.deltaTime;
-            if (timeInState > GameManager.TimeBetweenPlayerMoves)
+            if (timeInState > GameManager.MinTimeBetweenPlayerMoves)
             {
                 Vector2 movementInput = GameManager.Player.InputReader.MovementValue;
                 if (movementInput != Vector2.zero)
                 {
                     GameManager.Player.HeroNode.Move(movementInput);
+                    foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+                    {
+                        foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerMoveStrategies)
+                        {
+                            GameManager.EffectQueue.AddEffect(effect);
+                        }
+                    }
+                    StateMachine.SwitchState(new PlayerMoveResolveState("Player Move Resolve", StateMachine, GameManager));
                 }
             }
         }
 
         public override void OnExit()
         {
-            GameManager.Player.InputReader.OnProceedInput -= ProceedEarly;
+            GameManager.Player.InputReader.OnProceedInput -= Proceed;
         }
 
-        private void ProceedEarly()
+        private void Proceed()
         {
             GameManager.StartNewEndOfTurn();
-            StateMachine.SwitchState(new PlayerMoveResolveState("Player Move Resolve", StateMachine, GameManager));
+            StateMachine.SwitchState(new PlayerMoveEndResolveState("Player Move End Resolve", StateMachine, GameManager));
         }
     }
 }

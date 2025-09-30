@@ -27,7 +27,8 @@ namespace Project
         [Header("Game Settings")]
         [SerializeField] public bool AutoBattle = true;
         [SerializeField] public float AutoBattleSpeed = 1f;
-        [SerializeField] public float TimeBetweenPlayerMoves = 0.25f;
+        [SerializeField] public float MinTimeBetweenPlayerMoves = 0.25f;
+        [SerializeField] public float MinTimeBetweenPhases = 0.5f;
 
         public GameGrid Grid;
 
@@ -98,7 +99,7 @@ namespace Project
 
             // State Machine
             StateMachine = new StateMachine();
-            StateMachine.SetInitialState(new RoundStartState("Initial Round Start", StateMachine, this));
+            StateMachine.SetInitialState(new RoundStartState("Initial Round Start", StateMachine, this)); // Move this down to have round start effects trigger on game start
 
             // // Declare States
             // var roundStartState = new RoundStartState("RoundStart", this);

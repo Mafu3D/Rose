@@ -11,11 +11,15 @@ namespace Project.GameLoop
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
+            GameManager.EffectQueue.ResolveQueue();
         }
 
         public override void Update(float time)
         {
-            StateMachine.SwitchState(new PlayerMoveState("Player Move", StateMachine, GameManager));
+            if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
+            {
+                StateMachine.SwitchState(new PlayerMoveState("Player Move", StateMachine, GameManager));
+            }
         }
 
         public override void OnExit() { }
