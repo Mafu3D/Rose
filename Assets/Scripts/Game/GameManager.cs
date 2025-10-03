@@ -10,6 +10,7 @@ using Project.UI.MainUI;
 using Project.GameLoop;
 using UnityEngine.Events;
 using Project.Core;
+using Project.Combat;
 
 namespace Project
 {
@@ -39,6 +40,7 @@ namespace Project
         public StateMachine StateMachine;
         public EffectQueue EffectQueue;
 
+        public BattleManager BattleManager;
         public CardDrawManager CardDrawManager;
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
@@ -86,6 +88,7 @@ namespace Project
         {
             EffectQueue.Update();
             StateMachine.Update();
+            BattleManager.Update();
         }
 
         #region Start New Game
@@ -100,6 +103,7 @@ namespace Project
             ItemDeck = InitializeItemDeck(ItemDeckData);
 
             CardDrawManager = new CardDrawManager();
+            BattleManager = new BattleManager();
 
             EffectQueue = new EffectQueue();
 

@@ -20,7 +20,7 @@ namespace Project.GameplayEffects
 
         public override Status ResolveEffect()
         {
-            if (BattleManager.Instance.IsActiveBattle) return Status.Running;
+            if (GameManager.Instance.BattleManager.IsActiveBattle) return Status.Running;
             return Status.Complete;
         }
 
@@ -39,7 +39,7 @@ namespace Project.GameplayEffects
                                             enemyNodeData.Sprite,
                                             null);
 
-            BattleManager.Instance.StartNewBattle(left, right, BattleConclusion);
+            GameManager.Instance.BattleManager.StartNewBattle(left, right, BattleConclusion);
             return Status.Running;
         }
 

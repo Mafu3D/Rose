@@ -1,3 +1,4 @@
+using System;
 using Project.Combat;
 using TMPro;
 using Unity.VisualScripting;
@@ -5,8 +6,10 @@ using UnityEngine;
 
 namespace Project.UI.BattleUI
 {
-    public class BattleUI : Singleton<BattleUI>
+    public class BattleUI : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
+
         [Header("Main")]
         [SerializeField] GameObject MainContainer;
 
@@ -26,16 +29,41 @@ namespace Project.UI.BattleUI
         [SerializeField] TMP_Text ResultTitleText;
         [SerializeField] TMP_Text ResultMessageText;
 
-        Battle activeBattle => BattleManager.Instance.ActiveBattle;
+        [Header("Debug")]
+        [SerializeField] bool debugState = true;
+        [SerializeField] TMP_Text stateDebugText;
 
-        protected override void Awake()
+
+        Battle activeBattle => gameManager.BattleManager.ActiveBattle;
+
+        void Awake()
         {
-            base.Awake();
+            gameManager.OnGameStartEvent += Initialize;
             MainContainer.SetActive(false);
             BattleLog.text = "";
         }
 
-        public void OpenBattleUI()
+        void Update()
+        {
+            // TEMP: REMOVE!
+            if (debugState && gameManager.BattleManager.IsActiveBattle)
+            {
+                stateDebugText.gameObject.SetActive(true);
+                stateDebugText.text = gameManager.BattleManager.ActiveBattle.StateMachine.CurrentState.Name;
+            }
+            else
+            {
+                stateDebugText.gameObject.SetActive(false);
+            }
+        }
+
+        private void Initialize()
+        {
+            gameManager.BattleManager.OnNewBattleInitiated += OpenBattleUI;
+            gameManager.BattleManager.OnBattleConcluded += CloseBattleUI;
+        }
+
+        private void OpenBattleUI()
         {
             MainContainer.SetActive(true);
 
@@ -44,30 +72,12 @@ namespace Project.UI.BattleUI
 
             BattleLog.text = "";
 
+            activeBattle.OnPreBattleStart += ShowPreBattleUI;
+            activeBattle.OnBattleStart += ShowActiveBattleUI;
+            activeBattle.OnPostBattleStart += ShowPostBattleUI;
             activeBattle.OnBattleMessage += UpdateBattleLog;
-            activeBattle.OnPhaseChanged += UpdateBattleUI;
             // activeBattle.OnChooseRun += UpdateBattleUI;
             // activeBattle.OnChooseSteal += UpdateBattleUI;
-        }
-
-        public void UpdateBattleUI(BattlePhase phase)
-        {
-            switch (phase)
-            {
-                case BattlePhase.Prebattle:
-                    ShowPreBattleUI();
-                    break;
-
-                case BattlePhase.Start:
-                // case BattlePhase.FirstTurn:
-                // case BattlePhase.SecondTurn:
-                    ShowActiveBattleUI();
-                    break;
-
-                case BattlePhase.PostBattle:
-                    ShowPostBattleUI();
-                    break;
-            }
         }
 
         private void ShowPostBattleUI()
@@ -76,25 +86,7 @@ namespace Project.UI.BattleUI
             ActiveBattleContainer.SetActive(false);
             PostbattleContainer.SetActive(true);
 
-            switch (BattleManager.Instance.ActiveBattle.GetLatestBattleReport().Resolution)
-            {
-                case Combat.Resolution.Victory:
-                    ResultTitleText.text = "Victory";
-                    break;
-                case Combat.Resolution.Defeat:
-                    ResultTitleText.text = "Defeat";
-                    break;
-                case Combat.Resolution.RanAway:
-                    ResultTitleText.text = "Ran Away";
-                    break;
-                case Combat.Resolution.Stole:
-                    ResultTitleText.text = "You Stole!";
-                    break;
-                default:
-                    ResultTitleText.text = "No Resolution";
-                    break;
-            }
-            ResultMessageText.text = BattleManager.Instance.ActiveBattle.GetLatestBattleReport().Message;
+            ResultTitleText.text = "Fix Me";
         }
 
         private void ShowActiveBattleUI()
@@ -111,11 +103,12 @@ namespace Project.UI.BattleUI
             PostbattleContainer.SetActive(false);
         }
 
-        public void CloseBattleUI()
+        private void CloseBattleUI()
         {
-
+            activeBattle.OnPreBattleStart -= ShowPreBattleUI;
+            activeBattle.OnBattleStart -= ShowActiveBattleUI;
+            activeBattle.OnPostBattleStart -= ShowPostBattleUI;
             activeBattle.OnBattleMessage -= UpdateBattleLog;
-            activeBattle.OnPhaseChanged -= UpdateBattleUI;
             // activeBattle.OnChooseRun -= UpdateBattleUI;
             // activeBattle.OnChooseSteal -= UpdateBattleUI;
 

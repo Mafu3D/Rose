@@ -135,53 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20083334452a5aa479b4801b87c432e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &80292348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 80292350}
-  - component: {fileID: 80292349}
-  m_Layer: 0
-  m_Name: BattleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &80292349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 80292348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0038d0b954cff3a4aa2aaf3debfe97ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <TimeBetweenCombatTurns>k__BackingField: 0.25
-  <TimeBeforeCombatStarts>k__BackingField: 1
-  <TimeAfterCombatEnds>k__BackingField: 1
---- !u!4 &80292350
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 80292348}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &380159586 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
@@ -13367,7 +13320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 943401407}
   UICanvas: {fileID: 0}
-  EncounterDeckData: {fileID: 11400000, guid: a52d215cec2418e4c93e99025946dab8, type: 2}
+  EncounterDeckData: {fileID: 11400000, guid: 35af01d32e3efed47900555597edeae8, type: 2}
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 450250885d333784fb28186849824ae1, type: 2}
   AutoBattle: 1
@@ -14186,38 +14139,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1979608708886616486, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2077167225359421578, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_Name
       value: BattleUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338907420731826397, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_text
-      value: Result!
-      objectReference: {fileID: 0}
-    - target: {fileID: 5755912358590506533, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6502347113423046407, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7316430530513619319, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_text
-      value: $Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7842309214057913148, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_text
-      value: $Hero
-      objectReference: {fileID: 0}
-    - target: {fileID: 8551844549263484863, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_text
-      value: Sample message!
-      objectReference: {fileID: 0}
+    - target: {fileID: 7698953220067189152, guid: cde994b910928b54aac3967a8be70726, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1639557476}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14236,7 +14169,6 @@ SceneRoots:
   - {fileID: 7776690375369417289}
   - {fileID: 3028699358384905879}
   - {fileID: 1639557477}
-  - {fileID: 80292350}
   - {fileID: 1430360740}
   - {fileID: 943401406}
   - {fileID: 6229871062601988883}

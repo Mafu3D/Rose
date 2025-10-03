@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Project.Combat.CombatActions;
 using UnityEngine;
 
 namespace Project.Items
@@ -29,35 +30,28 @@ namespace Project.Items
 
         [Header("Strategies")]
 
-        [SerializeField] public List<CombatEffectStrategy> OnCombatStartStrategies = new();
-        [SerializeField] public List<CombatEffectStrategy> OnCombatEndStrategies = new();
-        [SerializeField] public List<CombatEffectStrategy> OnTurnStartStrategies = new();
-        [SerializeField] public List<CombatEffectStrategy> OnTurnEndStrategies = new();
-        [SerializeField] public List<CombatEffectStrategy> OnHitStrategies = new();
-        [SerializeField] public List<CombatEffectStrategy> OnReceiveHitStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnHitStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnReceiveHitStrategies = new();
 
-        // On Combat Start Strategies
+        [SerializeField] public List<CombatActionBaseData> OnCombatStartStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnCombatEndStrategies = new();
 
-        // On Combat End Strategies
+        [SerializeField] public List<CombatActionBaseData> OnRoundStartStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnRoundEndStrategies = new();
 
-        // On Hit Strategies
+        [SerializeField] public List<CombatActionBaseData> OnTurnStartStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnTurnEndStrategies = new();
 
-        // On Receive Damage Strategies
+        [SerializeField] public List<CombatActionBaseData> OnEnemyTurnStartStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnEnemyTurnEndStrategies = new();
 
-        // On SelfBloodied Strategies
 
-        // On SelfExposed Strategies
+        [SerializeField] public List<CombatActionBaseData> OnSelfBloodiedStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnEnemyBloodiedStrategies = new();
 
-        // On OpponentBloodied Strategies
+        [SerializeField] public List<CombatActionBaseData> OnSelfExposedStrategies = new();
+        [SerializeField] public List<CombatActionBaseData> OnEnemyExposedStrategies = new();
 
-        // On OpponentExposed Strategies
-
-        // On Turn Start Strategies
-
-        // On Turn End Strategies
-
-        // On SelfDeath Strategies
-
-        // On OpponentDeath Strategies
+        // gameplay effects for defeat opponent, run, or steal?
     }
 }

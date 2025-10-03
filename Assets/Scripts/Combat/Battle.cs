@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameNode.Hero;
 using Project.Items;
-using Project.Combat.BattleStateMachine;
 using UnityEngine;
+using Project.GameLoop;
+using Project.Combat.CombatStates;
+using Project.Combat.CombatActions;
 
 namespace Project.Combat
 {
@@ -13,7 +15,6 @@ namespace Project.Combat
         public bool BattleConcluded;
         public Resolution Resolution;
         public string Message;
-
         public BattleReport(bool battleConcluded, Resolution resolution, string message)
         {
             this.BattleConcluded = battleConcluded;
@@ -31,19 +32,6 @@ namespace Project.Combat
         Stole
     }
 
-    public enum BattlePhase
-    {
-        NotStarted,
-        Prebattle,
-        Run,
-        Steal,
-        Start,
-        FirstTurn,
-        SecondTurn,
-        PostBattle,
-        Conclude
-    }
-
     public enum PrebattleActions
     {
         Fight,
@@ -58,26 +46,30 @@ namespace Project.Combat
         public int Round;
         public int Turn;
         Combatant[] combatantOrder = new Combatant[2];
-        BattlePhase phase = BattlePhase.NotStarted;
-
-        BattleReport latestBattleReport = new BattleReport();
+        Combatant activeCombatanat;
 
         Action<BattleReport, Combatant, Combatant> finishedCallback;
-        public BattleReport GetLatestBattleReport() => latestBattleReport;
-        public BattlePhase GetPhase() => phase;
 
         public Choice<PrebattleActions> PreBattleChoice;
 
         public event Action<string> OnBattleMessage;
-        public event Action<BattlePhase> OnPhaseChanged;
+
+        public event Action OnPreBattleStart;
+        public event Action OnBattleStart;
+        public event Action OnPostBattleStart;
         public event Action OnChooseFight;
         public event Action OnChooseRun;
         public event Action OnChooseSteal;
+        public event Action OnAttackStart;
+        public event Action OnAttackEnd;
+        public event Action<BattleReport> OnBattleHasBeenDecided;
+        public event Action OnNextActionEvent;
 
         private bool ranAway;
         private bool avoidedRunDamage;
 
-        public StateMachine StateMachine;
+        public StateMachine StateMachine {get; private set; }
+        public CombatQueue CombatQueue {get; private set; }
 
 
         public Battle(Combatant hero, Combatant enemy, Action<BattleReport, Combatant, Combatant> finished)
@@ -88,80 +80,49 @@ namespace Project.Combat
 
             // State Machine
             StateMachine = new StateMachine();
-
-
-            // Declare States
-            // var preBattleState = new PreBattleState(this);
-            // var startBattleState = new StartBattleState(this);
-
-            // // Define Transitions
-            // At(preBattleState, startBattleState, new FuncPredicate(() => true));
+            CombatQueue = new CombatQueue();
         }
 
-        // void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
-        // void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
+        #region Initiate
 
         public void InitiateBattle()
         {
-            StateMachine.SwitchState(new PreBattle(StateMachine, this));
-            return;
-            phase = BattlePhase.Prebattle;
-            OnPhaseChanged?.Invoke(phase);
+            StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
+            OnPreBattleStart?.Invoke();
         }
 
-        private void ResolvePrebattleChoice(PrebattleActions actionChoice)
+        #endregion
+
+        public void Update()
         {
-            switch (actionChoice)
-            {
-                case PrebattleActions.Fight:
-                    ChooseFight();
-                    break;
-                case PrebattleActions.Steal:
-                    ChooseSteal();
-                    break;
-                case PrebattleActions.Run:
-                    ChooseRun();
-                    break;
-            }
-            PreBattleChoice = null;
+            CombatQueue.Update();
+            StateMachine.Update();
         }
 
-        private void ChooseFight()
+        #region Prebattle
+
+        public void ChooseFight()
         {
-            Debug.Log("I choose to fight!");
-            StartBattle();
+            // StartBattle();
         }
 
-        private void ChooseSteal()
+        public void ChooseSteal()
         {
-            Debug.Log("I choose to steal!");
-            phase = BattlePhase.Steal;
-            OnPhaseChanged?.Invoke(phase);
             OnChooseSteal?.Invoke();
         }
 
-        private void ChooseRun()
+        public void ChooseRun()
         {
-            Debug.Log("I choose to run!!!");
             RunAway();
         }
+
+        #endregion
+
+        #region Run
 
         private void RunAway()
         {
             ranAway = true;
-            phase = BattlePhase.Run;
-            if (CheckIfHeroHasHigherSpeed())
-            {
-                avoidedRunDamage = true;
-                LogBattleAction("avoided damage"); // message isn't actually used
-            }
-            else
-            {
-                avoidedRunDamage = false;
-                DoAttack(Enemy, Hero);
-            }
-            OnChooseRun?.Invoke();
-            OnPhaseChanged?.Invoke(phase);
         }
 
         private bool CheckIfHeroHasHigherSpeed()
@@ -175,105 +136,21 @@ namespace Project.Combat
             return false;
         }
 
-        public void Proceed()
+        #endregion
+
+        #region Steal
+
+        #endregion
+
+        #region Battle Loop
+
+        public void NextAction()
         {
-            ProcessBattle();
-            Debug.Log(phase);
+            OnNextActionEvent?.Invoke();
+            CombatQueue.TriggerNextAction();
         }
 
-        private BattlePhase ProcessBattle()
-        {
-            switch (phase)
-            {
-                case BattlePhase.Prebattle:
-                    return phase;
-
-                case BattlePhase.Start:
-                    phase = BattlePhase.FirstTurn;
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.FirstTurn:
-                    IncrementTurn();
-                    DoAttackForTurn(0);
-
-                    if (latestBattleReport.BattleConcluded)
-                    {
-                        phase = BattlePhase.PostBattle;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    else
-                    {
-                        phase = BattlePhase.SecondTurn;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    return phase;
-
-                case BattlePhase.SecondTurn:
-                    IncrementTurn();
-                    DoAttackForTurn(1);
-
-                    if (latestBattleReport.BattleConcluded)
-                    {
-                        phase = BattlePhase.PostBattle;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    else
-                    {
-                        NewRound();
-                        phase = BattlePhase.FirstTurn;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    return phase;
-
-                case BattlePhase.Run:
-                    Debug.Log("You ran away!");
-                    phase = BattlePhase.PostBattle;
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.Steal:
-                    Debug.Log("You got some gold!");
-                    phase = BattlePhase.PostBattle;
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.PostBattle:
-                    phase = BattlePhase.Conclude;
-                    ConcludeBattle();
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.Conclude:
-
-                    return phase;
-            }
-            return phase;
-        }
-
-        private void StartBattle()
-        {
-            phase = BattlePhase.Start;
-            OnPhaseChanged?.Invoke(phase);
-            Round = 0;
-            Turn = 0;
-            OnChooseFight?.Invoke();
-            OnPhaseChanged?.Invoke(phase);
-            DetermineCombatantOrder();
-
-
-
-            NewRound();
-        }
-
-        private void NewRound()
-        {
-            Round += 1;
-            ResetTurns();
-            DetermineCombatantOrder();
-        }
-
-        private void DetermineCombatantOrder()
+        public void DetermineCombatantOrder()
         {
             combatantOrder = new Combatant[2];
 
@@ -289,28 +166,119 @@ namespace Project.Combat
             }
         }
 
-        private void IncrementTurn() => Turn += 1;
-        private void ResetTurns() => Turn = 0;
-
-        private void DoAttackForTurn(int turn)
+        private Combatant GetTarget(Combatant combatant)
         {
-            if (turn == 0) // First turn
+            for (int i = 0; i < combatantOrder.Length; i++)
             {
-                DoAttack(combatantOrder[0], combatantOrder[1]);
+                if (i == 0)
+                {
+                    if (combatantOrder[i] == combatant) return combatantOrder[1];
+                }
+                else
+                {
+                    if (combatantOrder[i] == combatant) return combatantOrder[0];
+                }
             }
-            else // Second turn
-            {
-                DoAttack(combatantOrder[1], combatantOrder[0]);
-            }
+            return null;
         }
 
-        private void DoAttack(Combatant attacker, Combatant defender)
+        public void StartBattle()
         {
+            OnChooseFight?.Invoke();
+
+            Round = 0;
+            Turn = 0;
+
+            DetermineCombatantOrder();
+            foreach (Combatant combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnCombatStartStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+            CombatQueue.ResolveQueue();
+        }
+
+        public void StartNewRound()
+        {
+            Round += 1;
+            Turn = 0;
+
+            DetermineCombatantOrder();
+            foreach (Combatant combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+            CombatQueue.ResolveQueue();
+        }
+
+        public void StartNewTurn()
+        {
+            Turn += 1;
+            activeCombatanat = combatantOrder[Turn - 1];
+            if (activeCombatanat.Inventory != null)
+            {
+                List<Item> items = activeCombatanat.Inventory.GetHeldItems();
+                foreach (Item item in items)
+                {
+                    foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
+                    {
+                        actionData.QueueAction(CombatQueue, activeCombatanat, GetTarget(activeCombatanat));
+                    }
+                }
+            }
+            CombatQueue.ResolveQueue();
+        }
+
+        public void EndRound()
+        {
+            DetermineCombatantOrder();
+            foreach (Combatant combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnRoundEndStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+            CombatQueue.ResolveQueue();
+        }
+
+        public void DoAttack()
+        {
+            Combatant attacker = activeCombatanat;
+            Combatant defender = GetTarget(activeCombatanat);
+            OnAttackStart?.Invoke();
             int attackValue;
             attacker.Attack(out attackValue);
             HitReport hitReport = new HitReport(attackValue);
             defender.ReceiveAttack(hitReport);
             LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
+            OnAttackEnd?.Invoke();
         }
 
         private void LogBattleAction(string message)
@@ -319,7 +287,21 @@ namespace Project.Combat
             CreateBattleReport();
         }
 
-        private void CreateBattleReport()
+        #endregion
+
+        public bool CheckForResolution(out BattleReport battleReport)
+        {
+            battleReport = CreateBattleReport();
+            if (battleReport.BattleConcluded)
+            {
+                OnBattleHasBeenDecided?.Invoke(battleReport);
+                finishedCallback(battleReport, Hero, Enemy);
+                return true;
+            }
+            return false;
+        }
+
+        private BattleReport CreateBattleReport()
         {
             bool battleConcluded;
             Resolution resolution;
@@ -362,46 +344,7 @@ namespace Project.Combat
                 }
             }
 
-            latestBattleReport = new BattleReport(battleConcluded, resolution, message);
-        }
-
-        private void ConcludeBattle()
-        {
-            finishedCallback(latestBattleReport, Hero, Enemy);
-        }
-
-        private void TriggerEffects()
-        {
-            int i = 0;
-            foreach (Combatant combatant in combatantOrder)
-            {
-                Combatant user;
-                Combatant target;
-                if (i == 0)
-                {
-                    user = combatantOrder[0];
-                    target = combatantOrder[1];
-                }
-                else
-                {
-                    user = combatantOrder[1];
-                    target = combatantOrder[0];
-                }
-                if (combatant.Inventory != null)
-                {
-                    List<Item> items = combatant.Inventory.GetHeldItems();
-                    if (items.Count > 0)
-                    {
-                        foreach (Item item in items)
-                        {
-                            foreach (CombatEffectStrategy effect in item.ItemData.OnCombatStartStrategies)
-                            {
-                                effect.StartEffect(user, target);
-                            }
-                        }
-                    }
-                }
-            }
+            return new BattleReport(battleConcluded, resolution, message);
         }
     }
 }

@@ -29,10 +29,18 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  OnHitStrategies: []
+  OnReceiveHitStrategies: []
   OnCombatStartStrategies:
   - {fileID: 11400000, guid: 8ba29de3837441c4d8ecf658ed09643b, type: 2}
   OnCombatEndStrategies: []
+  OnRoundStartStrategies: []
+  OnRoundEndStrategies: []
   OnTurnStartStrategies: []
   OnTurnEndStrategies: []
-  OnHitStrategies: []
-  OnReceiveHitStrategies: []
+  OnEnemyTurnStartStrategies: []
+  OnEnemyTurnEndStrategies: []
+  OnSelfBloodiedStrategies: []
+  OnEnemyBloodiedStrategies: []
+  OnSelfExposedStrategies: []
+  OnEnemyExposedStrategies: []

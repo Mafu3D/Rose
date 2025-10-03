@@ -1,0 +1,41 @@
+using System;
+using UnityEngine;
+using Project.GameLoop;
+
+namespace Project.Combat.CombatStates
+{
+    public class SecondTurnState : State
+    {
+        public SecondTurnState(string name, StateMachine stateMachine, GameManager gameManager) : base(name, stateMachine, gameManager) { }
+
+        bool attackFired = false;
+
+        public override void OnEnter()
+        {
+            GameManager.BattleManager.ActiveBattle.StartNewTurn();
+            GameManager.BattleManager.ActiveBattle.OnAttackEnd += MoveToNextState;
+            GameManager.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+        }
+
+        public override void OnExit()
+        {
+            GameManager.BattleManager.ActiveBattle.OnAttackEnd -= MoveToNextState;
+            GameManager.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+        }
+
+        public override void Update(float deltaTime)
+        {
+            if (!GameManager.BattleManager.ActiveBattle.CombatQueue.QueueNeedsToBeResolved && !attackFired)
+            {
+                GameManager.BattleManager.ActiveBattle.DoAttack();
+                attackFired = true;
+            }
+        }
+
+        private void MoveToNextState()
+        {
+            StateMachine.SwitchState(new RoundEndState("Round End", StateMachine, GameManager));
+        }
+    }
+
+}

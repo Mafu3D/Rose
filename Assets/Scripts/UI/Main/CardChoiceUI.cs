@@ -27,7 +27,7 @@ namespace Project.UI.MainUI
             gameManager.CardDrawManager.OnConcludeCardDrawEvent += DestroyDisplayedCards;
         }
 
-        public void DisplayCards()
+        private void DisplayCards()
         {
             if (!gameManager.CardDrawManager.CardChoiceIsActive) { return; }
 
@@ -58,7 +58,7 @@ namespace Project.UI.MainUI
             }
         }
 
-        public void DestroyDisplayedCards()
+        private void DestroyDisplayedCards()
         {
             foreach (GameObject displayedCard in displayedCards)
             {
