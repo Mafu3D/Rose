@@ -13,6 +13,7 @@ namespace Project.Sequences
     {
         public string Name { get; private set; }
         public GameManager GameManager { get; private set; }
+
         public Node(string name, GameManager gameManager)
         {
             this.Name = name;
@@ -23,7 +24,7 @@ namespace Project.Sequences
         public abstract void Exit();
     }
 
-    public class Sequence
+    public class Sequencer
     {
         private List<Node> nodes = new();
         private int currentIndex = 0;

@@ -10,7 +10,7 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.BattleManager.ActiveBattle.StartBattle();
+            // GameManager.BattleManager.ActiveBattle.StartBattle();
             GameManager.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
             GameManager.BattleManager.ActiveBattle.OnNextActionEvent += Next;
         }
@@ -25,7 +25,7 @@ namespace Project.Combat.CombatStates
         {
             if (!GameManager.BattleManager.ActiveBattle.CombatQueue.QueueNeedsToBeResolved)
             {
-                StateMachine.SwitchState(new RoundStartState("Round Start", StateMachine, GameManager));
+                StateMachine.SwitchState(new BattleState("Battle State", StateMachine, GameManager));
             }
         }
 

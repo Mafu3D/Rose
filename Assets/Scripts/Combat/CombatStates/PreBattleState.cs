@@ -52,7 +52,7 @@ namespace Project.Combat.CombatStates
         private void ChooseFight()
         {
             Debug.Log("I choose to fight!");
-            StateMachine.SwitchState(new StartBattleState("Battle Start", StateMachine, GameManager));
+            StateMachine.SwitchState(new BattleState("Battle State", StateMachine, GameManager));
         }
     }
 

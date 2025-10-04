@@ -7,7 +7,7 @@ public class RoundStartNode : Node
 
     public override void Enter()
     {
-        GameManager.BattleManager.ActiveBattle.StartNewRound();
+        // GameManager.BattleManager.ActiveBattle.StartNewRound();
     }
 
     public override Status Execute()
@@ -26,7 +26,7 @@ public class TurnStartNode : Node
 
     public override void Enter()
     {
-        GameManager.BattleManager.ActiveBattle.StartNewTurn();
+        // GameManager.BattleManager.ActiveBattle.StartNewTurn();
     }
 
     public override Status Execute() {
@@ -44,7 +44,7 @@ public class TurnEndNode : Node
 
     public override void Enter()
     {
-        GameManager.BattleManager.ActiveBattle.EndTurn();
+        // GameManager.BattleManager.ActiveBattle.EndTurn();
     }
 
     public override Status Execute() {
@@ -62,7 +62,7 @@ public class RoundEndNode : Node
 
     public override void Enter()
     {
-        GameManager.BattleManager.ActiveBattle.EndRound();
+        // GameManager.BattleManager.ActiveBattle.EndRound();
     }
 
     public override Status Execute() {
@@ -80,7 +80,7 @@ public class AttackNode : Node
 
     public override void Enter()
     {
-        GameManager.BattleManager.ActiveBattle.DoAttack();
+        // GameManager.BattleManager.ActiveBattle.DoAttack();
     }
 
     public override Status Execute() {

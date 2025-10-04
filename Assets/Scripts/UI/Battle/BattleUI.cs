@@ -32,6 +32,7 @@ namespace Project.UI.BattleUI
         [Header("Debug")]
         [SerializeField] bool debugState = true;
         [SerializeField] TMP_Text stateDebugText;
+        [SerializeField] TMP_Text phaseDebugText;
 
 
         Battle activeBattle => gameManager.BattleManager.ActiveBattle;
@@ -50,6 +51,7 @@ namespace Project.UI.BattleUI
             {
                 stateDebugText.gameObject.SetActive(true);
                 stateDebugText.text = gameManager.BattleManager.ActiveBattle.StateMachine.CurrentState.Name;
+                phaseDebugText.text = gameManager.BattleManager.ActiveBattle.BattleState.ToString();
             }
             else
             {

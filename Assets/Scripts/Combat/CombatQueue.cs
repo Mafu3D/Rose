@@ -13,8 +13,6 @@ namespace Project.Combat
         public event Action OnResolveQueueStart;
         public event Action OnResolveQueueEnd;
         public bool QueueNeedsToBeResolved => queue.Count > 0;
-        public bool ResolvingQueue = false;
-        private bool nextActionTriggered = false;
 
         public CombatAction GetCurrentAction()
         {
@@ -30,70 +28,30 @@ namespace Project.Combat
             currentQueueIndex = 0;
         }
 
-        private Status IterateThroughQueue()
-        {
-            while (currentQueueIndex < queue.Count)
-            {
-                // if (!currentEffectHasStarted)
-                // {
-                //     queue[currentQueueIndex].StartEffect();
-                //     currentEffectHasStarted = true;
-                // }
-                // Status status = queue[currentQueueIndex].ResolveEffect();
-                // if (status != Status.Complete)
-                // {
-                //     return status;
-                // }
-                // queue[currentQueueIndex].ResetEffect();
-                // currentQueueIndex++;
-                // currentEffectHasStarted = false;
-
-                queue[currentQueueIndex].Execute();
-                currentQueueIndex++;
-                return Status.Running;
-            }
-            return Status.Complete;
-        }
-
-        private Status ExecuteNextInQueue()
+        public void ExecuteNextInQueue()
         {
             queue[currentQueueIndex].Execute();
             currentQueueIndex++;
-            if (currentQueueIndex < queue.Count)
+            if (currentQueueIndex >= queue.Count)
             {
-                return Status.Running;
+                ClearQueue();
             }
-            return Status.Complete;
         }
 
-        public void ResolveQueue()
+        public bool TryExecuteNextInQueue()
         {
             if (QueueNeedsToBeResolved)
             {
-                ResolvingQueue = true;
-                OnResolveQueueStart?.Invoke();
-            }
-        }
-
-        public void TriggerNextAction()
-        {
-            nextActionTriggered = true;
-        }
-
-        public void Update()
-        {
-            if (ResolvingQueue && nextActionTriggered)
-            {
-                Debug.Log("resolving queue");
-                nextActionTriggered = false;
-                Status status = ExecuteNextInQueue();
-                if (status == Status.Complete)
+                queue[currentQueueIndex].Execute();
+                currentQueueIndex++;
+                if (currentQueueIndex > queue.Count)
                 {
-                    OnResolveQueueEnd?.Invoke();
                     ClearQueue();
-                    ResolvingQueue = false;
+
                 }
+                return true;
             }
+            return false;
         }
     }
 }

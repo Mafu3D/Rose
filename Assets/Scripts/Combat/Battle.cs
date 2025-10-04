@@ -32,6 +32,21 @@ namespace Project.Combat
         Victory
     }
 
+    public enum BattleState
+    {
+        NotStarted,
+        PreBattle,
+        BattleStart,
+        RoundStart,
+        TurnStart,
+        Attack,
+        OnHit,
+        TurnEnd,
+        RoundEnd,
+        BattleEnd,
+        PostBattle
+    }
+
     public class Battle
     {
         public readonly Character Hero;
@@ -40,6 +55,7 @@ namespace Project.Combat
         public int Turn;
         Character[] combatantOrder = new Character[2];
         Character activeCombatant;
+        public BattleState BattleState = BattleState.NotStarted;
 
         Action<BattleReport, Character, Character> finishedCallback;
 
@@ -55,10 +71,11 @@ namespace Project.Combat
         private bool ranAway;
         private bool avoidedRunDamage;
         private bool battleHasStarted;
+        private bool currentStateHasBeenEntered;
 
         public StateMachine StateMachine { get; private set; }
         public CombatQueue CombatQueue { get; private set; }
-        public Sequence CombatSequence { get; private set; }
+        public Sequencer CombatSequence { get; private set; }
 
 
         public Battle(Character hero, Character enemy, Action<BattleReport, Character, Character> finished)
@@ -90,22 +107,21 @@ namespace Project.Combat
             // CombatSequence.AddNode(secondTurnEndNode);
             // CombatSequence.AddNode(roundEndNode);
 
-        }
 
-        #region Initiate
-
-        public void InitiateBattle()
-        {
             StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
             OnPreBattleStart?.Invoke();
         }
+
+        #region Initiate
 
         #endregion
 
         public void Update()
         {
-            CombatQueue.Update();
-            // StateMachine.Update();
+            StateMachine.Update();
+
+
+            // CombatQueue.Update();
             // if (battleHasStarted)
             // {
             //     CombatSequence.Update();
@@ -114,12 +130,6 @@ namespace Project.Combat
         }
 
         #region Run
-
-        private void RunAway()
-        {
-            ranAway = true;
-        }
-
         private bool CheckIfHeroHasHigherSpeed()
         {
             int heroSpeed = Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Speed);
@@ -173,23 +183,137 @@ namespace Project.Combat
 
         public void NextAction()
         {
-            // Trigger the next action in the queue
-            CombatQueue.TriggerNextAction();
-            OnNextActionEvent?.Invoke();
 
-            // Check for a resolution to the battle
-            BattleReport battleReport;
-            bool battleHasBeenDecided = CheckForResolution(out battleReport);
-            if (battleHasBeenDecided)
+            if (CombatQueue.QueueNeedsToBeResolved)
             {
-                finishedCallback(battleReport, Hero, Enemy);
-                GameManager.Instance.BattleManager.EndActiveBattle();
+                CombatQueue.ExecuteNextInQueue();
+            }
+            else
+            {
+                ExitState();
+                EnterState();
+            }
+
+            OnNextActionEvent?.Invoke();
+            if (CheckForResolution())
+            {
+                // BattleReport battleReport = CreateBattleReport();
+                // finishedCallback(battleReport, Hero, Enemy);
+                // GameManager.Instance.BattleManager.EndActiveBattle();
+                BattleState = BattleState.BattleEnd;
             }
         }
 
+        // TODO: Move Enter and Exit State into a state machine or sequencer
+        private void EnterState()
+        {
+            switch (BattleState)
+            {
+                case BattleState.NotStarted:
+                    break;
 
+                case BattleState.PreBattle:
+                    break;
 
-        public void StartBattle()
+                case BattleState.BattleStart:
+                    StartBattle();
+                    break;
+
+                case BattleState.RoundStart:
+                    StartNewRound();
+                    break;
+
+                case BattleState.TurnStart:
+                    StartNewTurn();
+                    break;
+
+                case BattleState.Attack:
+                    Debug.Log("Do attack here");
+                    break;
+
+                case BattleState.OnHit:
+                    Debug.Log("Do on hit here");
+                    break;
+
+                case BattleState.TurnEnd:
+                    EndTurn();
+                    break;
+
+                case BattleState.RoundEnd:
+                    EndRound();
+                    break;
+
+                case BattleState.BattleEnd:
+                    Debug.Log("Do battle end here");
+                    break;
+
+                case BattleState.PostBattle:
+                    CloseBattle();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void ExitState()
+        {
+            switch (BattleState)
+            {
+                case BattleState.NotStarted:
+                    break;
+
+                case BattleState.PreBattle:
+                    break;
+
+                case BattleState.BattleStart:
+                    BattleState = BattleState.RoundStart;
+                    break;
+
+                case BattleState.RoundStart:
+                    BattleState = BattleState.TurnStart;
+                    break;
+
+                case BattleState.TurnStart:
+                    BattleState = BattleState.Attack;
+                    break;
+
+                case BattleState.Attack:
+                    BattleState = BattleState.OnHit;
+                    break;
+
+                case BattleState.OnHit:
+                    BattleState = BattleState.TurnEnd;
+                    break;
+
+                case BattleState.TurnEnd:
+                    if (Turn == 1)
+                    {
+                        BattleState = BattleState.TurnStart;
+                    }
+                    else
+                    {
+                        BattleState = BattleState.RoundEnd;
+                    }
+                    break;
+
+                case BattleState.RoundEnd:
+                    BattleState = BattleState.RoundStart;
+                    break;
+
+                case BattleState.BattleEnd:
+                    BattleState = BattleState.PostBattle;
+                    break;
+
+                case BattleState.PostBattle:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void StartBattle()
         {
             Round = 0;
             Turn = 0;
@@ -209,12 +333,12 @@ namespace Project.Combat
                     }
                 }
             }
-            CombatQueue.ResolveQueue();
+            // CombatQueue.ResolveQueue();
 
             battleHasStarted = true;
         }
 
-        public void StartNewRound()
+        private void StartNewRound()
         {
             Round += 1;
             Turn = 0;
@@ -234,12 +358,13 @@ namespace Project.Combat
                     }
                 }
             }
-            CombatQueue.ResolveQueue();
+            // CombatQueue.ResolveQueue();
         }
 
-        public void StartNewTurn()
+        private void StartNewTurn()
         {
             Turn += 1;
+            Debug.Log($"Turn : {Turn}");
             activeCombatant = combatantOrder[Turn - 1];
             if (activeCombatant.Inventory != null)
             {
@@ -252,10 +377,10 @@ namespace Project.Combat
                     }
                 }
             }
-            CombatQueue.ResolveQueue();
+            // CombatQueue.ResolveQueue();
         }
 
-        public void EndTurn()
+        private void EndTurn()
         {
             activeCombatant = combatantOrder[Turn - 1];
             if (activeCombatant.Inventory != null)
@@ -269,10 +394,10 @@ namespace Project.Combat
                     }
                 }
             }
-            CombatQueue.ResolveQueue();
+            // CombatQueue.ResolveQueue();
         }
 
-        public void EndRound()
+        private void EndRound()
         {
             // DetermineCombatantOrder();
             foreach (Character combatant in combatantOrder)
@@ -289,7 +414,14 @@ namespace Project.Combat
                     }
                 }
             }
-            CombatQueue.ResolveQueue();
+            // CombatQueue.ResolveQueue();
+        }
+
+        private void CloseBattle()
+        {
+            BattleReport battleReport = CreateBattleReport();
+            finishedCallback(battleReport, Hero, Enemy);
+            GameManager.Instance.BattleManager.EndActiveBattle();
         }
 
         public void DoAttack()
@@ -313,12 +445,14 @@ namespace Project.Combat
 
         #endregion
 
-        public bool CheckForResolution(out BattleReport battleReport)
+        private bool CheckForResolution()
         {
-            battleReport = CreateBattleReport();
-            if (battleReport.BattleConcluded)
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
-
+                return true;
+            }
+            else if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
                 return true;
             }
             return false;
