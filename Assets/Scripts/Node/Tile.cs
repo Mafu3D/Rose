@@ -79,12 +79,21 @@ namespace Project.GameTiles
             usedCharacters = new();
         }
 
-        public void RegisterCharacter(CharacterData characterData)
+        public void RegisterCharacterFromData(CharacterData characterData)
         {
             if (Character != null)
             {
                 Inventory inventory = GetComponent<Inventory>();
                 Character = new Character(characterData, inventory);
+            }
+        }
+
+        public void RegisterCharacter(Character character)
+        {
+            if (Character != null)
+            {
+                Inventory inventory = GetComponent<Inventory>();
+                Character = character;
             }
         }
 

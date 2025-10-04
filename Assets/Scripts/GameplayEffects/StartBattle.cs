@@ -11,7 +11,7 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewStartBattle", menuName = "Effects/Start Battle", order = 1)]
     public class StartBattle : GameplayEffectStrategy
     {
-        [SerializeField] TileData enemyNodeData;
+        [SerializeField] CharacterData enemyCharacterData;
         [SerializeField] GameObject enemyNodePrefab;
 
         public override void ResetEffect()
@@ -26,20 +26,11 @@ namespace Project.GameplayEffects
 
         public override Status StartEffect()
         {
-            // Character left = new Character(GameManager.Instance.Hero.Attributes,
-            //                                GameManager.Instance.Hero.NodeData.DisplayName,
-            //                                GameManager.Instance.Hero.NodeData.Description,
-            //                                GameManager.Instance.Hero.NodeData.Sprite,
-            //                                GameManager.Instance.Hero.gameObject.GetComponent<Inventory>());
+            Character left = GameManager.Instance.Hero.Character;
 
-            // CharacterAttributes enemyAttributes = new CharacterAttributes(enemyNodeData.AttributesData);
-            // Character right = new Character(enemyAttributes,
-            //                                 enemyNodeData.DisplayName,
-            //                                 enemyNodeData.Description,
-            //                                 enemyNodeData.Sprite,
-            //                                 null);
+            Character right = new Character(enemyCharacterData, null);
 
-            // GameManager.Instance.BattleManager.StartNewBattle(left, right, BattleConclusion);
+            GameManager.Instance.BattleManager.StartNewBattle(left, right, BattleConclusion);
             return Status.Running;
         }
 
@@ -51,8 +42,9 @@ namespace Project.GameplayEffects
                 case Combat.Resolution.RanAway:
                 case Combat.Resolution.Stole:
                     GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
-                    Tile node = gameObject.GetComponent<Tile>();
-                    node.RegisterToGrid();
+                    Tile tile = gameObject.GetComponent<Tile>();
+                    tile.RegisterToGrid();
+                    tile.RegisterCharacter(right);
                     break;
             }
         }
