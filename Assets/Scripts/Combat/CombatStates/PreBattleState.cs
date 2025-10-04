@@ -40,21 +40,18 @@ namespace Project.Combat.CombatStates
         private void ChooseRun()
         {
             Debug.Log("I choose to run!");
-            GameManager.BattleManager.ActiveBattle.ChooseFight();
             StateMachine.SwitchState(new AttemptToRunState("Attempt to Run", StateMachine, GameManager));
         }
 
         private void ChooseSteal()
         {
             Debug.Log("I choose to steal!");
-            GameManager.BattleManager.ActiveBattle.ChooseFight();
             StateMachine.SwitchState(new AttemptToStealState("Attempt To Steal", StateMachine, GameManager));
         }
 
         private void ChooseFight()
         {
             Debug.Log("I choose to fight!");
-            GameManager.BattleManager.ActiveBattle.ChooseFight();
             StateMachine.SwitchState(new StartBattleState("Battle Start", StateMachine, GameManager));
         }
     }

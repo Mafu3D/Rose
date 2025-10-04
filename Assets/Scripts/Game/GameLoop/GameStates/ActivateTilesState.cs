@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -14,13 +14,13 @@ namespace Project.GameLoop
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
-            Cell heroCell = GameManager.Player.HeroNode.CurrentCell;
-            List<Node> registeredNodes;
-            if (GameManager.Grid.TryGetNodesRegisteredToCell(heroCell, out registeredNodes))
+            Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
+            List<Tile> registeredTiles;
+            if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
             {
-                foreach (Node node in registeredNodes)
+                foreach (Tile tile in registeredTiles)
                 {
-                    foreach (GameplayEffectStrategy effect in node.NodeData.OnActivateStrategies)
+                    foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
                     {
                         GameManager.EffectQueue.AddEffect(effect);
                     }

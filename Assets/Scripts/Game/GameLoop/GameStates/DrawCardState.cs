@@ -1,6 +1,6 @@
 using System;
 using Project.Decks;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -50,9 +50,9 @@ namespace Project.GameLoop
         {
             if (!GameManager.CardDrawManager.CardChoiceIsActive)
             {
-                foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+                foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
                 {
-                    foreach (GameplayEffectStrategy effect in node.NodeData.OnDrawCardStrategies)
+                    foreach (GameplayEffectStrategy effect in tile.TileData.OnDrawCardStrategies)
                     {
                         GameManager.EffectQueue.AddEffect(effect);
                     }

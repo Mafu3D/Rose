@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Project;
 using Project.Decks;
 using Project.Items;
-using Sandbox;
 using UnityEngine;
 
 public class Scratch : MonoBehaviour
@@ -23,27 +22,13 @@ public class Scratch : MonoBehaviour
     float time;
     bool hasExecuted = false;
 
-    Sequence testSequence;
-
-
     void Start()
     {
-        time = 0f;
-        testSequence = new Sequence();
-
-        TestNodeA testNodaA = new TestNodeA(null);
-        TestNodeB testNodaB = new TestNodeB(null);
-        Debug.Log(testSequence);
-        Debug.Log(testNodaA);
-        Debug.Log(testNodaB);
-        testSequence.AddNode(testNodaA);
-        testSequence.AddNode(testNodaB);
 
     }
 
     void Update()
     {
-        testSequence.Update();
         return;
 
         if (firstUpdate)

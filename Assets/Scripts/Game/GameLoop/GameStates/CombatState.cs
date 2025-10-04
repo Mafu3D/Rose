@@ -1,4 +1,4 @@
-using Project.GameNode;
+using Project.GameTiles;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -16,14 +16,6 @@ namespace Project.GameLoop
         {
             Debug.Log($"Enter: {Name}");
             interruptedState = StateMachine.PreviousState;
-
-            // foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
-            // {
-            //     foreach (GameplayEffectStrategy effect in node.NodeData.OnEndOfRoundStrategies)
-            //     {
-            //         GameManager.EffectQueue.AddEffect(effect);
-            //     }
-            // }
         }
 
         public override void Update(float time)

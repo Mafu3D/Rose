@@ -7,10 +7,9 @@ namespace Project.Combat.CombatActions
     {
         [SerializeField] string toSay;
 
-        public override void Execute(Combatant user, Combatant target)
+        public override void Execute(Character user, Character target)
         {
             Debug.Log($"{user.DisplayName}: {toSay}");
-            Debug.Log($"Test Action: {user.DisplayName} threw a bomb at {target.DisplayName}, dealing {toSay} damage!");
         }
     }
 }

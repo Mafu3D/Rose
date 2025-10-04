@@ -1,4 +1,4 @@
-using Project.GameNode;
+using Project.GameTiles;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -13,9 +13,9 @@ namespace Project.GameLoop
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
-            foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+            foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
             {
-                foreach (GameplayEffectStrategy effect in node.NodeData.OnEndOfTurnStrategies)
+                foreach (GameplayEffectStrategy effect in tile.TileData.OnEndOfTurnStrategies)
                 {
                     GameManager.EffectQueue.AddEffect(effect);
                 }

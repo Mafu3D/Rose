@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Project.GameNode;
-using Project.GameNode.Hero;
+using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
 using Project.GameLoop;
 using Project.Combat.CombatStates;
 using Project.Combat.CombatActions;
+using Project.Sequences;
 
 namespace Project.Combat
 {
@@ -26,53 +26,42 @@ namespace Project.Combat
     public enum Resolution
     {
         None,
-        Victory,
-        Defeat,
         RanAway,
-        Stole
-    }
-
-    public enum PrebattleActions
-    {
-        Fight,
-        Steal,
-        Run
+        Stole,
+        Defeat,
+        Victory
     }
 
     public class Battle
     {
-        public readonly Combatant Hero;
-        public readonly Combatant Enemy;
+        public readonly Character Hero;
+        public readonly Character Enemy;
         public int Round;
         public int Turn;
-        Combatant[] combatantOrder = new Combatant[2];
-        Combatant activeCombatanat;
+        Character[] combatantOrder = new Character[2];
+        Character activeCombatant;
 
-        Action<BattleReport, Combatant, Combatant> finishedCallback;
-
-        public Choice<PrebattleActions> PreBattleChoice;
+        Action<BattleReport, Character, Character> finishedCallback;
 
         public event Action<string> OnBattleMessage;
 
         public event Action OnPreBattleStart;
         public event Action OnBattleStart;
         public event Action OnPostBattleStart;
-        public event Action OnChooseFight;
-        public event Action OnChooseRun;
-        public event Action OnChooseSteal;
         public event Action OnAttackStart;
         public event Action OnAttackEnd;
-        public event Action<BattleReport> OnBattleHasBeenDecided;
         public event Action OnNextActionEvent;
 
         private bool ranAway;
         private bool avoidedRunDamage;
+        private bool battleHasStarted;
 
-        public StateMachine StateMachine {get; private set; }
-        public CombatQueue CombatQueue {get; private set; }
+        public StateMachine StateMachine { get; private set; }
+        public CombatQueue CombatQueue { get; private set; }
+        public Sequence CombatSequence { get; private set; }
 
 
-        public Battle(Combatant hero, Combatant enemy, Action<BattleReport, Combatant, Combatant> finished)
+        public Battle(Character hero, Character enemy, Action<BattleReport, Character, Character> finished)
         {
             this.Hero = hero;
             this.Enemy = enemy;
@@ -81,6 +70,26 @@ namespace Project.Combat
             // State Machine
             StateMachine = new StateMachine();
             CombatQueue = new CombatQueue();
+            // CombatSequence = new Sequence();
+
+            // RoundStartNode roundStartNode = new RoundStartNode("Round Start", GameManager.Instance);
+            // TurnStartNode firstTurnStartNode = new TurnStartNode("First Turn Start", GameManager.Instance);
+            // AttackNode firstTurnAttackNode = new AttackNode("First Turn Attack", GameManager.Instance);
+            // TurnEndNode firstTurnEndkNode = new TurnEndNode("First Turn End", GameManager.Instance);
+            // TurnStartNode secondTurnStartNode = new TurnStartNode("Second Turn Start", GameManager.Instance);
+            // AttackNode secondTurnAttackNode = new AttackNode("Second Turn Attack", GameManager.Instance);
+            // TurnEndNode secondTurnEndNode = new TurnEndNode("Second Turn End", GameManager.Instance);
+            // RoundEndNode roundEndNode = new RoundEndNode("Round End", GameManager.Instance);
+
+            // CombatSequence.AddNode(roundStartNode);
+            // CombatSequence.AddNode(firstTurnStartNode);
+            // CombatSequence.AddNode(firstTurnAttackNode);
+            // CombatSequence.AddNode(firstTurnEndkNode);
+            // CombatSequence.AddNode(secondTurnStartNode);
+            // CombatSequence.AddNode(secondTurnAttackNode);
+            // CombatSequence.AddNode(secondTurnEndNode);
+            // CombatSequence.AddNode(roundEndNode);
+
         }
 
         #region Initiate
@@ -96,27 +105,13 @@ namespace Project.Combat
         public void Update()
         {
             CombatQueue.Update();
-            StateMachine.Update();
+            // StateMachine.Update();
+            // if (battleHasStarted)
+            // {
+            //     CombatSequence.Update();
+            // }
+
         }
-
-        #region Prebattle
-
-        public void ChooseFight()
-        {
-            // StartBattle();
-        }
-
-        public void ChooseSteal()
-        {
-            OnChooseSteal?.Invoke();
-        }
-
-        public void ChooseRun()
-        {
-            RunAway();
-        }
-
-        #endregion
 
         #region Run
 
@@ -142,17 +137,9 @@ namespace Project.Combat
 
         #endregion
 
-        #region Battle Loop
-
-        public void NextAction()
-        {
-            OnNextActionEvent?.Invoke();
-            CombatQueue.TriggerNextAction();
-        }
-
         public void DetermineCombatantOrder()
         {
-            combatantOrder = new Combatant[2];
+            combatantOrder = new Character[2];
 
             if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Speed) > Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Speed))
             {
@@ -166,7 +153,7 @@ namespace Project.Combat
             }
         }
 
-        private Combatant GetTarget(Combatant combatant)
+        private Character GetTarget(Character combatant)
         {
             for (int i = 0; i < combatantOrder.Length; i++)
             {
@@ -182,15 +169,33 @@ namespace Project.Combat
             return null;
         }
 
+        #region Battle Loop
+
+        public void NextAction()
+        {
+            // Trigger the next action in the queue
+            CombatQueue.TriggerNextAction();
+            OnNextActionEvent?.Invoke();
+
+            // Check for a resolution to the battle
+            BattleReport battleReport;
+            bool battleHasBeenDecided = CheckForResolution(out battleReport);
+            if (battleHasBeenDecided)
+            {
+                finishedCallback(battleReport, Hero, Enemy);
+                GameManager.Instance.BattleManager.EndActiveBattle();
+            }
+        }
+
+
+
         public void StartBattle()
         {
-            OnChooseFight?.Invoke();
-
             Round = 0;
             Turn = 0;
 
             DetermineCombatantOrder();
-            foreach (Combatant combatant in combatantOrder)
+            foreach (Character combatant in combatantOrder)
             {
                 if (combatant.Inventory != null)
                 {
@@ -205,6 +210,8 @@ namespace Project.Combat
                 }
             }
             CombatQueue.ResolveQueue();
+
+            battleHasStarted = true;
         }
 
         public void StartNewRound()
@@ -213,7 +220,7 @@ namespace Project.Combat
             Turn = 0;
 
             DetermineCombatantOrder();
-            foreach (Combatant combatant in combatantOrder)
+            foreach (Character combatant in combatantOrder)
             {
                 if (combatant.Inventory != null)
                 {
@@ -233,15 +240,32 @@ namespace Project.Combat
         public void StartNewTurn()
         {
             Turn += 1;
-            activeCombatanat = combatantOrder[Turn - 1];
-            if (activeCombatanat.Inventory != null)
+            activeCombatant = combatantOrder[Turn - 1];
+            if (activeCombatant.Inventory != null)
             {
-                List<Item> items = activeCombatanat.Inventory.GetHeldItems();
+                List<Item> items = activeCombatant.Inventory.GetHeldItems();
                 foreach (Item item in items)
                 {
-                    foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
+                    foreach (CombatActionBaseData actionData in item.ItemData.OnTurnStartStrategies)
                     {
-                        actionData.QueueAction(CombatQueue, activeCombatanat, GetTarget(activeCombatanat));
+                        actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
+                    }
+                }
+            }
+            CombatQueue.ResolveQueue();
+        }
+
+        public void EndTurn()
+        {
+            activeCombatant = combatantOrder[Turn - 1];
+            if (activeCombatant.Inventory != null)
+            {
+                List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                foreach (Item item in items)
+                {
+                    foreach (CombatActionBaseData actionData in item.ItemData.OnTurnEndStrategies)
+                    {
+                        actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
                     }
                 }
             }
@@ -250,8 +274,8 @@ namespace Project.Combat
 
         public void EndRound()
         {
-            DetermineCombatantOrder();
-            foreach (Combatant combatant in combatantOrder)
+            // DetermineCombatantOrder();
+            foreach (Character combatant in combatantOrder)
             {
                 if (combatant.Inventory != null)
                 {
@@ -270,15 +294,15 @@ namespace Project.Combat
 
         public void DoAttack()
         {
-            Combatant attacker = activeCombatanat;
-            Combatant defender = GetTarget(activeCombatanat);
-            OnAttackStart?.Invoke();
-            int attackValue;
-            attacker.Attack(out attackValue);
-            HitReport hitReport = new HitReport(attackValue);
-            defender.ReceiveAttack(hitReport);
-            LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
-            OnAttackEnd?.Invoke();
+            // Character attacker = activeCombatant;
+            // Character defender = GetTarget(activeCombatant);
+            // OnAttackStart?.Invoke();
+            // int attackValue;
+            // attacker.GetAttackValue(out attackValue);
+            // HitReport hitReport = new HitReport(attackValue);
+            // defender.ReceiveAttack(hitReport);
+            // LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
+            // OnAttackEnd?.Invoke();
         }
 
         private void LogBattleAction(string message)
@@ -294,8 +318,7 @@ namespace Project.Combat
             battleReport = CreateBattleReport();
             if (battleReport.BattleConcluded)
             {
-                OnBattleHasBeenDecided?.Invoke(battleReport);
-                finishedCallback(battleReport, Hero, Enemy);
+
                 return true;
             }
             return false;

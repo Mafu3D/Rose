@@ -1,4 +1,4 @@
-using Project.GameNode;
+using Project.GameTiles;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -14,9 +14,9 @@ namespace Project.GameLoop
         {
             Debug.Log($"Enter: {Name}");
 
-            foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+            foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
             {
-                foreach (GameplayEffectStrategy effect in node.NodeData.OnRoundStartStrategies)
+                foreach (GameplayEffectStrategy effect in tile.TileData.OnRoundStartStrategies)
                 {
                     GameManager.EffectQueue.AddEffect(effect);
                 }

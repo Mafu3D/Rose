@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.GameNode.Hero;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.PlayerSystem;
 using Project.Decks;
 using Project.Items;
@@ -19,6 +18,7 @@ namespace Project
     {
         [Header("References I need to move out later")]
         [SerializeField] public Player Player;
+        [SerializeField] public CharacterData CharacterData;
         [SerializeField] public GameObject UICanvas;
 
         [Header("Game Parameters")]
@@ -34,7 +34,7 @@ namespace Project
 
         public GameGrid Grid;
 
-        public HeroNode Hero => Player.HeroNode;
+        public Tile Hero => Player.HeroTile;
         public int Round { get; private set; }
 
         public StateMachine StateMachine;
@@ -68,7 +68,7 @@ namespace Project
         public bool IsChoosingCard => ActiveCardChoice != null;
 
 
-        private List<Node> nodesToBeDestroyed = new();
+        private List<Tile> tilesToBeDestroyed = new();
 
         public bool GameHasStarted { get; private set; }
 
@@ -95,6 +95,8 @@ namespace Project
 
         public void StartGame()
         {
+            Player.HeroTile.RegisterCharacter(CharacterData);
+
             Grid = new GameGrid(new Vector2(1, 1));
             TEMP_BUILD_MAP();
 
@@ -269,24 +271,24 @@ namespace Project
         //     }
         // }
 
-        public void MarkNodeForDestroy(Node node)
+        public void MarkTileForDestroy(Tile tile)
         {
-            if (node == null) return;
+            if (tile == null) return;
 
-            if (!nodesToBeDestroyed.Contains(node))
+            if (!tilesToBeDestroyed.Contains(tile))
             {
-                node.gameObject.SetActive(false);
-                nodesToBeDestroyed.Add(node);
+                tile.gameObject.SetActive(false);
+                tilesToBeDestroyed.Add(tile);
             }
         }
 
-        public void DestroyMarkedNodes()
+        public void DestroyMarkedTiles()
         {
-            foreach (Node node in nodesToBeDestroyed)
+            foreach (Tile tilee in tilesToBeDestroyed)
             {
-                Destroy(node.gameObject);
+                Destroy(tilee.gameObject);
             }
-            nodesToBeDestroyed = new();
+            tilesToBeDestroyed = new();
         }
 
 

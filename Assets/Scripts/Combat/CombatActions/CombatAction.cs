@@ -4,11 +4,11 @@ namespace Project.Combat.CombatActions
 {
     public class CombatAction
     {
-        Combatant User;
-        Combatant Target;
-        Action<Combatant, Combatant> ExecuteAction;
+        Character User;
+        Character Target;
+        Action<Character, Character> ExecuteAction;
 
-        public CombatAction(Combatant user, Combatant target, Action<Combatant, Combatant> executeAction)
+        public CombatAction(Character user, Character target, Action<Character, Character> executeAction)
         {
             this.User = user;
             this.Target = target;

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Project.Attributes;
-using Project.GameNode;
-using Project.GameNode.Hero;
+using Project.GameTiles;
 using UnityEngine;
 
 namespace Project.GameplayEffects
@@ -18,29 +17,29 @@ namespace Project.GameplayEffects
 
         public override Status StartEffect()
         {
-            HeroNode heroNode = GameManager.Instance.Player.HeroNode;
+            Tile heroTile = GameManager.Instance.Player.HeroTile;
             if (AttributeType == AttributeType.Health)
             {
                 if (MaxValueModifier != 0)
                 {
-                    heroNode.Attributes.ModifyMaxAttributeValue(AttributeType, MaxValueModifier);
+                    heroTile.Character.Attributes.ModifyMaxAttributeValue(AttributeType, MaxValueModifier);
                 }
 
                 if (BaseValueModifier != 0)
                 {
-                    heroNode.Attributes.ModifyAttributeValue(AttributeType, BaseValueModifier);
+                    heroTile.Character.Attributes.ModifyAttributeValue(AttributeType, BaseValueModifier);
                 }
             }
             else
             {
                 if (MaxValueModifier != 0)
                 {
-                    heroNode.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier);
+                    heroTile.Character.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier);
                 }
 
                 if (BaseValueModifier != 0)
                 {
-                    heroNode.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier);
+                    heroTile.Character.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier);
                 }
             }
 

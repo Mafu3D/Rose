@@ -1,5 +1,5 @@
 using System;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.UI.BattleUI;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace Project.Combat
         public event Action OnBattleConcluded;
 
 
-        public void StartNewBattle(Combatant left, Combatant right, Action<BattleReport, Combatant, Combatant> finished)
+        public void StartNewBattle(Character left, Character right, Action<BattleReport, Character, Character> finished)
         {
             ActiveBattle = new Battle(left, right, finished);
             OnNewBattleInitiated?.Invoke();

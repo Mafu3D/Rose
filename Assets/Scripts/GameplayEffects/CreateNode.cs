@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Project.GameplayEffects
             // }
 
             GameObject gameObject = Instantiate(nodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
-            Node node = gameObject.GetComponent<Node>();
+            Tile node = gameObject.GetComponent<Tile>();
             node.RegisterToGrid();
             return Status.Complete;
         }

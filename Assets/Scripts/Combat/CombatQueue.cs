@@ -85,8 +85,8 @@ namespace Project.Combat
             if (ResolvingQueue && nextActionTriggered)
             {
                 Debug.Log("resolving queue");
-                Status status = ExecuteNextInQueue();
                 nextActionTriggered = false;
+                Status status = ExecuteNextInQueue();
                 if (status == Status.Complete)
                 {
                     OnResolveQueueEnd?.Invoke();

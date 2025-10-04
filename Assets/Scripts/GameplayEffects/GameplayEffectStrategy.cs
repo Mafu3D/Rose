@@ -1,4 +1,4 @@
-using Project.GameNode;
+using Project.GameTiles;
 using UnityEngine;
 
 namespace Project.GameplayEffects

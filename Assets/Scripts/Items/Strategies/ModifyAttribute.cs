@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Project.Attributes;
 using Project.Combat;
-using Project.GameNode;
-using Project.GameNode.Hero;
+using Project.GameTiles;
 using Project.Items;
 using Project.States;
 using UnityEngine;
@@ -16,21 +15,21 @@ namespace Project.CombatEffects
         [SerializeField] int BaseValueModifier;
         [SerializeField] int MaxValueModifier;
 
-        public override void EndEffect(Combatant user, Combatant target)
+        public override void EndEffect(Character user, Character target)
         {
         }
 
-        public override void ResetEffect(Combatant user, Combatant target)
+        public override void ResetEffect(Character user, Character target)
         {
         }
 
 
-        public override Status ResolveEffect(Combatant user, Combatant target)
+        public override Status ResolveEffect(Character user, Character target)
         {
             return Status.Complete;
         }
 
-        public override Status StartEffect(Combatant user, Combatant target)
+        public override Status StartEffect(Character user, Character target)
         {
             if (AttributeType == AttributeType.Health)
             {

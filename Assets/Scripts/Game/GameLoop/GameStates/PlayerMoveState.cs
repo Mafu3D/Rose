@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.GameplayEffects;
 using UnityEngine;
 
@@ -20,11 +20,11 @@ namespace Project.GameLoop
 
             GameManager.Player.InputReader.OnProceedInput += Proceed;
 
-            if (GameManager.Player.HeroNode.MovesRemaining == 0)
+            if (GameManager.Player.HeroTile.MovesRemaining == 0)
             {
-                foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+                foreach (Tile node in GameManager.Grid.GetAllRegisteredTiles())
                 {
-                    foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerMoveEndStrategies)
+                    foreach (GameplayEffectStrategy effect in node.TileData.OnPlayerMoveEndStrategies)
                     {
                         GameManager.EffectQueue.AddEffect(effect);
                     }
@@ -41,7 +41,7 @@ namespace Project.GameLoop
                 Vector2 movementInput = GameManager.Player.InputReader.MovementValue;
                 if (movementInput != Vector2.zero)
                 {
-                    GameManager.Player.HeroNode.Move(movementInput);
+                    GameManager.Player.HeroTile.Move(movementInput);
                     GameManager.OnPlayerMove();
                     Resolve();
                 }
@@ -60,21 +60,21 @@ namespace Project.GameLoop
 
         private void Resolve()
         {
-            foreach (Node node in GameManager.Grid.GetAllRegisteredNodes())
+            foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
             {
-                foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerMoveStrategies)
+                foreach (GameplayEffectStrategy effect in tile.TileData.OnPlayerMoveStrategies)
                 {
                     GameManager.EffectQueue.AddEffect(effect);
                 }
             }
 
-            Cell heroCell = GameManager.Player.HeroNode.CurrentCell;
-            List<Node> registeredNodes;
-            if (GameManager.Grid.TryGetNodesRegisteredToCell(heroCell, out registeredNodes))
+            Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
+            List<Tile> registeredTiles;
+            if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
             {
-                foreach (Node node in registeredNodes)
+                foreach (Tile tile in registeredTiles)
                 {
-                    foreach (GameplayEffectStrategy effect in node.NodeData.OnPlayerEnterStrategies)
+                    foreach (GameplayEffectStrategy effect in tile.TileData.OnPlayerEnterStrategies)
                     {
                         GameManager.EffectQueue.AddEffect(effect);
                     }

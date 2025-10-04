@@ -12,14 +12,21 @@ namespace Project.Combat.CombatStates
         {
             GameManager.BattleManager.ActiveBattle.StartNewRound();
             GameManager.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.BattleManager.ActiveBattle.OnNextActionEvent += Next;
         }
 
         public override void OnExit()
         {
             GameManager.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.BattleManager.ActiveBattle.OnNextActionEvent -= Next;
         }
 
         public override void Update(float deltaTime)
+        {
+
+        }
+
+        private void Next()
         {
             if (!GameManager.BattleManager.ActiveBattle.CombatQueue.QueueNeedsToBeResolved)
             {
