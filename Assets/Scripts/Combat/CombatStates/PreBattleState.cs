@@ -2,7 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using Project.GameLoop;
+using Project.States;
+using Project.Combat.CombatStates;
 using UnityEngine;
 
 namespace Project.Combat.CombatStates
@@ -52,7 +53,7 @@ namespace Project.Combat.CombatStates
         private void ChooseFight()
         {
             Debug.Log("I choose to fight!");
-            StateMachine.SwitchState(new BattleState("Battle State", StateMachine, GameManager));
+            StateMachine.SwitchState(new BattleStartState("Battle State", StateMachine, GameManager));
         }
     }
 

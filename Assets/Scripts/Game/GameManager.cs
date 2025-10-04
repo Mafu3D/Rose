@@ -10,6 +10,7 @@ using Project.GameLoop;
 using UnityEngine.Events;
 using Project.Core;
 using Project.Combat;
+using Project.States;
 
 namespace Project
 {
@@ -31,6 +32,9 @@ namespace Project
         [SerializeField] public float AutoBattleSpeed = 1f;
         [SerializeField] public float MinTimeBetweenPlayerMoves = 0.25f;
         [SerializeField] public float MinTimeBetweenPhases = 0.5f;
+
+        [Header("Debug")]
+        [SerializeField] public bool BattleDebugMode = false;
 
         public GameGrid Grid;
 

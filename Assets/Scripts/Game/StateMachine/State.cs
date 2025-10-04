@@ -1,4 +1,4 @@
-namespace Project.GameLoop
+namespace Project.States
 {
     public abstract class State : IState
     {

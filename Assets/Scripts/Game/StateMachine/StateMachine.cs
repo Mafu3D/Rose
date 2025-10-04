@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Project.GameLoop
+namespace Project.States
 {
     /// <summary>
     /// Base class for unit state machines. Ticks the current state every Update.

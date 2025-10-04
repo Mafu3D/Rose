@@ -7,32 +7,32 @@ namespace Project.Combat
 {
     public class CombatQueue
     {
-        public List<CombatAction> queue = new List<CombatAction>();
+        public List<CombatAction> Queue = new List<CombatAction>();
         private int currentQueueIndex;
         private bool currentEffectHasStarted = false;
         public event Action OnResolveQueueStart;
         public event Action OnResolveQueueEnd;
-        public bool QueueNeedsToBeResolved => queue.Count > 0;
+        public bool QueueNeedsToBeResolved => Queue.Count > 0;
 
         public CombatAction GetCurrentAction()
         {
-            if (queue != null) return queue[currentQueueIndex];
+            if (Queue != null) return Queue[currentQueueIndex];
             return null;
         }
 
-        public void AddAction(CombatAction action) => queue.Add(action);
-        public void RemoveAction(CombatAction action) { if (queue.Contains(action)) queue.Remove(action); }
+        public void AddAction(CombatAction action) => Queue.Add(action);
+        public void RemoveAction(CombatAction action) { if (Queue.Contains(action)) Queue.Remove(action); }
         public void ClearQueue()
         {
-            queue = new();
+            Queue = new();
             currentQueueIndex = 0;
         }
 
         public void ExecuteNextInQueue()
         {
-            queue[currentQueueIndex].Execute();
+            Queue[currentQueueIndex].Execute();
             currentQueueIndex++;
-            if (currentQueueIndex >= queue.Count)
+            if (currentQueueIndex >= Queue.Count)
             {
                 ClearQueue();
             }
@@ -42,9 +42,9 @@ namespace Project.Combat
         {
             if (QueueNeedsToBeResolved)
             {
-                queue[currentQueueIndex].Execute();
+                Queue[currentQueueIndex].Execute();
                 currentQueueIndex++;
-                if (currentQueueIndex > queue.Count)
+                if (currentQueueIndex > Queue.Count)
                 {
                     ClearQueue();
 

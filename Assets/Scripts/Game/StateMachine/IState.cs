@@ -1,6 +1,6 @@
 using System;
 
-namespace Project.GameLoop
+namespace Project.States
 {
     public interface IState
     {

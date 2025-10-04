@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Project.GameLoop;
+using Project.States;
 
 namespace Project.Combat.CombatStates
 {

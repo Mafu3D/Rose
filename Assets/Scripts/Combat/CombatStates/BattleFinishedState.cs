@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
-using Project.GameLoop;
 using Project.States;
 
 namespace Project.Combat.CombatStates
 {
-    public class AttemptToStealState : State
+    public class BattleFinishedState : State
     {
-        public AttemptToStealState(string name, StateMachine stateMachine, GameManager gameManager) : base(name, stateMachine, gameManager) { }
+        public BattleFinishedState(string name, StateMachine stateMachine, GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
         public override void OnEnter()
         {
+            GameManager.BattleManager.ActiveBattle.CloseBattle();
         }
 
         public override void OnExit()
