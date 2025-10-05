@@ -33,21 +33,6 @@ namespace Project.Combat
         Victory
     }
 
-    public enum BattleState
-    {
-        NotStarted,
-        PreBattle,
-        BattleStart,
-        RoundStart,
-        TurnStart,
-        Attack,
-        TurnEnd,
-        RoundEnd,
-        BattleEnd,
-        PostBattle,
-        BattleFinished
-    }
-
     public class Battle
     {
         public readonly Character Hero;
@@ -56,7 +41,6 @@ namespace Project.Combat
         public int Turn;
         Character[] combatantOrder = new Character[2];
         Character activeCombatant => combatantOrder[Turn - 1];
-        public BattleState BattleState = BattleState.NotStarted;
 
         Action<BattleReport, Character, Character> finishedCallback;
 
@@ -89,11 +73,16 @@ namespace Project.Combat
             StateMachine = new StateMachine();
             CombatQueue = new CombatQueue();
 
-            StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
-            OnPreBattleStart?.Invoke();
+
         }
 
         #region Initiate
+
+        public void StartPreBattle()
+        {
+            StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
+            OnPreBattleStart?.Invoke();
+        }
 
         #endregion
 
@@ -309,8 +298,8 @@ namespace Project.Combat
         public void EndBattle()
         {
             BattleReport battleReport = CreateBattleReport();
-            finishedCallback(battleReport, Hero, Enemy);
             OnPostBattleStart?.Invoke();
+            finishedCallback(battleReport, Hero, Enemy);
         }
 
         public void CloseBattle()
