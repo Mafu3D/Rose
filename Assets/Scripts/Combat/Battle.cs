@@ -145,24 +145,31 @@ namespace Project.Combat
 
         public void NextAction()
         {
-            if (CombatQueue.QueueNeedsToBeResolved)
+            bool proceed = true;
+
+            while (proceed)
             {
-                if (debugMode) Debug.Log("Next Action: Exeucting item in queue...");
-                CombatQueue.ExecuteNextInQueue();
-            }
-            else
-            {
-                if (debugMode) Debug.Log("Next Action: Going to next state...");
-                GoToNextState?.Invoke();
+                if (CombatQueue.QueueNeedsToBeResolved)
+                {
+                    if (debugMode) Debug.Log("Next Action: Exeucting item in queue...");
+                    CombatQueue.ExecuteNextInQueue();
+                    proceed = false;
+                }
+                else
+                {
+                    if (debugMode) Debug.Log("Next Action: Going to next state...");
+                    GoToNextState?.Invoke();
+                }
+                OnNextActionEvent?.Invoke();
+                if (CheckForResolution())
+                {
+                    if (debugMode) Debug.Log("Battle has been decided");
+                    OnBattleHasBeenDecided?.Invoke();
+                    StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
+                    proceed = false;
+                }
             }
 
-            OnNextActionEvent?.Invoke();
-            if (CheckForResolution())
-            {
-                if (debugMode) Debug.Log("Battle has been decided");
-                OnBattleHasBeenDecided?.Invoke();
-                StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
-            }
         }
 
         public void StartBattle()
@@ -270,29 +277,33 @@ namespace Project.Combat
             if (debugMode) Debug.Log($"End Round: {Round} - InQueue: {CombatQueue.Queue.Count}");
         }
 
-        public void DoAttack()
+        public void QueueAttack()
         {
             Character attacker = activeCombatant;
             Character defender = GetTarget(activeCombatant);
-            int attackValue = attacker.GetAttackValue();
 
-            HitReport hitReport = new HitReport(attackValue);
-            defender.ReceiveAttack(hitReport);
-            LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
-
-            if (activeCombatant.Inventory != null)
+            CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
             {
-                List<Item> items = activeCombatant.Inventory.GetHeldItems();
-                foreach (Item item in items)
+                int attackValue = attacker.GetAttackValue();
+                HitReport hitReport = new HitReport(attackValue);
+                defender.ReceiveAttack(hitReport);
+
+                LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
+
+                if (activeCombatant.Inventory != null)
                 {
-                    foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
+                    List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
                     {
-                        actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
+                        }
                     }
                 }
-            }
-
-            if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
+                if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
+            });
+            CombatQueue.AddAction(attackAction);
         }
 
         public void EndBattle()

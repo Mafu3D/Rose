@@ -8,15 +8,14 @@ namespace Project.Combat
 {
     public class BattleManager
     {
-        [field: SerializeField] public float TimeBetweenCombatTurns { get; private set; } = 0.25f;
-        [field: SerializeField] public float TimeBeforeCombatStarts { get; private set; } = 1f;
-        [field: SerializeField] public float TimeAfterCombatEnds { get; private set; } = 1f;
         public bool DebugMode = true;
 
         public Battle ActiveBattle;
         public bool IsActiveBattle => ActiveBattle != null;
         public event Action OnNewBattleInitiated;
         public event Action OnBattleConcluded;
+        public event Action AutoTimerTick;
+        private float autoTimer;
 
 
         public void StartNewBattle(Character left, Character right, Action<BattleReport, Character, Character> finished)
@@ -31,6 +30,16 @@ namespace Project.Combat
             if (IsActiveBattle)
             {
                 ActiveBattle.Update();
+            }
+
+            if (GameManager.Instance.AutoBattle)
+            {
+                autoTimer += Time.deltaTime;
+                if (autoTimer > GameManager.Instance.AutoBattleSpeed)
+                {
+                    autoTimer = 0f;
+                    AutoTimerTick?.Invoke();
+                }
             }
         }
 

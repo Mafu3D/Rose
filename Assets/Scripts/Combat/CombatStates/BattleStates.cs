@@ -13,7 +13,8 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
 
             GameManager.BattleManager.ActiveBattle.StartBattle();
@@ -21,9 +22,13 @@ namespace Project.Combat.CombatStates
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
         }
+
+        private void NextActionManual() { if (!GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
+        private void NextActionAuto() { if (GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
 
         private void GoToNexState()
         {
@@ -39,7 +44,8 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
 
             GameManager.BattleManager.ActiveBattle.StartNewRound();
@@ -47,9 +53,13 @@ namespace Project.Combat.CombatStates
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
         }
+
+        private void NextActionManual() { if (!GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
+        private void NextActionAuto() { if (GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
 
         private void GoToNexState()
         {
@@ -65,7 +75,8 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
 
             GameManager.BattleManager.ActiveBattle.StartNewTurn();
@@ -73,9 +84,13 @@ namespace Project.Combat.CombatStates
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
         }
+
+        private void NextActionManual() { if (!GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
+        private void NextActionAuto() { if (GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
 
         private void GoToNexState()
         {
@@ -91,17 +106,22 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
 
-            GameManager.BattleManager.ActiveBattle.DoAttack();
+            GameManager.BattleManager.ActiveBattle.QueueAttack();
         }
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
         }
+
+        private void NextActionManual() { if (!GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
+        private void NextActionAuto() { if (GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
 
         private void GoToNexState()
         {
@@ -117,7 +137,8 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
 
             GameManager.BattleManager.ActiveBattle.EndTurn();
@@ -125,9 +146,13 @@ namespace Project.Combat.CombatStates
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
         }
+
+        private void NextActionManual() { if (!GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
+        private void NextActionAuto() { if (GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
 
         private void GoToNexState()
         {
@@ -150,7 +175,8 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput += GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
 
             GameManager.BattleManager.ActiveBattle.EndRound();
@@ -158,9 +184,13 @@ namespace Project.Combat.CombatStates
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnProceedInput -= GameManager.BattleManager.ActiveBattle.NextAction;
+            GameManager.Instance.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
             GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
         }
+
+        private void NextActionManual() { if (!GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
+        private void NextActionAuto() { if (GameManager.Instance.AutoBattle) GameManager.BattleManager.ActiveBattle.NextAction(); }
 
         private void GoToNexState()
         {
