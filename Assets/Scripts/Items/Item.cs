@@ -72,7 +72,6 @@ namespace Project.Items
             if (this.ItemData.MagicModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
             if (this.ItemData.DexterityModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
             if (this.ItemData.SpeedModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
-
         }
 
     }

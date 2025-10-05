@@ -34,6 +34,22 @@ namespace Project.Attributes
             this.MaxValue = maxValue;
         }
 
+        public Attribute Copy()
+        {
+            Attribute copy = new Attribute(Type, StartingValue, MaxValue);
+            copy.SetBaseValue(BaseValue);
+            copy.SetMaxValue(MaxValue);
+            foreach (int mod in baseValueModifiers)
+            {
+                copy.RegisterBaseAttributeModifier(mod);
+            }
+            foreach (int mod in maxValueModifiers)
+            {
+                copy.RegisterBaseAttributeModifier(mod);
+            }
+            return copy;
+        }
+
         public int GetValue()
         {
             // int preMod = BaseValue;
@@ -56,6 +72,16 @@ namespace Project.Attributes
             }
             //  Debug.Log($"Get Max {Type}: {preMod} >>> {value}");
             return value;
+        }
+
+        public void SetBaseValue(int value)
+        {
+            BaseValue = value;
+        }
+
+        public void SetMaxValue(int value)
+        {
+            MaxValue = value;
         }
 
         public void ModifyValue(int amount)

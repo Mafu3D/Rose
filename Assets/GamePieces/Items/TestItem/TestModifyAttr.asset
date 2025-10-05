@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
-  m_Name: Hero_Attrs
+  m_Script: {fileID: 11500000, guid: d1b397118be74e24d818b1e4ff9c4b25, type: 3}
+  m_Name: TestModifyAttr
   m_EditorClassIdentifier: 
-  Health: 10
-  Speed: 3
-  Strength: 2
-  Magic: 1
-  Dexterity: 1
-  Armor: 5
+  IsPermanent: 0
+  modifyAttributeTarget: 0
+  AttributeType: 0
+  BaseValueModifier: 0
+  MaxValueModifier: 0

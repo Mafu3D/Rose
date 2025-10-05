@@ -8,6 +8,7 @@ using Project.States;
 using Project.Combat.CombatStates;
 using Project.Combat.CombatActions;
 using Project.Sequences;
+using Project.Attributes;
 
 namespace Project.Combat
 {
@@ -83,6 +84,9 @@ namespace Project.Combat
         {
             StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
             OnBattleInitialize?.Invoke();
+
+            Hero.ShapshotAttributes();
+            Enemy.ShapshotAttributes();
         }
 
         #endregion
@@ -323,6 +327,11 @@ namespace Project.Combat
         {
             BattleReport battleReport = CreateBattleReport();
             OnBattleDecided?.Invoke(battleReport);
+
+            // Reset attributes
+            Hero.RestoreSnapshotAttributes();
+            Enemy.RestoreSnapshotAttributes();
+
             finishedCallback(battleReport, Hero, Enemy);
         }
 

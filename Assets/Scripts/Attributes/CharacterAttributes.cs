@@ -17,6 +17,35 @@ namespace Project.Attributes
             Attributes.Add(AttributeType.Speed, new Attribute(AttributeType.Speed, data.Speed));
         }
 
+        public CharacterAttributes() {
+
+        }
+
+        public CharacterAttributes Copy()
+        {
+            CharacterAttributes copy = new CharacterAttributes();
+
+            Dictionary<AttributeType, Attribute> copyAttributes = new()
+            {
+                { AttributeType.Health, GetAttribute(AttributeType.Health).Copy() },
+                { AttributeType.Armor, GetAttribute(AttributeType.Armor).Copy() },
+                { AttributeType.Strength, GetAttribute(AttributeType.Strength).Copy() },
+                { AttributeType.Magic, GetAttribute(AttributeType.Magic).Copy() },
+                { AttributeType.Speed, GetAttribute(AttributeType.Speed).Copy() },
+                { AttributeType.Dexterity, GetAttribute(AttributeType.Dexterity).Copy() }
+            };
+
+            copy.Attributes = copyAttributes;
+
+            return copy;
+        }
+
+        public void ReplaceAttribute(AttributeType type, Attribute attribute)
+        {
+            Attributes.Remove(type);
+            Attributes.Add(type, attribute);
+        }
+
         public Attribute GetAttribute(AttributeType type)
         {
             Attribute attribute;
@@ -35,6 +64,15 @@ namespace Project.Attributes
                 return attribute.GetValue();
             }
             return 0;
+        }
+
+        public void SetAttributeBaseValue(AttributeType type, int value)
+        {
+            Attribute attribute;
+            if (Attributes.TryGetValue(type, out attribute))
+            {
+                attribute.SetBaseValue(value);
+            }
         }
 
         public int GetMaxAttributeValue(AttributeType type)

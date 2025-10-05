@@ -14012,13 +14012,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+      propertyPath: startingEquippedWeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f17b90afa26f964292f825d2311eb03, type: 2}
+    - target: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: startingHeldItemsData.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: 'startingHeldItemsData.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 83d23d9e469eae44ca28564be5258477, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f85c7a2fd2ad984eb14df769290be80, type: 2}
     - target: {fileID: 8881772238092289395, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: m_Name
       value: Hero
