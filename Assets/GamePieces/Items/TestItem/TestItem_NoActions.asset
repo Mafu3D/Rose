@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
+  m_Name: TestItem_NoActions
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  Sprite: {fileID: -2879650698133024763, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  GoldValue: 0
+  ItemType: 0
+  HealthModifier: 0
+  MaxHealthModifier: 0
+  ArmorModifier: 0
+  MaxArmorModifier: 0
+  StrengthModifier: 0
+  MaxStrengthModifier: 0
+  MagicModifier: 0
+  MaxMagicModifier: 0
+  DexterityModifier: 0
+  MaxDexterityModifier: 0
+  SpeedModifier: 0
+  MaxSpeedModifier: 0
+  OnHitStrategies: []
+  OnReceiveHitStrategies: []
+  OnCombatStartStrategies: []
+  OnCombatEndStrategies: []
+  OnRoundStartStrategies: []
+  OnRoundEndStrategies: []
+  OnTurnStartStrategies: []
+  OnTurnEndStrategies: []
+  OnEnemyTurnStartStrategies: []
+  OnEnemyTurnEndStrategies: []
+  OnSelfBloodiedStrategies: []
+  OnEnemyBloodiedStrategies: []
+  OnSelfExposedStrategies: []
+  OnEnemyExposedStrategies: []

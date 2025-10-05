@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
 
@@ -13,11 +13,11 @@ namespace Project.GameplayEffects
         [SerializeField] GameObject nodePrefab;
         // [SerializeField] NodeData nodeData;
 
-        public override void ResetEffect(Node user, Node target) { }
+        public override void ResetEffect() { }
 
-        public override Status ResolveEffect(Node user, Node target) => Status.Complete;
+        public override Status ResolveEffect() => Status.Complete;
 
-        public override Status StartEffect(Node user, Node target)
+        public override Status StartEffect()
         {
             // if (nodeData != null)
             // {
@@ -32,7 +32,7 @@ namespace Project.GameplayEffects
             // }
 
             GameObject gameObject = Instantiate(nodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
-            Node node = gameObject.GetComponent<Node>();
+            Tile node = gameObject.GetComponent<Tile>();
             node.RegisterToGrid();
             return Status.Complete;
         }

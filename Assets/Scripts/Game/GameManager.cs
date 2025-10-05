@@ -1,32 +1,25 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Project.GameNode.Hero;
-using Project.GameNode;
-using Project.States;
+using Project.GameTiles;
 using Project.PlayerSystem;
-using Project.GameStates;
 using Project.Decks;
 using Project.Items;
 using Project.UI.MainUI;
+using Project.GameLoop;
+using UnityEngine.Events;
+using Project.Core;
+using Project.Combat;
+using Project.States;
 
 namespace Project
 {
-    public enum GamePhase
-    {
-        NotStarted,
-        RoundStart,
-        PlayerTurn,
-        EndOfTurn,
-        Draw,
-        ActivateTiles,
-        RoundEnd
-    }
 
     public class GameManager : Singleton<GameManager>
     {
         [Header("References I need to move out later")]
         [SerializeField] public Player Player;
+        [SerializeField] public CharacterData CharacterData;
         [SerializeField] public GameObject UICanvas;
 
         [Header("Game Parameters")]
@@ -37,28 +30,35 @@ namespace Project
         [Header("Game Settings")]
         [SerializeField] public bool AutoBattle = true;
         [SerializeField] public float AutoBattleSpeed = 1f;
-        [SerializeField] public float TimeBetweenPlayerMoves = 0.25f;
+        [SerializeField] public float MinTimeBetweenPlayerMoves = 0.25f;
+        [SerializeField] public float MinTimeBetweenPhases = 0.5f;
+
+        [Header("Debug")]
+        [SerializeField] public bool BattleDebugMode = false;
 
         public GameGrid Grid;
-        public GamePhase CurrentPhase = GamePhase.NotStarted;
 
-        public HeroNode Hero => Player.HeroNode;
-        public int Turn { get; private set; }
+        public Tile Hero => Player.HeroTile;
+        public int Round { get; private set; }
 
         public StateMachine StateMachine;
         public EffectQueue EffectQueue;
 
+        public BattleManager BattleManager;
+        public CardDrawManager CardDrawManager;
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
         public Deck<Item> ItemDeck;
 
-        public event Action OnRoundStartPhaseStart;
-        public event Action OnPlayerTurnPhaseStart;
-        public event Action OnEndOfTurnPhaseStart;
-        public event Action OnDrawPhaseStart;
-        public event Action OnActivateTilesPhaseStart;
-        public event Action OnRoundEndPhaseStart;
-
+        public event Action OnGameStartEvent;
+        public event Action OnRoundStartEvent;
+        public event Action OnTurnStartEvent;
+        public event Action OnPlayerMoveStartEvent;
+        public event Action OnPlayerMoveEvent;
+        public event Action OnEndOfTurnEvent;
+        public event Action OnActivateTilesEvent;
+        public event Action OnDrawCardEvent;
+        public event Action OnEndOfRoundEvent;
 
         public Choice<Item> ActiveTreasureChoice;
         public event Action OnTresureChoiceStarted;
@@ -72,17 +72,13 @@ namespace Project
         public bool IsChoosingCard => ActiveCardChoice != null;
 
 
-        private List<Node> nodesToBeDestroyed = new();
+        private List<Tile> tilesToBeDestroyed = new();
+
+        public bool GameHasStarted { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
-
-            Grid = new GameGrid(new Vector2(1, 1));
-            TEMP_BUILD_MAP();
-
-            StateMachine = new StateMachine();
-            EffectQueue = new EffectQueue();
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -96,81 +92,134 @@ namespace Project
         {
             EffectQueue.Update();
             StateMachine.Update();
+            BattleManager.Update();
         }
+
+        #region Start New Game
 
         public void StartGame()
         {
-            CurrentPhase = GamePhase.RoundStart;
-            StateMachine.SwitchState(new NoPlayerInput(new RoundStart(StateMachine), StateMachine));
-            Turn = 0;
+            // Player.HeroTile.RegisterCharacterFromData(CharacterData);
+
+            Grid = new GameGrid(new Vector2(1, 1));
+            TEMP_BUILD_MAP();
 
             EncounterDeck = InitializeCardDeck(EncounterDeckData);
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
 
-            OnRoundStartPhaseStart?.Invoke();
+            CardDrawManager = new CardDrawManager();
+            BattleManager = new BattleManager();
+
+            EffectQueue = new EffectQueue();
+
+            // State Machine
+            StateMachine = new StateMachine();
+            StateMachine.SetInitialState(new RoundStartState("Initial Round Start", StateMachine, this)); // Move this down to have round start effects trigger on game start
+
+            // // Declare States
+            // var roundStartState = new RoundStartState("RoundStart", this);
+            // var roundStartResolveState = new ResolveEffectsState("RoundStartResolve", this);
+
+            // var turnStartState = new TurnStartState("TurnStart", this);
+            // var turnStartResolveState = new ResolveEffectsState("TurnStartResolve", this);
+
+            // var playerMoveState = new PlayerMoveState("PlayerMove", this);
+            // var playerMoveResolveState = new ResolveEffectsState("PlayerMoveResolve", this);
+            // var playerMoveEndResolveState = new ResolveEffectsState("PlayerMoveEndResolve", this);
+
+            // var endOfTurnState = new EndOfTurnState("EndOfTurn", this);
+            // var endOfTurnResolveState = new ResolveEffectsState("EndOfTurnResolve", this);
+
+            // // Debug.Log(roundStartResolveState);
+            // // Debug.Log(endOfTurnResolveState);
+            // // Debug.Log(roundStartResolveState == endOfTurnResolveState);
+            // // Debug.Log(Object.ReferenceEquals(roundStartResolveState, endOfTurnResolveState));
+
+            // // Define Transitions
+            // At(roundStartState, roundStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(roundStartResolveState, turnStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            // At(turnStartState, turnStartResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(turnStartResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            // At(playerMoveState, playerMoveResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(playerMoveResolveState, playerMoveState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            // At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => PhaseSwitch.PhaseIsComplete));
+            // At(playerMoveState, playerMoveEndResolveState, new FuncPredicate(() => Hero.MovesRemaining == 0));
+            // At(playerMoveEndResolveState, endOfTurnState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            // At(endOfTurnState, endOfTurnResolveState, new ActionPredicate(OnRoundStartEvent));
+            // At(endOfTurnResolveState, roundStartState, new FuncPredicate(() => !EffectQueue.QueueNeedsToBeResolved));
+
+            // // Set initial state
+            // StateMachine.SetState(roundStartState);
+
+            OnGameStartEvent?.Invoke();
+            Round = 0;
+            OnNewRound();
         }
 
-        public void StartRoundStartPhase()
+        // void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
+        // void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
+
+        #endregion
+
+        #region Game Loop
+        // Everthing about the game stat itself should be updated here! (What turn is it, shuffling decks, etc.)
+
+        public void OnNewRound()
         {
-            Turn += 1;
-            CurrentPhase = GamePhase.RoundStart;
-            OnRoundStartPhaseStart?.Invoke();
-            // EffectQueue.ResolveQueue();
+            Round += 1;
+            Hero.ResetMovesRemaining();
+            OnRoundStartEvent?.Invoke();
         }
 
-        public void StartPlayerTurnPhase()
+        public void OnNewTurn()
         {
-            CurrentPhase = GamePhase.PlayerTurn;
-            OnPlayerTurnPhaseStart?.Invoke();
-            // EffectQueue.ResolveQueue();
+            OnTurnStartEvent?.Invoke();
         }
 
-        public void StartEndOfTurnPhase()
+        public void OnStartPlayerMove()
         {
-            CurrentPhase = GamePhase.EndOfTurn;
-            OnEndOfTurnPhaseStart?.Invoke();
-            // EffectQueue.ResolveQueue();
+            OnPlayerMoveStartEvent?.Invoke();
         }
 
-        public void StartDrawPhase()
+        public void OnPlayerMove()
         {
-            CurrentPhase = GamePhase.ActivateTiles;
-            OnDrawPhaseStart?.Invoke();
-            // EffectQueue.ResolveQueue();
+            OnPlayerMoveEvent?.Invoke();
         }
 
-        public void StartActivateTilesPhase()
+        public void OnEndOfTurn()
         {
-            CurrentPhase = GamePhase.ActivateTiles;
-            OnActivateTilesPhaseStart?.Invoke();
-            // EffectQueue.ResolveQueue();
+            OnEndOfTurnEvent?.Invoke();
         }
 
-        public void StartRoundEndPhase()
+        public void OnActivateTiles()
         {
-            CurrentPhase = GamePhase.RoundEnd;
-            OnRoundEndPhaseStart?.Invoke();
-            // EffectQueue.ResolveQueue();
+            OnActivateTilesEvent?.Invoke();
         }
 
-        // private void DrawEncounterCard()
-        // {
-        //     Card card = EncounterDeck.Draw();
-        //     if (card == null)
-        //     {
-        //         return;
-        //     }
-        //     if (card.CardType == CardType.Monster)
-        //     {
-        //         card = MonsterDeck.Draw();
-        //         if (card == null)
-        //         {
-        //             return;
-        //         }
-        //     }
-        //     MainUI.Instance.DisplayCard(card);
-        // }
+        public void OnDrawCard()
+        {
+            OnDrawCardEvent?.Invoke();
+        }
+
+        public void OnEndOfRound()
+        {
+            OnEndOfRoundEvent?.Invoke();
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
 
         private Deck<Card> InitializeCardDeck(DeckData deckData)
         {
@@ -207,46 +256,48 @@ namespace Project
             }
         }
 
-        public void StartNewCardChoice(Choice<Card> cardChoice)
-        {
-            ActiveCardChoice = cardChoice;
-            MainUI.Instance.DisplayCards(ActiveCardChoice.GetAllItems());
-            // MainUI.Instance.DisplayTreasureChoice(cardChoice);
-            OnCardChoiceStarted?.Invoke();
-        }
+        // public void StartNewCardChoice(Choice<Card> cardChoice)
+        // {
+        //     ActiveCardChoice = cardChoice;
+        //     MainUI.Instance.DisplayCards(ActiveCardChoice.GetAllItems());
+        //     // MainUI.Instance.DisplayTreasureChoice(cardChoice);
+        //     OnCardChoiceStarted?.Invoke();
+        // }
 
-        public void EndCardChoice()
+        // public void EndCardChoice()
+        // {
+        //     if (ActiveCardChoice != null)
+        //     {
+        //         ActiveCardChoice = null;
+        //         // MainUI.Instance.DestroyTreasureChoice();
+        //         MainUI.Instance.DestroyDisplayedCards();
+        //         OnCardChoiceEnded?.Invoke();
+        //     }
+        // }
+
+        public void MarkTileForDestroy(Tile tile)
         {
-            if (ActiveCardChoice != null)
+            if (tile == null) return;
+
+            if (!tilesToBeDestroyed.Contains(tile))
             {
-                ActiveCardChoice = null;
-                // MainUI.Instance.DestroyTreasureChoice();
-                MainUI.Instance.DestroyDisplayedCards();
-                OnCardChoiceEnded?.Invoke();
+                tile.gameObject.SetActive(false);
+                tilesToBeDestroyed.Add(tile);
             }
         }
 
-        public void MarkNodeForDestroy(Node node)
+        public void DestroyMarkedTiles()
         {
-            if (node == null) return;
-
-            if (!nodesToBeDestroyed.Contains(node))
+            foreach (Tile tilee in tilesToBeDestroyed)
             {
-                node.gameObject.SetActive(false);
-                nodesToBeDestroyed.Add(node);
+                Destroy(tilee.gameObject);
             }
-        }
-
-        public void DestroyMarkedNodes()
-        {
-            foreach (Node node in nodesToBeDestroyed)
-            {
-                Destroy(node.gameObject);
-            }
-            nodesToBeDestroyed = new();
+            tilesToBeDestroyed = new();
         }
 
 
+
+        #region Temp Shit
         private void TEMP_BUILD_MAP()
         {
             List<Cell> walkableCells = new List<Cell>();
@@ -329,7 +380,6 @@ namespace Project
             }
             Grid.RegisterWalkableCells(walkableCells);
         }
+        #endregion
     }
 }
-
-

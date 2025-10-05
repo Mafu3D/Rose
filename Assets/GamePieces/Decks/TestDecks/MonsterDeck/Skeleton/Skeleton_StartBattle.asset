@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9559b1472856e024bb7e5b3505bb172c, type: 3}
   m_Name: Skeleton_StartBattle
   m_EditorClassIdentifier: 
-  enemyNodeData: {fileID: 11400000, guid: 4c8a7f0cb796f4b4cb951392eaa50e2d, type: 2}
-  enemyNodePrefab: {fileID: 4534305980478911969, guid: ba47a435ab9f25441a666d8fca4aab4f, type: 3}
+  enemyCharacterData: {fileID: 0}
+  enemyNodePrefab: {fileID: 0}

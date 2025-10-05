@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
 
@@ -10,13 +10,13 @@ namespace Project.GameplayEffects
     {
         [SerializeField] string ToSay;
 
-        public override void ResetEffect(Node user, Node target) { }
+        public override void ResetEffect() { }
 
-        public override Status ResolveEffect(Node user, Node target) => Status.Complete;
+        public override Status ResolveEffect() => Status.Complete;
 
-        public override Status StartEffect(Node user, Node target)
+        public override Status StartEffect()
         {
-            Debug.Log($"{user.name}: {ToSay}");
+            Debug.Log(ToSay);
             return Status.Complete;
         }
     }

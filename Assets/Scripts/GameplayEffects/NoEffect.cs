@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
 
@@ -8,18 +8,17 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewNoEffect", menuName = "Effects/No Effect", order = 1)]
     public class NoEffect : GameplayEffectStrategy
     {
-        public override void ResetEffect(Node user, Node target)
+        public override void ResetEffect()
         {
         }
 
-        public override Status ResolveEffect(Node user, Node target)
+        public override Status ResolveEffect()
         {
             return Status.Complete;
         }
 
-        public override Status StartEffect(Node user, Node target)
+        public override Status StartEffect()
         {
-            Debug.Log($"{user.name} performed no effect.");
             return Status.Running;
         }
     }

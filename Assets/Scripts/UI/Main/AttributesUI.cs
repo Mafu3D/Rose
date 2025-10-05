@@ -1,4 +1,4 @@
-using Project.GameNode;
+using Project.GameTiles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ namespace Project.UI.BattleUI
 {
     public class AttributesUI : MonoBehaviour
     {
-        [SerializeField] Node combatant;
+        [SerializeField] Tile playerCharacter;
         [SerializeField] TMP_Text healthText;
         [SerializeField] TMP_Text maxHealthText;
         [SerializeField] TMP_Text armorText;
@@ -18,12 +18,12 @@ namespace Project.UI.BattleUI
 
         private void Start()
         {
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Health).OnValueChanged += UpdateHealth;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Armor).OnValueChanged += UpdateArmor;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Speed).OnValueChanged += UpdateSpeed;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Strength).OnValueChanged += UpdateStrength;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Magic).OnValueChanged += UpdateMagic;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Dexterity).OnValueChanged += UpdateDexterity;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Health).OnValueChanged += UpdateHealth;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Armor).OnValueChanged += UpdateArmor;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Speed).OnValueChanged += UpdateSpeed;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Strength).OnValueChanged += UpdateStrength;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Magic).OnValueChanged += UpdateMagic;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Dexterity).OnValueChanged += UpdateDexterity;
 
             UpdateHealth();
             UpdateArmor();
@@ -35,39 +35,39 @@ namespace Project.UI.BattleUI
 
         void OnDestroy()
         {
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Health).OnValueChanged -= UpdateHealth;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Armor).OnValueChanged -= UpdateArmor;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Speed).OnValueChanged -= UpdateSpeed;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Strength).OnValueChanged -= UpdateStrength;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Magic).OnValueChanged -= UpdateMagic;
-            combatant.Attributes.GetAttribute(Attributes.AttributeType.Dexterity).OnValueChanged -= UpdateDexterity;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Health).OnValueChanged -= UpdateHealth;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Armor).OnValueChanged -= UpdateArmor;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Speed).OnValueChanged -= UpdateSpeed;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Strength).OnValueChanged -= UpdateStrength;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Magic).OnValueChanged -= UpdateMagic;
+            playerCharacter.Character.Attributes.GetAttribute(Attributes.AttributeType.Dexterity).OnValueChanged -= UpdateDexterity;
         }
 
         private void UpdateHealth()
         {
-            healthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Health).ToString();
-            maxHealthText.text = combatant.Attributes.GetMaxAttributeValue(Attributes.AttributeType.Health).ToString();
+            healthText.text = playerCharacter.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Health).ToString();
+            maxHealthText.text = playerCharacter.Character.Attributes.GetMaxAttributeValue(Attributes.AttributeType.Health).ToString();
 
         }
         private void UpdateArmor()
         {
-            armorText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Armor).ToString();
+            armorText.text = playerCharacter.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Armor).ToString();
         }
         private void UpdateSpeed()
         {
-            speedText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Speed).ToString();
+            speedText.text = playerCharacter.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Speed).ToString();
         }
         private void UpdateStrength()
         {
-            strengthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Strength).ToString();
+            strengthText.text = playerCharacter.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Strength).ToString();
         }
         private void UpdateMagic()
         {
-            magicText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Magic).ToString();
+            magicText.text = playerCharacter.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Magic).ToString();
         }
         private void UpdateDexterity()
         {
-            dexterityText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Dexterity).ToString();
+            dexterityText.text = playerCharacter.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Dexterity).ToString();
         }
     }
 }

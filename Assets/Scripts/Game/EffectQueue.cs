@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Project.GameNode;
 using Project.GameplayEffects;
-using UnityEngine;
 
 namespace Project
 {
@@ -25,45 +24,29 @@ namespace Project
 
     public class EffectQueue
     {
-        public List<GameplayEffectStrategy> queue = new();
-        public Dictionary<GameplayEffectStrategy, EffectReferences> registeredEffects = new();
+        public List<GameplayEffectStrategy> queue = new List<GameplayEffectStrategy>();
         private int currentEffectIndex;
         private bool currentEffectHasStarted = false;
+        public event Action OnResolveQueueStart;
+        public event Action OnResolveQueueEnd;
+        public bool QueueNeedsToBeResolved => queue.Count > 0;
+        public bool ResolvingQueue = false;
 
-        public bool QueueEmpty => queue.Count == 0;
-
-        public void QueueEffect(GameplayEffectStrategy effect, Node user, Node target)
-        {
-            queue.Add(effect);
-            EffectReferences references = new EffectReferences(user, target);
-            registeredEffects.Add(effect, references);
-        }
-
-        public void RemoveEffect(GameplayEffectStrategy effect)
-        {
-            if (queue.Contains(effect))
-            {
-                queue.Remove(effect);
-                registeredEffects.Remove(effect);
-            }
-        }
-        public void ClearQueue()
-        {
-            queue = new();
-            registeredEffects = new();
-            currentEffectIndex = 0;
-        }
         public GameplayEffectStrategy GetCurrentEffect()
         {
             if (queue != null) return queue[currentEffectIndex];
             return null;
         }
 
-        public event Action OnResolveQueueStart;
-        public event Action OnResolveQueueEnd;
-        public bool ResolvingQueue = false;
+        public void AddEffect(GameplayEffectStrategy effect) => queue.Add(effect);
+        public void RemoveEffect(GameplayEffectStrategy effect) { if (queue.Contains(effect)) queue.Remove(effect); }
+        public void ClearQueue()
+        {
+            queue = new();
+            currentEffectIndex = 0;
+        }
 
-        private Status IterateQueue()
+        private Status IterateThroughQueue()
         {
             while (currentEffectIndex < queue.Count)
             {
@@ -72,36 +55,35 @@ namespace Project
                 registeredEffects.TryGetValue(currentEffect, out references);
                 if (!currentEffectHasStarted)
                 {
-                    currentEffect.StartEffect(references.User, references.Target);
+                    queue[currentEffectIndex].StartEffect();
                     currentEffectHasStarted = true;
                 }
-                Status status = currentEffect.ResolveEffect(references.User, references.Target);
+                Status status = queue[currentEffectIndex].ResolveEffect();
                 if (status != Status.Complete)
                 {
                     return status;
                 }
-                currentEffect.ResetEffect(references.User, references.Target);
+                queue[currentEffectIndex].ResetEffect();
                 currentEffectIndex++;
                 currentEffectHasStarted = false;
             }
             return Status.Complete;
         }
 
-        public void Update()
+        public void ResolveQueue()
         {
-            // ResolveQueue();
+            if (QueueNeedsToBeResolved)
+            {
+                ResolvingQueue = true;
+                OnResolveQueueStart?.Invoke();
+            }
         }
 
-        public void ResolveQueue(Action callback)
+        public void Update()
         {
-            if (queue.Count > 0)
+            if (ResolvingQueue)
             {
-                if (!ResolvingQueue)
-                {
-                    OnResolveQueueStart?.Invoke();
-                    ResolvingQueue = true;
-                }
-                Status status = IterateQueue();
+                Status status = IterateThroughQueue();
                 if (status == Status.Complete)
                 {
                     OnResolveQueueEnd?.Invoke();

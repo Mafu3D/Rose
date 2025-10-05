@@ -5,27 +5,31 @@ namespace Project
 {
     public class Choice<T>
     {
-        List<T> choiceItems;
-        public bool ItemHasBeenChosen;
-        Action<T> onChooseCallback;
+        public List<T> Items { get; private set; }
+        public bool ItemHasBeenChosen { get; private set; }
+        public bool ChooseMultiple { get; private set; }
+        public int NumberOfChoices => Items.Count;
+        private Action<T> onChooseCallback;
 
-        public Choice(List<T> items, Action<T> callback)
+        public Choice(List<T> items, Action<T> callback, bool chooseMultiple = false)
         {
-            this.choiceItems = items;
+            this.Items = items;
+            this.ChooseMultiple = chooseMultiple;
             onChooseCallback = callback;
         }
 
         public void ChooseItem(int index)
         {
-            if (!ItemHasBeenChosen && index < choiceItems.Count)
+            if (ItemHasBeenChosen && !ChooseMultiple) return;
+            if (index < Items.Count)
             {
-                T item = choiceItems[index];
+                T item = Items[index];
                 onChooseCallback(item);
                 ItemHasBeenChosen = true;
             }
         }
 
-        public T GetItem(int i) => i < choiceItems.Count ? choiceItems[i] : default;
-        public List<T> GetAllItems() => choiceItems;
+        public T GetItem(int i) => i < Items.Count ? Items[i] : default;
+        public List<T> GetAllItems() => Items;
     }
 }

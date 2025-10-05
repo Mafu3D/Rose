@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Project;
 using UnityEngine;
-using Project.GameNode;
-using Project.GameNode.Hero;
+using Project.GameTiles;
 using System.IO;
 
 namespace Project
@@ -48,7 +47,7 @@ namespace Project
     {
         private Vector2 cellSize = new Vector2(1, 1);
 
-        private Dictionary<Cell, List<Node>> registeredCells = new();
+        private Dictionary<Cell, List<Tile>> registeredCells = new();
         private Dictionary<int, Cell> registeredKeys = new();
 
         private Dictionary<int, Cell> walkableCells = new();
@@ -89,12 +88,12 @@ namespace Project
             return walkableCells.TryGetValue(hash, out _);
         }
 
-        public bool AreNodesRegisteredToCell(Cell cell, bool excludeHeroes = true)
+        public bool AreTilesRegisteredToCell(Cell cell, bool excludeHeroes = true)
         {
-            List<Node> registeredNodes = GetNodesRegisteredToCell(cell);
-            if (registeredNodes.Count > 0)
+            List<Tile> registeredTiles = GetTilesRegisteredToCell(cell);
+            if (registeredTiles.Count > 0)
             {
-                if (registeredNodes.Count == 1 && excludeHeroes)
+                if (registeredTiles.Count == 1 && excludeHeroes)
                 {
                     return false;
                 }
@@ -103,32 +102,45 @@ namespace Project
             return false;
         }
 
-        public bool TryGetNodesRegisteredToCell(Cell cell, out List<Node> registeredNodes, bool excludeHeroes = true)
+        public bool TryGetTileesRegisteredToCell(Cell cell, out List<Tile> registeredTiles, bool excludeHeroes = true)
         {
-            registeredNodes = GetNodesRegisteredToCell(cell, excludeHeroes);
-            if (registeredNodes.Count > 0) return true;
+            registeredTiles = GetTilesRegisteredToCell(cell, excludeHeroes);
+            if (registeredTiles.Count > 0) return true;
             return false;
         }
 
-        private List<Node> GetNodesRegisteredToCell(Cell cell, bool excludeHeroes = true)
+        private List<Tile> GetTilesRegisteredToCell(Cell cell, bool excludeHeroes = true)
         {
-            List<Node> registeredNodes = new List<Node>();
+            List<Tile> registeredTiles = new List<Tile>();
             Cell registeredCell;
             registeredKeys.TryGetValue(cell.GetHashCode(), out registeredCell);
             if (registeredCell != null)
             {
-                List<Node> nodes;
-                registeredCells.TryGetValue(registeredCell, out nodes);
-                if (nodes != null)
+                List<Tile> tiles;
+                registeredCells.TryGetValue(registeredCell, out tiles);
+                if (tiles != null)
                 {
-                    if (excludeHeroes) nodes.RemoveAll(n => n is HeroNode);
-                    registeredNodes = nodes;
+                    if (excludeHeroes) tiles.RemoveAll(n => GameManager.Instance.Player.HeroTile);
+                    registeredTiles = tiles;
                 }
             }
-            return registeredNodes.OrderByDescending(x => x.NodeData.Priority).ToList();
+            return registeredTiles.OrderByDescending(x => x.TileData.ActivationPriority).ToList();
         }
 
-        public void RegisterToCell(Cell cell, Node node)
+        public List<Tile> GetAllRegisteredTiles()
+        {
+            List<Tile> registeredTiles = new();
+            foreach (KeyValuePair<Cell, List<Tile>> cells in registeredCells)
+            {
+                foreach (Tile tile in cells.Value)
+                {
+                    registeredTiles.Add(tile);
+                }
+            }
+            return registeredTiles;
+        }
+
+        public void RegisterToCell(Cell cell, Tile tile)
         {
             Cell registeredCell;
             int hash = cell.GetHashCode();
@@ -144,17 +156,17 @@ namespace Project
 
             if (!registeredCells.ContainsKey(registeredCell))
             {
-                registeredCells.Add(registeredCell, new List<Node>());
+                registeredCells.Add(registeredCell, new List<Tile>());
             }
 
-            if (!registeredCells[registeredCell].Contains(node))
+            if (!registeredCells[registeredCell].Contains(tile))
             {
-                registeredCells[registeredCell].Add(node);
+                registeredCells[registeredCell].Add(tile);
             }
 
         }
 
-        public void DeregisterFromCell(Cell cell, Node node)
+        public void DeregisterFromCell(Cell cell, Tile tile)
         {
             int hash = cell.GetHashCode();
             if (registeredKeys.ContainsKey(hash))
@@ -163,9 +175,9 @@ namespace Project
 
                 if (registeredCells.ContainsKey(registeredCell))
                 {
-                    if (registeredCells[registeredCell].Contains(node))
+                    if (registeredCells[registeredCell].Contains(tile))
                     {
-                        registeredCells[registeredCell].Remove(node);
+                        registeredCells[registeredCell].Remove(tile);
                     }
                     if (registeredCells[registeredCell].Count == 0)
                     {
@@ -204,7 +216,7 @@ namespace Project
             return WorldPositionToCell(worldPosition);
         }
 
-        public List<Cell> GetPathBetweenTwoCells(Cell start, Cell end)
+        public List<Cell> GetPathBetweenTwoCells(Cell start, Cell end, bool debug = false)
         {
             Pathfinder pathfinder = new Pathfinder(this, start, end);
             return pathfinder.CalculatePath();

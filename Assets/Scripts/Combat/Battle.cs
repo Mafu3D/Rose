@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Project.GameNode;
-using Project.GameNode.Hero;
+using Project.GameTiles;
+using Project.Items;
 using UnityEngine;
+using Project.GameLoop;
+using Project.States;
+using Project.Combat.CombatStates;
+using Project.Combat.CombatActions;
+using Project.Sequences;
 
 namespace Project.Combat
 {
@@ -11,250 +16,112 @@ namespace Project.Combat
         public bool BattleConcluded;
         public Resolution Resolution;
         public string Message;
-
-        public BattleReport(bool battleConcluded, Resolution resolution, string message)
+        public string Log;
+        public BattleReport(bool battleConcluded, Resolution resolution, string message, string log)
         {
             this.BattleConcluded = battleConcluded;
             this.Resolution = resolution;
             this.Message = message;
+            this.Log = log;
         }
     }
 
     public enum Resolution
     {
         None,
-        Victory,
-        Defeat,
         RanAway,
-        Stole
-    }
-
-    public enum BattlePhase
-    {
-        NotStarted,
-        Prebattle,
-        Run,
-        Steal,
-        Start,
-        FirstTurn,
-        SecondTurn,
-        PostBattle,
-        Conclude
-    }
-
-    public enum PrebattleActions
-    {
-        Fight,
-        Steal,
-        Run
+        Stole,
+        Defeat,
+        Victory
     }
 
     public class Battle
     {
-        public readonly Combatant Hero;
-        public readonly Combatant Enemy;
+        public readonly Character Hero;
+        public readonly Character Enemy;
         public int Round;
         public int Turn;
-        Combatant[] combatantOrder = new Combatant[2];
-        BattlePhase phase = BattlePhase.NotStarted;
+        Character[] combatantOrder = new Character[2];
+        Character activeCombatant => combatantOrder[Turn - 1];
 
-        BattleReport latestBattleReport = new BattleReport();
+        Action<BattleReport, Character, Character> finishedCallback;
 
-        Action<BattleReport, Combatant, Combatant> finishedCallback;
-        public BattleReport GetLatestBattleReport() => latestBattleReport;
-        public BattlePhase GetPhase() => phase;
+        public string BattleLog { get; private set; } = "";
+        public event Action<string> OnBattleLogUpdated;
 
-        public Choice<PrebattleActions> PreBattleChoice;
-
-        public event Action<string> OnBattleMessage;
-        public event Action<BattlePhase> OnPhaseChanged;
-        public event Action OnChooseFight;
-        public event Action OnChooseRun;
-        public event Action OnChooseSteal;
+        public event Action OnBattleInitialize;
+        public event Action OnBattleStart;
+        public event Action<BattleReport> OnBattleDecided;
+        public event Action OnNextActionEvent;
+        public event Action GoToNextState;
 
         private bool ranAway;
         private bool avoidedRunDamage;
 
+        public StateMachine StateMachine { get; private set; }
+        public CombatQueue CombatQueue { get; private set; }
+        public Sequencer CombatSequence { get; private set; }
 
-        public Battle(Combatant hero, Combatant enemy, Action<BattleReport, Combatant, Combatant> finished)
+        private bool debugMode;
+
+
+        public Battle(Character hero, Character enemy, Action<BattleReport, Character, Character> finished, bool debugMode = false)
         {
             this.Hero = hero;
             this.Enemy = enemy;
             finishedCallback = finished;
+            this.debugMode = debugMode;
+
+            StateMachine = new StateMachine();
+            CombatQueue = new CombatQueue();
+            CombatQueue.OnActionExecuted += LogAction;
         }
 
-        public void InitiateBattle()
+        #region Initiate
+
+        public void InitializeFight()
         {
-            phase = BattlePhase.Prebattle;
-            List<PrebattleActions> prebattleChoices = new List<PrebattleActions> { PrebattleActions.Fight, PrebattleActions.Steal, PrebattleActions.Run };
-            PreBattleChoice = new Choice<PrebattleActions>(prebattleChoices, ResolvePrebattleChoice);
-            OnPhaseChanged?.Invoke(phase);
-
+            StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
+            OnBattleInitialize?.Invoke();
         }
 
-        private void ResolvePrebattleChoice(PrebattleActions actionChoice)
+        #endregion
+
+        public void Update()
         {
-            switch (actionChoice)
-            {
-                case PrebattleActions.Fight:
-                    ChooseFight();
-                    break;
-                case PrebattleActions.Steal:
-                    ChooseSteal();
-                    break;
-                case PrebattleActions.Run:
-                    ChooseRun();
-                    break;
-            }
-            PreBattleChoice = null;
+            StateMachine.Update();
         }
 
-        private void ChooseFight()
-        {
-            Debug.Log("I choose to fight!");
-            StartBattle();
-        }
-
-        private void ChooseSteal()
-        {
-            Debug.Log("I choose to steal!");
-            phase = BattlePhase.Steal;
-            OnPhaseChanged?.Invoke(phase);
-            OnChooseSteal?.Invoke();
-        }
-
-        private void ChooseRun()
-        {
-            Debug.Log("I choose to run!!!");
-            RunAway();
-        }
-
-        private void RunAway()
-        {
-            ranAway = true;
-            phase = BattlePhase.Run;
-            if (CheckIfHeroHasHigherSpeed())
-            {
-                avoidedRunDamage = true;
-                LogBattleAction("avoided damage"); // message isn't actually used
-            }
-            else
-            {
-                avoidedRunDamage = false;
-                DoAttack(Enemy, Hero);
-            }
-            OnChooseRun?.Invoke();
-            OnPhaseChanged?.Invoke(phase);
-        }
-
-        private bool CheckIfHeroHasHigherSpeed()
+        #region Run
+        public void RunAway()
         {
             int heroSpeed = Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Speed);
             int enemySpeed = Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Speed);
-            if (heroSpeed > enemySpeed)
+
+            ranAway = true;
+
+            if (heroSpeed < enemySpeed)
             {
-                return true;
+                avoidedRunDamage = false;
+                QueueAttack(Enemy, Hero);
             }
-            return false;
-        }
-
-        public void Proceed()
-        {
-            ProcessBattle();
-            Debug.Log(phase);
-        }
-
-        private BattlePhase ProcessBattle()
-        {
-            switch (phase)
+            else
             {
-                case BattlePhase.Prebattle:
-                    return phase;
-
-                case BattlePhase.Start:
-                    phase = BattlePhase.FirstTurn;
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.FirstTurn:
-                    IncrementTurn();
-                    DoAttackForTurn(0);
-
-                    if (latestBattleReport.BattleConcluded)
-                    {
-                        phase = BattlePhase.PostBattle;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    else
-                    {
-                        phase = BattlePhase.SecondTurn;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    return phase;
-
-                case BattlePhase.SecondTurn:
-                    IncrementTurn();
-                    DoAttackForTurn(1);
-
-                    if (latestBattleReport.BattleConcluded)
-                    {
-                        phase = BattlePhase.PostBattle;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    else
-                    {
-                        NewRound();
-                        phase = BattlePhase.FirstTurn;
-                        OnPhaseChanged?.Invoke(phase);
-                    }
-                    return phase;
-
-                case BattlePhase.Run:
-                    Debug.Log("You ran away!");
-                    phase = BattlePhase.PostBattle;
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.Steal:
-                    Debug.Log("You got some gold!");
-                    phase = BattlePhase.PostBattle;
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.PostBattle:
-                    phase = BattlePhase.Conclude;
-                    ConcludeBattle();
-                    OnPhaseChanged?.Invoke(phase);
-                    return phase;
-
-                case BattlePhase.Conclude:
-
-                    return phase;
+                avoidedRunDamage = true;
             }
-            return phase;
+
+            // StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
         }
 
-        private void StartBattle()
-        {
-            phase = BattlePhase.Start;
-            OnPhaseChanged?.Invoke(phase);
-            Round = 0;
-            Turn = 0;
-            OnChooseFight?.Invoke();
-            OnPhaseChanged?.Invoke(phase);
-            NewRound();
-        }
+        #endregion
 
-        private void NewRound()
-        {
-            Round += 1;
-            ResetTurns();
-            DetermineCombatantOrder();
-        }
+        #region Steal
 
-        private void DetermineCombatantOrder()
+        #endregion
+
+        public void DetermineCombatantOrder()
         {
-            combatantOrder = new Combatant[2];
+            combatantOrder = new Character[2];
 
             if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Speed) > Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Speed))
             {
@@ -268,42 +135,245 @@ namespace Project.Combat
             }
         }
 
-        private void IncrementTurn() => Turn += 1;
-        private void ResetTurns() => Turn = 0;
-
-        private void DoAttackForTurn(int turn)
+        private Character GetTarget(Character combatant)
         {
-            if (turn == 0) // First turn
+            for (int i = 0; i < combatantOrder.Length; i++)
             {
-                DoAttack(combatantOrder[0], combatantOrder[1]);
+                if (i == 0)
+                {
+                    if (combatantOrder[i] == combatant) return combatantOrder[1];
+                }
+                else
+                {
+                    if (combatantOrder[i] == combatant) return combatantOrder[0];
+                }
             }
-            else // Second turn
-            {
-                DoAttack(combatantOrder[1], combatantOrder[0]);
-            }
+            return null;
         }
 
-        private void DoAttack(Combatant attacker, Combatant defender) {
-            int attackValue;
-            attacker.Attack(out attackValue);
+        #region Battle Loop
+
+        public void NextAction()
+        {
+            bool proceed = true;
+
+            while (proceed)
+            {
+                if (CombatQueue.QueueNeedsToBeResolved)
+                {
+                    if (debugMode) Debug.Log("Next Action: Exeucting item in queue...");
+                    CombatQueue.ExecuteNextInQueue();
+                    proceed = false;
+                }
+                else
+                {
+                    if (debugMode) Debug.Log("Next Action: Going to next state...");
+                    GoToNextState?.Invoke();
+                }
+                OnNextActionEvent?.Invoke();
+                if (CheckForResolution())
+                {
+                    if (debugMode) Debug.Log("Battle has been decided");
+                    StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
+                    proceed = false;
+                }
+            }
+
+        }
+
+        public void StartBattle()
+        {
+            Round = 0;
+            Turn = 0;
+
+            DetermineCombatantOrder();
+            foreach (Character combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnCombatStartStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+
+            if (debugMode) Debug.Log($"Battle Start - InQueue: {CombatQueue.Queue.Count}");
+
+            OnBattleStart?.Invoke();
+        }
+
+        public void StartNewRound()
+        {
+            Round += 1;
+            Turn = 0;
+
+            DetermineCombatantOrder();
+            foreach (Character combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+
+            if (debugMode) Debug.Log($"Start New Round: {Round}, {combatantOrder[0].DisplayName} goes first - InQueue: {CombatQueue.Queue.Count}");
+        }
+
+        public void StartNewTurn()
+        {
+            Turn += 1;
+            if (activeCombatant.Inventory != null)
+            {
+                List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                foreach (Item item in items)
+                {
+                    foreach (CombatActionBaseData actionData in item.ItemData.OnTurnStartStrategies)
+                    {
+                        actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
+                    }
+                }
+            }
+
+            if (debugMode) Debug.Log($"Start New Turn: {Turn}, {activeCombatant.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
+        }
+
+        public void EndTurn()
+        {
+            if (activeCombatant.Inventory != null)
+            {
+                List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                foreach (Item item in items)
+                {
+                    foreach (CombatActionBaseData actionData in item.ItemData.OnTurnEndStrategies)
+                    {
+                        actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
+                    }
+                }
+            }
+
+            if (debugMode) Debug.Log($"End Turn: {Turn} - InQueue: {CombatQueue.Queue.Count}");
+        }
+
+        public void EndRound()
+        {
+            foreach (Character combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnRoundEndStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+
+            if (debugMode) Debug.Log($"End Round: {Round} - InQueue: {CombatQueue.Queue.Count}");
+        }
+
+        public void QueueAttackForTurn()
+        {
+            Character attacker = activeCombatant;
+            Character defender = GetTarget(activeCombatant);
+
+            QueueAttack(attacker, defender);
+        }
+
+        private void QueueAttack(Character attacker, Character defender)
+        {
+            int attackValue = attacker.GetAttackValue();
             HitReport hitReport = new HitReport(attackValue);
-            defender.ReceiveAttack(hitReport);
-            LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
+
+            CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
+            {
+                defender.ReceiveAttack(hitReport);
+                if (attacker.Inventory != null)
+                {
+                    List<Item> items = attacker.Inventory.GetHeldItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, attacker, GetTarget(attacker));
+                        }
+                    }
+                }
+                if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
+            },
+            $"{defender.DisplayName} took {hitReport.Damage} dmg");
+            CombatQueue.AddAction(attackAction);
         }
 
-        private void LogBattleAction(string message)
+        public void EndBattle()
         {
-            OnBattleMessage?.Invoke(message);
-            CreateBattleReport();
+            BattleReport battleReport = CreateBattleReport();
+            OnBattleDecided?.Invoke(battleReport);
+            finishedCallback(battleReport, Hero, Enemy);
         }
 
-        private void CreateBattleReport()
+        public void CloseBattle()
+        {
+            CombatQueue.OnActionExecuted -= LogAction;
+            GameManager.Instance.BattleManager.EndActiveBattle();
+        }
+
+        #endregion
+
+        #region Other
+
+        private void LogAction(string message)
+        {
+            BattleLog += $"{message} \n";
+            OnBattleLogUpdated?.Invoke(BattleLog);
+        }
+
+        private bool CheckForResolution()
+        {
+            if (ranAway) return true;
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0
+                || Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private BattleReport CreateBattleReport()
         {
             bool battleConcluded;
             Resolution resolution;
             string message;
 
-            if (ranAway)
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
+                battleConcluded = true;
+                resolution = Resolution.Defeat;
+                // message = $"{Enemy.DisplayName} has defeated {Hero.DisplayName}";
+                message = $"{Hero.DisplayName} was slain by a {Enemy.DisplayName}";
+            }
+            else if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
+                battleConcluded = true;
+                resolution = Resolution.Victory;
+                // message = $"{Hero.DisplayName} has defeated {Enemy.DisplayName}";
+                message = $"{Hero.DisplayName} has defeated the {Enemy.DisplayName}";
+            }
+            else if (ranAway)
             {
                 battleConcluded = true;
                 resolution = Resolution.RanAway;
@@ -318,34 +388,14 @@ namespace Project.Combat
             }
             else
             {
-                if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
-                {
-                    battleConcluded = true;
-                    resolution = Resolution.Defeat;
-                    // message = $"{Enemy.DisplayName} has defeated {Hero.DisplayName}";
-                    message = $"{Hero.DisplayName} was slain by a {Enemy.DisplayName}";
-                }
-                else if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
-                {
-                    battleConcluded = true;
-                    resolution = Resolution.Victory;
-                    // message = $"{Hero.DisplayName} has defeated {Enemy.DisplayName}";
-                    message = $"{Hero.DisplayName} has defeated the {Enemy.DisplayName}";
-                }
-                else
-                {
-                    battleConcluded = false;
-                    resolution = Resolution.None;
-                    message = $"The battle rages on!";
-                }
+                battleConcluded = false;
+                resolution = Resolution.None;
+                message = $"The battle rages on!";
             }
 
-            latestBattleReport = new BattleReport(battleConcluded, resolution, message);
+            return new BattleReport(battleConcluded, resolution, message, BattleLog);
         }
 
-        private void ConcludeBattle()
-        {
-            finishedCallback(latestBattleReport, Hero, Enemy);
-        }
+        #endregion
     }
 }

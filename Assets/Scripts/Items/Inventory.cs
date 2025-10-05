@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Project.GameNode;
+using Project.Combat;
+using Project.GameTiles;
 using UnityEngine;
 
 namespace Project.Items
@@ -15,13 +16,13 @@ namespace Project.Items
         private Item equippedWeapon;
         private List<Item> heldItems = new();
 
-        Node ownerNode;
+        Tile owner;
 
         public event Action OnInventoryChanged;
 
         void Awake()
         {
-            ownerNode = GetComponent<Node>();
+            owner = GetComponent<Tile>();
         }
 
         void Start()
@@ -44,7 +45,7 @@ namespace Project.Items
 
             equippedWeapon = item;
 
-            item.RegisterToNode(ownerNode);
+            item.RegisterToNode(owner);
             item.OnEquip();
 
             OnInventoryChanged?.Invoke();
@@ -57,7 +58,7 @@ namespace Project.Items
             // Check for max slots
 
             heldItems.Add(item);
-            item.RegisterToNode(ownerNode);
+            item.RegisterToNode(owner);
             item.OnEquip();
 
             OnInventoryChanged?.Invoke();

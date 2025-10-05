@@ -1,12 +1,17 @@
+using System;
+using System.Collections.Generic;
 using Project.Combat;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.UI.BattleUI
 {
-    public class BattleUI : Singleton<BattleUI>
+    public class BattleUI : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager;
+
         [Header("Main")]
         [SerializeField] GameObject MainContainer;
 
@@ -20,22 +25,48 @@ namespace Project.UI.BattleUI
         [Header("During Battle")]
         [SerializeField] GameObject ActiveBattleContainer;
         [SerializeField] TMP_Text BattleLog;
+        [SerializeField] int MaxLogLength = 6;
 
         [Header("Postbattle")]
         [SerializeField] GameObject PostbattleContainer;
         [SerializeField] TMP_Text ResultTitleText;
         [SerializeField] TMP_Text ResultMessageText;
 
-        Battle activeBattle => BattleManager.Instance.ActiveBattle;
+        [Header("Debug")]
+        [SerializeField] bool debugState = true;
+        [SerializeField] TMP_Text stateDebugText;
 
-        protected override void Awake()
+
+        Battle activeBattle => gameManager.BattleManager.ActiveBattle;
+
+        void Awake()
         {
-            base.Awake();
+            gameManager.OnGameStartEvent += Initialize;
             MainContainer.SetActive(false);
             BattleLog.text = "";
         }
 
-        public void OpenBattleUI()
+        void Update()
+        {
+            // TEMP: REMOVE!
+            if (debugState && gameManager.BattleManager.IsActiveBattle)
+            {
+                stateDebugText.gameObject.SetActive(true);
+                stateDebugText.text = gameManager.BattleManager.ActiveBattle.StateMachine.CurrentState.Name;
+            }
+            else
+            {
+                stateDebugText.gameObject.SetActive(false);
+            }
+        }
+
+        private void Initialize()
+        {
+            gameManager.BattleManager.OnNewBattleInitiated += OpenBattleUI;
+            gameManager.BattleManager.OnBattleConcluded += CloseBattleUI;
+        }
+
+        private void OpenBattleUI()
         {
             MainContainer.SetActive(true);
 
@@ -44,57 +75,41 @@ namespace Project.UI.BattleUI
 
             BattleLog.text = "";
 
-            activeBattle.OnBattleMessage += UpdateBattleLog;
-            activeBattle.OnPhaseChanged += UpdateBattleUI;
+            activeBattle.OnBattleInitialize += ShowPreBattleUI;
+            activeBattle.OnBattleStart += ShowActiveBattleUI;
+            activeBattle.OnBattleDecided += ShowPostBattleUI;
+            activeBattle.OnBattleLogUpdated += UpdateBattleLog;
             // activeBattle.OnChooseRun += UpdateBattleUI;
             // activeBattle.OnChooseSteal += UpdateBattleUI;
         }
 
-        public void UpdateBattleUI(BattlePhase phase)
-        {
-            switch (phase)
-            {
-                case BattlePhase.Prebattle:
-                    ShowPreBattleUI();
-                    break;
-
-                case BattlePhase.Start:
-                // case BattlePhase.FirstTurn:
-                // case BattlePhase.SecondTurn:
-                    ShowActiveBattleUI();
-                    break;
-
-                case BattlePhase.PostBattle:
-                    ShowPostBattleUI();
-                    break;
-            }
-        }
-
-        private void ShowPostBattleUI()
+        private void ShowPostBattleUI(BattleReport battleReport)
         {
             PrebattleContainer.SetActive(false);
             ActiveBattleContainer.SetActive(false);
             PostbattleContainer.SetActive(true);
 
-            switch (BattleManager.Instance.ActiveBattle.GetLatestBattleReport().Resolution)
+            string title;
+            switch (battleReport.Resolution)
             {
-                case Combat.Resolution.Victory:
-                    ResultTitleText.text = "Victory";
-                    break;
-                case Combat.Resolution.Defeat:
-                    ResultTitleText.text = "Defeat";
-                    break;
                 case Combat.Resolution.RanAway:
-                    ResultTitleText.text = "Ran Away";
+                    title = "Ran Away!";
                     break;
                 case Combat.Resolution.Stole:
-                    ResultTitleText.text = "You Stole!";
+                    title = "You Stole!";
+                    break;
+                case Combat.Resolution.Defeat:
+                    title = "You were defeated!";
+                    break;
+                case Combat.Resolution.Victory:
+                    title = "You won!";
                     break;
                 default:
-                    ResultTitleText.text = "No Resolution";
+                    title = "Something went wrong";
                     break;
             }
-            ResultMessageText.text = BattleManager.Instance.ActiveBattle.GetLatestBattleReport().Message;
+            ResultTitleText.text = title;
+            ResultMessageText.text = battleReport.Message;
         }
 
         private void ShowActiveBattleUI()
@@ -111,25 +126,28 @@ namespace Project.UI.BattleUI
             PostbattleContainer.SetActive(false);
         }
 
-        public void CloseBattleUI()
+        private void CloseBattleUI()
         {
-
-            activeBattle.OnBattleMessage -= UpdateBattleLog;
-            activeBattle.OnPhaseChanged -= UpdateBattleUI;
+            activeBattle.OnBattleInitialize -= ShowPreBattleUI;
+            activeBattle.OnBattleStart -= ShowActiveBattleUI;
+            activeBattle.OnBattleDecided -= ShowPostBattleUI;
+            activeBattle.OnBattleLogUpdated -= UpdateBattleLog;
             // activeBattle.OnChooseRun -= UpdateBattleUI;
             // activeBattle.OnChooseSteal -= UpdateBattleUI;
 
             MainContainer.SetActive(false);
         }
 
-        void UpdateBattleLog(string message)
+        void UpdateBattleLog(string battleLog)
         {
-            // int lines = BattleLog.text.Split('\n').Length;
+            string[] lines = battleLog.Split('\n');
+            string truncatedLog = "";
+
+            int startingI = Math.Clamp(lines.Length - MaxLogLength, 0, 999999);
+            for (int i = startingI; i < lines.Length; i++) truncatedLog += $"{lines[i]} \n";
             LeftCombatantUI.UpdateStats();
             RightCombatantUI.UpdateStats();
-            BattleLog.text += $"{message} \n";
+            BattleLog.text = truncatedLog;
         }
-
-
     }
 }

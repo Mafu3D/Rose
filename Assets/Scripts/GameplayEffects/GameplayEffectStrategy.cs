@@ -1,12 +1,12 @@
-using Project.GameNode;
+using Project.GameTiles;
 using UnityEngine;
 
 namespace Project.GameplayEffects
 {
     public abstract class GameplayEffectStrategy : ScriptableObject
     {
-        public abstract Status StartEffect(Node user, Node target);
-        public abstract Status ResolveEffect(Node user, Node target);
-        public abstract void ResetEffect(Node user, Node target);
+        public abstract Status StartEffect();
+        public abstract Status ResolveEffect();
+        public abstract void ResetEffect();
     }
 }

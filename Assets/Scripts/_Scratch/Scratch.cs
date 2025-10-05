@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Project;
 using Project.Decks;
-using Project.GameNode;
 using Project.Items;
 using UnityEngine;
 
@@ -12,8 +11,6 @@ public class Scratch : MonoBehaviour
     [SerializeField] ItemData item;
     [SerializeField] List<ItemData> items;
     [SerializeField] CardData cardData;
-    [SerializeField] Node startNode;
-    [SerializeField] Node endNode;
     Card card;
     bool lmbClicked = false;
     bool rmbClicked = false;
@@ -25,7 +22,6 @@ public class Scratch : MonoBehaviour
     float time;
     bool hasExecuted = false;
 
-
     void Start()
     {
 
@@ -33,13 +29,16 @@ public class Scratch : MonoBehaviour
 
     void Update()
     {
+        return;
+
         if (firstUpdate)
         {
             FirstUpdate();
             firstUpdate = false;
         }
-        return;
         time += Time.deltaTime;
+        // Debug.Log(time);
+        return;
         if (time > timer && !hasExecuted)
         {
             card = new Card(cardData);
@@ -102,18 +101,18 @@ public class Scratch : MonoBehaviour
 
         return;
 
-        Cell start = GameManager.Instance.Grid.WorldPositionToCell(startNode.transform.position);
-        GameObject startGO = Instantiate(hitPointObject, new Vector3(start.Center.x, start.Center.y, 0), Quaternion.identity);
-        startGO.name = "start";
-        Cell end = GameManager.Instance.Grid.WorldPositionToCell(endNode.transform.position);
-        GameObject endGO = Instantiate(hitPointObject, new Vector3(end.Center.x, end.Center.y, 0), Quaternion.identity);
-        endGO.name = "end";
-        List<Cell> path = GameManager.Instance.Grid.GetPathBetweenTwoCells(start, end);
-        Debug.Log(path.Count);
-        foreach (Cell cell in path)
-        {
-            Instantiate(hitPointObject, new Vector3(cell.Center.x, cell.Center.y, 0), Quaternion.identity);
-        }
+        // Cell start = GameManager.Instance.Grid.WorldPositionToCell(startNode.transform.position);
+        // GameObject startGO = Instantiate(hitPointObject, new Vector3(start.Center.x, start.Center.y, 0), Quaternion.identity);
+        // startGO.name = "start";
+        // Cell end = GameManager.Instance.Grid.WorldPositionToCell(endNode.transform.position);
+        // GameObject endGO = Instantiate(hitPointObject, new Vector3(end.Center.x, end.Center.y, 0), Quaternion.identity);
+        // endGO.name = "end";
+        // List<Cell> path = GameManager.Instance.Grid.GetPathBetweenTwoCells(start, end);
+        // Debug.Log(path.Count);
+        // foreach (Cell cell in path)
+        // {
+        //     Instantiate(hitPointObject, new Vector3(cell.Center.x, cell.Center.y, 0), Quaternion.identity);
+        // }
     }
 
     private void CheckWorldPosForCell()

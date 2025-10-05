@@ -2,53 +2,50 @@ namespace Project.GameplayEffects
 {
     using Project.Attributes;
     using Project.Combat;
-    using Project.GameNode;
+    using Project.GameTiles;
+    using Project.Items;
+    using Unity.VisualScripting;
     using Unity.VisualScripting.Antlr3.Runtime.Misc;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "NewStartBattle", menuName = "Effects/Start Battle", order = 1)]
     public class StartBattle : GameplayEffectStrategy
     {
-        [SerializeField] NodeData enemyNodeData;
+        [SerializeField] CharacterData enemyCharacterData;
         [SerializeField] GameObject enemyNodePrefab;
 
-        public override void ResetEffect(Node user, Node target)
+        public override void ResetEffect()
         {
         }
 
-        public override Status ResolveEffect(Node user, Node target)
+        public override Status ResolveEffect()
         {
-            if (BattleManager.Instance.IsActiveBattle) return Status.Running;
+            if (GameManager.Instance.BattleManager.IsActiveBattle) return Status.Running;
             return Status.Complete;
         }
 
-        public override Status StartEffect(Node user, Node target)
+        public override Status StartEffect()
         {
-            Combatant left = new Combatant(GameManager.Instance.Hero.Attributes,
-                                           GameManager.Instance.Hero.NodeData.DisplayName,
-                                           GameManager.Instance.Hero.NodeData.Description,
-                                           GameManager.Instance.Hero.NodeData.Sprite);
+            Character left = GameManager.Instance.Hero.Character;
 
-            CharacterAttributes enemyAttributes = new CharacterAttributes(enemyNodeData.AttributesData);
-            Combatant right = new Combatant(enemyAttributes,
-                                            enemyNodeData.DisplayName,
-                                            enemyNodeData.Description,
-                                            enemyNodeData.Sprite);
+            Character right = new Character(enemyCharacterData, null);
 
-            BattleManager.Instance.StartNewBattle(left, right, BattleConclusion);
+            GameManager.Instance.BattleManager.StartNewBattle(left, right, BattleConclusion);
             return Status.Running;
         }
 
-        private void BattleConclusion(BattleReport battleReport, Combatant left, Combatant right)
+        private void BattleConclusion(BattleReport battleReport, Character left, Character right)
         {
             // TODO: Create any nodes if the battle wasnt won
             switch (battleReport.Resolution)
             {
                 case Combat.Resolution.RanAway:
                 case Combat.Resolution.Stole:
+                    Debug.Log("instantiating new tile");
                     GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
-                    Node node = gameObject.GetComponent<Node>();
-                    node.RegisterToGrid();
+                    Tile tile = gameObject.GetComponent<Tile>();
+                    tile.RegisterToGrid();
+                    tile.RegisterCharacter(right);
                     break;
             }
         }

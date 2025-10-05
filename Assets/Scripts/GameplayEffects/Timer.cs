@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Project.GameNode;
+using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
 
@@ -11,12 +11,12 @@ namespace Project.GameplayEffects
         [SerializeField] float timer;
         float time;
 
-        public override void ResetEffect(Node user, Node target)
+        public override void ResetEffect()
         {
             time = 0f;
         }
 
-        public override Status ResolveEffect(Node user, Node target)
+        public override Status ResolveEffect()
         {
             if (time > timer)
             {
@@ -27,9 +27,8 @@ namespace Project.GameplayEffects
             return Status.Running;
         }
 
-        public override Status StartEffect(Node user, Node target)
+        public override Status StartEffect()
         {
-            Debug.Log($"{user.name} started a new timer for {timer} seconds!");
             time += Time.deltaTime;
             return Status.Running;
         }
