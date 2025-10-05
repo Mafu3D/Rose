@@ -46,10 +46,9 @@ namespace Project.Combat
 
         public event Action<string> OnBattleMessage;
 
-        public event Action OnPreBattleStart;
+        public event Action OnBattleInitialize;
         public event Action OnBattleStart;
-        public event Action OnBattleHasBeenDecided;
-        public event Action OnPostBattleStart;
+        public event Action<BattleReport> OnBattleDecided;
         public event Action OnNextActionEvent;
         public event Action GoToNextState;
 
@@ -78,10 +77,10 @@ namespace Project.Combat
 
         #region Initiate
 
-        public void StartPreBattle()
+        public void InitializeFight()
         {
             StateMachine.SetInitialState(new PreBattleState("Pre Battle", StateMachine, GameManager.Instance));
-            OnPreBattleStart?.Invoke();
+            OnBattleInitialize?.Invoke();
         }
 
         #endregion
@@ -164,7 +163,6 @@ namespace Project.Combat
                 if (CheckForResolution())
                 {
                     if (debugMode) Debug.Log("Battle has been decided");
-                    OnBattleHasBeenDecided?.Invoke();
                     StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
                     proceed = false;
                 }
@@ -309,7 +307,7 @@ namespace Project.Combat
         public void EndBattle()
         {
             BattleReport battleReport = CreateBattleReport();
-            OnPostBattleStart?.Invoke();
+            OnBattleDecided?.Invoke(battleReport);
             finishedCallback(battleReport, Hero, Enemy);
         }
 
@@ -333,11 +331,8 @@ namespace Project.Combat
 
         private bool CheckForResolution()
         {
-            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
-            {
-                return true;
-            }
-            else if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0
+                || Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
                 return true;
             }

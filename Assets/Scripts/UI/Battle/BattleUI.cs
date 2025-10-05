@@ -72,21 +72,41 @@ namespace Project.UI.BattleUI
 
             BattleLog.text = "";
 
-            activeBattle.OnPreBattleStart += ShowPreBattleUI;
+            activeBattle.OnBattleInitialize += ShowPreBattleUI;
             activeBattle.OnBattleStart += ShowActiveBattleUI;
-            activeBattle.OnPostBattleStart += ShowPostBattleUI;
+            activeBattle.OnBattleDecided += ShowPostBattleUI;
             activeBattle.OnBattleMessage += UpdateBattleLog;
             // activeBattle.OnChooseRun += UpdateBattleUI;
             // activeBattle.OnChooseSteal += UpdateBattleUI;
         }
 
-        private void ShowPostBattleUI()
+        private void ShowPostBattleUI(BattleReport battleReport)
         {
             PrebattleContainer.SetActive(false);
             ActiveBattleContainer.SetActive(false);
             PostbattleContainer.SetActive(true);
 
-            ResultTitleText.text = "Fix Me";
+            string title;
+            switch (battleReport.Resolution)
+            {
+                case Combat.Resolution.RanAway:
+                    title = "Ran Away!";
+                    break;
+                case Combat.Resolution.Stole:
+                    title = "You Stole!";
+                    break;
+                case Combat.Resolution.Defeat:
+                    title = "You were defeated!";
+                    break;
+                case Combat.Resolution.Victory:
+                    title = "You won!";
+                    break;
+                default:
+                    title = "Something went wrong";
+                    break;
+            }
+            ResultTitleText.text = title;
+            ResultMessageText.text = battleReport.Message;
         }
 
         private void ShowActiveBattleUI()
@@ -105,9 +125,9 @@ namespace Project.UI.BattleUI
 
         private void CloseBattleUI()
         {
-            activeBattle.OnPreBattleStart -= ShowPreBattleUI;
+            activeBattle.OnBattleInitialize -= ShowPreBattleUI;
             activeBattle.OnBattleStart -= ShowActiveBattleUI;
-            activeBattle.OnPostBattleStart -= ShowPostBattleUI;
+            activeBattle.OnBattleDecided -= ShowPostBattleUI;
             activeBattle.OnBattleMessage -= UpdateBattleLog;
             // activeBattle.OnChooseRun -= UpdateBattleUI;
             // activeBattle.OnChooseSteal -= UpdateBattleUI;

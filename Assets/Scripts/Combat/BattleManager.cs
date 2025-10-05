@@ -22,7 +22,7 @@ namespace Project.Combat
         {
             ActiveBattle = new Battle(left, right, finished, true);
             OnNewBattleInitiated?.Invoke();
-            ActiveBattle.StartPreBattle();
+            ActiveBattle.InitializeFight();
         }
 
         public void Update()
