@@ -146,7 +146,9 @@ namespace Project.UI.BattleUI
             int startingI = Math.Clamp(lines.Length - MaxLogLength, 0, 999999);
             for (int i = startingI; i < lines.Length; i++) truncatedLog += $"{lines[i]} \n";
             LeftCombatantUI.UpdateStats();
+            LeftCombatantUI.UpdateStatusEffects();
             RightCombatantUI.UpdateStats();
+            RightCombatantUI.UpdateStatusEffects();
             BattleLog.text = truncatedLog;
         }
     }

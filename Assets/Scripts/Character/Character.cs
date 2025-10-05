@@ -1,6 +1,7 @@
 using System;
 using Project.Attributes;
 using Project.Combat;
+using Project.Combat.StatusEffects;
 using Project.Items;
 using UnityEngine;
 
@@ -10,13 +11,14 @@ namespace Project
     {
         public CharacterAttributes Attributes;
         public CharacterAttributes StoredAttributes;
+        public StatusEffectManager StatusEffectManager { get; private set; }
         public string DisplayName;
         public string Description;
         public string CombatDescription;
         public Sprite Sprite;
         public Inventory Inventory;
 
-        int shapshotArmorValue;
+        public int Stunned;
 
         public Character(CharacterData characterData, Inventory inventory)
         {
@@ -26,17 +28,8 @@ namespace Project
             this.CombatDescription = characterData.CombatDescription;
             this.Sprite = characterData.CombatSprite;
             this.Inventory = inventory;
+            StatusEffectManager = new StatusEffectManager();
         }
-
-        // public void SnapshotArmorValue()
-        // {
-        //     shapshotArmorValue = Attributes.GetAttributeBaseValue(AttributeType.Armor);
-        // }
-
-        // public void RestoreSnapshotArmorvalue()
-        // {
-        //     Attributes.
-        // }
 
         public int GetAttackValue()
         {

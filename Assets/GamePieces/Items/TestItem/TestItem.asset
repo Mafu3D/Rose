@@ -30,21 +30,14 @@ MonoBehaviour:
   SpeedModifier: 0
   MaxSpeedModifier: 0
   OnHitStrategies:
-  - {fileID: 11400000, guid: c012bcb1b8dd3bb4b96714431083fa20, type: 2}
+  - {fileID: 11400000, guid: 6fe13f7b3ef1a9a4abc5ccd18fae31f5, type: 2}
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies:
-  - {fileID: 11400000, guid: 7e25a2a09f7ac384583322097c88e1f2, type: 2}
+  OnCombatStartStrategies: []
   OnCombatEndStrategies: []
-  OnRoundStartStrategies:
-  - {fileID: 11400000, guid: a5bb2b4640d7fb04aac18f09354f52af, type: 2}
-  OnRoundEndStrategies:
-  - {fileID: 11400000, guid: 70b43e00c391ef54cb91e3a0cdcbd867, type: 2}
-  OnTurnStartStrategies:
-  - {fileID: 11400000, guid: 78514b5e268b7024ba4e4cdefad8e569, type: 2}
-  - {fileID: 11400000, guid: 137250cd8c02e2945b0c71ae0ade1a1b, type: 2}
-  - {fileID: 11400000, guid: 7d64b59799b86a648ad0d2c8467c1787, type: 2}
-  OnTurnEndStrategies:
-  - {fileID: 11400000, guid: e1901067dc2ee3a4f8bc155ee85d154d, type: 2}
+  OnRoundStartStrategies: []
+  OnRoundEndStrategies: []
+  OnTurnStartStrategies: []
+  OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
   OnSelfBloodiedStrategies: []

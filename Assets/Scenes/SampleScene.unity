@@ -142,6 +142,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileProcessingText: {fileID: 1374307905}
+--- !u!114 &206589332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1668927545849009039, guid: cde994b910928b54aac3967a8be70726, type: 3}
+  m_PrefabInstance: {fileID: 7776690375369417289}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &380159586 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
@@ -7133,6 +7144,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9178796695236094650, guid: 84cad83d09aaab3469b92d78038a6179, type: 3}
   m_PrefabInstance: {fileID: 1535818414499637489}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &885656841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6019754503283624036, guid: cde994b910928b54aac3967a8be70726, type: 3}
+  m_PrefabInstance: {fileID: 7776690375369417289}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943401405
 GameObject:
   m_ObjectHideFlags: 0
@@ -13357,7 +13379,7 @@ MonoBehaviour:
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 450250885d333784fb28186849824ae1, type: 2}
   AutoBattle: 1
-  AutoBattleSpeed: 0.5
+  AutoBattleSpeed: 1
   MinTimeBetweenPlayerMoves: 0.25
   MinTimeBetweenPhases: 0.5
   BattleDebugMode: 0
@@ -14017,12 +14039,12 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6f17b90afa26f964292f825d2311eb03, type: 2}
     - target: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: startingHeldItemsData.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: 'startingHeldItemsData.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8f85c7a2fd2ad984eb14df769290be80, type: 2}
+      objectReference: {fileID: 11400000, guid: 83d23d9e469eae44ca28564be5258477, type: 2}
     - target: {fileID: 8881772238092289395, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -14120,18 +14142,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1355074345613088536, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 1053595594815772521, guid: cde994b910928b54aac3967a8be70726, type: 3}
+      propertyPath: statusEffectText
+      value: 
+      objectReference: {fileID: 206589332}
     - target: {fileID: 2077167225359421578, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_Name
       value: BattleUI
       objectReference: {fileID: 0}
-    - target: {fileID: 2832591457193364075, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5578778594591761735, guid: cde994b910928b54aac3967a8be70726, type: 3}
+      propertyPath: statusEffectText
+      value: 
+      objectReference: {fileID: 885656841}
     - target: {fileID: 6502347113423046407, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -14140,21 +14162,8 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1639557476}
-    - target: {fileID: 7698953220067189152, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: MaxLogLength
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8372571104611702704, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_text
-      value: Sample Battle State
-      objectReference: {fileID: 0}
-    - target: {fileID: 8372571104611702704, guid: cde994b910928b54aac3967a8be70726, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3428197411313664508, guid: cde994b910928b54aac3967a8be70726, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cde994b910928b54aac3967a8be70726, type: 3}

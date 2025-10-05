@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Project.Combat;
+using Project.Combat.StatusEffects;
 using Project.GameTiles;
 using TMPro;
 using UnityEngine;
@@ -17,6 +19,7 @@ namespace Project.UI.BattleUI
         [SerializeField] TMP_Text strengthText;
         [SerializeField] TMP_Text magicText;
         [SerializeField] TMP_Text dexterityText;
+        [SerializeField] TMP_Text statusEffectText;
 
         Character combatant;
 
@@ -27,6 +30,8 @@ namespace Project.UI.BattleUI
             this.description.text = combatant.Description;
 
             this.combatant = combatant;
+
+            this.statusEffectText.text = "";
 
             UpdateStats();
         }
@@ -39,6 +44,16 @@ namespace Project.UI.BattleUI
             strengthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Strength).ToString();
             magicText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Magic).ToString();
             dexterityText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Dexterity).ToString();
+        }
+
+        public void UpdateStatusEffects()
+        {
+            string text = "";
+            foreach (StatusEffect statusEffect in combatant.StatusEffectManager.GetRegisteredStatusEffects().Values)
+            {
+                text += $"{statusEffect.DisplayName} {statusEffect.Stacks} \n";
+            }
+            statusEffectText.text = text;
         }
     }
 }

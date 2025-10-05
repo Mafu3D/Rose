@@ -9,6 +9,7 @@ using Project.Combat.CombatStates;
 using Project.Combat.CombatActions;
 using Project.Sequences;
 using Project.Attributes;
+using Project.Combat.StatusEffects;
 
 namespace Project.Combat
 {
@@ -219,6 +220,7 @@ namespace Project.Combat
             DetermineCombatantOrder();
             foreach (Character combatant in combatantOrder)
             {
+                // Items
                 if (combatant.Inventory != null)
                 {
                     List<Item> items = combatant.Inventory.GetHeldItems();
@@ -230,6 +232,12 @@ namespace Project.Combat
                         }
                     }
                 }
+
+                // Status Effect
+                foreach (StatusEffect statusEffect in combatant.StatusEffectManager.GetAllStatusEffects())
+                {
+                    statusEffect.OnRoundStart();
+                }
             }
 
             if (debugMode) Debug.Log($"Start New Round: {Round}, {combatantOrder[0].DisplayName} goes first - InQueue: {CombatQueue.Queue.Count}");
@@ -238,6 +246,8 @@ namespace Project.Combat
         public void StartNewTurn()
         {
             Turn += 1;
+
+            // Items
             if (activeCombatant.Inventory != null)
             {
                 List<Item> items = activeCombatant.Inventory.GetHeldItems();
@@ -250,11 +260,18 @@ namespace Project.Combat
                 }
             }
 
+            // Status Effect
+            foreach (StatusEffect statusEffect in activeCombatant.StatusEffectManager.GetAllStatusEffects())
+            {
+                statusEffect.OnTurnStart();
+            }
+
             if (debugMode) Debug.Log($"Start New Turn: {Turn}, {activeCombatant.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
         }
 
         public void EndTurn()
         {
+            // Items
             if (activeCombatant.Inventory != null)
             {
                 List<Item> items = activeCombatant.Inventory.GetHeldItems();
@@ -267,11 +284,18 @@ namespace Project.Combat
                 }
             }
 
+            // Status Effect
+            foreach (StatusEffect statusEffect in activeCombatant.StatusEffectManager.GetAllStatusEffects())
+            {
+                statusEffect.OnTurnEnd();
+            }
+
             if (debugMode) Debug.Log($"End Turn: {Turn} - InQueue: {CombatQueue.Queue.Count}");
         }
 
         public void EndRound()
         {
+            // Items
             foreach (Character combatant in combatantOrder)
             {
                 if (combatant.Inventory != null)
@@ -285,6 +309,12 @@ namespace Project.Combat
                         }
                     }
                 }
+
+                // Status effects
+                foreach (StatusEffect statusEffect in combatant.StatusEffectManager.GetAllStatusEffects())
+                {
+                    statusEffect.OnRoundEnd();
+                }
             }
 
             if (debugMode) Debug.Log($"End Round: {Round} - InQueue: {CombatQueue.Queue.Count}");
@@ -294,6 +324,12 @@ namespace Project.Combat
         {
             Character attacker = activeCombatant;
             Character defender = GetTarget(activeCombatant);
+
+            if (attacker.Stunned > 0)
+            {
+                attacker.Stunned -= 1;
+                return;
+            }
 
             QueueAttack(attacker, defender);
         }
@@ -306,6 +342,8 @@ namespace Project.Combat
             CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
             {
                 defender.ReceiveAttack(hitReport);
+
+                // Items
                 if (attacker.Inventory != null)
                 {
                     List<Item> items = attacker.Inventory.GetHeldItems();
@@ -317,6 +355,18 @@ namespace Project.Combat
                         }
                     }
                 }
+
+                // Status Effects
+                foreach (StatusEffect statusEffect in attacker.StatusEffectManager.GetAllStatusEffects())
+                {
+                    statusEffect.OnHit();
+                }
+
+                foreach (StatusEffect statusEffect in defender.StatusEffectManager.GetAllStatusEffects())
+                {
+                    statusEffect.OnReceiveHit();
+                }
+
                 if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
             },
             $"{defender.DisplayName} took {hitReport.Damage} dmg");

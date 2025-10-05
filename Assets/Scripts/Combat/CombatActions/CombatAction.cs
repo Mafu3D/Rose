@@ -2,6 +2,12 @@ using System;
 
 namespace Project.Combat.CombatActions
 {
+    public enum CombatActionTarget
+    {
+        User,
+        Target
+    }
+
     public class CombatAction
     {
         Character User;

@@ -3,17 +3,13 @@ using UnityEngine;
 
 namespace Project.Combat.CombatActions
 {
-    public enum ModifyAttributeTarget
-    {
-        User,
-        Enemy
-    }
+
 
     [CreateAssetMenu(fileName = "NewModifyAttribute", menuName = "Combat Actions/Modify Attribute", order = 1)]
     public class ModifyUserAttribute : CombatActionBaseData
     {
         [SerializeField] bool IsPermanent = false;
-        [SerializeField] ModifyAttributeTarget modifyAttributeTarget;
+        [SerializeField] CombatActionTarget targetCharacter;
         [SerializeField] AttributeType AttributeType;
         [SerializeField] int BaseValueModifier;
         [SerializeField] int MaxValueModifier;
@@ -21,7 +17,7 @@ namespace Project.Combat.CombatActions
         public override void Execute(Character user, Character target)
         {
             Character character;
-            if (modifyAttributeTarget == ModifyAttributeTarget.User)
+            if (targetCharacter == CombatActionTarget.User)
             {
                 character = user;
             }
@@ -70,7 +66,7 @@ namespace Project.Combat.CombatActions
                 else incOrDec = "decreased";
 
                 Character character;
-                if (modifyAttributeTarget == ModifyAttributeTarget.User) character = user;
+                if (targetCharacter == CombatActionTarget.User) character = user;
                 else character = target;
 
                 message += $"{user.DisplayName} {incOrDec} {character.DisplayName}'s Max {AttributeType.ToString()} by {MaxValueModifier}";
@@ -83,7 +79,7 @@ namespace Project.Combat.CombatActions
                 else incOrDec = "decreased";
 
                 Character character;
-                if (modifyAttributeTarget == ModifyAttributeTarget.User) character = user;
+                if (targetCharacter == CombatActionTarget.User) character = user;
                 else character = target;
 
                 message += $"{user.DisplayName} {incOrDec} {character.DisplayName}'s {AttributeType.ToString()} by {BaseValueModifier}";
