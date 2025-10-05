@@ -13352,7 +13352,7 @@ MonoBehaviour:
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 450250885d333784fb28186849824ae1, type: 2}
   AutoBattle: 1
-  AutoBattleSpeed: 1
+  AutoBattleSpeed: 0.5
   MinTimeBetweenPlayerMoves: 0.25
   MinTimeBetweenPhases: 0.2
   BattleDebugMode: 0
@@ -14009,7 +14009,7 @@ PrefabInstance:
     - target: {fileID: 4573550975446478128, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: 'startingHeldItemsData.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: b22b99c985c019345b9581962b9de3f1, type: 2}
+      objectReference: {fileID: 11400000, guid: 83d23d9e469eae44ca28564be5258477, type: 2}
     - target: {fileID: 8881772238092289395, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -14121,12 +14121,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6502347113423046407, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7698953220067189152, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1639557476}
+    - target: {fileID: 7698953220067189152, guid: cde994b910928b54aac3967a8be70726, type: 3}
+      propertyPath: MaxLogLength
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8372571104611702704, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_text
       value: Sample Battle State

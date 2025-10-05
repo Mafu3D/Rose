@@ -99,7 +99,7 @@ namespace Project
 
         public void StartGame()
         {
-            Player.HeroTile.RegisterCharacterFromData(CharacterData);
+            // Player.HeroTile.RegisterCharacterFromData(CharacterData);
 
             Grid = new GameGrid(new Vector2(1, 1));
             TEMP_BUILD_MAP();

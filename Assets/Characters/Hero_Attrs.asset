@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
   m_Name: Hero_Attrs
   m_EditorClassIdentifier: 
-  Health: 10
+  Health: 20
   Speed: 2
   Strength: 2
   Magic: 1

@@ -47,6 +47,7 @@ namespace Project.GameplayEffects
                     tile.RegisterCharacter(right);
                     break;
             }
+            Debug.Log(left.Attributes.GetAttributeValue(AttributeType.Health));
         }
     }
 }
