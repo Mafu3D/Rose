@@ -93,15 +93,24 @@ namespace Project.Combat
         }
 
         #region Run
-        private bool CheckIfHeroHasHigherSpeed()
+        public void RunAway()
         {
             int heroSpeed = Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Speed);
             int enemySpeed = Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Speed);
-            if (heroSpeed > enemySpeed)
+
+            ranAway = true;
+
+            if (heroSpeed < enemySpeed)
             {
-                return true;
+                avoidedRunDamage = false;
+                QueueAttack(Enemy, Hero);
             }
-            return false;
+            else
+            {
+                avoidedRunDamage = true;
+            }
+
+            // StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
         }
 
         #endregion
@@ -277,27 +286,30 @@ namespace Project.Combat
             if (debugMode) Debug.Log($"End Round: {Round} - InQueue: {CombatQueue.Queue.Count}");
         }
 
-        public void QueueAttack()
+        public void QueueAttackForTurn()
         {
             Character attacker = activeCombatant;
             Character defender = GetTarget(activeCombatant);
 
+            QueueAttack(attacker, defender);
+        }
+
+        private void QueueAttack(Character attacker, Character defender)
+        {
             int attackValue = attacker.GetAttackValue();
             HitReport hitReport = new HitReport(attackValue);
 
             CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
             {
-
                 defender.ReceiveAttack(hitReport);
-
-                if (activeCombatant.Inventory != null)
+                if (attacker.Inventory != null)
                 {
-                    List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                    List<Item> items = attacker.Inventory.GetHeldItems();
                     foreach (Item item in items)
                     {
                         foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
                         {
-                            actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
+                            actionData.QueueAction(CombatQueue, attacker, GetTarget(attacker));
                         }
                     }
                 }
@@ -335,6 +347,7 @@ namespace Project.Combat
 
         private bool CheckForResolution()
         {
+            if (ranAway) return true;
             if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0
                 || Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
             {
@@ -349,7 +362,21 @@ namespace Project.Combat
             Resolution resolution;
             string message;
 
-            if (ranAway)
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
+                battleConcluded = true;
+                resolution = Resolution.Defeat;
+                // message = $"{Enemy.DisplayName} has defeated {Hero.DisplayName}";
+                message = $"{Hero.DisplayName} was slain by a {Enemy.DisplayName}";
+            }
+            else if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
+                battleConcluded = true;
+                resolution = Resolution.Victory;
+                // message = $"{Hero.DisplayName} has defeated {Enemy.DisplayName}";
+                message = $"{Hero.DisplayName} has defeated the {Enemy.DisplayName}";
+            }
+            else if (ranAway)
             {
                 battleConcluded = true;
                 resolution = Resolution.RanAway;
@@ -364,26 +391,9 @@ namespace Project.Combat
             }
             else
             {
-                if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
-                {
-                    battleConcluded = true;
-                    resolution = Resolution.Defeat;
-                    // message = $"{Enemy.DisplayName} has defeated {Hero.DisplayName}";
-                    message = $"{Hero.DisplayName} was slain by a {Enemy.DisplayName}";
-                }
-                else if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
-                {
-                    battleConcluded = true;
-                    resolution = Resolution.Victory;
-                    // message = $"{Hero.DisplayName} has defeated {Enemy.DisplayName}";
-                    message = $"{Hero.DisplayName} has defeated the {Enemy.DisplayName}";
-                }
-                else
-                {
-                    battleConcluded = false;
-                    resolution = Resolution.None;
-                    message = $"The battle rages on!";
-                }
+                battleConcluded = false;
+                resolution = Resolution.None;
+                message = $"The battle rages on!";
             }
 
             return new BattleReport(battleConcluded, resolution, message, BattleLog);
