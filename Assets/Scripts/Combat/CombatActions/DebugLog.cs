@@ -11,5 +11,10 @@ namespace Project.Combat.CombatActions
         {
             Debug.Log($"{user.DisplayName}: {toSay}");
         }
+
+        protected override string Message(Character user, Character target)
+        {
+            return $"{user.DisplayName}: {toSay}";
+        }
     }
 }

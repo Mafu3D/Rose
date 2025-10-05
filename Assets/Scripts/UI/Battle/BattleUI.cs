@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Project.Combat;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,6 +25,7 @@ namespace Project.UI.BattleUI
         [Header("During Battle")]
         [SerializeField] GameObject ActiveBattleContainer;
         [SerializeField] TMP_Text BattleLog;
+        [SerializeField] int MaxLogLength = 6;
 
         [Header("Postbattle")]
         [SerializeField] GameObject PostbattleContainer;
@@ -75,7 +78,7 @@ namespace Project.UI.BattleUI
             activeBattle.OnBattleInitialize += ShowPreBattleUI;
             activeBattle.OnBattleStart += ShowActiveBattleUI;
             activeBattle.OnBattleDecided += ShowPostBattleUI;
-            activeBattle.OnBattleMessage += UpdateBattleLog;
+            activeBattle.OnBattleLogUpdated += UpdateBattleLog;
             // activeBattle.OnChooseRun += UpdateBattleUI;
             // activeBattle.OnChooseSteal += UpdateBattleUI;
         }
@@ -128,19 +131,23 @@ namespace Project.UI.BattleUI
             activeBattle.OnBattleInitialize -= ShowPreBattleUI;
             activeBattle.OnBattleStart -= ShowActiveBattleUI;
             activeBattle.OnBattleDecided -= ShowPostBattleUI;
-            activeBattle.OnBattleMessage -= UpdateBattleLog;
+            activeBattle.OnBattleLogUpdated -= UpdateBattleLog;
             // activeBattle.OnChooseRun -= UpdateBattleUI;
             // activeBattle.OnChooseSteal -= UpdateBattleUI;
 
             MainContainer.SetActive(false);
         }
 
-        void UpdateBattleLog(string message)
+        void UpdateBattleLog(string battleLog)
         {
-            // int lines = BattleLog.text.Split('\n').Length;
+            string[] lines = battleLog.Split('\n');
+            string truncatedLog = "";
+
+            int startingI = Math.Clamp(lines.Length - MaxLogLength, 0, 999999);
+            for (int i = startingI; i < lines.Length; i++) truncatedLog += $"{lines[i]} \n";
             LeftCombatantUI.UpdateStats();
             RightCombatantUI.UpdateStats();
-            BattleLog.text += $"{message} \n";
+            BattleLog.text = truncatedLog;
         }
     }
 }

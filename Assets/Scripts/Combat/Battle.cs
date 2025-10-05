@@ -16,11 +16,13 @@ namespace Project.Combat
         public bool BattleConcluded;
         public Resolution Resolution;
         public string Message;
-        public BattleReport(bool battleConcluded, Resolution resolution, string message)
+        public string Log;
+        public BattleReport(bool battleConcluded, Resolution resolution, string message, string log)
         {
             this.BattleConcluded = battleConcluded;
             this.Resolution = resolution;
             this.Message = message;
+            this.Log = log;
         }
     }
 
@@ -44,7 +46,8 @@ namespace Project.Combat
 
         Action<BattleReport, Character, Character> finishedCallback;
 
-        public event Action<string> OnBattleMessage;
+        public string BattleLog { get; private set; } = "";
+        public event Action<string> OnBattleLogUpdated;
 
         public event Action OnBattleInitialize;
         public event Action OnBattleStart;
@@ -71,8 +74,7 @@ namespace Project.Combat
 
             StateMachine = new StateMachine();
             CombatQueue = new CombatQueue();
-
-
+            CombatQueue.OnActionExecuted += LogAction;
         }
 
         #region Initiate
@@ -280,13 +282,13 @@ namespace Project.Combat
             Character attacker = activeCombatant;
             Character defender = GetTarget(activeCombatant);
 
+            int attackValue = attacker.GetAttackValue();
+            HitReport hitReport = new HitReport(attackValue);
+
             CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
             {
-                int attackValue = attacker.GetAttackValue();
-                HitReport hitReport = new HitReport(attackValue);
-                defender.ReceiveAttack(hitReport);
 
-                LogBattleAction($"{defender.DisplayName} took {hitReport.Damage} dmg");
+                defender.ReceiveAttack(hitReport);
 
                 if (activeCombatant.Inventory != null)
                 {
@@ -300,7 +302,8 @@ namespace Project.Combat
                     }
                 }
                 if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
-            });
+            },
+            $"{defender.DisplayName} took {hitReport.Damage} dmg");
             CombatQueue.AddAction(attackAction);
         }
 
@@ -313,6 +316,8 @@ namespace Project.Combat
 
         public void CloseBattle()
         {
+            CombatQueue.OnActionExecuted -= LogAction;
+
             BattleReport battleReport = CreateBattleReport();
             finishedCallback(battleReport, Hero, Enemy);
             GameManager.Instance.BattleManager.EndActiveBattle();
@@ -322,12 +327,11 @@ namespace Project.Combat
 
         #region Other
 
-        private void LogBattleAction(string message)
+        private void LogAction(string message)
         {
-            OnBattleMessage?.Invoke(message);
-            CreateBattleReport();
+            BattleLog += $"{message} \n";
+            OnBattleLogUpdated?.Invoke(BattleLog);
         }
-
 
         private bool CheckForResolution()
         {
@@ -382,7 +386,7 @@ namespace Project.Combat
                 }
             }
 
-            return new BattleReport(battleConcluded, resolution, message);
+            return new BattleReport(battleConcluded, resolution, message, BattleLog);
         }
 
         #endregion

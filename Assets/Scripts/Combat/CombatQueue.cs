@@ -9,9 +9,9 @@ namespace Project.Combat
     {
         public List<CombatAction> Queue = new List<CombatAction>();
         private int currentQueueIndex;
-        private bool currentEffectHasStarted = false;
         public event Action OnResolveQueueStart;
         public event Action OnResolveQueueEnd;
+        public event Action<string> OnActionExecuted;
         public bool QueueNeedsToBeResolved => Queue.Count > 0;
 
         public CombatAction GetCurrentAction()
@@ -31,27 +31,12 @@ namespace Project.Combat
         public void ExecuteNextInQueue()
         {
             Queue[currentQueueIndex].Execute();
+            OnActionExecuted?.Invoke(Queue[currentQueueIndex].Message);
             currentQueueIndex++;
             if (currentQueueIndex >= Queue.Count)
             {
                 ClearQueue();
             }
-        }
-
-        public bool TryExecuteNextInQueue()
-        {
-            if (QueueNeedsToBeResolved)
-            {
-                Queue[currentQueueIndex].Execute();
-                currentQueueIndex++;
-                if (currentQueueIndex > Queue.Count)
-                {
-                    ClearQueue();
-
-                }
-                return true;
-            }
-            return false;
         }
     }
 }
