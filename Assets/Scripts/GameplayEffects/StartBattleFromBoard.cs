@@ -8,8 +8,8 @@ namespace Project.GameplayEffects
     using Unity.VisualScripting.Antlr3.Runtime.Misc;
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = "NewStartBattle", menuName = "Effects/Start Battle", order = 1)]
-    public class StartBattle : GameplayEffectStrategy
+    [CreateAssetMenu(fileName = "NewStartBattleFromBoard", menuName = "Effects/Start Battle (From Board)", order = 1)]
+    public class StartBattleFromBoard : GameplayEffectStrategy
     {
         [SerializeField] CharacterData enemyCharacterData;
         [SerializeField] GameObject enemyNodePrefab;
@@ -39,13 +39,16 @@ namespace Project.GameplayEffects
             // TODO: Create any nodes if the battle wasnt won
             switch (battleReport.Resolution)
             {
-                case Combat.Resolution.RanAway:
-                case Combat.Resolution.Stole:
-                    Debug.Log("instantiating new tile");
-                    GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
-                    Tile tile = gameObject.GetComponent<Tile>();
-                    tile.RegisterToGrid();
-                    tile.RegisterCharacter(right);
+                // case Combat.Resolution.RanAway:
+                // case Combat.Resolution.Stole:
+                //     Debug.Log("instantiating new tile");
+                //     GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
+                //     Tile tile = gameObject.GetComponent<Tile>();
+                //     tile.RegisterToGrid();
+                //     tile.RegisterCharacter(right);
+                //     break;
+                case Combat.Resolution.Victory:
+                    Destroy(this);
                     break;
             }
         }

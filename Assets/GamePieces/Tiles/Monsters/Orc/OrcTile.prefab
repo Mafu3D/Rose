@@ -69,6 +69,10 @@ PrefabInstance:
       value: OrcTile
       objectReference: {fileID: 0}
     - target: {fileID: 7512119350408021164, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+      propertyPath: IsPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512119350408021164, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
       propertyPath: NodeData
       value: 
       objectReference: {fileID: 11400000, guid: 47ad9efd924de8d47920c9bbefb93701, type: 2}
@@ -80,6 +84,10 @@ PrefabInstance:
       propertyPath: CharacterData
       value: 
       objectReference: {fileID: 11400000, guid: 47987d60dbc840c40841a86116da56dc, type: 2}
+    - target: {fileID: 7512119350408021164, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
+      propertyPath: willMoveTowardsPlayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6582607631212750363, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
     m_RemovedGameObjects: []

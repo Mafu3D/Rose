@@ -26,8 +26,8 @@ namespace Project.GameTiles
         [SerializeField] protected int moveDistance = 1;
         [SerializeField] private bool willMoveTowardsPlayer = false;
         [SerializeField] public bool IsPlayer = true;
-        private bool isStunned;
-        private int roundsStunned = 0;
+        private bool isStunned = true;
+        private int roundsStunned = 1;
         public Character Character { get; private set; }
 
         protected Rigidbody2D myRigidBody;
@@ -94,6 +94,7 @@ namespace Project.GameTiles
             {
                 Inventory inventory = GetComponent<Inventory>();
                 Character = character;
+                ResetMovesRemaining(); // do this because reset moves takes infro
             }
         }
 
@@ -151,7 +152,7 @@ namespace Project.GameTiles
         private void MoveTowardsPlayer()
         {
             // This is all so gross
-
+            Debug.Log("move");
             if (isStunned)
             {
                 roundsStunned -= 1;
@@ -164,12 +165,15 @@ namespace Project.GameTiles
 
             if (willMoveTowardsPlayer)
             {
-                List<Cell> path = GameManager.Instance.Grid.GetPathBetweenTwoCells(this.CurrentCell, GameManager.Instance.Player.HeroTile.CurrentCell);
-                MoveToCell(path[0]);
-                if (CurrentCell == GameManager.Instance.Player.HeroTile.CurrentCell)
+                List<Cell> path = GameManager.Instance.Grid.GetPathBetweenTwoCells(this.CurrentCell, GameManager.Instance.Player.HeroTile.CurrentCell, true);
+                if (path.Count > 0)
                 {
-                    isStunned = true;
-                    roundsStunned = 2;
+                    MoveToCell(path[0]);
+                    if (CurrentCell == GameManager.Instance.Player.HeroTile.CurrentCell)
+                    {
+                        isStunned = true;
+                        roundsStunned = 1;
+                    }
                 }
             }
         }

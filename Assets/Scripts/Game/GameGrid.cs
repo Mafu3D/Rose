@@ -203,7 +203,7 @@ namespace Project
             return WorldPositionToCell(worldPosition);
         }
 
-        public List<Cell> GetPathBetweenTwoCells(Cell start, Cell end)
+        public List<Cell> GetPathBetweenTwoCells(Cell start, Cell end, bool debug = false)
         {
             Pathfinder pathfinder = new Pathfinder(this, start, end);
             return pathfinder.CalculatePath();

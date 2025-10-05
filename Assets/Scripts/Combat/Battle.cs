@@ -329,9 +329,6 @@ namespace Project.Combat
         public void CloseBattle()
         {
             CombatQueue.OnActionExecuted -= LogAction;
-
-            BattleReport battleReport = CreateBattleReport();
-            finishedCallback(battleReport, Hero, Enemy);
             GameManager.Instance.BattleManager.EndActiveBattle();
         }
 

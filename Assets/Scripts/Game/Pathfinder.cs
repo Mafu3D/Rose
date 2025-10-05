@@ -42,7 +42,7 @@ namespace Project
         public void RegisterToInvalidCells(Cell cell) { if (!invalidCells.ContainsKey(cell.GetHashCode())) invalidCells.Add(cell.GetHashCode(), cell); }
         public bool TryGetCellInInvalidCells(Cell cell) => invalidCells.TryGetValue(cell.GetHashCode(), out _);
 
-        public List<Cell> CalculatePath()
+        public List<Cell> CalculatePath(bool debug = false)
         {
             // Initialize
             RegisterToInvalidCells(start);
@@ -51,7 +51,7 @@ namespace Project
 
 
             Cell current = start;
-            int i = 0;
+            int iter = 0;
             while (current != end)
             {
                 List<Cell> validNeighbors;
@@ -74,13 +74,26 @@ namespace Project
                     current = next;
                 }
 
-                i++;
-                if (i > 1000)
+                iter++;
+                if (iter > 1000)
                 {
                     Debug.Log("too many iterations!");
                     break;
                 }
             }
+
+            RegisterToPath(end);
+
+            if (debug)
+            {
+                Debug.Log("Calculating path...");
+                for (int i = 0; i < path.Count - 1; i++)
+                {
+                    // This won't work because it is only drawn for one frame!!
+                    Debug.DrawLine(path[i].Center, path[i + 1].Center, Color.red);
+                }
+            }
+
             return path;
         }
 
