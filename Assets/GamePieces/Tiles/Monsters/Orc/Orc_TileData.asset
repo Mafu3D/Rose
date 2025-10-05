@@ -24,18 +24,20 @@ MonoBehaviour:
   DisplayName: Orc
   Description: Doubles strength when bloodied
   Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  Priority: 0
-  NodeType: 3
+  ActivationPriority: 0
+  TileType: 0
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
-  AttributesData: {fileID: 11400000, guid: 726a2e8ecf860b843b211d5f04c09e0a, type: 2}
+  CharacterData: {fileID: 11400000, guid: 47987d60dbc840c40841a86116da56dc, type: 2}
   OnActivateStrategies: []
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
   OnPlayerEnterStrategies: []
   OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
   OnCreateStrategies: []
   OnDestroyStrategies: []
-  OnEndOfTurnStratgies:
-  - {fileID: 11400000, guid: 4837122d114acb043b07c1913c8fb574, type: 2}
-  - {fileID: 11400000, guid: 6351a8f036c2be74f9aab3773baff291, type: 2}
-  OnStartOfRoundStrategies: []
-  OnEndOfRoundStrategies: []

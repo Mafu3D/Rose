@@ -24,16 +24,20 @@ MonoBehaviour:
   DisplayName: Skeleton
   Description: Chance to survive fatal damage
   Sprite: {fileID: -3558442656048911363, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  Priority: 0
-  NodeType: 3
+  ActivationPriority: 0
+  TileType: 0
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
-  AttributesData: {fileID: 11400000, guid: 5a24b4c12d60ef948b7f3287c9d45bcf, type: 2}
-  OnEndTurnStrategies: []
+  CharacterData: {fileID: 11400000, guid: 6b54c2e8b4f39124eb2415b40bc35006, type: 2}
+  OnActivateStrategies: []
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
   OnPlayerEnterStrategies: []
   OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
   OnCreateStrategies: []
   OnDestroyStrategies: []
-  OnRoundStartStrategies: []
-  OnPlayerTurnEndStrategies: []
-  OnRoundEndStrategies: []

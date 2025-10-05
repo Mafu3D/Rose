@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Project.GameNode;
 using Project.GameplayEffects;
 
 namespace Project
@@ -8,18 +7,6 @@ namespace Project
     public enum Status {
         Running,
         Complete
-    }
-
-    public struct EffectReferences
-    {
-        public Node User;
-        public Node Target;
-
-        public EffectReferences(Node user, Node target)
-        {
-            this.User = user;
-            this.Target = target;
-        }
     }
 
     public class EffectQueue
@@ -50,9 +37,6 @@ namespace Project
         {
             while (currentEffectIndex < queue.Count)
             {
-                GameplayEffectStrategy currentEffect = queue[currentEffectIndex];
-                EffectReferences references;
-                registeredEffects.TryGetValue(currentEffect, out references);
                 if (!currentEffectHasStarted)
                 {
                     queue[currentEffectIndex].StartEffect();
@@ -91,7 +75,6 @@ namespace Project
                     ResolvingQueue = false;
                 }
             }
-            callback();
         }
     }
 }

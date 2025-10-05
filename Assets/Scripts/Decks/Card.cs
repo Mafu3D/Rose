@@ -42,7 +42,7 @@ namespace Project.Decks
         {
             foreach (GameplayEffectStrategy effect in strategies)
             {
-                GameManager.Instance.EffectQueue.QueueEffect(effect, null, null);
+                GameManager.Instance.EffectQueue.AddEffect(effect);
             }
         }
     }

@@ -26,4 +26,4 @@ MonoBehaviour:
   CardType: 4
   DisplayText: Oh no! It's a spooky scary skeleton!
   Strategies:
-  - {fileID: 11400000, guid: e63402db059c79e4688812b0a4047bd9, type: 2}
+  - {fileID: 11400000, guid: 37c7f8a9814d6ff49ae7b3c92a184724, type: 2}

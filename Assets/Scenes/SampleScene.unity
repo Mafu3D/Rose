@@ -7128,6 +7128,11 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: -10}
+--- !u!1 &870778442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9178796695236094650, guid: 84cad83d09aaab3469b92d78038a6179, type: 3}
+  m_PrefabInstance: {fileID: 1535818414499637489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943401405
 GameObject:
   m_ObjectHideFlags: 0
@@ -13347,14 +13352,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 943401407}
   CharacterData: {fileID: 11400000, guid: 3fac53523f1ea7649a27e9292bc1d8d4, type: 2}
-  UICanvas: {fileID: 0}
+  UICanvas: {fileID: 870778442}
   EncounterDeckData: {fileID: 11400000, guid: 35af01d32e3efed47900555597edeae8, type: 2}
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 450250885d333784fb28186849824ae1, type: 2}
   AutoBattle: 1
   AutoBattleSpeed: 0.5
   MinTimeBetweenPlayerMoves: 0.25
-  MinTimeBetweenPhases: 0.2
+  MinTimeBetweenPhases: 0.5
   BattleDebugMode: 0
 --- !u!4 &1639557477
 Transform:
