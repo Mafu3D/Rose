@@ -1,4 +1,5 @@
 using Project.Attributes;
+using Project.Combat.CombatActions;
 using UnityEngine;
 
 namespace Project.Combat.StatusEffects
@@ -18,32 +19,33 @@ namespace Project.Combat.StatusEffects
 
         public override void OnRemoveStack() { }
 
-        public override void OnHit() { }
+        public override CombatAction OnHit() { return null; }
 
-        public override void OnReceiveHit() { }
+        public override CombatAction OnReceiveHit() { return null; }
 
 
-        public override void OnTurnEnd() { }
+        public override CombatAction OnTurnEnd() { return null; }
 
-        public override void OnTurnStart() { }
+        public override CombatAction OnTurnStart() { return null; }
 
-        public override void OnRoundStart() { }
+        public override CombatAction OnRoundStart() { return null; }
 
-        public override void OnRoundEnd()
+        public override CombatAction OnRoundEnd()
         {
-            RemoveStacks(1);
+            int amount = 1;
+            return new CombatAction(() => RemoveStacks(amount), $"{amount} Frozen was removed from {owner.DisplayName}");
         }
 
-        public override void OnEnemyTurnStart() { }
+        public override CombatAction OnEnemyTurnStart() { return null; }
 
-        public override void OnEnemyTurnEnd() { }
+        public override CombatAction OnEnemyTurnEnd() { return null; }
 
-        public override void OnSelfBloodied() { }
+        public override CombatAction OnSelfBloodied() { return null; }
 
-        public override void OnEnemyBloodied() { }
+        public override CombatAction OnEnemyBloodied() { return null; }
 
-        public override void OnSelfExposed() { }
+        public override CombatAction OnSelfExposed() { return null; }
 
-        public override void OnEnemyExposed() { }
+        public override CombatAction OnEnemyExposed() { return null; }
     }
 }

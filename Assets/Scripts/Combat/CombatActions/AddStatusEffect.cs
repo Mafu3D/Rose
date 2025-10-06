@@ -31,6 +31,18 @@ namespace Project.Combat.CombatActions
                     FrostStatusEffect frost = new FrostStatusEffect(character, other, 3);
                     character.StatusEffectManager.AddStack(frost, stackAmount);
                     break;
+                case StatusEffectType.Burn:
+                    BurnStatusEffect burn = new BurnStatusEffect(character, other, 99);
+                    character.StatusEffectManager.AddStack(burn, stackAmount);
+                    break;
+                case StatusEffectType.Weakened:
+                    WeakenStatusEffect weak = new WeakenStatusEffect(character, other, 99);
+                    character.StatusEffectManager.AddStack(weak, stackAmount);
+                    break;
+                case StatusEffectType.Vulnerable:
+                    VulnerableStatusEffect vulnerable = new VulnerableStatusEffect(character, other, 99);
+                    character.StatusEffectManager.AddStack(vulnerable, stackAmount);
+                    break;
             }
         }
 

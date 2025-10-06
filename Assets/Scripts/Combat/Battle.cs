@@ -236,7 +236,10 @@ namespace Project.Combat
                 // Status Effect
                 foreach (StatusEffect statusEffect in combatant.StatusEffectManager.GetAllStatusEffects())
                 {
-                    statusEffect.OnRoundStart();
+                    CombatAction statusEffectAction = statusEffect.OnRoundStart();
+                    if (statusEffectAction != null) {
+                        CombatQueue.AddAction(statusEffectAction);
+                    }
                 }
             }
 
@@ -263,7 +266,17 @@ namespace Project.Combat
             // Status Effect
             foreach (StatusEffect statusEffect in activeCombatant.StatusEffectManager.GetAllStatusEffects())
             {
-                statusEffect.OnTurnStart();
+                CombatAction statusEffectAction = statusEffect.OnTurnStart();
+                if (statusEffectAction != null) {
+                    CombatQueue.AddAction(statusEffectAction);
+                }
+            }
+            foreach (StatusEffect statusEffect in GetTarget(activeCombatant).StatusEffectManager.GetAllStatusEffects())
+            {
+                CombatAction statusEffectAction = statusEffect.OnEnemyTurnStart();
+                if (statusEffectAction != null) {
+                    CombatQueue.AddAction(statusEffectAction);
+                }
             }
 
             if (debugMode) Debug.Log($"Start New Turn: {Turn}, {activeCombatant.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
@@ -287,7 +300,18 @@ namespace Project.Combat
             // Status Effect
             foreach (StatusEffect statusEffect in activeCombatant.StatusEffectManager.GetAllStatusEffects())
             {
-                statusEffect.OnTurnEnd();
+                CombatAction statusEffectAction = statusEffect.OnTurnEnd();
+                if (statusEffectAction != null)
+                {
+                    CombatQueue.AddAction(statusEffectAction);
+                }
+            }
+            foreach (StatusEffect statusEffect in GetTarget(activeCombatant).StatusEffectManager.GetAllStatusEffects())
+            {
+                CombatAction statusEffectAction = statusEffect.OnEnemyTurnEnd();
+                if (statusEffectAction != null) {
+                    CombatQueue.AddAction(statusEffectAction);
+                }
             }
 
             if (debugMode) Debug.Log($"End Turn: {Turn} - InQueue: {CombatQueue.Queue.Count}");
@@ -313,7 +337,10 @@ namespace Project.Combat
                 // Status effects
                 foreach (StatusEffect statusEffect in combatant.StatusEffectManager.GetAllStatusEffects())
                 {
-                    statusEffect.OnRoundEnd();
+                    CombatAction statusEffectAction = statusEffect.OnRoundEnd();
+                    if (statusEffectAction != null) {
+                        CombatQueue.AddAction(statusEffectAction);
+                    }
                 }
             }
 
@@ -359,12 +386,18 @@ namespace Project.Combat
                 // Status Effects
                 foreach (StatusEffect statusEffect in attacker.StatusEffectManager.GetAllStatusEffects())
                 {
-                    statusEffect.OnHit();
+                    CombatAction statusEffectAction = statusEffect.OnHit();
+                    if (statusEffectAction != null) {
+                        CombatQueue.AddAction(statusEffectAction);
+                    }
                 }
 
                 foreach (StatusEffect statusEffect in defender.StatusEffectManager.GetAllStatusEffects())
                 {
-                    statusEffect.OnReceiveHit();
+                    CombatAction statusEffectAction = statusEffect.OnReceiveHit();
+                    if (statusEffectAction != null) {
+                        CombatQueue.AddAction(statusEffectAction);
+                    }
                 }
 
                 if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");

@@ -38,9 +38,14 @@ namespace Project
 
         public void ReceiveAttack(HitReport hitReport)
         {
+            TakeDamage(hitReport.Damage);
+        }
+
+        public void TakeDamage(int amount, bool avoidArmor = false)
+        {
             int armor = Attributes.GetAttributeValue(AttributeType.Armor);
-            Attributes.ModifyAttributeValue(AttributeType.Armor, -Math.Abs(hitReport.Damage));
-            int carryOverDamage = armor - hitReport.Damage;
+            Attributes.ModifyAttributeValue(AttributeType.Armor, -Math.Abs(amount));
+            int carryOverDamage = armor - amount;
             if (carryOverDamage < 0)
             {
                 carryOverDamage = Math.Abs(carryOverDamage);

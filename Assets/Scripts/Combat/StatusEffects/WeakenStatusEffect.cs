@@ -1,26 +1,19 @@
 using Project.Attributes;
 using Project.Combat.CombatActions;
-using UnityEngine;
 
 namespace Project.Combat.StatusEffects
 {
-
-    public class FrostStatusEffect : StatusEffect
+    public class WeakenStatusEffect : StatusEffect
     {
-        public override string DisplayName => "Frost";
-        public FrostStatusEffect(Character owner, Character enemy, int maxStacks) : base(owner, enemy, maxStacks) { }
+        public override string DisplayName => "Burn";
+        public WeakenStatusEffect(Character owner, Character enemy, int maxStacks) : base(owner, enemy, maxStacks) { }
 
         public override void OnAllStacksRemoved() { }
-        public override void OnReceiveMaxStacks()
-        {
-            FrozenStatusEffect frozenStatusEffect = new FrozenStatusEffect(owner, enemy, 99);
-            owner.StatusEffectManager.AddStack(frozenStatusEffect, 1);
-            RemoveStacks(Stacks);
-        }
+        public override void OnReceiveMaxStacks() { }
 
         public override void OnReceiveNewStack()
         {
-            owner.Attributes.ModifyAttributeValue(AttributeType.Speed, -1);
+            owner.Attributes.ModifyAttributeValue(AttributeType.Strength, -1);
         }
 
         public override void OnRemoveStack() { }

@@ -5,7 +5,10 @@ namespace Project.Combat.StatusEffects
     public enum StatusEffectType
     {
         Frost,
-        Frozen
+        Frozen,
+        Burn,
+        Weakened,
+        Vulnerable
     }
 
     public class StatusEffectManager

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
   m_Name: Orc_Attrs
   m_EditorClassIdentifier: 
-  Health: 10
+  Health: 20
   Speed: 1
   Strength: 3
   Magic: 0

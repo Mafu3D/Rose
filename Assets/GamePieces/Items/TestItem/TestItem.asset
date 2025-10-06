@@ -29,10 +29,10 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
-  OnHitStrategies:
-  - {fileID: 11400000, guid: 6fe13f7b3ef1a9a4abc5ccd18fae31f5, type: 2}
+  OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies: []
+  OnCombatStartStrategies:
+  - {fileID: 11400000, guid: 6fe13f7b3ef1a9a4abc5ccd18fae31f5, type: 2}
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []

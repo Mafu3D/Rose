@@ -1,14 +1,11 @@
-using Project.Attributes;
 using Project.Combat.CombatActions;
-using UnityEngine;
 
 namespace Project.Combat.StatusEffects
 {
-
-    public class FrostStatusEffect : StatusEffect
+    public class BurnStatusEffect : StatusEffect
     {
-        public override string DisplayName => "Frost";
-        public FrostStatusEffect(Character owner, Character enemy, int maxStacks) : base(owner, enemy, maxStacks) { }
+        public override string DisplayName => "Burn";
+        public BurnStatusEffect(Character owner, Character enemy, int maxStacks) : base(owner, enemy, maxStacks) { }
 
         public override void OnAllStacksRemoved() { }
         public override void OnReceiveMaxStacks()
@@ -18,10 +15,7 @@ namespace Project.Combat.StatusEffects
             RemoveStacks(Stacks);
         }
 
-        public override void OnReceiveNewStack()
-        {
-            owner.Attributes.ModifyAttributeValue(AttributeType.Speed, -1);
-        }
+        public override void OnReceiveNewStack() { }
 
         public override void OnRemoveStack() { }
 
@@ -29,7 +23,16 @@ namespace Project.Combat.StatusEffects
 
         public override CombatAction OnReceiveHit() { return null; }
 
-        public override CombatAction OnTurnEnd() { return null; }
+        public override CombatAction OnTurnEnd()
+        {
+            int startingStacks = Stacks;
+            return new CombatAction(() =>
+            {
+                owner.TakeDamage(startingStacks);
+                RemoveStacks(1);
+            },
+            $"{owner.DisplayName} was burnt for {startingStacks} damage");
+        }
 
         public override CombatAction OnTurnStart() { return null; }
 

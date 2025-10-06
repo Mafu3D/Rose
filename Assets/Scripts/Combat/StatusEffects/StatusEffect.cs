@@ -1,7 +1,12 @@
 using System;
+using Project.Combat.CombatActions;
 
 namespace Project.Combat.StatusEffects
 {
+    public enum StatusEffectEventName {
+
+    }
+
     public abstract class StatusEffect
     {
         public abstract string DisplayName { get; }
@@ -54,17 +59,17 @@ namespace Project.Combat.StatusEffects
         public abstract void OnAllStacksRemoved();
 
         // Combat actions
-        public abstract void OnHit();
-        public abstract void OnReceiveHit();
-        public abstract void OnTurnStart();
-        public abstract void OnTurnEnd();
-        public abstract void OnRoundStart();
-        public abstract void OnRoundEnd();
-        public abstract void OnEnemyTurnStart();  // Not implemented into battle yet
-        public abstract void OnEnemyTurnEnd();  // Not implemented into battle yet
-        public abstract void OnSelfBloodied();  // Not implemented into battle yet
-        public abstract void OnEnemyBloodied();  // Not implemented into battle yet
-        public abstract void OnSelfExposed();  // Not implemented into battle yet
-        public abstract void OnEnemyExposed();  // Not implemented into battle yet
+        public abstract CombatAction OnHit();
+        public abstract CombatAction OnReceiveHit();
+        public abstract CombatAction OnTurnStart();
+        public abstract CombatAction OnTurnEnd();
+        public abstract CombatAction OnRoundStart();
+        public abstract CombatAction OnRoundEnd();
+        public abstract CombatAction OnEnemyTurnStart();  // Not implemented into battle yet
+        public abstract CombatAction OnEnemyTurnEnd();  // Not implemented into battle yet
+        public abstract CombatAction OnSelfBloodied();  // Not implemented into battle yet
+        public abstract CombatAction OnEnemyBloodied();  // Not implemented into battle yet
+        public abstract CombatAction OnSelfExposed();  // Not implemented into battle yet
+        public abstract CombatAction OnEnemyExposed();  // Not implemented into battle yet
     }
 }

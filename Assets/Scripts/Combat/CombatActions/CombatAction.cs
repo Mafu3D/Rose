@@ -13,6 +13,8 @@ namespace Project.Combat.CombatActions
         Character User;
         Character Target;
         Action<Character, Character> ExecuteAction;
+
+        Action ExecuteStatusEffect;
         public string Message;
 
         public CombatAction(Character user, Character target, Action<Character, Character> executeAction, string message)
@@ -23,6 +25,22 @@ namespace Project.Combat.CombatActions
             this.Message = message;
         }
 
-        public void Execute() => ExecuteAction(User, Target);
+        public CombatAction(Action executeStatusEffect, string message)
+        {
+            this.ExecuteStatusEffect = executeStatusEffect;
+            this.Message = message;
+        }
+
+        public void Execute()
+        {
+            if (ExecuteAction != null)
+            {
+                ExecuteAction(User, Target);
+            }
+            else if (ExecuteStatusEffect != null)
+            {
+                ExecuteStatusEffect();
+            }
+        }
     }
 }
