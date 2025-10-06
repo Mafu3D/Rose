@@ -10,6 +10,7 @@ namespace Project.Items
         [Header("Meta")]
         [SerializeField] public string Name;
         [SerializeField] public string Description;
+        [SerializeField] public string ItemID;
         [SerializeField] public Sprite Sprite;
         [SerializeField] public int GoldValue;
         [SerializeField] public ItemType ItemType;
