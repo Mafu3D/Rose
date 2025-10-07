@@ -12,12 +12,12 @@ namespace Project.Combat.StatusEffects
         public override void OnAllStacksRemoved() { }
         public override void OnReceiveMaxStacks() { }
 
-        public override void OnReceiveNewStack()
+        public override void OnReceiveNewStack(int amount)
         {
             owner.Stunned += 1;
         }
 
-        public override void OnRemoveStack() { }
+        public override void OnRemoveStack(int amount) { }
 
         public override CombatAction OnHit() { return null; }
 

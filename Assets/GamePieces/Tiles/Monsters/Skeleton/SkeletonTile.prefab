@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6b54c2e8b4f39124eb2415b40bc35006, type: 2}
     - target: {fileID: 7512119350408021164, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}
       propertyPath: willMoveTowardsPlayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6582607631212750363, guid: f2991459c7851ba49abc17a6c7376c1e, type: 3}

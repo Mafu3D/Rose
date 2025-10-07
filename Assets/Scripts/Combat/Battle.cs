@@ -56,6 +56,8 @@ namespace Project.Combat
         public event Action<BattleReport> OnBattleDecided;
         public event Action OnNextActionEvent;
         public event Action GoToNextState;
+        public event Action OnNewTurn;
+        public event Action OnAttack;
 
         private bool ranAway;
         private bool avoidedRunDamage;
@@ -77,6 +79,13 @@ namespace Project.Combat
             StateMachine = new StateMachine();
             CombatQueue = new CombatQueue();
             CombatQueue.OnActionExecuted += LogAction;
+        }
+
+        public int GetWhichSideIsActiveTEMP()
+        {
+            if (activeCombatant == Hero) return 0;
+            if (activeCombatant == Enemy) return 1;
+            else return -1;
         }
 
         #region Initiate
@@ -250,6 +259,8 @@ namespace Project.Combat
         {
             Turn += 1;
 
+            OnNewTurn?.Invoke();
+
             // Items
             if (activeCombatant.Inventory != null)
             {
@@ -369,6 +380,7 @@ namespace Project.Combat
             CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
             {
                 defender.ReceiveAttack(hitReport);
+                OnAttack?.Invoke();
 
                 // Items
                 if (attacker.Inventory != null)

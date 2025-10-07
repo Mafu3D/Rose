@@ -18,12 +18,12 @@ namespace Project.Combat.StatusEffects
             RemoveStacks(Stacks);
         }
 
-        public override void OnReceiveNewStack()
+        public override void OnReceiveNewStack(int amount)
         {
             owner.Attributes.ModifyAttributeValue(AttributeType.Speed, -1);
         }
 
-        public override void OnRemoveStack() { }
+        public override void OnRemoveStack(int amount) { }
 
         public override CombatAction OnHit() { return null; }
 

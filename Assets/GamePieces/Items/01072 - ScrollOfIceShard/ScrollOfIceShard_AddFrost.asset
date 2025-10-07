@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08de7308af1a35844bf257f6aa03b3a0, type: 3}
   m_Name: ScrollOfIceShard_AddFrost
   m_EditorClassIdentifier: 
-  targetCharacter: 0
+  targetCharacter: 1
   effectType: 0
-  stackAmount: 0
+  stackAmount: 2

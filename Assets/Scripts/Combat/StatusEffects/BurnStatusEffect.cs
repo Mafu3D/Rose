@@ -15,9 +15,9 @@ namespace Project.Combat.StatusEffects
             RemoveStacks(Stacks);
         }
 
-        public override void OnReceiveNewStack() { }
+        public override void OnReceiveNewStack(int amount) { }
 
-        public override void OnRemoveStack() { }
+        public override void OnRemoveStack(int amount) { }
 
         public override CombatAction OnHit() { return null; }
 

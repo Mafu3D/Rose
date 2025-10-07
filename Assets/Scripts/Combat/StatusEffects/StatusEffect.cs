@@ -29,7 +29,7 @@ namespace Project.Combat.StatusEffects
             if (amount != 0)
             {
                 Stacks = Math.Clamp(Stacks + Math.Abs(amount), 0, MaxStacks);
-                OnReceiveNewStack();
+                OnReceiveNewStack(amount);
 
                 if (Stacks >= MaxStacks)
                 {
@@ -42,7 +42,7 @@ namespace Project.Combat.StatusEffects
             if (amount != 0)
             {
                 Stacks = Math.Clamp(Stacks - Math.Abs(amount), 0, MaxStacks);
-                OnRemoveStack();
+                OnRemoveStack(amount);
 
                 if (Stacks <= 0)
                 {
@@ -52,9 +52,14 @@ namespace Project.Combat.StatusEffects
             }
         }
 
+        public void RemoveAllStacks()
+        {
+            RemoveStacks(Stacks);
+        }
+
         // Stack based actions
-        public abstract void OnReceiveNewStack();
-        public abstract void OnRemoveStack();
+        public abstract void OnReceiveNewStack(int amount);
+        public abstract void OnRemoveStack(int amount);
         public abstract void OnReceiveMaxStacks();
         public abstract void OnAllStacksRemoved();
 

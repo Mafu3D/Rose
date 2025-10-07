@@ -79,12 +79,17 @@ namespace Project.UI.BattleUI
             activeBattle.OnBattleStart += ShowActiveBattleUI;
             activeBattle.OnBattleDecided += ShowPostBattleUI;
             activeBattle.OnBattleLogUpdated += UpdateBattleLog;
+            activeBattle.OnNewTurn += UpdateActiveCombatant;
+            activeBattle.OnAttack += PlayAttackVFX;
             // activeBattle.OnChooseRun += UpdateBattleUI;
             // activeBattle.OnChooseSteal += UpdateBattleUI;
         }
 
         private void ShowPostBattleUI(BattleReport battleReport)
         {
+            LeftCombatantUI.SetActiveCombatant(false);
+            RightCombatantUI.SetActiveCombatant(false);
+
             PrebattleContainer.SetActive(false);
             ActiveBattleContainer.SetActive(false);
             PostbattleContainer.SetActive(true);
@@ -132,10 +137,45 @@ namespace Project.UI.BattleUI
             activeBattle.OnBattleStart -= ShowActiveBattleUI;
             activeBattle.OnBattleDecided -= ShowPostBattleUI;
             activeBattle.OnBattleLogUpdated -= UpdateBattleLog;
+            activeBattle.OnNewTurn -= UpdateActiveCombatant;
+            activeBattle.OnAttack -= PlayAttackVFX;
             // activeBattle.OnChooseRun -= UpdateBattleUI;
             // activeBattle.OnChooseSteal -= UpdateBattleUI;
 
             MainContainer.SetActive(false);
+        }
+
+        private void UpdateActiveCombatant()
+        {
+            int activeCombatantTEMP = activeBattle.GetWhichSideIsActiveTEMP();
+            if (activeCombatantTEMP == 0)
+            {
+                LeftCombatantUI.SetActiveCombatant(true);
+                RightCombatantUI.SetActiveCombatant(false);
+            }
+            else if (activeCombatantTEMP == 1)
+            {
+                LeftCombatantUI.SetActiveCombatant(false);
+                RightCombatantUI.SetActiveCombatant(true);
+            }
+            else
+            {
+                LeftCombatantUI.SetActiveCombatant(false);
+                RightCombatantUI.SetActiveCombatant(false);
+            }
+        }
+
+        private void PlayAttackVFX()
+        {
+            int activeCombatantTEMP = activeBattle.GetWhichSideIsActiveTEMP();
+            if (activeCombatantTEMP == 0)
+            {
+                LeftCombatantUI.PlayAttackVFX();
+            }
+            else if (activeCombatantTEMP == 1)
+            {
+                RightCombatantUI.PlayAttackVFX();
+            }
         }
 
         void UpdateBattleLog(string battleLog)

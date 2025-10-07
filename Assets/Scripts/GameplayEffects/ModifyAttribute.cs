@@ -18,7 +18,7 @@ namespace Project.GameplayEffects
         public override Status StartEffect()
         {
             Tile heroTile = GameManager.Instance.Player.HeroTile;
-            if (AttributeType == AttributeType.Health)
+            if (AttributeType == AttributeType.Health || AttributeType == AttributeType.Armor)
             {
                 if (MaxValueModifier != 0)
                 {

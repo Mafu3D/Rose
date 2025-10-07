@@ -26,7 +26,7 @@ namespace Project.Combat.CombatActions
                 character = target;
             }
 
-            if (AttributeType == AttributeType.Health)
+            if (AttributeType == AttributeType.Health || AttributeType == AttributeType.Armor)
             {
                 if (MaxValueModifier != 0)
                 {

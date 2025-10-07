@@ -1,4 +1,6 @@
-using System.Collections.Generic;
+using System.Collections;
+using EasyTextEffects;
+using Project.Attributes;
 using Project.Combat;
 using Project.Combat.StatusEffects;
 using Project.GameTiles;
@@ -20,8 +22,16 @@ namespace Project.UI.BattleUI
         [SerializeField] TMP_Text magicText;
         [SerializeField] TMP_Text dexterityText;
         [SerializeField] TMP_Text statusEffectText;
+        [SerializeField] GameObject activeCombatantContainer;
+        [SerializeField] GameObject attackVFX;
 
         Character combatant;
+
+        void Awake()
+        {
+            activeCombatantContainer.SetActive(false);
+            attackVFX.SetActive(false);
+        }
 
         public void InitializeCombatant(Character combatant)
         {
@@ -38,12 +48,42 @@ namespace Project.UI.BattleUI
 
         public void UpdateStats()
         {
-            healthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Health).ToString();
-            armorText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Armor).ToString();
-            speedText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Speed).ToString();
-            strengthText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Strength).ToString();
-            magicText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Magic).ToString();
-            dexterityText.text = combatant.Attributes.GetAttributeValue(Attributes.AttributeType.Dexterity).ToString();
+            UpdateStatText(healthText, AttributeType.Health);
+            UpdateStatText(armorText, AttributeType.Armor);
+            UpdateStatText(speedText, AttributeType.Speed);
+            UpdateStatText(strengthText, AttributeType.Strength);
+            UpdateStatText(magicText, AttributeType.Magic);
+            UpdateStatText(dexterityText, AttributeType.Dexterity);
+        }
+
+        private void UpdateStatText(TMP_Text text, AttributeType attributeType)
+        {
+            int newValue = combatant.Attributes.GetAttributeValue(attributeType);
+            int oldValue = int.Parse(text.text);
+            if (newValue == oldValue) return;
+
+            text.text = newValue.ToString();
+
+            TextEffect textEffect = text.GetComponent<TextEffect>();
+            if (textEffect != null)
+            {
+                if (newValue < oldValue)
+                {
+                    StartCoroutine(TextEffectRoutine(textEffect, "damage"));
+                }
+                else if (newValue > oldValue)
+                {
+                    StartCoroutine(TextEffectRoutine(textEffect, "heal"));
+                }
+            }
+        }
+
+        private IEnumerator TextEffectRoutine(TextEffect textEffect, string tag)
+        {
+            textEffect.StartManualEffect(tag);
+            textEffect.StartManualEffect("changed");
+            yield return new WaitForSecondsRealtime(0.4f);
+            textEffect.StopManualEffects();
         }
 
         public void UpdateStatusEffects()
@@ -54,6 +94,29 @@ namespace Project.UI.BattleUI
                 text += $"{statusEffect.DisplayName} {statusEffect.Stacks} \n";
             }
             statusEffectText.text = text;
+        }
+
+        public void PlayAttackVFX()
+        {
+            Animator animator = attackVFX.GetComponent<Animator>();
+            if (animator != null)
+            {
+                StartCoroutine(PlayAttackVFXRoutine(animator));
+            }
+        }
+
+        private IEnumerator PlayAttackVFXRoutine(Animator animator) {
+            attackVFX.SetActive(true);
+            int vfxAnimationHash = Animator.StringToHash("IdleVFX");
+            animator.Play(vfxAnimationHash);
+
+            yield return new WaitForSecondsRealtime(0.75f);
+            attackVFX.SetActive(false);
+        }
+
+        public void SetActiveCombatant(bool value)
+        {
+            activeCombatantContainer.SetActive(value);
         }
     }
 }
