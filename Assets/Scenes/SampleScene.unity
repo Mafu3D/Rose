@@ -7370,11 +7370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPointObject: {fileID: 6683939368783204238, guid: 579e374c68b80d84ea7879b5a8ecc734, type: 3}
   inventory: {fileID: 380159586}
-  item: {fileID: 11400000, guid: 39c69bb36081ffd45856ab317bf12b60, type: 2}
-  items:
-  - {fileID: 11400000, guid: 6f17b90afa26f964292f825d2311eb03, type: 2}
-  - {fileID: 11400000, guid: 39c69bb36081ffd45856ab317bf12b60, type: 2}
-  - {fileID: 11400000, guid: f1b86fd7dad6ffc44992278ee26e0451, type: 2}
+  item: {fileID: 0}
+  items: []
   cardData: {fileID: 11400000, guid: 574283eea6ce230439dd19828f8fbe32, type: 2}
 --- !u!4 &1430360740
 Transform:
@@ -13367,7 +13364,7 @@ MonoBehaviour:
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 13b5f39b389816a40a66297c56709d96, type: 2}
   AutoBattle: 1
-  AutoBattleSpeed: 0.25
+  AutoBattleSpeed: 1
   MinTimeBetweenPlayerMoves: 0.25
   MinTimeBetweenPhases: 0.5
   BattleDebugMode: 0
@@ -14225,7 +14222,7 @@ PrefabInstance:
       objectReference: {fileID: 538591081}
     - target: {fileID: 6502347113423046407, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7514050003420547337, guid: cde994b910928b54aac3967a8be70726, type: 3}
       propertyPath: m_AnchoredPosition.y

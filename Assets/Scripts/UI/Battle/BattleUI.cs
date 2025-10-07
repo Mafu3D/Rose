@@ -15,6 +15,7 @@ namespace Project.UI.BattleUI
 
         [Header("Main")]
         [SerializeField] GameObject MainContainer;
+        [SerializeField] UIShaker MainUIShaker;
 
         [Header("Combatants")]
         [SerializeField] CombatantUI LeftCombatantUI;
@@ -84,6 +85,8 @@ namespace Project.UI.BattleUI
             activeBattle.OnAttack += PlayAttackVFX;
             // activeBattle.OnChooseRun += UpdateBattleUI;
             // activeBattle.OnChooseSteal += UpdateBattleUI;
+            activeBattle.Hero.OnReceiveHit += ShakeUIHero;
+            activeBattle.Enemy.OnReceiveHit += ShakeUIEnemy;
         }
 
         private void ShowPostBattleUI(BattleReport battleReport)
@@ -142,8 +145,20 @@ namespace Project.UI.BattleUI
             activeBattle.OnAttack -= PlayAttackVFX;
             // activeBattle.OnChooseRun -= UpdateBattleUI;
             // activeBattle.OnChooseSteal -= UpdateBattleUI;
+            activeBattle.Hero.OnReceiveHit -= ShakeUIHero;
+            activeBattle.Enemy.OnReceiveHit -= ShakeUIEnemy;
 
             MainContainer.SetActive(false);
+        }
+
+        private void ShakeUIEnemy(HitReport report)
+        {
+            // MainUIShaker.StartShake(0.25f, report.Damage * 2f, 5f);
+        }
+
+        private void ShakeUIHero(HitReport report)
+        {
+            MainUIShaker.StartShake(0.5f, report.Damage * 5f, 10f);
         }
 
         public void PlayEffectVFX(GameObject vfxPrefab, Character target)

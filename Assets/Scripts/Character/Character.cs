@@ -18,6 +18,8 @@ namespace Project
         public Sprite Sprite;
         public Inventory Inventory;
 
+        public event Action<HitReport> OnReceiveHit;
+
         public int Stunned;
 
         public Character(CharacterData characterData, Inventory inventory)
@@ -39,6 +41,7 @@ namespace Project
         public void ReceiveAttack(HitReport hitReport)
         {
             TakeDamage(hitReport.Damage);
+            OnReceiveHit?.Invoke(hitReport);
         }
 
         public void TakeDamage(int amount, bool avoidArmor = false)

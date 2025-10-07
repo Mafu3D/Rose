@@ -2,25 +2,14 @@ using System.Collections.Generic;
 using Project;
 using Project.Decks;
 using Project.Items;
+using Project.UI.MainUI;
 using UnityEngine;
 
 public class Scratch : MonoBehaviour
 {
-    [SerializeField] GameObject hitPointObject;
-    [SerializeField] Inventory inventory;
-    [SerializeField] ItemData item;
-    [SerializeField] List<ItemData> items;
-    [SerializeField] CardData cardData;
-    Card card;
-    bool lmbClicked = false;
-    bool rmbClicked = false;
-
-    int itemIndex;
-
-    bool firstUpdate = true;
-    float timer = 2f;
-    float time;
-    bool hasExecuted = false;
+    [SerializeField] UIShaker Shaker;
+    private bool firstUpdate;
+    private bool lmbClicked;
 
     void Start()
     {
@@ -29,99 +18,30 @@ public class Scratch : MonoBehaviour
 
     void Update()
     {
-        return;
+
 
         if (firstUpdate)
         {
             FirstUpdate();
             firstUpdate = false;
         }
-        time += Time.deltaTime;
-        // Debug.Log(time);
-        return;
-        if (time > timer && !hasExecuted)
-        {
-            card = new Card(cardData);
-            card.Execute();
-            hasExecuted = true;
-        }
 
-        // if (cardStatus != Status.Complete)
-        // {
-        //     cardStatus = card.Resolve();
-
-        // }
 
         if (Input.GetMouseButton(0))
         {
             if (!lmbClicked)
             {
                 lmbClicked = true;
-                return;
-                Item newItem = new Item(item);
-                itemIndex = inventory.AddItem(newItem);
-                // CheckWorldPosForCell();
             }
         }
         else
         {
             lmbClicked = false;
         }
-
-        if (Input.GetMouseButton(1))
-        {
-            if (!rmbClicked)
-            {
-                return;
-                inventory.RemoveItem(itemIndex);
-                rmbClicked = true;
-            }
-        }
-        else
-        {
-            rmbClicked = false;
-        }
     }
 
     private void FirstUpdate()
     {
-        // GameManager.Instance.Player.HeroNode.Attributes.ModifyAttributeValue(Project.Attributes.AttributeType.Health, -9);
 
-        // List<Item> choiceItems = new();
-        // foreach (ItemData itemData in items)
-        // {
-        //     Item item = new Item(itemData);
-        //     choiceItems.Add(item);
-        // }
-
-        // List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
-
-        // Choice<Item> treasureChoice = new Choice<Item(choiceItems);
-        // MainUI.Instance.DisplayTreasureChoice(treasureChoice);
-
-        return;
-
-        // Cell start = GameManager.Instance.Grid.WorldPositionToCell(startNode.transform.position);
-        // GameObject startGO = Instantiate(hitPointObject, new Vector3(start.Center.x, start.Center.y, 0), Quaternion.identity);
-        // startGO.name = "start";
-        // Cell end = GameManager.Instance.Grid.WorldPositionToCell(endNode.transform.position);
-        // GameObject endGO = Instantiate(hitPointObject, new Vector3(end.Center.x, end.Center.y, 0), Quaternion.identity);
-        // endGO.name = "end";
-        // List<Cell> path = GameManager.Instance.Grid.GetPathBetweenTwoCells(start, end);
-        // Debug.Log(path.Count);
-        // foreach (Cell cell in path)
-        // {
-        //     Instantiate(hitPointObject, new Vector3(cell.Center.x, cell.Center.y, 0), Quaternion.identity);
-        // }
-    }
-
-    private void CheckWorldPosForCell()
-    {
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Cell hitCell = GameManager.Instance.Grid.WorldPositionToCell(worldPosition);
-        Instantiate(hitPointObject, worldPosition, Quaternion.identity);
-        Debug.Log($"X: {hitCell.x} Y: {hitCell.y}");
-        // Debug.Log(hitCell.Center);
-        // Debug.Log(hitCell.GetHashCode());
     }
 }
