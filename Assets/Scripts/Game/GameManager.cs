@@ -11,6 +11,7 @@ using UnityEngine.Events;
 using Project.Core;
 using Project.Combat;
 using Project.States;
+using Project.Resources;
 
 namespace Project
 {

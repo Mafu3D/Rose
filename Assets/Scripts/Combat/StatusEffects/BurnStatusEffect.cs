@@ -1,4 +1,5 @@
 using Project.Combat.CombatActions;
+using Project.VFX;
 
 namespace Project.Combat.StatusEffects
 {
@@ -8,14 +9,12 @@ namespace Project.Combat.StatusEffects
         public BurnStatusEffect(Character owner, Character enemy, int maxStacks) : base(owner, enemy, maxStacks) { }
 
         public override void OnAllStacksRemoved() { }
-        public override void OnReceiveMaxStacks()
-        {
-            FrozenStatusEffect frozenStatusEffect = new FrozenStatusEffect(owner, enemy, 99);
-            owner.StatusEffectManager.AddStack(frozenStatusEffect, 1);
-            RemoveStacks(Stacks);
-        }
+        public override void OnReceiveMaxStacks() { }
 
-        public override void OnReceiveNewStack(int amount) { }
+        public override void OnReceiveNewStack(int amount)
+        {
+            VFXManager.Instance.PlayStatusEffectVFX("BurnOnApply", owner);
+        }
 
         public override void OnRemoveStack(int amount) { }
 
@@ -29,6 +28,7 @@ namespace Project.Combat.StatusEffects
             return new CombatAction(() =>
             {
                 owner.TakeDamage(startingStacks);
+                VFXManager.Instance.PlayStatusEffectVFX("BurnOnTrigger", owner);
                 RemoveStacks(1);
             },
             $"{owner.DisplayName} was burnt for {startingStacks} damage");

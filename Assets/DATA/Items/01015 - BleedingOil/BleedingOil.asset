@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: BleedingFlask
+  m_Name: BleedingOil
   m_EditorClassIdentifier: 
-  Name: Bleeding Oil
-  Description: 'Combat Start: Apply 2 Vulnerable'
+  Name: Vulnerable Oil
+  Description: 'On Hit: Apply 1 Vulnerable'
   ItemID: 
   Sprite: {fileID: 5926964135845988567, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   GoldValue: 0
@@ -30,11 +30,11 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
-  OnHitStrategies: []
+  OnHitStrategies:
+  - {fileID: 11400000, guid: caac02aba49a815408b978b058db317a, type: 2}
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
-  OnCombatEndStrategies:
-  - {fileID: 11400000, guid: b86cb6187c951e64c938d7122506a87a, type: 2}
+  OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
   OnTurnStartStrategies: []

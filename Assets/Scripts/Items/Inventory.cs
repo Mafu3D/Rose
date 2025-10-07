@@ -35,6 +35,16 @@ namespace Project.Items
         public Item GetItemAtSlot(int index) => heldItems[index];
         public List<Item> GetHeldItems() => heldItems;
 
+        public List<Item> GetAllItems()
+        {
+            List<Item> allItems = new List<Item>(GetHeldItems());
+            if (equippedWeapon != null)
+            {
+                allItems.Add(equippedWeapon);
+            }
+            return allItems;
+        }
+
         public Item SwapEquippedWeapon(Item item)
         {
             if (equippedWeapon != null)

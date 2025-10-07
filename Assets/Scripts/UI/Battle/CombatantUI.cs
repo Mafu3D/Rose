@@ -24,6 +24,7 @@ namespace Project.UI.BattleUI
         [SerializeField] TMP_Text statusEffectText;
         [SerializeField] GameObject activeCombatantContainer;
         [SerializeField] GameObject attackVFX;
+        [SerializeField] Transform effectVFXLocator;
 
         Character combatant;
 
@@ -106,12 +107,35 @@ namespace Project.UI.BattleUI
         }
 
         private IEnumerator PlayAttackVFXRoutine(Animator animator) {
+            int speedHash = Animator.StringToHash("Speed");
+            animator.SetFloat(speedHash, 1 / GameManager.Instance.AutoBattleSpeed);
             attackVFX.SetActive(true);
             int vfxAnimationHash = Animator.StringToHash("IdleVFX");
             animator.Play(vfxAnimationHash);
 
-            yield return new WaitForSecondsRealtime(0.75f);
+            yield return new WaitForSecondsRealtime(0.75f * GameManager.Instance.AutoBattleSpeed);
             attackVFX.SetActive(false);
+        }
+
+        public void PlayEffectVFX(GameObject VFXPrefab)
+        {
+            GameObject vfxObject = Instantiate(VFXPrefab, effectVFXLocator);
+            StartCoroutine(PlayEffectVFXRoutine(vfxObject));
+        }
+
+        private IEnumerator PlayEffectVFXRoutine(GameObject vfxObject)
+        {
+            Animator animator = vfxObject.GetComponent<Animator>();
+            int speedHash = Animator.StringToHash("Speed");
+            animator.SetFloat(speedHash, 1 / GameManager.Instance.AutoBattleSpeed);
+            if (animator != null)
+            {
+                int vfxAnimationHash = Animator.StringToHash("IdleVFX");
+                animator.Play(vfxAnimationHash);
+
+                yield return new WaitForSecondsRealtime(0.75f * GameManager.Instance.AutoBattleSpeed);
+                Destroy(vfxObject);
+            }
         }
 
         public void SetActiveCombatant(bool value)

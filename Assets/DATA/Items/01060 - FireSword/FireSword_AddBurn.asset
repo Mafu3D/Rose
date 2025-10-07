@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08de7308af1a35844bf257f6aa03b3a0, type: 3}
-  m_Name: BleedingOil_AddVulnerable
+  m_Name: FireSword_AddBurn
   m_EditorClassIdentifier: 
-  targetCharacter: 0
-  effectType: 4
+  VFXPrefab: {fileID: 4306167161924932604, guid: 328880c6f4e8a7b47a507ec11ebc1d16, type: 3}
+  targetCharacter: 1
+  effectType: 2
   stackAmount: 1

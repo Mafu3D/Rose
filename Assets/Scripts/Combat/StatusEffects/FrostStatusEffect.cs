@@ -1,5 +1,6 @@
 using Project.Attributes;
 using Project.Combat.CombatActions;
+using Project.VFX;
 using UnityEngine;
 
 namespace Project.Combat.StatusEffects
@@ -16,11 +17,13 @@ namespace Project.Combat.StatusEffects
             FrozenStatusEffect frozenStatusEffect = new FrozenStatusEffect(owner, enemy, 99);
             owner.StatusEffectManager.AddStack(frozenStatusEffect, 1);
             RemoveStacks(Stacks);
+
         }
 
         public override void OnReceiveNewStack(int amount)
         {
             owner.Attributes.ModifyAttributeValue(AttributeType.Speed, -1);
+            VFXManager.Instance.PlayStatusEffectVFX("FrostOnApply", owner);
         }
 
         public override void OnRemoveStack(int amount) { }

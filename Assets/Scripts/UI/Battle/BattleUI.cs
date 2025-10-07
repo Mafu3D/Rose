@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Project.Combat;
+using Project.VFX;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -143,6 +144,18 @@ namespace Project.UI.BattleUI
             // activeBattle.OnChooseSteal -= UpdateBattleUI;
 
             MainContainer.SetActive(false);
+        }
+
+        public void PlayEffectVFX(GameObject vfxPrefab, Character target)
+        {
+            if (target == activeBattle.Hero)
+            {
+                LeftCombatantUI.PlayEffectVFX(vfxPrefab);
+            }
+            else if (target == activeBattle.Enemy)
+            {
+                RightCombatantUI.PlayEffectVFX(vfxPrefab);
+            }
         }
 
         private void UpdateActiveCombatant()

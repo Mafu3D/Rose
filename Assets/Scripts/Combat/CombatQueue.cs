@@ -12,6 +12,7 @@ namespace Project.Combat
         public event Action OnResolveQueueStart;
         public event Action OnResolveQueueEnd;
         public event Action<string> OnActionExecuted;
+        public event Action<GameObject> OnActionVFXExecuted;
         public bool QueueNeedsToBeResolved => Queue.Count > 0;
 
         public CombatAction GetCurrentAction()

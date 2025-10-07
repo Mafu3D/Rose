@@ -1,4 +1,5 @@
 using Project.Combat.CombatActions;
+using Project.VFX;
 
 namespace Project.Combat.StatusEffects
 {
@@ -10,7 +11,10 @@ namespace Project.Combat.StatusEffects
         public override void OnAllStacksRemoved() { }
         public override void OnReceiveMaxStacks() { }
 
-        public override void OnReceiveNewStack(int amount) { }
+        public override void OnReceiveNewStack(int amount)
+        {
+            VFXManager.Instance.PlayStatusEffectVFX("VulnerableOnApply", owner);
+        }
 
         public override void OnRemoveStack(int amount) { }
 
@@ -20,6 +24,7 @@ namespace Project.Combat.StatusEffects
             return new CombatAction(() =>
             {
                 owner.TakeDamage(Stacks);
+                VFXManager.Instance.PlayStatusEffectVFX("VulnerableOnTrigger", owner);
             },
             $"{owner.DisplayName} took an additional {Stacks} damage"); }
 

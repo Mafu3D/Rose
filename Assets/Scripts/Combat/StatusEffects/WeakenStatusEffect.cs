@@ -1,5 +1,6 @@
 using Project.Attributes;
 using Project.Combat.CombatActions;
+using Project.VFX;
 
 namespace Project.Combat.StatusEffects
 {
@@ -13,19 +14,23 @@ namespace Project.Combat.StatusEffects
 
         public override void OnReceiveNewStack(int amount)
         {
-            owner.Attributes.ModifyAttributeValue(AttributeType.Strength, -1);
+            owner.Attributes.ModifyAttributeValue(AttributeType.Strength, -amount);
+            VFXManager.Instance.PlayStatusEffectVFX("WeakOnApply", owner);
         }
 
-        public override void OnRemoveStack(int amount) { }
+        public override void OnRemoveStack(int amount)
+        {
+            owner.Attributes.ModifyAttributeValue(AttributeType.Strength, amount);
+        }
 
-        public override CombatAction OnHit() { return null; }
+        public override CombatAction OnHit() { return new CombatAction(() => RemoveAllStacks(), $"{DisplayName} was removed from {owner.DisplayName}"); }
 
         public override CombatAction OnReceiveHit() { return null; }
 
         public override CombatAction OnTurnEnd()
         {
-            return new CombatAction(() => RemoveAllStacks(), $"{DisplayName} was removed from {owner}");
-         }
+            return null;
+        }
 
         public override CombatAction OnTurnStart() { return null; }
 

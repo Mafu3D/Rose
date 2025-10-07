@@ -205,7 +205,7 @@ namespace Project.Combat
             {
                 if (combatant.Inventory != null)
                 {
-                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    List<Item> items = combatant.Inventory.GetAllItems();
                     foreach (Item item in items)
                     {
                         foreach (CombatActionBaseData actionData in item.ItemData.OnCombatStartStrategies)
@@ -232,7 +232,7 @@ namespace Project.Combat
                 // Items
                 if (combatant.Inventory != null)
                 {
-                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    List<Item> items = combatant.Inventory.GetAllItems();
                     foreach (Item item in items)
                     {
                         foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
@@ -264,7 +264,8 @@ namespace Project.Combat
             // Items
             if (activeCombatant.Inventory != null)
             {
-                List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                List<Item> items = activeCombatant.Inventory.GetAllItems();
+                Debug.Log(items.Count);
                 foreach (Item item in items)
                 {
                     foreach (CombatActionBaseData actionData in item.ItemData.OnTurnStartStrategies)
@@ -298,7 +299,7 @@ namespace Project.Combat
             // Items
             if (activeCombatant.Inventory != null)
             {
-                List<Item> items = activeCombatant.Inventory.GetHeldItems();
+                List<Item> items = activeCombatant.Inventory.GetAllItems();
                 foreach (Item item in items)
                 {
                     foreach (CombatActionBaseData actionData in item.ItemData.OnTurnEndStrategies)
@@ -335,7 +336,7 @@ namespace Project.Combat
             {
                 if (combatant.Inventory != null)
                 {
-                    List<Item> items = combatant.Inventory.GetHeldItems();
+                    List<Item> items = combatant.Inventory.GetAllItems();
                     foreach (Item item in items)
                     {
                         foreach (CombatActionBaseData actionData in item.ItemData.OnRoundEndStrategies)
@@ -385,11 +386,18 @@ namespace Project.Combat
                 // Items
                 if (attacker.Inventory != null)
                 {
-                    List<Item> items = attacker.Inventory.GetHeldItems();
+                    List<Item> items = attacker.Inventory.GetAllItems();
+                    foreach (Item item in items)
+                    {
+                        Debug.Log(item.ToString());
+                        Debug.Log(item.ItemData.name);
+                    }
+
                     foreach (Item item in items)
                     {
                         foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
                         {
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
                             actionData.QueueAction(CombatQueue, attacker, GetTarget(attacker));
                         }
                     }

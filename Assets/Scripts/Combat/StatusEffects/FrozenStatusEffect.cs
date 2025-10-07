@@ -1,5 +1,6 @@
 using Project.Attributes;
 using Project.Combat.CombatActions;
+using Project.VFX;
 using UnityEngine;
 
 namespace Project.Combat.StatusEffects
@@ -15,6 +16,7 @@ namespace Project.Combat.StatusEffects
         public override void OnReceiveNewStack(int amount)
         {
             owner.Stunned += 1;
+            VFXManager.Instance.PlayStatusEffectVFX("FrozenOnApply", owner);
         }
 
         public override void OnRemoveStack(int amount) { }
