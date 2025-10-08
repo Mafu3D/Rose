@@ -158,7 +158,7 @@ namespace Project.UI.BattleUI
 
         private void ShakeUIHero(HitReport report)
         {
-            MainUIShaker.StartShake(0.5f, report.Damage * 5f, 10f);
+            MainUIShaker.StartShake(0.25f, report.Damage * 2.5f, 10f);
         }
 
         public void PlayEffectVFX(GameObject vfxPrefab, Character target)
