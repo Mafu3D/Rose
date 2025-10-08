@@ -2,14 +2,16 @@ using System.Collections.Generic;
 using Project;
 using Project.Decks;
 using Project.Items;
+using Project.PlayerSystem;
 using Project.UI.MainUI;
 using UnityEngine;
 
 public class Scratch : MonoBehaviour
 {
-    [SerializeField] UIShaker Shaker;
+    [SerializeField] Player Player;
     private bool firstUpdate;
     private bool lmbClicked;
+    private bool rmbClicked;
 
     void Start()
     {
@@ -32,11 +34,25 @@ public class Scratch : MonoBehaviour
             if (!lmbClicked)
             {
                 lmbClicked = true;
+                Player.GoldTracker.AddGold(1);
             }
         }
         else
         {
             lmbClicked = false;
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            if (!rmbClicked)
+            {
+                rmbClicked = true;
+                Player.GoldTracker.RemoveGold(1);
+            }
+        }
+        else
+        {
+            rmbClicked = false;
         }
     }
 

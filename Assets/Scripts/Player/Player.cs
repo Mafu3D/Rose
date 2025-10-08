@@ -9,6 +9,7 @@ namespace Project.PlayerSystem
         [SerializeField] public Input.InputReader InputReader;
         [SerializeField] public Tile HeroTile;
         [SerializeField] public Inventory Inventory;
+        [SerializeField] public GoldTracker GoldTracker;
         public Camera PlayerCamera { get; private set; }
 
         void Awake()

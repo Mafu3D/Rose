@@ -41,7 +41,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50045986b640244448b2a9b9854a2d08, type: 2}
   OnPlayerEnterStrategies:
   - {fileID: 11400000, guid: 1ebd017aae823284d8dffb181f59b526, type: 2}
-  OnPlayerExitStrategies: []
+  OnPlayerExitStrategies:
+  - {fileID: 11400000, guid: f26ae33342ff48741b73b15395aa82b7, type: 2}
   OnEndOfTurnStrategies:
   - {fileID: 11400000, guid: 37e48cd433efe2242aaaca6747cac6ee, type: 2}
   OnDrawCardStrategies:

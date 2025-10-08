@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db0b65f18bd64746a3a006967368ff3, type: 3}
   m_Name: LogPlayerExit
   m_EditorClassIdentifier: 
-  ToSay: Player Entered
+  ToSay: Player Exit
