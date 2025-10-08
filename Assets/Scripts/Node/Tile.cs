@@ -32,8 +32,13 @@ namespace Project.GameTiles
 
         protected Rigidbody2D myRigidBody;
 
-
-        List<Tile> usedCharacters = new();
+        // TEMP: REMOVE
+        public int ActivatesThisGame;
+        public int ActivatesThisTurn;
+        public int PlayerEntersThisGame;
+        public int PlayerEntersThisTurn;
+        public int PlayerExitsThisGame;
+        public int PlayerExitsThisTurn;
 
         public int MovesRemaining { get; private set; }
         public Action OnRemainingMovesChanged;
@@ -70,13 +75,69 @@ namespace Project.GameTiles
         private void Initialize()
         {
             RegisterToGrid();
-            ResetNode();
             ResetMovesRemaining();
         }
 
-        private void ResetNode()
+        public void ResetForTurn()
         {
-            usedCharacters = new();
+            ActivatesThisTurn = 0;
+            PlayerEntersThisTurn = 0;
+            PlayerExitsThisTurn = 0;
+        }
+
+        public void ResetForGame()
+        {
+            ActivatesThisGame = 0;
+            PlayerEntersThisGame = 0;
+            PlayerExitsThisGame = 0;
+        }
+
+        public bool CanActivate()
+        {
+            if (TileData.OnActivateStrategies.Count > 0)
+            {
+                if (ActivatesThisTurn == 0 ||
+                    (TileData.CanBeUsedMultipleTimes && TileData.UsesPerTurn > ActivatesThisTurn))
+                    {
+                        if ((TileData.LimitTotalUses && ActivatesThisGame < TileData.TotalUses) || !TileData.LimitTotalUses)
+                        {
+                            return true;
+                        }
+                    }
+            }
+            return false;
+        }
+
+        public bool CanPlayerEnter()
+        {
+            if (TileData.OnPlayerEnterStrategies.Count > 0)
+            {
+                if (PlayerEntersThisTurn == 0 ||
+                    (TileData.CanBeUsedMultipleTimes && TileData.UsesPerTurn > PlayerEntersThisTurn))
+                    {
+                        if ((TileData.LimitTotalUses && PlayerEntersThisGame < TileData.TotalUses) || !TileData.LimitTotalUses)
+                        {
+                            return true;
+                        }
+                    }
+            }
+            return false;
+        }
+
+        public bool CanPlayerExit()
+        {
+            if (TileData.OnPlayerExitStrategies.Count > 0)
+            {
+                if (PlayerExitsThisTurn == 0 ||
+                    (TileData.CanBeUsedMultipleTimes && TileData.UsesPerTurn > PlayerExitsThisTurn))
+                    {
+                        if ((TileData.LimitTotalUses && PlayerExitsThisGame < TileData.TotalUses) || !TileData.LimitTotalUses)
+                        {
+                            return true;
+                        }
+                    }
+            }
+            return false;
         }
 
         public void RegisterCharacterFromData(CharacterData characterData)
@@ -96,6 +157,12 @@ namespace Project.GameTiles
                 Character = character;
                 ResetMovesRemaining(); // do this because reset moves takes infro
             }
+        }
+
+        public void ModifyMovesRemaining(int amount)
+        {
+            MovesRemaining += amount;
+            OnRemainingMovesChanged?.Invoke();
         }
 
         public void RegisterToGrid()

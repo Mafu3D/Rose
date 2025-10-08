@@ -18,6 +18,9 @@ namespace Project.GameTiles
 
         [Header("Usability")]
         [SerializeField] public bool CanBeUsedMultipleTimes = false;
+        [SerializeField] public int UsesPerTurn = 1;
+        [SerializeField] public bool LimitTotalUses = false;
+        [SerializeField] public int TotalUses = 1;
         [SerializeField] public bool DestroyAfterUsing = false;
 
         [Header("Character")]

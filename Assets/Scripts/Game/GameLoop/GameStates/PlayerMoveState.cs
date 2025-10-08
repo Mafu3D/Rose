@@ -42,6 +42,25 @@ namespace Project.GameLoop
                 Vector2 movementInput = GameManager.Player.InputReader.MovementValue;
                 if (movementInput != Vector2.zero)
                 {
+                    Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
+                    List<Tile> registeredTiles;
+                    if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
+                    {
+                        foreach (Tile tile in registeredTiles)
+                        {
+                            if (tile.CanPlayerExit())
+                            {
+                                tile.PlayerExitsThisGame += 1;
+                                tile.PlayerExitsThisTurn += 1;
+                                foreach (GameplayEffectStrategy effect in tile.TileData.OnPlayerExitStrategies)
+                                {
+                                    GameManager.EffectQueue.AddEffect(effect);
+                                }
+                            }
+                        }
+                    }
+
+
                     GameManager.Player.HeroTile.Move(movementInput);
                     GameManager.OnPlayerMove();
                     Resolve();
@@ -71,20 +90,21 @@ namespace Project.GameLoop
 
             Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
             List<Tile> registeredTiles;
-            Debug.Log("resolve resolve resolve");
-            Debug.Log(heroCell);
             if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
             {
-                Debug.Log("got registered tile");
                 foreach (Tile tile in registeredTiles)
                 {
-                    Debug.Log(tile.name);
-                    foreach (GameplayEffectStrategy effect in tile.TileData.OnPlayerEnterStrategies)
+                    if (tile.CanPlayerEnter())
                     {
-                        Debug.Log("adding effect");
-                        GameManager.EffectQueue.AddEffect(effect);
+                        tile.PlayerEntersThisGame += 1;
+                        tile.PlayerEntersThisTurn += 1;
+                        foreach (GameplayEffectStrategy effect in tile.TileData.OnPlayerEnterStrategies)
+                        {
+                            GameManager.EffectQueue.AddEffect(effect);
+                        }
                     }
                 }
+
             }
             StateMachine.SwitchState(new PlayerMoveResolveState("Player Move Resolve", StateMachine, GameManager));
         }

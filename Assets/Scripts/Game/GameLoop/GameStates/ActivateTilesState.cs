@@ -21,9 +21,15 @@ namespace Project.GameLoop
             {
                 foreach (Tile tile in registeredTiles)
                 {
-                    foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
+
+                    if (tile.CanActivate())
                     {
-                        GameManager.EffectQueue.AddEffect(effect);
+                        tile.ActivatesThisGame += 1;
+                        tile.ActivatesThisTurn += 1;
+                        foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
+                        {
+                            GameManager.EffectQueue.AddEffect(effect);
+                        }
                     }
                 }
                 StateMachine.SwitchState(new ActivateTilesResolveState("Activate Tiles Resolve", StateMachine, GameManager));

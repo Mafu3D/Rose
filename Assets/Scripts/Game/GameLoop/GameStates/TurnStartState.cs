@@ -18,6 +18,7 @@ namespace Project.GameLoop
 
             foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
             {
+                tile.ResetForTurn();
                 foreach (GameplayEffectStrategy effect in tile.TileData.OnTurnStartStrategies)
                 {
                     GameManager.EffectQueue.AddEffect(effect);

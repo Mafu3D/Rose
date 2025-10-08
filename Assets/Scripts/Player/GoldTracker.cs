@@ -19,13 +19,13 @@ namespace Project
 
         public void AddGold(int amount)
         {
-            Gold = Math.Clamp(Gold + amount, 0, MaxGold);
+            Gold = Math.Clamp(Gold + Math.Abs(amount), 0, MaxGold);
             OnGoldChangedEvent?.Invoke();
         }
 
         public void RemoveGold(int amount)
         {
-            Gold = Math.Clamp(Gold - amount, 0, MaxGold);
+            Gold = Math.Clamp(Gold - Math.Abs(amount), 0, MaxGold);
             OnGoldChangedEvent?.Invoke();
         }
 

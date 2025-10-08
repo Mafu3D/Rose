@@ -92,7 +92,6 @@ namespace Project
         public bool TryGetTileesRegisteredToCell(Cell cell, out List<Tile> registeredTiles, bool excludeHeroes = true)
         {
             registeredTiles = GetTilesRegisteredToCell(cell, excludeHeroes);
-            Debug.Log(registeredTiles.Count);
             if (registeredTiles.Count > 0) return true;
             return false;
         }
@@ -102,19 +101,17 @@ namespace Project
             List<Tile> registeredTiles = new List<Tile>();
             Cell registeredCell;
             registeredKeys.TryGetValue(cell.GetHashCode(), out registeredCell);
-            Debug.Log(registeredCell);
             if (registeredCell != null)
             {
                 List<Tile> tiles;
                 registeredCells.TryGetValue(registeredCell, out tiles);
-                Debug.Log(tiles.Count);
                 if (tiles != null)
                 {
                     // if (excludeHeroes) tiles.RemoveAll(n => GameManager.Instance.Player.HeroTile);
                     // registeredTiles = tiles;
                     foreach (Tile tile in tiles)
                     {
-                        if (tile.IsPlayer != true) registeredTiles.Add(tile);
+                        if (tile.IsPlayer != true && excludeHeroes) registeredTiles.Add(tile);
                     }
                     Debug.Log(registeredTiles.Count);
                 }
