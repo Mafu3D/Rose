@@ -71,12 +71,17 @@ namespace Project.GameLoop
 
             Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
             List<Tile> registeredTiles;
+            Debug.Log("resolve resolve resolve");
+            Debug.Log(heroCell);
             if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
             {
+                Debug.Log("got registered tile");
                 foreach (Tile tile in registeredTiles)
                 {
+                    Debug.Log(tile.name);
                     foreach (GameplayEffectStrategy effect in tile.TileData.OnPlayerEnterStrategies)
                     {
+                        Debug.Log("adding effect");
                         GameManager.EffectQueue.AddEffect(effect);
                     }
                 }

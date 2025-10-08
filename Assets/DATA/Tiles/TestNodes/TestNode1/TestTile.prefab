@@ -54,10 +54,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2781546360571269513, guid: c6522f60aff49534ea478835df6d5ef0, type: 3}
       propertyPath: m_Name
-      value: TestNode1
+      value: TestTile
       objectReference: {fileID: 0}
     - target: {fileID: 2955479412156668539, guid: c6522f60aff49534ea478835df6d5ef0, type: 3}
       propertyPath: NodeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 05a7c3f2927fa4a4da6ade6194caeecc, type: 2}
+    - target: {fileID: 2955479412156668539, guid: c6522f60aff49534ea478835df6d5ef0, type: 3}
+      propertyPath: TileData
       value: 
       objectReference: {fileID: 11400000, guid: 05a7c3f2927fa4a4da6ade6194caeecc, type: 2}
     m_RemovedComponents:

@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec64cdcfcd3fd74e8274f4549a67a9a, type: 3}
-  m_Name: NewModifyAttributes
+  m_Script: {fileID: 11500000, guid: 9db0b65f18bd64746a3a006967368ff3, type: 3}
+  m_Name: LogPlayerExit
   m_EditorClassIdentifier: 
-  HealthModifier: 10
-  ArmorModifier: 10
-  StrengthModifier: 10
-  MagicModifier: 10
-  DexterityModifier: 10
-  SpeedModifier: 0
+  ToSay: Player Entered

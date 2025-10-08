@@ -152,7 +152,6 @@ namespace Project.GameTiles
         private void MoveTowardsPlayer()
         {
             // This is all so gross
-            Debug.Log("move");
             if (isStunned)
             {
                 roundsStunned -= 1;

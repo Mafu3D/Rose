@@ -24,11 +24,11 @@ MonoBehaviour:
   DisplayName: Test Node 1
   Description: I'm the first test node!
   Sprite: {fileID: 6700204669442689607, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  Priority: 0
-  NodeType: 0
+  ActivationPriority: 0
+  TileType: 0
   CanBeUsedMultipleTimes: 0
   DestroyAfterUsing: 1
-  AttributesData: {fileID: 11400000, guid: 1ccaa5c8a2b54c0489143a132590cb39, type: 2}
+  CharacterData: {fileID: 0}
   OnActivateStrategies:
   - {fileID: 11400000, guid: 0adb7c3738cfdbb44b63a7ce9f04bf32, type: 2}
   OnRoundStartStrategies:
@@ -40,7 +40,7 @@ MonoBehaviour:
   OnPlayerMoveEndStrategies:
   - {fileID: 11400000, guid: 50045986b640244448b2a9b9854a2d08, type: 2}
   OnPlayerEnterStrategies:
-  - {fileID: 11400000, guid: 5fb1aba7f27a4ee4fa847dc70a721014, type: 2}
+  - {fileID: 11400000, guid: 1ebd017aae823284d8dffb181f59b526, type: 2}
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies:
   - {fileID: 11400000, guid: 37e48cd433efe2242aaaca6747cac6ee, type: 2}
