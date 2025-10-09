@@ -29,6 +29,14 @@ namespace Project.GameTiles
         [SerializeField] protected int moveDistance = 1;
         [SerializeField] private bool willMoveTowardsPlayer = false;
         [SerializeField] public bool IsPlayer = true;
+
+        [Header("Icons")]
+        [SerializeField] SpriteRenderer icon;
+        [SerializeField] SpriteRenderer outline1;
+        [SerializeField] SpriteRenderer outline2;
+        [SerializeField] GameObject usableIcon;
+        [SerializeField] GameObject actionIcon;
+
         private bool isStunned = true;
         private int roundsStunned = 1;
         public Character Character { get; private set; }
@@ -44,12 +52,6 @@ namespace Project.GameTiles
         public int PlayerExitsThisGame;
         public int PlayerExitsThisTurn;
 
-        [Header("Icons")]
-        [SerializeField] SpriteRenderer icon;
-        [SerializeField] SpriteRenderer outline1;
-        [SerializeField] SpriteRenderer outline2;
-        [SerializeField] GameObject usableIcon;
-        [SerializeField] GameObject actionIcon;
 
         public int MovesRemaining { get; private set; }
         public Action OnRemainingMovesChanged;
@@ -154,7 +156,10 @@ namespace Project.GameTiles
         protected virtual void Awake()
         {
             mySpriteRenderer = GetComponent<SpriteRenderer>();
-            mySpriteRenderer.sprite = TileData.Sprite;
+            if (mySpriteRenderer != null)
+            {
+                mySpriteRenderer.sprite = TileData.Sprite;
+            }
 
             myRigidBody = GetComponent<Rigidbody2D>();
 
@@ -171,7 +176,28 @@ namespace Project.GameTiles
             GameManager.Instance.OnPlayerMoveEvent += MoveTowardsPlayer;
 
             if (usableIcon != null) usableIcon.SetActive(true);
-            if(actionIcon != null) actionIcon.SetActive(false);
+            if (actionIcon != null) actionIcon.SetActive(false);
+        }
+
+        void Update()
+        {
+            if (!IsPlayer)
+            {
+                if (!CanActivate() && !CanPlayerEnter() && !CanPlayerExit())
+                {
+                    Color color = icon.color;
+                    color.a = 0.5f;
+                    icon.color = color;
+                    usableIcon.SetActive(false);
+                }
+                else
+                {
+                    Color color = icon.color;
+                    color.a = 1.0f;
+                    icon.color = color;
+                    usableIcon.SetActive(true);
+                }
+            }
         }
 
         private void Initialize()

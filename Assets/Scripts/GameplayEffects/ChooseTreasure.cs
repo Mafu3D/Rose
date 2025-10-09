@@ -8,6 +8,7 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewChooseTreasure", menuName = "Effects/Choose Treasure", order = 1)]
     public class ChooseTreaure : GameplayEffectStrategy
     {
+        [SerializeField] int amount = 3;
         public override void ResetEffect()
         {
         }
@@ -20,7 +21,7 @@ namespace Project.GameplayEffects
 
         public override Status StartEffect()
         {
-            List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(3);
+            List<Item> choiceItems = GameManager.Instance.ItemDeck.DrawMultiple(amount);
             Choice<Item> treasureChoice = new Choice<Item>(choiceItems, EquipChosenItem);
             GameManager.Instance.StartNewTreasureChoice(treasureChoice);
             GameManager.Instance.StateMachine.SwitchState(new SelectingItemState("Selecting Item State", GameManager.Instance.StateMachine, GameManager.Instance));

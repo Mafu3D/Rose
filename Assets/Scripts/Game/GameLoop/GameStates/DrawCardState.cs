@@ -53,12 +53,12 @@ namespace Project.GameLoop
             {
                 foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
                 {
-                    foreach (GameplayEffectStrategy effect in tile.TileData.OnDrawCardStrategies)
+                    foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
                     {
                         GameManager.EffectQueue.AddEffect(effect);
                     }
                 }
-                StateMachine.SwitchState(new DrawCardResolveState("Draw Card Resolve", StateMachine, GameManager));
+                StateMachine.SwitchState(new DrawCardResolveState("Draw Tile Resolve", StateMachine, GameManager));
             }
         }
 

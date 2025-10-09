@@ -36,7 +36,7 @@ namespace Project.GameLoop
             }
             else
             {
-                StateMachine.SwitchState(new DrawCardState("Draw Card", StateMachine, GameManager));
+                StateMachine.SwitchState(new DrawCardState("Draw Tile", StateMachine, GameManager));
             }
         }
 

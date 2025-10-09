@@ -113,7 +113,6 @@ namespace Project
                     {
                         if (tile.IsPlayer != true && excludeHeroes) registeredTiles.Add(tile);
                     }
-                    Debug.Log(registeredTiles.Count);
                 }
             }
             return registeredTiles.OrderByDescending(x => x.TileData.ActivationPriority).ToList();

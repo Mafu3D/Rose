@@ -14215,7 +14215,7 @@ PrefabInstance:
     - target: {fileID: 1132716468560724757, guid: 51e97589e3d8082478011cb8e633d20e, type: 3}
       propertyPath: TileDeckData
       value: 
-      objectReference: {fileID: 11400000, guid: de8b22a9fb1d8a44da5effd52661fd86, type: 2}
+      objectReference: {fileID: 11400000, guid: 48759704c5fdca949b56d0a368647fd4, type: 2}
     - target: {fileID: 2703517283477840577, guid: 51e97589e3d8082478011cb8e633d20e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14378,6 +14378,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 229550233783343859, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 229550233783343859, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 229550233783343859, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 229550233783343859, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 229550233783343859, guid: f770a78ff569b3b43b882e4164099ecd, type: 3}
       propertyPath: m_SortingOrder
       value: 10
