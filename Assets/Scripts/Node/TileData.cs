@@ -6,6 +6,13 @@ using UnityEngine;
 
 namespace Project.GameTiles
 {
+    public enum DangerStatus
+    {
+        Standard,
+        Safe,
+        Dangerous
+    }
+
     [CreateAssetMenu(fileName = "TileData", menuName = "Tiles/Tile Data", order = 0)]
     public class TileData : SerializedScriptableObject
     {
@@ -16,6 +23,10 @@ namespace Project.GameTiles
         [SerializeField] public int ActivationPriority = 0;
         [SerializeField] public TileType TileType;
         [SerializeField] public TileType SecondaryTileType;
+        [SerializeField] public bool IsLocked;
+        [SerializeField] public bool IsTrapped;
+        [SerializeField] public DangerStatus DangerStatus;
+
 
         [Header("Usability")]
         [SerializeField] public bool CanBeUsedMultipleTimes = false;

@@ -27,7 +27,8 @@ namespace Project.GameplayEffects
             return Status.Running;
         }
 
-        private void EquipChosenItem(Item item) {
+        private void EquipChosenItem(Item item, List<Item> notChosen)
+        {
             switch (item.ItemData.ItemType)
             {
                 case ItemType.Weapon:
@@ -37,6 +38,8 @@ namespace Project.GameplayEffects
                     GameManager.Instance.Player.Inventory.AddItem(item);
                     break;
             }
+
+            GameManager.Instance.ItemDeck.AddToRemaining(notChosen, true);
         }
     }
 }

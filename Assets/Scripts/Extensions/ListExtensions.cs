@@ -20,6 +20,14 @@ public static class ListExtensions
         return list;
     }
 
+    /// <summary>
+    /// Remove item from list
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="index"></param>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public static IList<T> Pop<T>(this IList<T> list, int index, out T item)
     {
         item = list[index];

@@ -36,7 +36,7 @@ namespace Project.Combat.CombatStates
         private void OnChooseOne() => PreBattleChoice.ChooseItem(0);
         private void OnChooseTwo() => PreBattleChoice.ChooseItem(1);
         private void OnChooseThree() => PreBattleChoice.ChooseItem(2);
-        private void ResolvePrebattleChoice(Action action) => action();
+        private void ResolvePrebattleChoice(Action action, List<Action> _) => action();
 
         private void ChooseRun()
         {

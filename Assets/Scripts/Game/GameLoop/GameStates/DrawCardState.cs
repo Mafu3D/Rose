@@ -21,35 +21,35 @@ namespace Project.GameLoop
             GameManager.Player.InputReader.OnChoice2Input += ChooseOptionTwo;
             GameManager.Player.InputReader.OnChoice3Input += ChooseOptionThree;
 
-            GameManager.CardDrawManager.DrawCards(GameManager.EncounterDeck, 2);
+            GameManager.TileDrawManager.DrawTiles(3);
         }
 
         private void ChooseOptionThree()
         {
-            GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(2);
+            GameManager.TileDrawManager.ActiveTileChoice.ChooseItem(2);
         }
 
         private void ChooseOptionTwo()
         {
-            GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(1);
+            GameManager.TileDrawManager.ActiveTileChoice.ChooseItem(1);
         }
 
         private void ChooseOptionOne()
         {
-            GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(0);
+            GameManager.TileDrawManager.ActiveTileChoice.ChooseItem(0);
         }
 
         private void Proceed()
         {
-            if (GameManager.CardDrawManager.ActiveCardChoice.NumberOfChoices == 1)
+            if (GameManager.TileDrawManager.ActiveTileChoice.NumberOfChoices == 1)
             {
-                GameManager.CardDrawManager.ActiveCardChoice.ChooseItem(0);
+                GameManager.TileDrawManager.ActiveTileChoice.ChooseItem(0);
             }
         }
 
         public override void Update(float time)
         {
-            if (!GameManager.CardDrawManager.CardChoiceIsActive)
+            if (!GameManager.TileDrawManager.TileChoiceIsActive)
             {
                 foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
                 {

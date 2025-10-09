@@ -9,9 +9,9 @@ namespace Project
         public bool ItemHasBeenChosen { get; private set; }
         public bool ChooseMultiple { get; private set; }
         public int NumberOfChoices => Items.Count;
-        private Action<T> onChooseCallback;
+        private Action<T, List<T>> onChooseCallback;
 
-        public Choice(List<T> items, Action<T> callback, bool chooseMultiple = false)
+        public Choice(List<T> items, Action<T, List<T>> callback, bool chooseMultiple = false)
         {
             this.Items = items;
             this.ChooseMultiple = chooseMultiple;
@@ -23,8 +23,14 @@ namespace Project
             if (ItemHasBeenChosen && !ChooseMultiple) return;
             if (index < Items.Count)
             {
-                T item = Items[index];
-                onChooseCallback(item);
+                T chosenItem = Items[index];
+                List<T> notChosenItems = new();
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    if (i != index) notChosenItems.Add(Items[i]);
+                }
+
+                onChooseCallback(chosenItem, notChosenItems);
                 ItemHasBeenChosen = true;
             }
         }

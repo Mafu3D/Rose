@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.Decks
@@ -11,20 +12,23 @@ namespace Project.Decks
         public int CurrenCount => currentItems.Count;
         public int TotalCount => startingItems.Count;
 
-        public void AddPermanent(List<T> itemsToAdd)
+        public void AddPermanent(List<T> itemsToAdd, bool shuffle=true, bool addToTop=false)
         {
             foreach (T item in itemsToAdd)
             {
-                startingItems.Add(item);
-                currentItems.Add(item);
+                if (addToTop) startingItems.Insert(0, item);
+                else startingItems.Add(item);
+                AddToRemaining(itemsToAdd, shuffle, addToTop);
             }
         }
 
-        public void AddToRemaining(List<T> itemsToAdd)
+        public void AddToRemaining(List<T> itemsToAdd, bool shuffle=true, bool addToTop=false)
         {
             foreach (T item in itemsToAdd)
             {
-                currentItems.Add(item);
+                if (addToTop) currentItems.Insert(0, item);
+                else currentItems.Add(item);
+                if (shuffle) Shuffle();
             }
         }
 

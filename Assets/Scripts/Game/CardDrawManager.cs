@@ -40,9 +40,9 @@ namespace Project.Core
             }
         }
 
-        private void ResolveChoice(Card card)
+        private void ResolveChoice(Card chosen, List<Card> notChosen)
         {
-            card.Execute();
+            chosen.Execute();
             ActiveCardChoice = null;
             OnConcludeCardDrawEvent?.Invoke();
         }

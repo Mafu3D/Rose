@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: Chest
+  m_Name: MonsterLair
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,15 +21,15 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Chest
-  Description: Choose from 2 treasures
-  Sprite: {fileID: 504775986, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  ActivationPriority: 0
-  TileType: 4
+  DisplayName: Monster Lair
+  Description: Battle two monsters
+  Sprite: {fileID: -1066573289, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  ActivationPriority: 1
+  TileType: 3
   SecondaryTileType: 0
   IsLocked: 0
-  IsTrapped: 0
-  DangerStatus: 0
+  IsTrapped: 1
+  DangerStatus: 2
   CanBeUsedMultipleTimes: 0
   UsesPerTurn: 1
   LimitTotalUses: 1

@@ -27,6 +27,7 @@ namespace Project
         [SerializeField] public DeckData EncounterDeckData;
         [SerializeField] public DeckData MonsterDeckData;
         [SerializeField] public ItemDeckData ItemDeckData;
+        [SerializeField] public TileDeckData TileDeckData;
 
         [Header("Game Settings")]
         [SerializeField] public bool AutoBattle = true;
@@ -47,9 +48,11 @@ namespace Project
 
         public BattleManager BattleManager;
         public CardDrawManager CardDrawManager;
+        public TileDrawManager TileDrawManager;
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
         public Deck<Item> ItemDeck;
+        public Deck<TileData> TileDeck;
 
         public event Action OnGameStartEvent;
         public event Action OnRoundStartEvent;
@@ -62,9 +65,11 @@ namespace Project
         public event Action OnEndOfRoundEvent;
 
         public Choice<Item> ActiveTreasureChoice;
+        public Choice<TileData> ActiveTileChoice;
         public event Action OnTresureChoiceStarted;
         public event Action OnTresureChoiceEnded;
         public bool IsChoosingTreasure => ActiveTreasureChoice != null;
+        public bool IsChoosingTile => ActiveTileChoice != null;
 
 
         public Choice<Card> ActiveCardChoice;
@@ -108,8 +113,10 @@ namespace Project
             EncounterDeck = InitializeCardDeck(EncounterDeckData);
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
+            TileDeck = InitializeTileDeck(TileDeckData);
 
             CardDrawManager = new CardDrawManager();
+            TileDrawManager = new TileDrawManager();
             BattleManager = new BattleManager();
 
             EffectQueue = new EffectQueue();
@@ -234,6 +241,15 @@ namespace Project
         private Deck<Item> InitializeItemDeck(ItemDeckData deckData)
         {
             Deck<Item> deck = new Deck<Item>();
+            deck.AddPermanent(deckData.UnpackItems());
+            deck.Reset();
+            deck.Shuffle();
+            return deck;
+        }
+
+        private Deck<TileData> InitializeTileDeck(TileDeckData deckData)
+        {
+            Deck<TileData> deck = new Deck<TileData>();
             deck.AddPermanent(deckData.UnpackItems());
             deck.Reset();
             deck.Shuffle();

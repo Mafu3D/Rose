@@ -59,6 +59,12 @@ namespace Project.GameTiles
             SetIconAndColor();
         }
 
+        public void SetTileData(TileData tileData)
+        {
+            TileData = tileData;
+            SetIconAndColor();
+        }
+
         private void SetIconAndColor()
         {
             if (TileData != null)
@@ -164,8 +170,8 @@ namespace Project.GameTiles
             GameManager.Instance.OnGameStartEvent += Initialize;
             GameManager.Instance.OnPlayerMoveEvent += MoveTowardsPlayer;
 
-            usableIcon.SetActive(true);
-            actionIcon.SetActive(false);
+            if (usableIcon != null) usableIcon.SetActive(true);
+            if(actionIcon != null) actionIcon.SetActive(false);
         }
 
         private void Initialize()
