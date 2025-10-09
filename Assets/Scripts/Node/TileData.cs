@@ -15,6 +15,7 @@ namespace Project.GameTiles
         [SerializeField] public Sprite Sprite;
         [SerializeField] public int ActivationPriority = 0;
         [SerializeField] public TileType TileType;
+        [SerializeField] public TileType SecondaryTileType;
 
         [Header("Usability")]
         [SerializeField] public bool CanBeUsedMultipleTimes = false;

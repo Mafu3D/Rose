@@ -26,8 +26,11 @@ MonoBehaviour:
   Sprite: {fileID: 6700204669442689607, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   ActivationPriority: 0
   TileType: 0
-  CanBeUsedMultipleTimes: 0
-  DestroyAfterUsing: 1
+  CanBeUsedMultipleTimes: 1
+  UsesPerTurn: 2
+  LimitTotalUses: 1
+  TotalUses: 5
+  DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
   OnActivateStrategies:
   - {fileID: 11400000, guid: 0adb7c3738cfdbb44b63a7ce9f04bf32, type: 2}

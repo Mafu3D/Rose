@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using Project.Attributes;
 using Project.GameplayEffects;
 using Project.Items;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.GameTiles
 {
     public enum TileType
     {
-        Location,
-        NPC,
+        None,
         Hero,
-        Combatant,
-        Event
+        Monster,
+        Danger,
+        Economic,
+        Event,
+        NPC,
+        Neutral,
+        Special
     }
 
     public class Tile : MonoBehaviour
@@ -33,6 +36,7 @@ namespace Project.GameTiles
         protected Rigidbody2D myRigidBody;
 
         // TEMP: REMOVE
+        [Header("Activations")]
         public int ActivatesThisGame;
         public int ActivatesThisTurn;
         public int PlayerEntersThisGame;
@@ -40,15 +44,104 @@ namespace Project.GameTiles
         public int PlayerExitsThisGame;
         public int PlayerExitsThisTurn;
 
+        [Header("Icons")]
+        [SerializeField] SpriteRenderer icon;
+        [SerializeField] SpriteRenderer outline1;
+        [SerializeField] SpriteRenderer outline2;
+        [SerializeField] GameObject usableIcon;
+        [SerializeField] GameObject actionIcon;
+
         public int MovesRemaining { get; private set; }
         public Action OnRemainingMovesChanged;
 
         void OnValidate()
         {
+            SetIconAndColor();
+        }
+
+        private void SetIconAndColor()
+        {
             if (TileData != null)
             {
-                mySpriteRenderer = GetComponent<SpriteRenderer>();
-                mySpriteRenderer.sprite = TileData.Sprite;
+                if (icon != null)
+                {
+                    icon.sprite = TileData.Sprite;
+                }
+
+                string hexColor = "#222323";
+                if (outline1 != null)
+                {
+                    switch (TileData.TileType)
+                    {
+                        case TileType.Hero:
+                        case TileType.Monster:
+                            hexColor = "#222323";
+                            break;
+                        case TileType.NPC:
+                            hexColor = "#5EA4DB";
+                            break;
+                        case TileType.Danger:
+                            hexColor = "#B24242";
+                            break;
+                        case TileType.Economic:
+                            hexColor = "#CAB742";
+                            break;
+                        case TileType.Event:
+                            hexColor = "#F18A31";
+                            break;
+                        case TileType.Neutral:
+                            hexColor = "#649061";
+                            break;
+                        case TileType.Special:
+                            hexColor = "#C555A0";
+                            break;
+
+                    }
+                    Color color;
+                    if (ColorUtility.TryParseHtmlString(hexColor, out color))
+                    {
+                        outline1.color = color;
+                    }
+                }
+
+                if (outline2 != null)
+                {
+                    string hexColor2 = hexColor;
+                    if (TileData.SecondaryTileType != TileType.None)
+                    {
+                        switch (TileData.SecondaryTileType)
+                        {
+                            case TileType.Hero:
+                            case TileType.Monster:
+                                hexColor2 = "#222323";
+                                break;
+                            case TileType.NPC:
+                                hexColor2 = "#5EA4DB";
+                                break;
+                            case TileType.Danger:
+                                hexColor2 = "#B24242";
+                                break;
+                            case TileType.Economic:
+                                hexColor2 = "#CAB742";
+                                break;
+                            case TileType.Event:
+                                hexColor2 = "#F18A31";
+                                break;
+                            case TileType.Neutral:
+                                hexColor2 = "#649061";
+                                break;
+                            case TileType.Special:
+                                hexColor2 = "#C555A0";
+                                break;
+
+                        }
+                    }
+                    Color color;
+                    if (ColorUtility.TryParseHtmlString(hexColor2, out color))
+                    {
+                        outline2.color = color;
+                    }
+                }
             }
         }
 
@@ -70,6 +163,9 @@ namespace Project.GameTiles
         {
             GameManager.Instance.OnGameStartEvent += Initialize;
             GameManager.Instance.OnPlayerMoveEvent += MoveTowardsPlayer;
+
+            usableIcon.SetActive(true);
+            actionIcon.SetActive(false);
         }
 
         private void Initialize()
