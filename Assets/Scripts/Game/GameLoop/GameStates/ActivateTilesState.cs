@@ -15,6 +15,7 @@ namespace Project.GameLoop
         public override void OnEnter()
         {
             Debug.Log($"Enter: {Name}");
+            // You're checking the hero cell twice!
             Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
             List<Tile> registeredTiles;
             if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))

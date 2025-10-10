@@ -33,9 +33,21 @@ namespace Project.Combat.CombatStates
 
         public override void Update(float deltaTime) { }
 
-        private void OnChooseOne() => PreBattleChoice.ChooseItem(0);
-        private void OnChooseTwo() => PreBattleChoice.ChooseItem(1);
-        private void OnChooseThree() => PreBattleChoice.ChooseItem(2);
+        private void OnChooseOne() {
+            PreBattleChoice.ChooseItem(0);
+            PreBattleChoice.Resolve();
+        }
+
+        private void OnChooseTwo() {
+            PreBattleChoice.ChooseItem(1);
+            PreBattleChoice.Resolve();
+        }
+
+        private void OnChooseThree() {
+            PreBattleChoice.ChooseItem(2);
+            PreBattleChoice.Resolve();
+        }
+
         private void ResolvePrebattleChoice(List<Action> actions, List<Action> _) => actions[0]();
 
         private void ChooseRun()

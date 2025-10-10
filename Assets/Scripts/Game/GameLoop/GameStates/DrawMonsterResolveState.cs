@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace Project.GameLoop
 {
-    public class DrawCardResolveState : State
+    public class DrawMonsterResolveState : State
     {
-        public DrawCardResolveState(string name,
-                                StateMachine stateMachine,
-                                GameManager gameManager) : base(name, stateMachine, gameManager) { }
+        public DrawMonsterResolveState(string name, StateMachine stateMachine, GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
         public override void OnEnter()
         {
@@ -19,8 +17,7 @@ namespace Project.GameLoop
         {
             if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
             {
-                GameManager.OnEndOfRound();
-                StateMachine.SwitchState(new DrawMonsterState("Draw Monster", StateMachine, GameManager));
+                StateMachine.SwitchState(new ActivateTilesState("Activate Tiles", StateMachine, GameManager));
             }
         }
 

@@ -1,4 +1,5 @@
 using System;
+using Project.Decks;
 using UnityEngine;
 
 namespace Project.Core.GameEvents
@@ -14,6 +15,9 @@ namespace Project.Core.GameEvents
 
         public event Action<IGameEvent> OnItemDrawStarted;
         public event Action<IGameEvent> OnItemDrawEnded;
+
+        public event Action<IGameEvent> OnCardDrawStarted;
+        public event Action<IGameEvent> OnCardDrawEnded;
 
         // Tile
         public TileChoiceEvent StartTileDrawEvent(int amount, bool shuffleRemaining)
@@ -53,6 +57,27 @@ namespace Project.Core.GameEvents
             IGameEvent gameEvent = CurrentGameEvent;
             CurrentGameEvent = null;
             OnItemDrawEnded?.Invoke(gameEvent);
+        }
+
+        // Monster
+        public CardChoiceEvent StartCardDrawEvent(Deck<Card> deck, int amount, bool shuffleRemaining)
+        {
+            Debug.Log("Starting new CardDrawEvent");
+            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+
+            CardChoiceEvent cardChoiceEvent = new CardChoiceEvent(deck, amount, shuffleRemaining);
+            CurrentGameEvent = cardChoiceEvent;
+            cardChoiceEvent.SetupEvent();
+            OnCardDrawStarted?.Invoke(cardChoiceEvent);
+            return cardChoiceEvent;
+        }
+
+        public void EndCardDrawEvent()
+        {
+            Debug.Log($"Ending event: {CurrentGameEvent}");
+            IGameEvent gameEvent = CurrentGameEvent;
+            CurrentGameEvent = null;
+            OnCardDrawEnded?.Invoke(gameEvent);
         }
     }
 }

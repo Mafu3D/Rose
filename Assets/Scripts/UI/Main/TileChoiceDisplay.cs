@@ -71,7 +71,7 @@ namespace Project.UI.MainUI
                     case TileType.Event:
                         hexColor = "#F18A31";
                         break;
-                    case TileType.Neutral:
+                    case TileType.Boon:
                         hexColor = "#649061";
                         break;
                     case TileType.Special:
@@ -109,7 +109,7 @@ namespace Project.UI.MainUI
                         case TileType.Event:
                             hexColor2 = "#F18A31";
                             break;
-                        case TileType.Neutral:
+                        case TileType.Boon:
                             hexColor2 = "#649061";
                             break;
                         case TileType.Special:

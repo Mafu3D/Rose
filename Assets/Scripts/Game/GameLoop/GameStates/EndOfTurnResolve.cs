@@ -19,7 +19,7 @@ namespace Project.GameLoop
         {
             if (!GameManager.EffectQueue.QueueNeedsToBeResolved)
             {
-                StateMachine.SwitchState(new ActivateTilesState("Activate Tiles", StateMachine, GameManager));
+                StateMachine.SwitchState(new CheckForTilesState("Check For Tiles", StateMachine, GameManager));
             }
         }
 

@@ -25,6 +25,8 @@ namespace Project
         [SerializeField] public GameObject UICanvas;
 
         [Header("Game Parameters")]
+        [Range(0, 100)]
+        [SerializeField] public float ChanceForMonsterEncounter = 50f;
         [SerializeField] public DeckData EncounterDeckData;
         [SerializeField] public DeckData MonsterDeckData;
         [SerializeField] public ItemDeckData ItemDeckData;

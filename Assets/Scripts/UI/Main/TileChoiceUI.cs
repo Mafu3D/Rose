@@ -28,7 +28,6 @@ namespace Project.UI.MainUI
         {
             TileChoiceEvent tileChoiceEvent = gameEvent as TileChoiceEvent;
             List<TileData> tiles = tileChoiceEvent.Choice.GetAllItems();
-            Debug.Log(tiles[0]);
 
             for (int i = 0; i < tiles.Count; i++)
             {

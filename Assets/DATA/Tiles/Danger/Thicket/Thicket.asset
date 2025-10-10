@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
+  m_Name: Thicket
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  DisplayName: Thicket
+  Description: 'On Enter: -1 moves this turn'
+  Sprite: {fileID: -1269918139, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  ActivationPriority: 0
+  TileType: 3
+  SecondaryTileType: 0
+  IsLocked: 0
+  IsTrapped: 0
+  DangerStatus: 2
+  CanBeUsedMultipleTimes: 0
+  UsesPerTurn: 1
+  LimitTotalUses: 0
+  TotalUses: 1
+  DestroyAfterUsing: 0
+  CharacterData: {fileID: 0}
+  OnActivateStrategies: []
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
+  OnPlayerEnterStrategies:
+  - {fileID: 11400000, guid: f1e6b6340ccb312459719bd2d03c546c, type: 2}
+  OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []

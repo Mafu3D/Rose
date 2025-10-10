@@ -70,24 +70,24 @@ namespace Project.GameLoop
 
         public void MoveToNextState(IGameEvent _)
         {
-            Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
-            List<Tile> registeredTiles;
-            if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
-            {
-                foreach (Tile tile in registeredTiles)
-                {
+            // Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
+            // List<Tile> registeredTiles;
+            // if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
+            // {
+            //     foreach (Tile tile in registeredTiles)
+            //     {
 
-                    if (tile.CanActivate())
-                    {
-                        tile.ActivatesThisGame += 1;
-                        tile.ActivatesThisTurn += 1;
-                        foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
-                        {
-                            GameManager.EffectQueue.AddEffect(effect);
-                        }
-                    }
-                }
-            }
+            //         if (tile.CanActivate())
+            //         {
+            //             tile.ActivatesThisGame += 1;
+            //             tile.ActivatesThisTurn += 1;
+            //             foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
+            //             {
+            //                 GameManager.EffectQueue.AddEffect(effect);
+            //             }
+            //         }
+            //     }
+            // }
             StateMachine.SwitchState(new DrawCardResolveState("Draw Tile Resolve", StateMachine, GameManager));
         }
 
