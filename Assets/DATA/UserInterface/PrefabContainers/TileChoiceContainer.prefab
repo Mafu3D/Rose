@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -60, y: -85}
+  m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5387928204630625133
@@ -84,6 +84,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686215386309663872}
+  - component: {fileID: 3207897319665858839}
+  - component: {fileID: 7722523342368173483}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -110,9 +112,39 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104.42286, y: 176.91478}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 55.42286, y: 95.91478}
+  m_SizeDelta: {x: 83.7, y: 40.12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3207897319665858839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113045474511734295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 7722523342368173483}
+  delay: 0.2
+--- !u!114 &7722523342368173483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113045474511734295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be5ba5d9d1717a488fa02c48052209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  tileChoiceDisplay: {fileID: 8466551778983881407}
 --- !u!1 &1913220118739241381
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +231,8 @@ GameObject:
   - component: {fileID: 6386235064176599099}
   - component: {fileID: 8375332086716050408}
   - component: {fileID: 5433866586288139184}
+  - component: {fileID: 5299284736604064781}
+  - component: {fileID: 4403916856337418296}
   m_Layer: 5
   m_Name: DangerIcon
   m_TagString: Untagged
@@ -263,6 +297,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5299284736604064781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200801970827751073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 4403916856337418296}
+  delay: 0.2
+--- !u!114 &4403916856337418296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200801970827751073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be5ba5d9d1717a488fa02c48052209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  tileChoiceDisplay: {fileID: 8466551778983881407}
 --- !u!1 &3374623400912284196
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +338,8 @@ GameObject:
   - component: {fileID: 7099938040308460804}
   - component: {fileID: 6169351667110472186}
   - component: {fileID: 3954063007512353481}
+  - component: {fileID: 7476679981034611810}
+  - component: {fileID: 5886360298644309325}
   m_Layer: 5
   m_Name: TrappedIcon
   m_TagString: Untagged
@@ -338,6 +404,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7476679981034611810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374623400912284196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 5886360298644309325}
+  delay: 0.2
+--- !u!114 &5886360298644309325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374623400912284196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be5ba5d9d1717a488fa02c48052209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  tileChoiceDisplay: {fileID: 8466551778983881407}
 --- !u!1 &4276560172082028947
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +509,113 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5248879424460327446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5455425225849978876}
+  - component: {fileID: 5476143644880701682}
+  - component: {fileID: 8354332340972805469}
+  - component: {fileID: 985544192180233575}
+  - component: {fileID: 7653061907006606447}
+  m_Layer: 5
+  m_Name: RiskyIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5455425225849978876
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248879424460327446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1066558591772673588}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -85}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5476143644880701682
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248879424460327446}
+  m_CullTransparentMesh: 1
+--- !u!114 &8354332340972805469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248879424460327446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1066573289, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &985544192180233575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248879424460327446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 7653061907006606447}
+  delay: 0.2
+--- !u!114 &7653061907006606447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248879424460327446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be5ba5d9d1717a488fa02c48052209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  tileChoiceDisplay: {fileID: 8466551778983881407}
 --- !u!1 &5654018675582788306
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +723,7 @@ RectTransform:
   - {fileID: 7099938040308460804}
   - {fileID: 6386235064176599099}
   - {fileID: 4624778582483233792}
+  - {fileID: 5455425225849978876}
   m_Father: {fileID: 7732331687076110758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -697,7 +901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.573883, y: -85}
+  m_AnchoredPosition: {x: 25.426117, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &250350639320605097
@@ -806,6 +1010,7 @@ MonoBehaviour:
   trappedIcon: {fileID: 3374623400912284196}
   safeIcon: {fileID: 9063111492471893209}
   dangerIcon: {fileID: 3200801970827751073}
+  riskyIcon: {fileID: 5248879424460327446}
   costIcons:
   - {fileID: 697265324021792834}
   - {fileID: 7802044139152611656}
@@ -896,6 +1101,8 @@ GameObject:
   - component: {fileID: 1160507593547052624}
   - component: {fileID: 1703590094535026924}
   - component: {fileID: 8963028447881681480}
+  - component: {fileID: 7523319901633560150}
+  - component: {fileID: 7248721295935792825}
   m_Layer: 5
   m_Name: LockedIcon
   m_TagString: Untagged
@@ -960,6 +1167,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7523319901633560150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597809060726668844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 7248721295935792825}
+  delay: 0.2
+--- !u!114 &7248721295935792825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597809060726668844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be5ba5d9d1717a488fa02c48052209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  tileChoiceDisplay: {fileID: 8466551778983881407}
 --- !u!1 &7802044139152611656
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -43.14994, y: -85}
+  m_AnchoredPosition: {x: 6.8500595, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5105466391571514728
@@ -1320,6 +1557,8 @@ GameObject:
   - component: {fileID: 4624778582483233792}
   - component: {fileID: 6173878628739780974}
   - component: {fileID: 5507708341311694191}
+  - component: {fileID: 6005740200740906585}
+  - component: {fileID: 1680292875781235901}
   m_Layer: 5
   m_Name: SafeIcon
   m_TagString: Untagged
@@ -1384,3 +1623,33 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6005740200740906585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9063111492471893209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 1680292875781235901}
+  delay: 0.2
+--- !u!114 &1680292875781235901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9063111492471893209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be5ba5d9d1717a488fa02c48052209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
+  tileChoiceDisplay: {fileID: 8466551778983881407}

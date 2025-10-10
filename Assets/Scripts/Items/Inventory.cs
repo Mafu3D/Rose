@@ -32,7 +32,14 @@ namespace Project.Items
 
         public Item GetEquippedWeapon() => equippedWeapon;
 
-        public Item GetItemAtSlot(int index) => heldItems[index];
+        public Item GetItemAtSlot(int index)
+        {
+            if (index >= heldItems.Count)
+            {
+                return null;
+            }
+            return heldItems[index];
+        }
         public List<Item> GetHeldItems() => heldItems;
 
         public List<Item> GetAllItems()

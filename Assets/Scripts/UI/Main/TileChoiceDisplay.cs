@@ -21,10 +21,15 @@ namespace Project.UI.MainUI
         [SerializeField] GameObject trappedIcon;
         [SerializeField] GameObject safeIcon;
         [SerializeField] GameObject dangerIcon;
+        [SerializeField] GameObject riskyIcon;
         [SerializeField] List<GameObject> costIcons;
+
+        public TileData TileData { get; private set; }
 
         public void DisplayTile(TileData tileData, int choiceNumber)
         {
+            this.TileData = tileData;
+
             displayName.text = tileData.DisplayName;
             descriptionText.text = tileData.Description;
             image.sprite = tileData.Sprite;
@@ -35,14 +40,17 @@ namespace Project.UI.MainUI
                 case DangerStatus.Safe:
                     safeIcon.SetActive(true);
                     dangerIcon.SetActive(false);
+                    riskyIcon.SetActive(false);
                     break;
                 case DangerStatus.Dangerous:
                     safeIcon.SetActive(false);
                     dangerIcon.SetActive(true);
+                    riskyIcon.SetActive(false);
                     break;
                 default:
                     safeIcon.SetActive(false);
                     dangerIcon.SetActive(false);
+                    riskyIcon.SetActive(true);
                     break;
 
             }
