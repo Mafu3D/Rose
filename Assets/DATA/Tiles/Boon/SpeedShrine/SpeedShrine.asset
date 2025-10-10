@@ -30,6 +30,7 @@ MonoBehaviour:
   IsLocked: 0
   IsTrapped: 0
   DangerStatus: 0
+  Cost: 2
   CanBeUsedMultipleTimes: 0
   UsesPerTurn: 1
   LimitTotalUses: 1

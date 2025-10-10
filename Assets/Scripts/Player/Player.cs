@@ -10,6 +10,7 @@ namespace Project.PlayerSystem
         [SerializeField] public Tile HeroTile;
         [SerializeField] public Inventory Inventory;
         [SerializeField] public GoldTracker GoldTracker;
+        [SerializeField] public GemTracker GemTracker;
         public Camera PlayerCamera { get; private set; }
 
         void Awake()

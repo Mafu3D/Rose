@@ -15,6 +15,7 @@ namespace Project.UI.MainUI
         [SerializeField] Image image;
         [SerializeField] Image background1;
         [SerializeField] Image background2;
+        [SerializeField] Image outline;
         [Header("Icons")]
         [SerializeField] GameObject lockedIcon;
         [SerializeField] GameObject trappedIcon;
@@ -124,7 +125,21 @@ namespace Project.UI.MainUI
                     background2.color = color;
                 }
             }
-        }
+            for (int i = 0; i < tileData.Cost; i++)
+            {
+                costIcons[i].SetActive(true);
+            }
 
+            if (tileData.Cost > GameManager.Instance.Player.GemTracker.Gem)
+            {
+                List<Image> images = new List<Image> { image, background1, background2, outline };
+                foreach(Image image in images)
+                {
+                    Color color = image.color;
+                    color.a = 0.25f;
+                    image.color = color;
+                }
+            }
+        }
     }
 }

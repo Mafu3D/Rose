@@ -9,7 +9,7 @@ namespace Project.Decks
     {
         private List<T> startingItems = new();
         private List<T> currentItems = new();
-        public int CurrenCount => currentItems.Count;
+        public int CurrentCount => currentItems.Count;
         public int TotalCount => startingItems.Count;
 
         public void AddPermanent(List<T> itemsToAdd, bool shuffle=true, bool addToTop=false)

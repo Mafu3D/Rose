@@ -47,6 +47,10 @@ namespace Project.GameplayEffects
                     tile.RegisterToGrid();
                     tile.RegisterCharacter(right);
                     break;
+                case Combat.Resolution.Victory:
+                    GameManager.Instance.Player.GemTracker.AddGem(enemyCharacterData.gemReward);
+                    GameManager.Instance.Player.GoldTracker.AddGold(enemyCharacterData.goldReward);
+                    break;
             }
         }
     }

@@ -181,7 +181,7 @@ namespace Project.GameTiles
 
         void Update()
         {
-            if (!IsPlayer)
+            if (!IsPlayer && icon != null)
             {
                 if (!CanActivate() && !CanPlayerEnter() && !CanPlayerExit())
                 {

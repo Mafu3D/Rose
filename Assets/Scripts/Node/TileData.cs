@@ -28,6 +28,9 @@ namespace Project.GameTiles
         [SerializeField] public bool IsTrapped;
         [SerializeField] public DangerStatus DangerStatus;
 
+        [Header("Cost")]
+        [SerializeField] public int Cost;
+
 
         [Header("Usability")]
         [SerializeField] public bool CanBeUsedMultipleTimes = false;

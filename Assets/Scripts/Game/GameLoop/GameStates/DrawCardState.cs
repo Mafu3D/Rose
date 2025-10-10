@@ -32,36 +32,38 @@ namespace Project.GameLoop
 
         private void ChooseOptionThree()
         {
-            tileChoiceEvent.ChooseItem(2);
-            tileChoiceEvent.Resolve();
-            GameManager.GameEventManager.EndTileDrawEvent();
-
+            Choose(2);
         }
 
         private void ChooseOptionTwo()
         {
-            tileChoiceEvent.ChooseItem(1);
-            tileChoiceEvent.Resolve();
-            GameManager.GameEventManager.EndTileDrawEvent();
-
+            Choose(1);
         }
 
         private void ChooseOptionOne()
         {
-            tileChoiceEvent.ChooseItem(0);
-            tileChoiceEvent.Resolve();
-            GameManager.GameEventManager.EndTileDrawEvent();
+            Choose(0);
+        }
 
+        private void Choose(int index)
+        {
+            if (tileChoiceEvent.Choice.GetItem(index).Cost <= GameManager.Player.GemTracker.Gem) {
+                GameManager.Player.GemTracker.RemoveGem(tileChoiceEvent.Choice.GetItem(index).Cost);
+
+                tileChoiceEvent.ChooseItem(index);
+                tileChoiceEvent.Resolve();
+                GameManager.GameEventManager.EndTileDrawEvent();
+            }
         }
 
         private void Proceed()
         {
-            if (GameManager.TileDrawManager.ActiveTileChoice.NumberOfChoices == 1)
-            {
-                tileChoiceEvent.ChooseItem(0);
-                tileChoiceEvent.Resolve();
-                GameManager.GameEventManager.EndTileDrawEvent();
-            }
+            // if (GameManager.TileDrawManager.ActiveTileChoice.NumberOfChoices == 1)
+            // {
+            //     tileChoiceEvent.ChooseItem(0);
+            //     tileChoiceEvent.Resolve();
+            //     GameManager.GameEventManager.EndTileDrawEvent();
+            // }
         }
 
         public override void Update(float time)
