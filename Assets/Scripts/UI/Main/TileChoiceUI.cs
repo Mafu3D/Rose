@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Project.Core.GameEvents;
 using Project.GameTiles;
 using UnityEngine;
 
@@ -21,16 +22,14 @@ namespace Project.UI.MainUI
 
         void Initialize()
         {
-            gameManager.TileDrawManager.OnNewTileDrawEvent += DisplayCards;
-            gameManager.TileDrawManager.OnConcludeTileDrawEvent += DestroyDisplayedCards;
+            gameManager.GameEventManager.OnTileDrawStarted += DisplayCards;
+            gameManager.GameEventManager.OnTileDrawEnded += DestroyDisplayedCards;
         }
 
-        private void DisplayCards()
+        private void DisplayCards(IGameEvent gameEvent)
         {
-            if (!gameManager.TileDrawManager.TileChoiceIsActive) { return; }
-
-            Choice<TileData> tileChoice = gameManager.TileDrawManager.ActiveTileChoice;
-            List<TileData> tiles = tileChoice.Items;
+            TileChoiceEvent tileChoiceEvent = gameEvent as TileChoiceEvent;
+            List<TileData> tiles = tileChoiceEvent.Choice.GetAllItems();
 
             // Single card
             if (tiles.Count == 1)
@@ -74,7 +73,7 @@ namespace Project.UI.MainUI
             }
         }
 
-        private void DestroyDisplayedCards()
+        private void DestroyDisplayedCards(IGameEvent _)
         {
             foreach (GameObject displayedCard in displayedTiles)
             {

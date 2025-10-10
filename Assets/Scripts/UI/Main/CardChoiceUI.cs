@@ -29,33 +29,33 @@ namespace Project.UI.MainUI
 
         private void DisplayCards()
         {
-            if (!gameManager.CardDrawManager.CardChoiceIsActive) { return; }
+            // if (!gameManager.CardDrawManager.CardChoiceIsActive) { return; }
 
-            Choice<Card> cardChoice = gameManager.CardDrawManager.ActiveCardChoice;
-            List<Card> cards = cardChoice.Items;
+            // Choice<Card> cardChoice = gameManager.CardDrawManager.ActiveCardChoice;
+            // List<Card> cards = cardChoice.items;
 
-            // Single card
-            if (cards.Count == 1)
-            {
-                GameObject centerDisplayedCard = Instantiate(cardDisplayPrefab, centerCardDisplayTransform.position, Quaternion.identity, centerCardDisplayTransform);
-                CardDisplay centerCardDisplay = centerDisplayedCard.GetComponent<CardDisplay>();
-                centerCardDisplay.DisplayCard(cards[0]);
-                displayedCards.Add(centerDisplayedCard);
-            }
+            // // Single card
+            // if (cards.Count == 1)
+            // {
+            //     GameObject centerDisplayedCard = Instantiate(cardDisplayPrefab, centerCardDisplayTransform.position, Quaternion.identity, centerCardDisplayTransform);
+            //     CardDisplay centerCardDisplay = centerDisplayedCard.GetComponent<CardDisplay>();
+            //     centerCardDisplay.DisplayCard(cards[0]);
+            //     displayedCards.Add(centerDisplayedCard);
+            // }
 
-            // Choice of two
-            else if (cards.Count == 2)
-            {
-                GameObject displayedCardLeft = Instantiate(cardDisplayPrefab, leftCardDisplayTransform.position, Quaternion.identity, leftCardDisplayTransform);
-                CardDisplay leftCardDisplay = displayedCardLeft.GetComponent<CardDisplay>();
-                leftCardDisplay.DisplayCard(cards[0]);
-                displayedCards.Add(displayedCardLeft);
+            // // Choice of two
+            // else if (cards.Count == 2)
+            // {
+            //     GameObject displayedCardLeft = Instantiate(cardDisplayPrefab, leftCardDisplayTransform.position, Quaternion.identity, leftCardDisplayTransform);
+            //     CardDisplay leftCardDisplay = displayedCardLeft.GetComponent<CardDisplay>();
+            //     leftCardDisplay.DisplayCard(cards[0]);
+            //     displayedCards.Add(displayedCardLeft);
 
-                GameObject displayedCardRight = Instantiate(cardDisplayPrefab, rightCardDisplayTransform.position, Quaternion.identity, rightCardDisplayTransform);
-                CardDisplay rightCardDisplay = displayedCardRight.GetComponent<CardDisplay>();
-                rightCardDisplay.DisplayCard(cards[1]);
-                displayedCards.Add(displayedCardRight);
-            }
+            //     GameObject displayedCardRight = Instantiate(cardDisplayPrefab, rightCardDisplayTransform.position, Quaternion.identity, rightCardDisplayTransform);
+            //     CardDisplay rightCardDisplay = displayedCardRight.GetComponent<CardDisplay>();
+            //     rightCardDisplay.DisplayCard(cards[1]);
+            //     displayedCards.Add(displayedCardRight);
+            // }
         }
 
         private void DestroyDisplayedCards()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project.Attributes;
+using Project.Core.GameEvents;
 using Project.GameplayEffects;
 using Sirenix.OdinInspector;
 using UnityEngine;

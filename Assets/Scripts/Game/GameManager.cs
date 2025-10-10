@@ -12,6 +12,7 @@ using Project.Core;
 using Project.Combat;
 using Project.States;
 using Project.Resources;
+using Project.Core.GameEvents;
 
 namespace Project
 {
@@ -49,9 +50,10 @@ namespace Project
         public BattleManager BattleManager;
         public CardDrawManager CardDrawManager;
         public TileDrawManager TileDrawManager;
+        public GameEventManager GameEventManager;
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
-        public Deck<Item> ItemDeck;
+        public Deck<ItemData> ItemDeck;
         public Deck<TileData> TileDeck;
 
         public event Action OnGameStartEvent;
@@ -118,6 +120,7 @@ namespace Project
             CardDrawManager = new CardDrawManager();
             TileDrawManager = new TileDrawManager();
             BattleManager = new BattleManager();
+            GameEventManager = new GameEventManager();
 
             EffectQueue = new EffectQueue();
 
@@ -238,9 +241,9 @@ namespace Project
             return deck;
         }
 
-        private Deck<Item> InitializeItemDeck(ItemDeckData deckData)
+        private Deck<ItemData> InitializeItemDeck(ItemDeckData deckData)
         {
-            Deck<Item> deck = new Deck<Item>();
+            Deck<ItemData> deck = new Deck<ItemData>();
             deck.AddPermanent(deckData.UnpackItems());
             deck.Reset();
             deck.Shuffle();

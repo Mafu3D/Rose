@@ -3,6 +3,8 @@ using Project.GameTiles;
 using Project.GameplayEffects;
 using Project.States;
 using UnityEngine;
+using Project.Core.GameEvents;
+using Project.Items;
 
 namespace Project.GameLoop
 {
@@ -22,32 +24,40 @@ namespace Project.GameLoop
             GameManager.Player.InputReader.OnChoice1Input += ChooseOptionOne;
             GameManager.Player.InputReader.OnChoice2Input += ChooseOptionTwo;
             GameManager.Player.InputReader.OnChoice3Input += ChooseOptionThree;
+            GameManager.GameEventManager.OnItemDrawEnded += GoBackToInterruptedState;
         }
 
         private void ChooseOptionThree()
         {
-            GameManager.ActiveTreasureChoice.ChooseItem(2);
-            GameManager.EndTreasureChoice();
+            ItemChoiceEvent itemChoiceEvent = GameManager.GameEventManager.CurrentGameEvent as ItemChoiceEvent;
+            itemChoiceEvent.ChooseItem(2);
+            itemChoiceEvent.Resolve();
+            GameManager.GameEventManager.EndItemDrawEvent();
         }
 
         private void ChooseOptionTwo()
         {
-            GameManager.ActiveTreasureChoice.ChooseItem(1);
-            GameManager.EndTreasureChoice();
+            ItemChoiceEvent itemChoiceEvent = GameManager.GameEventManager.CurrentGameEvent as ItemChoiceEvent;
+            itemChoiceEvent.ChooseItem(1);
+            itemChoiceEvent.Resolve();
+            GameManager.GameEventManager.EndItemDrawEvent();
         }
 
         private void ChooseOptionOne()
         {
-            GameManager.ActiveTreasureChoice.ChooseItem(0);
-            GameManager.EndTreasureChoice();
+            ItemChoiceEvent itemChoiceEvent = GameManager.GameEventManager.CurrentGameEvent as ItemChoiceEvent;
+            itemChoiceEvent.ChooseItem(0);
+            itemChoiceEvent.Resolve();
+            GameManager.GameEventManager.EndItemDrawEvent();
         }
 
         public override void Update(float time)
         {
-            if (!GameManager.IsChoosingTreasure)
-            {
-                StateMachine.SwitchState(interruptedState);
-            }
+        }
+
+        private void GoBackToInterruptedState(IGameEvent _)
+        {
+            StateMachine.SwitchState(interruptedState);
         }
 
         public override void OnExit()
@@ -55,6 +65,7 @@ namespace Project.GameLoop
             GameManager.Player.InputReader.OnChoice1Input -= ChooseOptionOne;
             GameManager.Player.InputReader.OnChoice2Input -= ChooseOptionTwo;
             GameManager.Player.InputReader.OnChoice3Input -= ChooseOptionThree;
+            GameManager.GameEventManager.OnItemDrawEnded -= GoBackToInterruptedState;
         }
     }
 }

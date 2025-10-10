@@ -22,7 +22,7 @@ namespace Project.Core
             List<Card> monsterCards;
             if (CheckForMonsters(cards, out monsterCards)) cards = monsterCards;
 
-            ActiveCardChoice = new Choice<Card>(cards, ResolveChoice);
+            // ActiveCardChoice = new Choice<Card>(cards, ResolveChoice);
             OnNewCardDrawEvent?.Invoke();
         }
 

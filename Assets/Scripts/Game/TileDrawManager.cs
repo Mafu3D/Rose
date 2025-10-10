@@ -20,7 +20,7 @@ namespace Project.Core
             List<TileData> tiles = GameManager.Instance.TileDeck.DrawMultiple(amount);
             if (tiles.Count == 0) return;
 
-            ActiveTileChoice = new Choice<TileData>(tiles, ResolveChoice);
+            // ActiveTileChoice = new Choice<TileData>(tiles, ResolveChoice);
             OnNewTileDrawEvent?.Invoke();
         }
 
@@ -34,13 +34,6 @@ namespace Project.Core
         {
             if (choiceIndex < ActiveTileChoice.NumberOfChoices)
             {
-                for (int i = 0; i < ActiveTileChoice.NumberOfChoices; i++)
-                {
-                    if (i != choiceIndex)
-                    {
-                        // shuffle them back in
-                    }
-                }
                 ActiveTileChoice.ChooseItem(choiceIndex);
             }
         }

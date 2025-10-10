@@ -11,16 +11,17 @@ namespace Project.Decks
         [DictionaryDrawerSettings(KeyLabel = "Item", ValueLabel = "Amount")]
         public Dictionary<ItemData, int> Cards = new Dictionary<ItemData, int>();
 
-        public List<Item> UnpackItems()
+        public List<ItemData> UnpackItems()
         {
-            List<Item> unpackedItems = new();
+            List<ItemData> unpackedItems = new();
             foreach (KeyValuePair<ItemData, int> entry in Cards)
             {
                 for (int i = 0; i < entry.Value; i++)
                 {
-                    ItemData data = entry.Key;
-                    Item card = new Item(data);
-                    unpackedItems.Add(card);
+                    // ItemData data = entry.Key;
+                    // Item card = new Item(data);
+                    // unpackedItems.Add(card);
+                    unpackedItems.Add(entry.Key);
                 }
             }
             return unpackedItems;
