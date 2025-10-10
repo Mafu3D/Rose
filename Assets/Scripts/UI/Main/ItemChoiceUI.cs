@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Project.Core.GameEvents;
 using Project.GameTiles;
+using Project.Items;
 using UnityEngine;
 
 namespace Project.UI.MainUI
 {
-    public class TileChoiceUI : MonoBehaviour
+    public class ItemChoiceUI : MonoBehaviour
     {
         [SerializeField] private GameManager gameManager;
         [SerializeField] private GameObject mainContainer;
@@ -20,28 +21,27 @@ namespace Project.UI.MainUI
 
         void Initialize()
         {
-            gameManager.GameEventManager.OnTileDrawStarted += DisplayObjects;
-            gameManager.GameEventManager.OnTileDrawEnded += DestroyedDisplayedObjects;
+            gameManager.GameEventManager.OnItemDrawStarted += DisplayObjects;
+            gameManager.GameEventManager.OnItemDrawEnded += DestroyedDisplayedObjects;
         }
 
         private void DisplayObjects(IGameEvent gameEvent)
         {
-            TileChoiceEvent tileChoiceEvent = gameEvent as TileChoiceEvent;
-            List<TileData> tiles = tileChoiceEvent.Choice.GetAllItems();
-            Debug.Log(tiles[0]);
+            ItemChoiceEvent itemChoiceEvent = gameEvent as ItemChoiceEvent;
+            List<ItemData> items = itemChoiceEvent.Choice.GetAllItems();
 
-            for (int i = 0; i < tiles.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                PopulateDisplay(tiles[i], i + 1, displayParentTransforms[i]);
+                PopulateDisplay(items[i], i+1, displayParentTransforms[i]);
             }
             mainContainer.SetActive(true);
         }
 
-        private void PopulateDisplay(TileData tile, int number, Transform parent)
+        private void PopulateDisplay(ItemData item, int number, Transform parent)
         {
             GameObject displayedObeject = Instantiate(displayPrefab, parent.position, Quaternion.identity, parent);
-            TileChoiceDisplay display = displayedObeject.GetComponent<TileChoiceDisplay>();
-            display.DisplayTile(tile, number);
+            ItemChoiceDisplay display = displayedObeject.GetComponent<ItemChoiceDisplay>();
+            display.DisplayItem(item, number);
             displayedObjects.Add(displayedObeject);
         }
 

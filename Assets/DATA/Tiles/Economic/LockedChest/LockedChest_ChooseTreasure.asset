@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e558202a03a85c444890c98ad0f7ca15, type: 3}
   m_Name: LockedChest_ChooseTreasure
   m_EditorClassIdentifier: 
+  amount: 3
+  shuffleRemaining: 1

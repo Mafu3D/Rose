@@ -11,43 +11,43 @@ namespace Project
 
     public class EffectQueue
     {
-        public List<GameplayEffectStrategy> queue = new List<GameplayEffectStrategy>();
+        public List<GameplayEffectStrategy> Queue = new List<GameplayEffectStrategy>();
         private int currentEffectIndex;
         private bool currentEffectHasStarted = false;
         public event Action OnResolveQueueStart;
         public event Action OnResolveQueueEnd;
-        public bool QueueNeedsToBeResolved => queue.Count > 0;
+        public bool QueueNeedsToBeResolved => Queue.Count > 0;
         public bool ResolvingQueue = false;
 
         public GameplayEffectStrategy GetCurrentEffect()
         {
-            if (queue != null) return queue[currentEffectIndex];
+            if (Queue != null) return Queue[currentEffectIndex];
             return null;
         }
 
-        public void AddEffect(GameplayEffectStrategy effect) => queue.Add(effect);
-        public void RemoveEffect(GameplayEffectStrategy effect) { if (queue.Contains(effect)) queue.Remove(effect); }
+        public void AddEffect(GameplayEffectStrategy effect) => Queue.Add(effect);
+        public void RemoveEffect(GameplayEffectStrategy effect) { if (Queue.Contains(effect)) Queue.Remove(effect); }
         public void ClearQueue()
         {
-            queue = new();
+            Queue = new();
             currentEffectIndex = 0;
         }
 
         private Status IterateThroughQueue()
         {
-            while (currentEffectIndex < queue.Count)
+            while (currentEffectIndex < Queue.Count)
             {
                 if (!currentEffectHasStarted)
                 {
-                    queue[currentEffectIndex].StartEffect();
+                    Queue[currentEffectIndex].StartEffect();
                     currentEffectHasStarted = true;
                 }
-                Status status = queue[currentEffectIndex].ResolveEffect();
+                Status status = Queue[currentEffectIndex].ResolveEffect();
                 if (status != Status.Complete)
                 {
                     return status;
                 }
-                queue[currentEffectIndex].ResetEffect();
+                Queue[currentEffectIndex].ResetEffect();
                 currentEffectIndex++;
                 currentEffectHasStarted = false;
             }

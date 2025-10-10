@@ -325,7 +325,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9056361700247383585}
-  - component: {fileID: 5185572299652807794}
   m_Layer: 5
   m_Name: TreasureChoiceContainer
   m_TagString: Untagged
@@ -358,22 +357,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5185572299652807794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4930688746656744661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4edd0bc438159a43ac3a6db95522f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemChoiceContainerPrefab: {fileID: 2885748055888674173, guid: 894636b1610e2ce4380342128b1b5c2f, type: 3}
-  itemChoice01Container: {fileID: 4600465573819837447}
-  itemChoice02Container: {fileID: 2582283388826176678}
-  itemChoice03Container: {fileID: 3690589293680846036}
 --- !u!1 &8857244552337324058
 GameObject:
   m_ObjectHideFlags: 0

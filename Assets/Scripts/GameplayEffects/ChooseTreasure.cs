@@ -18,7 +18,7 @@ namespace Project.GameplayEffects
 
         public override Status ResolveEffect()
         {
-            if (GameManager.Instance.IsChoosingTreasure) return Status.Running;
+            if (GameManager.Instance.GameEventManager.CurrentGameEvent != null) return Status.Running;
             return Status.Complete;
         }
 

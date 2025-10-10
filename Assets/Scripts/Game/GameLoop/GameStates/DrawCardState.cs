@@ -5,6 +5,7 @@ using Project.GameplayEffects;
 using Project.States;
 using UnityEngine;
 using Project.Core.GameEvents;
+using System.Collections.Generic;
 
 namespace Project.GameLoop
 {
@@ -69,11 +70,22 @@ namespace Project.GameLoop
 
         public void MoveToNextState(IGameEvent _)
         {
-            foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
+            Cell heroCell = GameManager.Player.HeroTile.CurrentCell;
+            List<Tile> registeredTiles;
+            if (GameManager.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
             {
-                foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
+                foreach (Tile tile in registeredTiles)
                 {
-                    GameManager.EffectQueue.AddEffect(effect);
+
+                    if (tile.CanActivate())
+                    {
+                        tile.ActivatesThisGame += 1;
+                        tile.ActivatesThisTurn += 1;
+                        foreach (GameplayEffectStrategy effect in tile.TileData.OnActivateStrategies)
+                        {
+                            GameManager.EffectQueue.AddEffect(effect);
+                        }
+                    }
                 }
             }
             StateMachine.SwitchState(new DrawCardResolveState("Draw Tile Resolve", StateMachine, GameManager));

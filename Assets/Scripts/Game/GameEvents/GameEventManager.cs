@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Project.Core.GameEvents
 {
@@ -17,7 +18,7 @@ namespace Project.Core.GameEvents
         // Tile
         public TileChoiceEvent StartTileDrawEvent(int amount, bool shuffleRemaining)
         {
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running!");
+            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
 
             TileChoiceEvent tileChoiceEvent = new TileChoiceEvent(amount, shuffleRemaining);
             CurrentGameEvent = tileChoiceEvent;
@@ -36,7 +37,8 @@ namespace Project.Core.GameEvents
         // Item
         public ItemChoiceEvent StartItemDrawEvent(int amount, bool shuffleRemaining)
         {
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running!");
+            Debug.Log("Starting new ItemChoiceEvent");
+            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
 
             ItemChoiceEvent itemChoiceEvent = new ItemChoiceEvent(amount, shuffleRemaining);
             CurrentGameEvent = itemChoiceEvent;
@@ -47,6 +49,7 @@ namespace Project.Core.GameEvents
 
         public void EndItemDrawEvent()
         {
+            Debug.Log($"Ending event: {CurrentGameEvent}");
             IGameEvent gameEvent = CurrentGameEvent;
             CurrentGameEvent = null;
             OnItemDrawEnded?.Invoke(gameEvent);

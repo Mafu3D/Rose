@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Project.GameplayEffects;
 using TMPro;
 using UnityEngine;

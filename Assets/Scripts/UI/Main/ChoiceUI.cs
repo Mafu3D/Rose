@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace Project.UI.MainUI
 {
-    public class TileChoiceUI : MonoBehaviour
+    public class ChoiceUI : MonoBehaviour
     {
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private GameObject mainContainer;
         [SerializeField] private GameObject displayPrefab;
+
         [SerializeField] private List<RectTransform> displayParentTransforms;
+
         List<GameObject> displayedObjects = new();
 
         void Awake()
@@ -28,13 +29,11 @@ namespace Project.UI.MainUI
         {
             TileChoiceEvent tileChoiceEvent = gameEvent as TileChoiceEvent;
             List<TileData> tiles = tileChoiceEvent.Choice.GetAllItems();
-            Debug.Log(tiles[0]);
 
             for (int i = 0; i < tiles.Count; i++)
             {
-                PopulateDisplay(tiles[i], i + 1, displayParentTransforms[i]);
+                PopulateDisplay(tiles[i], i+1, displayParentTransforms[i]);
             }
-            mainContainer.SetActive(true);
         }
 
         private void PopulateDisplay(TileData tile, int number, Transform parent)
@@ -51,8 +50,6 @@ namespace Project.UI.MainUI
             {
                 Destroy(displayedCard);
             }
-
-            mainContainer.SetActive(false);
         }
     }
 }

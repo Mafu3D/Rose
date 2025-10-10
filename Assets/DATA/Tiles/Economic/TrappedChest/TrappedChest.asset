@@ -36,7 +36,8 @@ MonoBehaviour:
   TotalUses: 1
   DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
-  OnActivateStrategies: []
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 71cee4957551f144aa8c4cdd2da4f6b6, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []

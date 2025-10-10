@@ -66,12 +66,8 @@ namespace Project
         public event Action OnDrawCardEvent;
         public event Action OnEndOfRoundEvent;
 
-        public Choice<Item> ActiveTreasureChoice;
-        public Choice<TileData> ActiveTileChoice;
         public event Action OnTresureChoiceStarted;
         public event Action OnTresureChoiceEnded;
-        public bool IsChoosingTreasure => ActiveTreasureChoice != null;
-        public bool IsChoosingTile => ActiveTileChoice != null;
 
 
         public Choice<Card> ActiveCardChoice;
@@ -257,23 +253,6 @@ namespace Project
             deck.Reset();
             deck.Shuffle();
             return deck;
-        }
-
-        public void StartNewTreasureChoice(Choice<Item> treasureChoice)
-        {
-            ActiveTreasureChoice = treasureChoice;
-            MainUI.Instance.DisplayTreasureChoice(treasureChoice);
-            OnTresureChoiceStarted?.Invoke();
-        }
-
-        public void EndTreasureChoice()
-        {
-            if (ActiveTreasureChoice != null)
-            {
-                ActiveTreasureChoice = null;
-                MainUI.Instance.DestroyTreasureChoice();
-                OnTresureChoiceEnded?.Invoke();
-            }
         }
 
         // public void StartNewCardChoice(Choice<Card> cardChoice)
