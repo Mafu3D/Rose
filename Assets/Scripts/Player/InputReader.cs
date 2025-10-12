@@ -16,9 +16,9 @@ namespace Project.PlayerSystem.Input
         // Events (TODO: Clean these up with new controls!)
         public event Action OnMoveInput;
         public event Action OnProceedInput;
-        public event Action OnChoice1Input;
-        public event Action OnChoice2Input;
-        public event Action OnChoice3Input;
+        public event Action<int> OnNumInput;
+        public event Action OnExitInput;
+
 
 
         private Controls controls;
@@ -48,22 +48,70 @@ namespace Project.PlayerSystem.Input
             OnProceedInput?.Invoke();
         }
 
-        public void OnChoice1(InputAction.CallbackContext context)
+        public void OnOne(InputAction.CallbackContext context)
         {
             if (!context.performed) { return; }
-            OnChoice1Input?.Invoke();
+            OnNumInput?.Invoke(1);
         }
 
-        public void OnChoice2(InputAction.CallbackContext context)
+        public void OnTwo(InputAction.CallbackContext context)
         {
             if (!context.performed) { return; }
-            OnChoice2Input?.Invoke();
+            OnNumInput?.Invoke(2);
         }
 
-        public void OnChoice3(InputAction.CallbackContext context)
+        public void OnThree(InputAction.CallbackContext context)
         {
             if (!context.performed) { return; }
-            OnChoice3Input?.Invoke();
+            OnNumInput?.Invoke(3);
+        }
+
+        public void OnFour(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(4);
+        }
+
+        public void OnFive(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(5);
+        }
+
+        public void OnSix(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(6);
+        }
+
+        public void OnSeven(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(7);
+        }
+
+        public void OnEight(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(8);
+        }
+
+        public void OnNine(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(9);
+        }
+
+        public void OnZero(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnNumInput?.Invoke(0);
+        }
+
+        public void OnExit(InputAction.CallbackContext context)
+        {
+            if (!context.performed) { return; }
+            OnExitInput?.Invoke();
         }
     }
 }

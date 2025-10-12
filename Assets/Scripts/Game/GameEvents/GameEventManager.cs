@@ -20,6 +20,9 @@ namespace Project.Core.GameEvents
         public event Action<IGameEvent> OnCardDrawStarted;
         public event Action<IGameEvent> OnCardDrawEnded;
 
+        public event Action<IGameEvent> OnShopStarted;
+        public event Action<IGameEvent> OnShopEnded;
+
         // Tile
         public TileChoiceEvent StartTileDrawEvent(int amount, bool shuffleRemaining)
         {
@@ -60,7 +63,7 @@ namespace Project.Core.GameEvents
             OnItemDrawEnded?.Invoke(gameEvent);
         }
 
-        // Monster
+        // Monster Draw
         public CardChoiceEvent StartCardDrawEvent(Deck<Card> deck, int amount, bool shuffleRemaining)
         {
             Debug.Log("Starting new CardDrawEvent");
@@ -79,6 +82,27 @@ namespace Project.Core.GameEvents
             IGameEvent gameEvent = CurrentGameEvent;
             CurrentGameEvent = null;
             OnCardDrawEnded?.Invoke(gameEvent);
+        }
+
+        // Shop
+        public ShopEvent StartShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0)
+        {
+            Debug.Log("Starting new shop event");
+            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+
+            ShopEvent shopEvent = new ShopEvent(amount, priceModifier, replaceOnBuy, refreshable, refreshCost);
+            CurrentGameEvent = shopEvent;
+            shopEvent.SetupEvent();
+            OnShopStarted?.Invoke(shopEvent);
+            return shopEvent;
+        }
+
+        public void EndShopEvent()
+        {
+            Debug.Log($"Ending event: {CurrentGameEvent}");
+            IGameEvent gameEvent = CurrentGameEvent;
+            CurrentGameEvent = null;
+            OnShopEnded?.Invoke(gameEvent);
         }
     }
 }

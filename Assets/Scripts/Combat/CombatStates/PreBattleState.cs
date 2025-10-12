@@ -19,32 +19,20 @@ namespace Project.Combat.CombatStates
             List<Action> prebattleChoices = new List<Action> { ChooseFight, ChooseSteal, ChooseRun };
             PreBattleChoice = new Choice<Action>(prebattleChoices, ResolvePrebattleChoice);
 
-            GameManager.Instance.Player.InputReader.OnChoice1Input += OnChooseOne;
-            GameManager.Instance.Player.InputReader.OnChoice2Input += OnChooseTwo;
-            GameManager.Instance.Player.InputReader.OnChoice3Input += OnChooseThree;
+            GameManager.Instance.Player.InputReader.OnNumInput += Choose;
         }
 
         public override void OnExit()
         {
-            GameManager.Instance.Player.InputReader.OnChoice1Input -= OnChooseOne;
-            GameManager.Instance.Player.InputReader.OnChoice2Input -= OnChooseTwo;
-            GameManager.Instance.Player.InputReader.OnChoice3Input -= OnChooseThree;
+            GameManager.Instance.Player.InputReader.OnNumInput -= Choose;
          }
 
         public override void Update(float deltaTime) { }
 
-        private void OnChooseOne() {
-            PreBattleChoice.ChooseItem(0);
-            PreBattleChoice.Resolve();
-        }
-
-        private void OnChooseTwo() {
-            PreBattleChoice.ChooseItem(1);
-            PreBattleChoice.Resolve();
-        }
-
-        private void OnChooseThree() {
-            PreBattleChoice.ChooseItem(2);
+        private void Choose(int num)
+        {
+            if (num > PreBattleChoice.NumberOfChoices) return;
+            PreBattleChoice.ChooseItem(num-1);
             PreBattleChoice.Resolve();
         }
 

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
+  m_Name: TravelingMerchant
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  DisplayName: Traveling Merchant
+  Description: A wandering merchant with wares to sell
+  Sprite: {fileID: -1543209236, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  ActivationPriority: 0
+  TileType: 4
+  SecondaryTileType: 0
+  IsLocked: 0
+  IsTrapped: 0
+  DangerStatus: 1
+  Cost: 0
+  CanBeUsedMultipleTimes: 0
+  UsesPerTurn: 1
+  LimitTotalUses: 0
+  TotalUses: 1
+  DestroyAfterUsing: 0
+  CharacterData: {fileID: 0}
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 19d91e84954ef244196253fb4e52a13c, type: 2}
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []

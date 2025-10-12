@@ -46,7 +46,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Choice1"",
+                    ""name"": ""One"",
                     ""type"": ""Button"",
                     ""id"": ""ac72b4a5-e324-4886-b1c8-f239119a105e"",
                     ""expectedControlType"": """",
@@ -55,7 +55,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Choice2"",
+                    ""name"": ""Two"",
                     ""type"": ""Button"",
                     ""id"": ""70c3690c-852e-4e7a-840f-b846dd6e7672"",
                     ""expectedControlType"": """",
@@ -64,9 +64,81 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Choice3"",
+                    ""name"": ""Three"",
                     ""type"": ""Button"",
                     ""id"": ""1bcc5259-2b3f-4003-9f4c-6065b0b85e78"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Four"",
+                    ""type"": ""Button"",
+                    ""id"": ""afcd38ac-ad82-4f22-a762-355b25c55ff9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Five"",
+                    ""type"": ""Button"",
+                    ""id"": ""32337bfd-636f-487b-bafa-d6e09a1a71d5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Six"",
+                    ""type"": ""Button"",
+                    ""id"": ""273f4ca7-fabf-43b5-9a40-446f079abd9c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Seven"",
+                    ""type"": ""Button"",
+                    ""id"": ""ffb26e9b-bbb8-413d-980e-1e565cebf012"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Eight"",
+                    ""type"": ""Button"",
+                    ""id"": ""83c9f2ee-0c26-4c12-afd4-aef651b6e4b5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Nine"",
+                    ""type"": ""Button"",
+                    ""id"": ""ace2824a-c917-4f4c-94df-ece0f6608627"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zero"",
+                    ""type"": ""Button"",
+                    ""id"": ""4923f2ec-9e28-4244-8b44-6fae34b4ce4e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""56e5c3c1-bdd2-4aaf-8e20-bf806eeb6c33"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -142,34 +214,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""75936f87-25de-4014-a5d2-e9065d069930"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e2d046ff-84b1-49eb-8aa2-fd19a826bf79"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eaa9de2e-0e16-419c-971f-58e711124eaa"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice2"",
+                    ""groups"": "";KBM"",
+                    ""action"": ""One"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -179,19 +229,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5e991532-6f29-4a63-b20b-db4dacdb5115"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice3"",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Two"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -201,8 +240,96 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choice3"",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Three"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b9f7018-e690-4049-929b-03d951f5f3ad"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Four"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c02ecd0e-b0e8-4862-b5b2-5c8fa733ede5"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Five"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35cd593a-37c5-4f62-a012-1f4a1dbb3e0b"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Six"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ea45094-8a45-4ab6-ae4e-b470d3d87618"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Seven"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9851cb86-da76-48cc-bae0-13c77500be29"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Eight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72ab7bca-5751-47d7-8cba-af6050dd60d4"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Nine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7ce8c0e-faa9-43cf-9f1c-8e7ad074dcbc"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Zero"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""332a2d16-b856-4288-a794-fff53afe8823"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KBM"",
+                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -232,9 +359,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Move = m_Main.FindAction("Move", throwIfNotFound: true);
         m_Main_Proceed = m_Main.FindAction("Proceed", throwIfNotFound: true);
-        m_Main_Choice1 = m_Main.FindAction("Choice1", throwIfNotFound: true);
-        m_Main_Choice2 = m_Main.FindAction("Choice2", throwIfNotFound: true);
-        m_Main_Choice3 = m_Main.FindAction("Choice3", throwIfNotFound: true);
+        m_Main_One = m_Main.FindAction("One", throwIfNotFound: true);
+        m_Main_Two = m_Main.FindAction("Two", throwIfNotFound: true);
+        m_Main_Three = m_Main.FindAction("Three", throwIfNotFound: true);
+        m_Main_Four = m_Main.FindAction("Four", throwIfNotFound: true);
+        m_Main_Five = m_Main.FindAction("Five", throwIfNotFound: true);
+        m_Main_Six = m_Main.FindAction("Six", throwIfNotFound: true);
+        m_Main_Seven = m_Main.FindAction("Seven", throwIfNotFound: true);
+        m_Main_Eight = m_Main.FindAction("Eight", throwIfNotFound: true);
+        m_Main_Nine = m_Main.FindAction("Nine", throwIfNotFound: true);
+        m_Main_Zero = m_Main.FindAction("Zero", throwIfNotFound: true);
+        m_Main_Exit = m_Main.FindAction("Exit", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -303,18 +438,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
     private readonly InputAction m_Main_Move;
     private readonly InputAction m_Main_Proceed;
-    private readonly InputAction m_Main_Choice1;
-    private readonly InputAction m_Main_Choice2;
-    private readonly InputAction m_Main_Choice3;
+    private readonly InputAction m_Main_One;
+    private readonly InputAction m_Main_Two;
+    private readonly InputAction m_Main_Three;
+    private readonly InputAction m_Main_Four;
+    private readonly InputAction m_Main_Five;
+    private readonly InputAction m_Main_Six;
+    private readonly InputAction m_Main_Seven;
+    private readonly InputAction m_Main_Eight;
+    private readonly InputAction m_Main_Nine;
+    private readonly InputAction m_Main_Zero;
+    private readonly InputAction m_Main_Exit;
     public struct MainActions
     {
         private @Controls m_Wrapper;
         public MainActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Main_Move;
         public InputAction @Proceed => m_Wrapper.m_Main_Proceed;
-        public InputAction @Choice1 => m_Wrapper.m_Main_Choice1;
-        public InputAction @Choice2 => m_Wrapper.m_Main_Choice2;
-        public InputAction @Choice3 => m_Wrapper.m_Main_Choice3;
+        public InputAction @One => m_Wrapper.m_Main_One;
+        public InputAction @Two => m_Wrapper.m_Main_Two;
+        public InputAction @Three => m_Wrapper.m_Main_Three;
+        public InputAction @Four => m_Wrapper.m_Main_Four;
+        public InputAction @Five => m_Wrapper.m_Main_Five;
+        public InputAction @Six => m_Wrapper.m_Main_Six;
+        public InputAction @Seven => m_Wrapper.m_Main_Seven;
+        public InputAction @Eight => m_Wrapper.m_Main_Eight;
+        public InputAction @Nine => m_Wrapper.m_Main_Nine;
+        public InputAction @Zero => m_Wrapper.m_Main_Zero;
+        public InputAction @Exit => m_Wrapper.m_Main_Exit;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,15 +481,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Proceed.started += instance.OnProceed;
             @Proceed.performed += instance.OnProceed;
             @Proceed.canceled += instance.OnProceed;
-            @Choice1.started += instance.OnChoice1;
-            @Choice1.performed += instance.OnChoice1;
-            @Choice1.canceled += instance.OnChoice1;
-            @Choice2.started += instance.OnChoice2;
-            @Choice2.performed += instance.OnChoice2;
-            @Choice2.canceled += instance.OnChoice2;
-            @Choice3.started += instance.OnChoice3;
-            @Choice3.performed += instance.OnChoice3;
-            @Choice3.canceled += instance.OnChoice3;
+            @One.started += instance.OnOne;
+            @One.performed += instance.OnOne;
+            @One.canceled += instance.OnOne;
+            @Two.started += instance.OnTwo;
+            @Two.performed += instance.OnTwo;
+            @Two.canceled += instance.OnTwo;
+            @Three.started += instance.OnThree;
+            @Three.performed += instance.OnThree;
+            @Three.canceled += instance.OnThree;
+            @Four.started += instance.OnFour;
+            @Four.performed += instance.OnFour;
+            @Four.canceled += instance.OnFour;
+            @Five.started += instance.OnFive;
+            @Five.performed += instance.OnFive;
+            @Five.canceled += instance.OnFive;
+            @Six.started += instance.OnSix;
+            @Six.performed += instance.OnSix;
+            @Six.canceled += instance.OnSix;
+            @Seven.started += instance.OnSeven;
+            @Seven.performed += instance.OnSeven;
+            @Seven.canceled += instance.OnSeven;
+            @Eight.started += instance.OnEight;
+            @Eight.performed += instance.OnEight;
+            @Eight.canceled += instance.OnEight;
+            @Nine.started += instance.OnNine;
+            @Nine.performed += instance.OnNine;
+            @Nine.canceled += instance.OnNine;
+            @Zero.started += instance.OnZero;
+            @Zero.performed += instance.OnZero;
+            @Zero.canceled += instance.OnZero;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -349,15 +524,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Proceed.started -= instance.OnProceed;
             @Proceed.performed -= instance.OnProceed;
             @Proceed.canceled -= instance.OnProceed;
-            @Choice1.started -= instance.OnChoice1;
-            @Choice1.performed -= instance.OnChoice1;
-            @Choice1.canceled -= instance.OnChoice1;
-            @Choice2.started -= instance.OnChoice2;
-            @Choice2.performed -= instance.OnChoice2;
-            @Choice2.canceled -= instance.OnChoice2;
-            @Choice3.started -= instance.OnChoice3;
-            @Choice3.performed -= instance.OnChoice3;
-            @Choice3.canceled -= instance.OnChoice3;
+            @One.started -= instance.OnOne;
+            @One.performed -= instance.OnOne;
+            @One.canceled -= instance.OnOne;
+            @Two.started -= instance.OnTwo;
+            @Two.performed -= instance.OnTwo;
+            @Two.canceled -= instance.OnTwo;
+            @Three.started -= instance.OnThree;
+            @Three.performed -= instance.OnThree;
+            @Three.canceled -= instance.OnThree;
+            @Four.started -= instance.OnFour;
+            @Four.performed -= instance.OnFour;
+            @Four.canceled -= instance.OnFour;
+            @Five.started -= instance.OnFive;
+            @Five.performed -= instance.OnFive;
+            @Five.canceled -= instance.OnFive;
+            @Six.started -= instance.OnSix;
+            @Six.performed -= instance.OnSix;
+            @Six.canceled -= instance.OnSix;
+            @Seven.started -= instance.OnSeven;
+            @Seven.performed -= instance.OnSeven;
+            @Seven.canceled -= instance.OnSeven;
+            @Eight.started -= instance.OnEight;
+            @Eight.performed -= instance.OnEight;
+            @Eight.canceled -= instance.OnEight;
+            @Nine.started -= instance.OnNine;
+            @Nine.performed -= instance.OnNine;
+            @Nine.canceled -= instance.OnNine;
+            @Zero.started -= instance.OnZero;
+            @Zero.performed -= instance.OnZero;
+            @Zero.canceled -= instance.OnZero;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -388,8 +587,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnProceed(InputAction.CallbackContext context);
-        void OnChoice1(InputAction.CallbackContext context);
-        void OnChoice2(InputAction.CallbackContext context);
-        void OnChoice3(InputAction.CallbackContext context);
+        void OnOne(InputAction.CallbackContext context);
+        void OnTwo(InputAction.CallbackContext context);
+        void OnThree(InputAction.CallbackContext context);
+        void OnFour(InputAction.CallbackContext context);
+        void OnFive(InputAction.CallbackContext context);
+        void OnSix(InputAction.CallbackContext context);
+        void OnSeven(InputAction.CallbackContext context);
+        void OnEight(InputAction.CallbackContext context);
+        void OnNine(InputAction.CallbackContext context);
+        void OnZero(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }

@@ -41,7 +41,6 @@ namespace Project
                 }
                 chosen.Add(chosenItem);
                 notChosen.Remove(chosenItem);
-
             }
         }
 
@@ -72,10 +71,48 @@ namespace Project
             }
         }
 
+        public void RemoveItem(int index)
+        {
+            if (index < items.Count)
+            {
+                items.RemoveAt(index);
+            }
+            if (index < notChosen.Count)
+            {
+                notChosen.RemoveAt(index);
+            }
+        }
+
+
         public void ReplaceItem(T itemToAdd, T itemToReplace)
         {
             RemoveItem(itemToReplace);
             AddItem(itemToAdd);
+        }
+
+        public void ReplaceItem(T itemToAdd, int indexToReplace)
+        {
+            RemoveItem(indexToReplace);
+            AddItem(itemToAdd);
+        }
+
+
+        public void TEMPReplaceLikeArrayForShop(T itemToAdd, int index)
+        {
+            // int index = items.IndexOf(itemToReplace);
+            // notChosen.IndexOf(itemToReplace);
+            // T item = items[index];
+            T item = items[index];
+            items[index] = itemToAdd;
+
+            notChosen.Remove(item);
+            notChosen.Add(itemToAdd);
+        }
+
+        public void Reset()
+        {
+            notChosen = new List<T>(items);
+            chosen = new();
         }
 
         public void Resolve() => resolveCallback(chosen, notChosen);

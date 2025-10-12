@@ -8,7 +8,7 @@ namespace Project.Core.GameEvents
     public class TileChoiceEvent : ChoiceEvent<TileData>
     {
         private bool shuffleRemaining;
-        public TileChoiceEvent(int amount, bool shuffleRemaining) : base(amount)
+        public TileChoiceEvent(int amount, bool shuffleRemaining) : base(amount, false)
         {
             this.shuffleRemaining = shuffleRemaining;
         }

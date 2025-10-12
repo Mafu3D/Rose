@@ -6,7 +6,7 @@ namespace Project.Core.GameEvents
     public class ItemChoiceEvent : ChoiceEvent<ItemData>
     {
         private bool shuffleRemaining;
-        public ItemChoiceEvent(int amount, bool shuffleRemaining) : base(amount)
+        public ItemChoiceEvent(int amount, bool shuffleRemaining) : base(amount, true)
         {
             this.shuffleRemaining = shuffleRemaining;
         }

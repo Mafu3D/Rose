@@ -8,9 +8,9 @@ using Project.Items;
 
 namespace Project.GameLoop
 {
-    public class SelectingItemState : State
+    public class ShopState : State
     {
-        public SelectingItemState(string name,
+        public ShopState(string name,
                                 StateMachine stateMachine,
                                 GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
@@ -31,10 +31,21 @@ namespace Project.GameLoop
 
         private void Choose(int num)
         {
+            if (num == 9)
+            {
+                RefreshShop();
+                return;
+            }
+
             if (num > choiceEvent.Choice.NumberOfChoices) return;
             choiceEvent.ChooseItem(num - 1);
             choiceEvent.Resolve();
-            GameManager.GameEventManager.EndItemDrawEvent();
+        }
+
+        private void RefreshShop()
+        {
+            ShopEvent shopEvent = choiceEvent as ShopEvent;
+            shopEvent.Refresh();
         }
 
         private void Exit()
@@ -42,7 +53,7 @@ namespace Project.GameLoop
             if (choiceEvent.IsExitable)
             {
                 choiceEvent.Resolve();
-                GameManager.GameEventManager.EndItemDrawEvent();
+                GameManager.GameEventManager.EndShopEvent();
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Project.Choices;
 using UnityEngine;
@@ -14,11 +15,14 @@ namespace Project.Core.GameEvents
     public abstract class ChoiceEvent<T> : IGameEvent
     {
         protected int amount;
+        public bool IsExitable;
+        public event Action OnEventEnded;
         public Choice<T> Choice { get; protected set; }
 
-        public ChoiceEvent(int amount)
+        public ChoiceEvent(int amount, bool canBeClosedEarly)
         {
             this.amount = amount;
+            this.IsExitable = canBeClosedEarly;
         }
 
         public void SetupEvent()

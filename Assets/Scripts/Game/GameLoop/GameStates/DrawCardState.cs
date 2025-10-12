@@ -22,35 +22,20 @@ namespace Project.GameLoop
         {
             Debug.Log($"Enter: {Name}");
             GameManager.Player.InputReader.OnProceedInput += Proceed;
-            GameManager.Player.InputReader.OnChoice1Input += ChooseOptionOne;
-            GameManager.Player.InputReader.OnChoice2Input += ChooseOptionTwo;
-            GameManager.Player.InputReader.OnChoice3Input += ChooseOptionThree;
+            GameManager.Player.InputReader.OnNumInput += Choose;
             GameManager.GameEventManager.OnTileDrawEnded += MoveToNextState;
 
             tileChoiceEvent = GameManager.GameEventManager.StartTileDrawEvent(3, true);
         }
 
-        private void ChooseOptionThree()
+        private void Choose(int num)
         {
-            Choose(2);
-        }
+            if (num > tileChoiceEvent.Choice.NumberOfChoices) return;
 
-        private void ChooseOptionTwo()
-        {
-            Choose(1);
-        }
+            if (tileChoiceEvent.Choice.GetItem(num - 1).Cost <= GameManager.Player.GemTracker.Gem) {
+                GameManager.Player.GemTracker.RemoveGem(tileChoiceEvent.Choice.GetItem(num - 1).Cost);
 
-        private void ChooseOptionOne()
-        {
-            Choose(0);
-        }
-
-        private void Choose(int index)
-        {
-            if (tileChoiceEvent.Choice.GetItem(index).Cost <= GameManager.Player.GemTracker.Gem) {
-                GameManager.Player.GemTracker.RemoveGem(tileChoiceEvent.Choice.GetItem(index).Cost);
-
-                tileChoiceEvent.ChooseItem(index);
+                tileChoiceEvent.ChooseItem(num - 1);
                 tileChoiceEvent.Resolve();
                 GameManager.GameEventManager.EndTileDrawEvent();
             }
@@ -96,9 +81,7 @@ namespace Project.GameLoop
         public override void OnExit()
         {
             GameManager.Player.InputReader.OnProceedInput -= Proceed;
-            GameManager.Player.InputReader.OnChoice1Input -= ChooseOptionOne;
-            GameManager.Player.InputReader.OnChoice2Input -= ChooseOptionTwo;
-            GameManager.Player.InputReader.OnChoice3Input -= ChooseOptionThree;
+            GameManager.Player.InputReader.OnNumInput -= Choose;
 
             GameManager.GameEventManager.OnTileDrawEnded -= MoveToNextState;
         }

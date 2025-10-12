@@ -7,7 +7,7 @@ namespace Project.Core.GameEvents
     {
         private bool shuffleRemaining;
         Deck<Card> deck;
-        public CardChoiceEvent(Deck<Card> deck, int amount, bool shuffleRemaining) : base(amount)
+        public CardChoiceEvent(Deck<Card> deck, int amount, bool shuffleRemaining) : base(amount, false)
         {
             this.shuffleRemaining = shuffleRemaining;
             this.deck = deck;

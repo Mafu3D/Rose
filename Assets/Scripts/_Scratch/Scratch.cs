@@ -34,7 +34,7 @@ public class Scratch : MonoBehaviour
             if (!lmbClicked)
             {
                 lmbClicked = true;
-                Player.GemTracker.AddGem(1);
+                Player.GoldTracker.AddGold(1);
             }
         }
         else
@@ -47,7 +47,7 @@ public class Scratch : MonoBehaviour
             if (!rmbClicked)
             {
                 rmbClicked = true;
-                Player.GemTracker.RemoveGem(1);
+                Player.GoldTracker.RemoveGold(1);
             }
         }
         else
