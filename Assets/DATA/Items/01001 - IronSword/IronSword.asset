@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: +2 Attack
   ItemID: 01001
   Sprite: {fileID: -8218794040945226646, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 0
+  GoldValue: 3
   ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0

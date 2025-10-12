@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: +2 Attack, +2 Armor
   ItemID: 
   Sprite: {fileID: 1480474399701166164, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 0
+  GoldValue: 5
   ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0

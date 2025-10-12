@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: 'Combat Start: Apply 2 Weakened'
   ItemID: 
   Sprite: {fileID: 8119881643591593686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 0
+  GoldValue: 5
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0

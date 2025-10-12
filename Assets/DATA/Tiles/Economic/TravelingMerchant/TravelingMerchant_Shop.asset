@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryAmount: 8
   priceModifier: 1
+  replaceOnBuy: 0
+  refreshable: 1
+  refreshCost: 5

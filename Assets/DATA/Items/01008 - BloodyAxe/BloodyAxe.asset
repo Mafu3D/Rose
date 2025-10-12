@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
   ItemID: 
   Sprite: {fileID: 7318801667195844142, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 0
+  GoldValue: 6
   ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0

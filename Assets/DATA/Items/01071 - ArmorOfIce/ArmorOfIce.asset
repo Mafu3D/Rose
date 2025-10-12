@@ -17,7 +17,7 @@ MonoBehaviour:
     1 Frost'
   ItemID: 
   Sprite: {fileID: 598871768815864723, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 0
+  GoldValue: 7
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0

@@ -24,14 +24,14 @@ namespace Project.GameLoop
 
             GameManager.Player.InputReader.OnNumInput += Choose;
             GameManager.Player.InputReader.OnExitInput += Exit;
-            GameManager.GameEventManager.OnItemDrawEnded += GoBackToInterruptedState;
+            GameManager.GameEventManager.OnShopEnded += GoBackToInterruptedState;
 
             choiceEvent = GameManager.GameEventManager.CurrentGameEvent as ChoiceEvent<ItemData>;
         }
 
         private void Choose(int num)
         {
-            if (num == 9)
+            if (num == 0)
             {
                 RefreshShop();
                 return;
@@ -70,7 +70,7 @@ namespace Project.GameLoop
         {
             GameManager.Player.InputReader.OnNumInput -= Choose;
             GameManager.Player.InputReader.OnExitInput -= Exit;
-            GameManager.GameEventManager.OnItemDrawEnded -= GoBackToInterruptedState;
+            GameManager.GameEventManager.OnShopEnded -= GoBackToInterruptedState;
         }
     }
 }

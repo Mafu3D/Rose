@@ -10,8 +10,8 @@ namespace Project.Core.GameEvents
         // This should be mostly split into a special shop class and the event should just handle event stuff!
         private float priceModifier;
         private bool replaceOnBuy;
-        private bool refreshable;
-        private int refreshCost;
+        public bool Refreshable { get; private set; }
+        public int RefreshCost { get; private set; }
 
         private bool debug = true;
 
@@ -19,13 +19,14 @@ namespace Project.Core.GameEvents
         {
             this.priceModifier = priceModifier;
             this.replaceOnBuy = replaceOnBuy;
-            this.refreshable = refreshable;
-            this.refreshCost = refreshCost;
+            this.Refreshable = refreshable;
+            this.RefreshCost = refreshCost;
         }
 
         public event Action OnBuyEvent;
         public event Action OnCannotBuyEvent;
         public event Action OnRefreshEvent;
+        public event Action OnShopUpdated;
 
         public override void ChooseItem(int index)
         {
@@ -55,6 +56,7 @@ namespace Project.Core.GameEvents
                 }
                 Choice.Resolve();
                 OnBuyEvent?.Invoke();
+                OnShopUpdated?.Invoke();
 
                 if (debug)
                 {
@@ -115,16 +117,17 @@ namespace Project.Core.GameEvents
 
         public void Refresh()
         {
-            if (refreshable)
+            if (Refreshable)
             {
-                if (GameManager.Instance.Player.GoldTracker.Gold >= refreshCost)
+                if (GameManager.Instance.Player.GoldTracker.Gold >= RefreshCost)
                 {
                     List<ItemData> oldChoice = Choice.GetNotChosen();
                     GenerateChoices();
                     GameManager.Instance.ItemDeck.AddToRemaining(oldChoice, true);
 
-                    GameManager.Instance.Player.GoldTracker.RemoveGold(refreshCost);
+                    GameManager.Instance.Player.GoldTracker.RemoveGold(RefreshCost);
                     OnRefreshEvent?.Invoke();
+                    OnShopUpdated?.Invoke();
                     if (debug)
                     {
                         Debug.Log("!!! REFRESHED !!!");
@@ -158,9 +161,9 @@ namespace Project.Core.GameEvents
                 }
             }
 
-            if (refreshable)
+            if (Refreshable)
             {
-                Debug.Log($"(9) - Refresh the shop! : {refreshCost}");
+                Debug.Log($"(9) - Refresh the shop! : {RefreshCost}");
             }
             Debug.Log("---------------------------------------------");
         }

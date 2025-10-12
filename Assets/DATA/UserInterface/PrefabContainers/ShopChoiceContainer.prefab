@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9065656207336045394}
+  - component: {fileID: 2304505005553015226}
+  - component: {fileID: 2993608557690564052}
+  - component: {fileID: 9099650113551309541}
   m_Layer: 5
   m_Name: ShopChoiceContainer
   m_TagString: Untagged
@@ -40,6 +43,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2304505005553015226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383905212344687111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbef50e02590e564c9573c1fb1ff2c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameTMPText: {fileID: 1320702614009671301}
+  costContainer: {fileID: 3599358118455381483}
+  costTMPText: {fileID: 5915983414601241818}
+  shopNumberTMPText: {fileID: 7894426410579262087}
+  image: {fileID: 5767739434032555720}
+  soldOutSprite: {fileID: -175949995, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+--- !u!114 &2993608557690564052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383905212344687111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9989ae4eb153954a94d2634598ec962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  tooltipInformationGetter: {fileID: 9099650113551309541}
+  delay: 0.2
+--- !u!114 &9099650113551309541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383905212344687111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87962d4366042c94ca00140f19a6313d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopItemUI: {fileID: 2304505005553015226}
 --- !u!1 &3424600232214295391
 GameObject:
   m_ObjectHideFlags: 0
