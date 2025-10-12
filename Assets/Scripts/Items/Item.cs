@@ -28,7 +28,7 @@ namespace Project.Items
             DeregisterAttributeModifiers(character);
         }
 
-        public void RegisterAttributeModifiers(Character character)
+        private void RegisterAttributeModifiers(Character character)
         {
             if (this.ItemData.MaxHealthModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, this.ItemData.MaxHealthModifier);
             if (this.ItemData.MaxArmorModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Armor, this.ItemData.MaxArmorModifier);
@@ -47,7 +47,7 @@ namespace Project.Items
             if (this.ItemData.SpeedModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
         }
 
-        public void DeregisterAttributeModifiers(Character character)
+        private void DeregisterAttributeModifiers(Character character)
         {
             if (this.ItemData.MaxHealthModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, -this.ItemData.MaxHealthModifier);
             if (this.ItemData.MaxArmorModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Armor, -this.ItemData.MaxArmorModifier);

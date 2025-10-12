@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: Campfire
+  m_Name: Monk
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,24 +21,24 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Campfire
-  Description: Restore 5 health when you end your turn here
-  Sprite: {fileID: 1256095980742163159, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  DisplayName: Monk
+  Description: Gain a blessing
+  Sprite: {fileID: -687513912, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 0
-  TileType: 7
+  TileType: 6
   SecondaryTileType: 0
   IsLocked: 0
   IsTrapped: 0
-  DangerStatus: 0
-  Cost: 0
+  DangerStatus: 1
+  Cost: 1
   CanBeUsedMultipleTimes: 0
   UsesPerTurn: 1
-  LimitTotalUses: 0
+  LimitTotalUses: 1
   TotalUses: 1
   DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
   OnActivateStrategies:
-  - {fileID: 11400000, guid: ed56f6e9cd5d80f4aa3fe1bc2f50db94, type: 2}
+  - {fileID: 11400000, guid: 46ea62f29a461da4482e687f553fbc59, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []

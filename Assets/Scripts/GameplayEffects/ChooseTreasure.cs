@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Project.Core.GameEvents;
 using Project.GameLoop;
-using Project.Items;
 using UnityEngine;
 
 namespace Project.GameplayEffects

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03e407449ac129f4bb6f698a47173f9c, type: 3}
-  m_Name: NewNPCServiceDefinition
+  m_Script: {fileID: 11500000, guid: 8ea6fd9ed2cfe84469f0bd75e7ff2e80, type: 3}
+  m_Name: Monk_SpeedBlessingService
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,4 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Services: []
+  DisplayName: Blessing of Speed
+  Description: Permanent +2 speed
+  DisplaySprite: {fileID: -472984634, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Cost: 4
+  Repeatable: 0
+  ExitOnUse: 1
+  Effect: {fileID: 11400000, guid: a2cb12160ee73d145ace68dab1bee7e3, type: 2}

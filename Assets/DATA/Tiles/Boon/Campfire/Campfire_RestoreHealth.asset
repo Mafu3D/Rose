@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21dff2319b65f454998b5bbcbdb49063, type: 3}
-  m_Name: Hero_Inventory
+  m_Script: {fileID: 11500000, guid: 17b56f4431e040849a900d78fbbcc88a, type: 3}
+  m_Name: Campfire_RestoreHealth
   m_EditorClassIdentifier: 
-  MaxSlots: 4
-  StartingEquippedWeaponData: {fileID: 11400000, guid: 7f5830758eadbdc46bd374b56777fc7f, type: 2}
-  StartingHeldItemsData: []
+  AttributeType: 0
+  BaseValueModifier: 5
+  MaxValueModifier: 0

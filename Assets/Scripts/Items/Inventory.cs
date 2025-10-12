@@ -11,6 +11,8 @@ namespace Project.Items
     {
         private Item equippedWeapon;
         private List<Item> heldItems = new();
+        private List<Item> secretItems = new();
+        private Item weaponUpgrade;
         private int maxSlots = 4;
 
         public event Action OnInventoryChanged;
@@ -39,6 +41,8 @@ namespace Project.Items
             return heldItems[index];
         }
         public List<Item> GetHeldItems() => heldItems;
+        public List<Item> GetSecretItems() => secretItems;
+        public Item GetWeaponUpgrade() => weaponUpgrade;
 
         public List<Item> GetAllItems()
         {
@@ -46,7 +50,14 @@ namespace Project.Items
             if (equippedWeapon != null)
             {
                 allItems.Add(equippedWeapon);
+                if (weaponUpgrade != null)
+                {
+                    allItems.Add(weaponUpgrade);
+                }
             }
+            List<Item> secretItems = new List<Item>(GetSecretItems());
+            Debug.Log(secretItems.Count);
+            allItems.AddRange(secretItems);
             return allItems;
         }
 
@@ -55,6 +66,7 @@ namespace Project.Items
             if (equippedWeapon != null)
             {
                 equippedWeapon.OnUnequip(owner);
+                RemoveWeaponUpgrade();
             }
 
             equippedWeapon = item;
@@ -88,6 +100,39 @@ namespace Project.Items
             item.OnUnequip(owner);
 
             OnInventoryChanged?.Invoke();
+        }
+
+        public int AddSecretItem(Item item)
+        {
+            secretItems.Add(item);
+            item.OnEquip(owner);
+            return secretItems.Count - 1;
+        }
+
+        public void RemoveSecretItem(int index)
+        {
+            Item item;
+            secretItems.Pop(index, out item);
+            item.OnUnequip(owner);
+        }
+
+        public void AddWeaponUpgrade(Item item)
+        {
+            if (weaponUpgrade != null)
+            {
+                weaponUpgrade.OnUnequip(owner);
+            }
+            weaponUpgrade = item;
+            weaponUpgrade.OnEquip(owner);
+        }
+
+        public void RemoveWeaponUpgrade()
+        {
+            if (weaponUpgrade != null)
+            {
+                weaponUpgrade.OnUnequip(owner);
+                weaponUpgrade = null;
+            }
         }
 
         private void EquipStartingItems(InventoryDefinition inventoryDefinition)

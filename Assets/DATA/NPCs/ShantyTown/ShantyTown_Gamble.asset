@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e683885276aa274c9ac7a85f840fa39, type: 3}
   m_Name: ShantyTown_Gamble
   m_EditorClassIdentifier: 
-  Amount: 0
-  chanceToWin: 0
+  Amount: 2
+  chanceToWin: 60

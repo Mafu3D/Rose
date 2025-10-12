@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea6fd9ed2cfe84469f0bd75e7ff2e80, type: 3}
-  m_Name: ShantyTown_GambleService
+  m_Name: Blacksmith_UpgradeWeaponService
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Gamble
-  Description: Bet your money!
-  DisplaySprite: {fileID: 1299804717, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  Cost: 2
-  Repeatable: 1
-  ExitOnUse: 0
-  Effect: {fileID: 11400000, guid: 180671c0c86e38b4a9f6059432680806, type: 2}
+  DisplayName: Upgrade Weapon
+  Description: Upgrades your weapon
+  DisplaySprite: {fileID: 856815066, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Cost: 3
+  Repeatable: 0
+  ExitOnUse: 1
+  Effect: {fileID: 11400000, guid: bf080fd4e33adce4dadb963146ff9e1a, type: 2}

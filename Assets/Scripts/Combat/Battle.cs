@@ -265,7 +265,6 @@ namespace Project.Combat
             if (activeCombatant.Inventory != null)
             {
                 List<Item> items = activeCombatant.Inventory.GetAllItems();
-                Debug.Log(items.Count);
                 foreach (Item item in items)
                 {
                     foreach (CombatActionBaseData actionData in item.ItemData.OnTurnStartStrategies)

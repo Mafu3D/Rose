@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21dff2319b65f454998b5bbcbdb49063, type: 3}
-  m_Name: Hero_Inventory
+  m_Script: {fileID: 11500000, guid: c398e1a0241f2a348a8c5091539de6fe, type: 3}
+  m_Name: Monk_HealthBlessingAddItem
   m_EditorClassIdentifier: 
-  MaxSlots: 4
-  StartingEquippedWeaponData: {fileID: 11400000, guid: 7f5830758eadbdc46bd374b56777fc7f, type: 2}
-  StartingHeldItemsData: []
+  itemData: {fileID: 11400000, guid: 94117e563f328cd448ab69b7f429cd9d, type: 2}
+  addToSecretItems: 1

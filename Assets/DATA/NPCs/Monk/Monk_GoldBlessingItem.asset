@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: BloodyAxe
+  m_Name: Monk_GoldBlessingItem
   m_EditorClassIdentifier: 
-  Name: Bloody Axe
-  Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
+  Name: Blessing of Gold
+  Description: 
   ItemID: 
-  Sprite: {fileID: 7318801667195844142, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
-  GoldValue: 6
-  ItemType: 1
+  Sprite: {fileID: 0}
+  GoldValue: 0
+  ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 4
+  StrengthModifier: 0
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -32,9 +32,9 @@ MonoBehaviour:
   MaxSpeedModifier: 0
   OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies:
-  - {fileID: 11400000, guid: 43ea1d89f6dfb6146a1cdeef97bfff72, type: 2}
-  OnCombatEndStrategies: []
+  OnCombatStartStrategies: []
+  OnCombatEndStrategies:
+  - {fileID: 11400000, guid: 34ccd2f67fdf5894f9c4c4e3fe7d8c80, type: 2}
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
   OnTurnStartStrategies: []
