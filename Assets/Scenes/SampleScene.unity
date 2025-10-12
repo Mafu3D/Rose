@@ -7112,7 +7112,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 1cebf3e552c3a5a4c8f038c1fd6c82da, type: 2}
     - target: {fileID: 6532928159928767444, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_Name
-      value: Blacksmith (1)
+      value: Monk
       objectReference: {fileID: 0}
     - target: {fileID: 8022595941363151908, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_Color.b
@@ -7128,11 +7128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8945126992583430082, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8945126992583430082, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8945126992583430082, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13746,15 +13746,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ee99238ddafc5184db1a108a9ba36a9a, type: 2}
     - target: {fileID: 6532928159928767444, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_Name
-      value: CastleShop
+      value: Shop
       objectReference: {fileID: 0}
     - target: {fileID: 8945126992583430082, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8945126992583430082, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8945126992583430082, guid: b41515a06f60da64ea6029f849fc36c3, type: 3}
       propertyPath: m_LocalPosition.z
