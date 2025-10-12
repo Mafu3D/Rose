@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Project.Decks;
+using Project.NPCs;
 using UnityEngine;
 
 namespace Project.Core.GameEvents
@@ -22,6 +23,9 @@ namespace Project.Core.GameEvents
 
         public event Action<IGameEvent> OnShopStarted;
         public event Action<IGameEvent> OnShopEnded;
+
+        public event Action<IGameEvent> OnNPCServiceStarted;
+        public event Action<IGameEvent> OnNPCServiceEnded;
 
         // Tile
         public TileChoiceEvent StartTileDrawEvent(int amount, bool shuffleRemaining)
@@ -103,6 +107,27 @@ namespace Project.Core.GameEvents
             IGameEvent gameEvent = CurrentGameEvent;
             CurrentGameEvent = null;
             OnShopEnded?.Invoke(gameEvent);
+        }
+
+        // NPC Service
+        public ServiceEvent StartNPCServiceEvent(NPCServiceDefinition npcServiceDefinition)
+        {
+            Debug.Log("Starting new npc service event");
+            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+
+            ServiceEvent npcServiceEvent = new ServiceEvent(npcServiceDefinition.Services.Count, npcServiceDefinition);
+            CurrentGameEvent = npcServiceEvent;
+            npcServiceEvent.SetupEvent();
+            OnNPCServiceStarted?.Invoke(npcServiceEvent);
+            return npcServiceEvent;
+        }
+
+        public void EndNPCServiceEvent()
+        {
+            Debug.Log($"Ending event: {CurrentGameEvent}");
+            IGameEvent gameEvent = CurrentGameEvent;
+            CurrentGameEvent = null;
+            OnNPCServiceEnded?.Invoke(gameEvent);
         }
     }
 }

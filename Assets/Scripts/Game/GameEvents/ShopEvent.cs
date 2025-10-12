@@ -142,7 +142,7 @@ namespace Project.Core.GameEvents
                 }
                 if (debug)
                 {
-                   DebugShop();
+                    DebugShop();
                 }
             }
         }

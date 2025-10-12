@@ -1,10 +1,9 @@
+using System.Collections.Generic;
 using Project.GameLoop;
 using UnityEngine;
 
 namespace Project.GameplayEffects
 {
-
-
     [CreateAssetMenu(fileName = "NewOpenShop", menuName = "Effects/Open Shop", order = 1)]
     public class OpenShop : GameplayEffectStrategy
     {
