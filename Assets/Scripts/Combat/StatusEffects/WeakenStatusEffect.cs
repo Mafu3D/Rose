@@ -14,13 +14,21 @@ namespace Project.Combat.StatusEffects
 
         public override void OnReceiveNewStack(int amount)
         {
-            owner.Attributes.ModifyAttributeValue(AttributeType.Strength, -amount);
+            for (int i = 0; i < amount; i++)
+            {
+                owner.Attributes.RegisterAttributeModifier(AttributeType.Strength, -1);
+            }
+            // owner.Attributes.ModifyAttributeValue(AttributeType.Strength, -amount);
             VFXManager.Instance.PlayStatusEffectVFX("WeakOnApply", owner);
         }
 
         public override void OnRemoveStack(int amount)
         {
-            owner.Attributes.ModifyAttributeValue(AttributeType.Strength, amount);
+            for (int i = 0; i < amount; i++)
+            {
+                owner.Attributes.DeregisterAttributeModifier(AttributeType.Strength, -1);
+            }
+            // owner.Attributes.ModifyAttributeValue(AttributeType.Strength, amount);
         }
 
         public override CombatAction OnHit() { return new CombatAction(() => RemoveAllStacks(), $"{DisplayName} was removed from {owner.DisplayName}"); }
