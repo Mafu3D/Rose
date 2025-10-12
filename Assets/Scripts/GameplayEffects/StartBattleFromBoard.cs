@@ -48,7 +48,7 @@ namespace Project.GameplayEffects
                 //     tile.RegisterCharacter(right);
                 //     break;
                 case Combat.Resolution.Victory:
-                    Destroy(this);
+                    // Destroy(this);
                     break;
             }
         }

@@ -26,10 +26,19 @@ MonoBehaviour:
   Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   ActivationPriority: 0
   TileType: 0
+  SecondaryTileType: 0
+  IsLocked: 0
+  IsTrapped: 0
+  DangerStatus: 0
+  Cost: 0
   CanBeUsedMultipleTimes: 0
+  UsesPerTurn: 1
+  LimitTotalUses: 0
+  TotalUses: 1
   DestroyAfterUsing: 1
   CharacterData: {fileID: 11400000, guid: 47987d60dbc840c40841a86116da56dc, type: 2}
-  OnActivateStrategies: []
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 41a7261d97e92e44dbe632120d89e833, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []
