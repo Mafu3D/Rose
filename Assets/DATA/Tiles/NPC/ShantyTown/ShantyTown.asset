@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Blacksmith
-  Description: Upgrade your weapon
-  Sprite: {fileID: -1530005309, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  DisplayName: Shanty Town
+  Description: Rest or gamble
+  Sprite: {fileID: -1791664912, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 0
   TileType: 6
   SecondaryTileType: 0
@@ -31,14 +31,14 @@ MonoBehaviour:
   IsTrapped: 0
   DangerStatus: 1
   Cost: 1
-  CanBeUsedMultipleTimes: 0
+  CanBeUsedMultipleTimes: 1
   UsesPerTurn: 1
-  LimitTotalUses: 1
+  LimitTotalUses: 0
   TotalUses: 2
   DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
   OnActivateStrategies:
-  - {fileID: 11400000, guid: 8dd8ae24df90f97499488378ab3c23a6, type: 2}
+  - {fileID: 11400000, guid: 6366968f0a9c0534692f1c1164012957, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []

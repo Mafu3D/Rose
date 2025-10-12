@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea6fd9ed2cfe84469f0bd75e7ff2e80, type: 3}
-  m_Name: ShantyTown_Rest
+  m_Name: ShantyTown_GambleService
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Rest
-  Description: Restore all hit points
-  DisplaySprite: {fileID: -536513802, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  Cost: 3
-  Repeatable: 0
-  ExitOnUse: 1
-  Effect: {fileID: 11400000, guid: 332284ad8bc2d58439ddb5c5ad63a5d7, type: 2}
+  DisplayName: Gamble
+  Description: Bet your money!
+  DisplaySprite: {fileID: 1299804717, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Cost: 2
+  Repeatable: 1
+  ExitOnUse: 0
+  Effect: {fileID: 11400000, guid: ec73221b324b59b4394fa0bd84100a64, type: 2}

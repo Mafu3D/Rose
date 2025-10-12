@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981304c4fa560bd498f2d2926539fbe1, type: 3}
   m_Name: ShantyTown_OpenService
   m_EditorClassIdentifier: 
-  npcServiceDefinition: {fileID: 11400000, guid: b44e2aff7fcc9ea42a1085882a41c53b, type: 2}
+  npcServiceDefinition: {fileID: 11400000, guid: 3decd50da5a5f8d408ccd1f3e6d86fc6, type: 2}

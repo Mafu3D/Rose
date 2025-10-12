@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db0b65f18bd64746a3a006967368ff3, type: 3}
-  m_Name: LogGamble
+  m_Script: {fileID: 11500000, guid: 8e683885276aa274c9ac7a85f840fa39, type: 3}
+  m_Name: ShantyTown_Gamble
   m_EditorClassIdentifier: 
-  ToSay: gamba gamba gamba
+  Amount: 0
+  chanceToWin: 0
