@@ -3,6 +3,7 @@ using Project.Core.GameEvents;
 using Project.Custom;
 using Project.GameplayEffects;
 using Project.Items;
+using Project.NPCs;
 using TMPro;
 using UnityEngine;
 
@@ -58,7 +59,7 @@ namespace Project.UI.Shop
                 Destroy(gameObject);
             }
 
-            List<SerializableKeyValuePair<GameplayEffectStrategy, int>> services = serviceEvent.Choice.GetAllItems();
+            List<ServiceDefinition> services = serviceEvent.Choice.GetAllItems();
             for (int i = 0; i < services.Count; i++)
             {
                 GameObject shopItemUIGameObject;
@@ -68,7 +69,7 @@ namespace Project.UI.Shop
                 shopItemUI.SetShopSlotNumber(i + 1);
                 if (services[i] != null)
                 {
-                    shopItemUI.DisplayItemData(services[i].Key, "Service", services[i].Value);
+                    shopItemUI.DisplayItemData(services[i]);
                 }
                 else
                 {

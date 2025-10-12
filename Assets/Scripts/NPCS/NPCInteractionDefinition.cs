@@ -7,8 +7,8 @@ namespace Project.NPCs
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = "NewNPCServiceDefinition", menuName = "NPCs/Service Definition", order = 0)]
-    public class NPCServiceDefinition : SerializedScriptableObject
+    [CreateAssetMenu(fileName = "NewNPCInteractionDefinition", menuName = "NPCs/Interaction Definition", order = 0)]
+    public class NPCInteractionDefinition : SerializedScriptableObject
     {
         [Header("Shop Header")]
         [SerializeField] public string NPCName = "NPC";
@@ -16,7 +16,7 @@ namespace Project.NPCs
 
         [Header("Services")]
         [DictionaryDrawerSettings(KeyLabel = "Effect", ValueLabel = "Price")]
-        public List<SerializableKeyValuePair<GameplayEffectStrategy, int>> Services = new List<SerializableKeyValuePair<GameplayEffectStrategy, int>>();
+        public List<ServiceDefinition> Services = new();
         public bool ExitAfterPurchase = true;
         public bool ServicesAreRepeatable = false;
     }

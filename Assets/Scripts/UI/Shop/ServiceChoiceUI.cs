@@ -1,4 +1,5 @@
 using Project.GameplayEffects;
+using Project.NPCs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,17 +14,17 @@ namespace Project.UI.Shop
         [SerializeField] TMP_Text shopNumberTMPText;
         [SerializeField] Image image;
         [SerializeField] Sprite soldOutSprite;
-        GameplayEffectStrategy effect;
+        ServiceDefinition serviceDefinition;
 
         internal void SetShopSlotNumber(int num) => shopNumberTMPText.text = num.ToString();
 
-        internal void DisplayItemData(GameplayEffectStrategy effect, string name, int cost)
+        internal void DisplayItemData(ServiceDefinition serviceDefinition)
         {
-            this.effect = effect;
-            nameTMPText.text = name;
+            this.serviceDefinition = serviceDefinition;
+            nameTMPText.text = serviceDefinition.DisplayName;
             costContainer.SetActive(true);
-            costTMPText.text = cost.ToString();
-            // image.sprite = sprite;
+            costTMPText.text = serviceDefinition.Cost.ToString();
+            image.sprite = serviceDefinition.DisplaySprite;
         }
 
         internal void DisplaySoldOut()
@@ -33,6 +34,6 @@ namespace Project.UI.Shop
             image.sprite = soldOutSprite;
         }
 
-        public GameplayEffectStrategy GetEffect() => effect;
+        public ServiceDefinition GetServiceDefinition() => serviceDefinition;
     }
 }

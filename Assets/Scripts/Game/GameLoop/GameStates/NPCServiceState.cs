@@ -4,6 +4,7 @@ using Project.Core.GameEvents;
 using Project.Items;
 using Project.Custom;
 using Project.GameplayEffects;
+using Project.NPCs;
 
 namespace Project.GameLoop
 {
@@ -14,7 +15,7 @@ namespace Project.GameLoop
                                 GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
         State interruptedState;
-        ChoiceEvent<SerializableKeyValuePair<GameplayEffectStrategy, int>> choiceEvent;
+        ChoiceEvent<ServiceDefinition> choiceEvent;
 
         public override void OnEnter()
         {
@@ -25,7 +26,7 @@ namespace Project.GameLoop
             GameManager.Player.InputReader.OnExitInput += Exit;
             GameManager.GameEventManager.OnNPCServiceEnded += GoBackToInterruptedState;
 
-            choiceEvent = GameManager.GameEventManager.CurrentGameEvent as ChoiceEvent<SerializableKeyValuePair<GameplayEffectStrategy, int>>;
+            choiceEvent = GameManager.GameEventManager.CurrentGameEvent as ChoiceEvent<ServiceDefinition>;
         }
 
         private void Choose(int num)

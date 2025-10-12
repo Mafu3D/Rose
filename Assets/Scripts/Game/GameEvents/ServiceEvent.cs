@@ -7,15 +7,15 @@ using UnityEngine;
 
 namespace Project.Core.GameEvents
 {
-    public class ServiceEvent : ChoiceEvent<SerializableKeyValuePair<GameplayEffectStrategy, int>>
+    public class ServiceEvent : ChoiceEvent<ServiceDefinition>
     {
         private string npcName;
         private string callout;
 
         private bool debug = true;
 
-        private NPCServiceDefinition npcServiceDefinition;
-        public ServiceEvent(int amount, NPCServiceDefinition npcServiceDefinition) : base(amount, true)
+        private NPCInteractionDefinition npcServiceDefinition;
+        public ServiceEvent(int amount, NPCInteractionDefinition npcServiceDefinition) : base(amount, true)
         {
             this.npcName = npcServiceDefinition.NPCName;
             this.callout = npcServiceDefinition.Callout;
@@ -44,13 +44,13 @@ namespace Project.Core.GameEvents
                 return;
             }
 
-            SerializableKeyValuePair<GameplayEffectStrategy, int> service = Choice.GetAllItems()[index];
-            if (GameManager.Instance.Player.GoldTracker.Gold >= service.Value)
+            ServiceDefinition service = Choice.GetAllItems()[index];
+            if (GameManager.Instance.Player.GoldTracker.Gold >= service.Cost)
             {
                 // Perform any condiitonal checks here
-                if (debug) Debug.Log($"You purchased a {service.Key.name}!");
+                if (debug) Debug.Log($"You purchased a {service.DisplayName}!");
                 Choice.ChooseItem(index);
-                GameManager.Instance.Player.GoldTracker.RemoveGold(service.Value);
+                GameManager.Instance.Player.GoldTracker.RemoveGold(service.Cost);
 
                 if (!npcServiceDefinition.ServicesAreRepeatable)
                 {
@@ -73,9 +73,9 @@ namespace Project.Core.GameEvents
 
         public override void GenerateChoices()
         {
-            List<SerializableKeyValuePair<GameplayEffectStrategy, int>> choices = npcServiceDefinition.Services;
+            List<ServiceDefinition> choices = npcServiceDefinition.Services;
             if (choices.Count == 0) return;
-            Choice = new Choice<SerializableKeyValuePair<GameplayEffectStrategy, int>>(choices, ResolveCallback);
+            Choice = new Choice<ServiceDefinition>(choices, ResolveCallback);
 
             if (debug)
             {
@@ -89,11 +89,11 @@ namespace Project.Core.GameEvents
         {
         }
 
-        protected override void ResolveCallback(List<SerializableKeyValuePair<GameplayEffectStrategy, int>> chosen, List<SerializableKeyValuePair<GameplayEffectStrategy, int>> notChosen)
+        protected override void ResolveCallback(List<ServiceDefinition> chosen, List<ServiceDefinition> notChosen)
         {
-            foreach (SerializableKeyValuePair<GameplayEffectStrategy, int> service in chosen)
+            foreach (ServiceDefinition service in chosen)
             {
-                GameManager.Instance.EffectQueue.AddEffect(service.Key);
+                GameManager.Instance.EffectQueue.AddEffect(service.Effect);
                 GameManager.Instance.EffectQueue.ResolveQueue();
             }
             Choice.Reset();
@@ -110,13 +110,13 @@ namespace Project.Core.GameEvents
         {
             //Debug
             Debug.Log("---------------------------------------------");
-            List<SerializableKeyValuePair<GameplayEffectStrategy, int>> services = Choice.GetAllItems();
+            List<ServiceDefinition> services = Choice.GetAllItems();
             for (int i = 0; i < services.Count; i++)
             {
                 if (services[i] == null) Debug.Log($"({i + 1}) SOLD OUT");
                 else
                 {
-                    Debug.Log($"({i + 1}) {services[i].Key.name} :: {services[i].Value}g");
+                    Debug.Log($"({i + 1}) {services[i].DisplayName} :: {services[i].Cost}g");
                 }
             }
             Debug.Log("---------------------------------------------");

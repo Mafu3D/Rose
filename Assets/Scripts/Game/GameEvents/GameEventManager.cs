@@ -110,7 +110,7 @@ namespace Project.Core.GameEvents
         }
 
         // NPC Service
-        public ServiceEvent StartNPCServiceEvent(NPCServiceDefinition npcServiceDefinition)
+        public ServiceEvent StartNPCServiceEvent(NPCInteractionDefinition npcServiceDefinition)
         {
             Debug.Log("Starting new npc service event");
             if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");

@@ -7,7 +7,7 @@ namespace Project.GameplayEffects
     [CreateAssetMenu(fileName = "NewOpenNPCService", menuName = "Effects/Open NPC Service", order = 1)]
     public class OpenNPCService : GameplayEffectStrategy
     {
-        [SerializeField] NPCServiceDefinition npcServiceDefinition;
+        [SerializeField] NPCInteractionDefinition npcServiceDefinition;
 
         public override void ResetEffect()
         {
