@@ -188,7 +188,7 @@ namespace Project.Combat
                 if (CheckForResolution())
                 {
                     if (debugMode) Debug.Log("Battle has been decided");
-                    StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
+                    StateMachine.SwitchState(new BattleEndState("Battle End", StateMachine, GameManager.Instance));
                     proceed = false;
                 }
             }
@@ -427,22 +427,25 @@ namespace Project.Combat
 
         public void EndBattle()
         {
-            // // Items
-            // foreach (Character combatant in combatantOrder)
-            // {
-            //     if (combatant.Inventory != null)
-            //     {
-            //         List<Item> items = combatant.Inventory.GetAllItems();
-            //         foreach (Item item in items)
-            //         {
-            //             foreach (CombatActionBaseData actionData in item.ItemData.OnCombatEndStrategies)
-            //             {
-            //                 actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
-            //             }
-            //         }
-            //     }
-            // }
+            // Items
+            foreach (Character combatant in combatantOrder)
+            {
+                if (combatant.Inventory != null)
+                {
+                    List<Item> items = combatant.Inventory.GetAllItems();
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnCombatEndStrategies)
+                        {
+                            actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+                        }
+                    }
+                }
+            }
+        }
 
+        public void FinishBattle()
+        {
             BattleReport battleReport = CreateBattleReport();
             OnBattleDecided?.Invoke(battleReport);
 

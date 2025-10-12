@@ -11,7 +11,7 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            GameManager.BattleManager.ActiveBattle.EndBattle();
+            GameManager.BattleManager.ActiveBattle.FinishBattle();
             GameManager.Player.InputReader.OnProceedInput += GoToNexState;
         }
 

@@ -200,4 +200,55 @@ namespace Project.Combat.CombatStates
         public override void Update(float deltaTime) { }
     }
 
+    public class BattleEndState : State
+    {
+        public BattleEndState(string name, StateMachine stateMachine, GameManager gameManager) : base(name, stateMachine, gameManager) { }
+
+        public override void OnEnter()
+        {
+            GameManager.Player.InputReader.OnProceedInput += NextActionManual;
+            GameManager.BattleManager.AutoTimerTick += NextActionAuto;
+            GameManager.BattleManager.ActiveBattle.GoToNextState += GoToNexState;
+
+            GameManager.BattleManager.ActiveBattle.EndBattle();
+        }
+
+        public override void OnExit()
+        {
+            GameManager.Player.InputReader.OnProceedInput -= NextActionManual;
+            GameManager.BattleManager.AutoTimerTick -= NextActionAuto;
+            GameManager.BattleManager.ActiveBattle.GoToNextState -= GoToNexState;
+        }
+
+        private void NextActionManual()
+        {
+            if (GameManager.BattleManager.ActiveBattle.CombatQueue.QueueNeedsToBeResolved)
+            {
+                GameManager.BattleManager.ActiveBattle.CombatQueue.ExecuteNextInQueue();
+            }
+            else
+            {
+                GoToNexState();
+            }
+        }
+
+        private void NextActionAuto() {
+            if (GameManager.BattleManager.ActiveBattle.CombatQueue.QueueNeedsToBeResolved)
+            {
+                GameManager.BattleManager.ActiveBattle.CombatQueue.ExecuteNextInQueue();
+            }
+            else
+            {
+                GoToNexState();
+            }
+        }
+
+        private void GoToNexState()
+        {
+            StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));;
+        }
+
+        public override void Update(float deltaTime) { }
+    }
+
 }
