@@ -21,6 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  NPCName: Blacksmith
+  Callout: What can I do ya fer?
   Services:
   - Key: {fileID: 11400000, guid: 10547ed8f993ef447be7d1817173715b, type: 2}
     Value: 3
+  ExitAfterPurchase: 1
+  ServicesAreRepeatable: 0
