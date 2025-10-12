@@ -17,7 +17,27 @@ namespace Project.UI.MainUI
 
         private void UpdateTurnTracker()
         {
-            turnText.text = $"Turn: {GameManager.Instance.Round.ToString("D3")}";
+            int turnsRemaining = GameManager.Instance.RoundsTillBoss - GameManager.Instance.Round;
+
+            string hexColor;
+            if (turnsRemaining > 10)
+            {
+                hexColor = "#FFFFFF";
+            }
+            else if (turnsRemaining > 5)
+            {
+                hexColor = "#FF4C00";
+            }
+            else
+            {
+                hexColor = "#FB0404";
+            }
+            Color color;
+            if (ColorUtility.TryParseHtmlString(hexColor, out color))
+            {
+                turnText.color = color;
+            }
+            turnText.text = $"Turns Till Boss: {turnsRemaining.ToString("D2")}";
         }
     }
 }

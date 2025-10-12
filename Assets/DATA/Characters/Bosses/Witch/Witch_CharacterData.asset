@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc65741e31c1ebc45ba1155aeec0fc9c, type: 3}
+  m_Name: Witch_CharacterData
+  m_EditorClassIdentifier: 
+  DisplayName: The Witch
+  Description: 'Turn Start: Apply 1 weaken, On Hit: Apply 1 Vulnerable'
+  CombatDescription: 'Turn Start: Apply 1 weaken, On Hit: Apply 1 Vulnerable'
+  CombatSprite: {fileID: -3086339059375945603, guid: 22494ff751a8c174daebc540981bab39, type: 3}
+  AttributesData: {fileID: 11400000, guid: 921ca555df1f2ef4bbe28611485bfce4, type: 2}
+  InventoryDefinition: {fileID: 11400000, guid: e4421243b1c0f274ba9e1a02ae7403db, type: 2}
+  gemReward: 3
+  goldReward: 10

@@ -20,8 +20,5 @@ namespace Project
         [Header("Rewards")]
         [SerializeField] public int gemReward = 1;
         [SerializeField] public int goldReward = 3;
-
-        [Header("Default Inventory")]
-        [SerializeField] public List<ItemData> DefaultInventory;
     }
 }

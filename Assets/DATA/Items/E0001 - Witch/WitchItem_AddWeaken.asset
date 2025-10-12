@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08de7308af1a35844bf257f6aa03b3a0, type: 3}
-  m_Name: WinterKingItem_AddFrost
+  m_Name: WitchItem_AddWeaken
   m_EditorClassIdentifier: 
   targetCharacter: 1
-  effectType: 0
-  stackAmount: 2
+  effectType: 3
+  stackAmount: 1

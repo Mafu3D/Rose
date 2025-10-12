@@ -15,4 +15,9 @@ MonoBehaviour:
   MaxSlots: 4
   StartingEquippedWeaponData: {fileID: 11400000, guid: a6e04f280a8d9c44d83bd439fb0d2045, type: 2}
   StartingHeldItemsData:
-  - {fileID: 11400000, guid: 848246f300a650247acecea0155c8b46, type: 2}
+  - {fileID: 11400000, guid: 5ab778efcd9907647a34330cb43ae962, type: 2}
+  - {fileID: 11400000, guid: 2f4c7fd0716dc8e42961fd114907aef2, type: 2}
+  - {fileID: 11400000, guid: f2c0e1fe3300cd944861d5d18a2a11e6, type: 2}
+  - {fileID: 11400000, guid: d49cceb75cc37e941abd8bc494ac8eed, type: 2}
+  - {fileID: 11400000, guid: 3573cf1b5e4f8db4ebc8755f1c58c995, type: 2}
+  - {fileID: 11400000, guid: 105c583ce34a04f4b8322f58247b08ec, type: 2}

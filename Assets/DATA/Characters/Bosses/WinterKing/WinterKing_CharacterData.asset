@@ -17,5 +17,7 @@ MonoBehaviour:
   CombatDescription: 'On Hit: Apply 2 Frost'
   CombatSprite: {fileID: 4657546464997229677, guid: b96947d553702d34c967769f262153ce, type: 3}
   AttributesData: {fileID: 11400000, guid: d76cc03a408c0b74d9e9053bef41934a, type: 2}
+  InventoryDefinition: {fileID: 11400000, guid: 0aac001c3f23e85478dc967fa9e37455, type: 2}
   gemReward: 3
   goldReward: 10
+  DefaultInventory: []

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: WinterKingItem
+  m_Name: WitchItem
   m_EditorClassIdentifier: 
   Name: 
   Description: 
@@ -31,13 +31,14 @@ MonoBehaviour:
   SpeedModifier: 0
   MaxSpeedModifier: 0
   OnHitStrategies:
-  - {fileID: 11400000, guid: 0a3022987fa505e4a85a0de8a023c8ef, type: 2}
+  - {fileID: 11400000, guid: 0c9cfd25e937e4f45a080dc6f89ce5e1, type: 2}
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies: []
+  OnTurnStartStrategies:
+  - {fileID: 11400000, guid: 769cb404694417d44b4039364f426725, type: 2}
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []

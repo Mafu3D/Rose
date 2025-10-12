@@ -31,6 +31,8 @@ namespace Project
         [SerializeField] public DeckData MonsterDeckData;
         [SerializeField] public ItemDeckData ItemDeckData;
         [SerializeField] public TileDeckData TileDeckData;
+        [SerializeField] public int RoundsTillBoss;
+        [SerializeField] public CharacterDeckData BossDeckData;
 
         [Header("Game Settings")]
         [SerializeField] public bool AutoBattle = true;
@@ -57,6 +59,9 @@ namespace Project
         public Deck<Card> MonsterDeck;
         public Deck<ItemData> ItemDeck;
         public Deck<TileData> TileDeck;
+        public Deck<CharacterData> BossDeck;
+
+        public CharacterData Boss;
 
         public event Action OnGameStartEvent;
         public event Action OnRoundStartEvent;
@@ -114,6 +119,10 @@ namespace Project
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
             TileDeck = InitializeTileDeck(TileDeckData);
+            BossDeck = InitializeBossDeck(BossDeckData);
+
+            Boss = BossDeck.Draw();
+            Debug.Log($"The boss for this round is {Boss.DisplayName}");
 
             CardDrawManager = new CardDrawManager();
             TileDrawManager = new TileDrawManager();
@@ -170,6 +179,7 @@ namespace Project
             OnNewRound();
         }
 
+
         // void At(IState from, IState to, IPredicate condition) => StateMachine.AddTransition(from, to, condition);
         // void Any(IState to, IPredicate condition) => StateMachine.AddAnyTransition(to, condition);
 
@@ -181,6 +191,15 @@ namespace Project
         public void OnNewRound()
         {
             Round += 1;
+            if (Round >= RoundsTillBoss)
+            {
+                SummonBoss();
+            }
+            else
+            {
+                Debug.Log($"The boss will appear in {RoundsTillBoss - Round} rounds!");
+            }
+
             Hero.ResetMovesRemaining();
             OnRoundStartEvent?.Invoke();
         }
@@ -222,10 +241,46 @@ namespace Project
 
         #endregion
 
+        private void SummonBoss()
+        {
+            Debug.Log("The boss is here!");
+            // TileFactory.Instance.CreateTile()
+            // GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
+            // Tile tile = gameObject.GetComponent<Tile>();
+            // tile.RegisterToGrid();
+            // tile.RegisterCharacter(right);
 
+            Character left = GameManager.Instance.Hero.Character;
+            Character right = new Character(Boss);
+            Inventory inventory;
+            if (Boss.InventoryDefinition != null)
+            {
+                inventory = new Inventory(right, Boss.InventoryDefinition);
+            }
+            else
+            {
+                inventory = new Inventory(right);
+            }
+            right.SetInventory(inventory);
+            BattleManager.StartNewBattle(left, right, BossBattleConclusion);
+        }
 
-
-
+        private void BossBattleConclusion(BattleReport battleReport, Character left, Character right)
+        {
+            switch (battleReport.Resolution)
+            {
+                case Combat.Resolution.RanAway:
+                case Combat.Resolution.Stole:
+                    Debug.Log("OH shit, you shouldn't be able to run from the boss! can you please go back and fight them??");
+                    break;
+                case Combat.Resolution.Victory:
+                    Debug.Log("CONGRATS YOU DEFEATED THE BOSS!");
+                    break;
+                case Combat.Resolution.Defeat:
+                    Debug.Log("YOU LOST! BETTER LUCK NEXT TIME");
+                    break;
+            }
+        }
 
 
 
@@ -252,6 +307,16 @@ namespace Project
         {
             Deck<TileData> deck = new Deck<TileData>();
             deck.AddPermanent(deckData.UnpackItems());
+            deck.Reset();
+            deck.Shuffle();
+            return deck;
+        }
+
+
+        private Deck<CharacterData> InitializeBossDeck(CharacterDeckData bossDeckData)
+        {
+            Deck<CharacterData> deck = new Deck<CharacterData>();
+            deck.AddPermanent(bossDeckData.Unpack());
             deck.Reset();
             deck.Shuffle();
             return deck;
