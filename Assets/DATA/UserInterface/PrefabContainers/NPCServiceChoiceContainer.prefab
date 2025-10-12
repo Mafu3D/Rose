@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9065656207336045394}
   - component: {fileID: 6214544791619132459}
   - component: {fileID: 2993608557690564052}
+  - component: {fileID: 5601864734003552314}
   m_Layer: 5
   m_Name: NPCServiceChoiceContainer
   m_TagString: Untagged
@@ -73,9 +74,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: 
-  content: Not implemented
-  tooltipInformationGetter: {fileID: 0}
+  content: 
+  tooltipInformationGetter: {fileID: 5601864734003552314}
   delay: 0.2
+--- !u!114 &5601864734003552314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383905212344687111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e652632f32eca0145948b979f805afa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serviceChoiceUI: {fileID: 6214544791619132459}
 --- !u!1 &3424600232214295391
 GameObject:
   m_ObjectHideFlags: 0

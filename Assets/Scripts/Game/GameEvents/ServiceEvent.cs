@@ -14,12 +14,12 @@ namespace Project.Core.GameEvents
 
         private bool debug = true;
 
-        private NPCInteractionDefinition npcServiceDefinition;
+        private NPCInteractionDefinition interactionDefinition;
         public ServiceEvent(int amount, NPCInteractionDefinition npcServiceDefinition) : base(amount, true)
         {
             this.npcName = npcServiceDefinition.NPCName;
             this.callout = npcServiceDefinition.Callout;
-            this.npcServiceDefinition = npcServiceDefinition;
+            this.interactionDefinition = npcServiceDefinition;
         }
 
         public event Action OnBuyEvent;
@@ -28,7 +28,7 @@ namespace Project.Core.GameEvents
 
         public override void ChooseItem(int index)
         {
-            if (index > npcServiceDefinition.Services.Count)
+            if (index > interactionDefinition.Services.Count)
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace Project.Core.GameEvents
                 Choice.ChooseItem(index);
                 GameManager.Instance.Player.GoldTracker.RemoveGold(service.Cost);
 
-                if (!npcServiceDefinition.ServicesAreRepeatable)
+                if (!service.Repeatable)
                 {
                     Choice.TEMPReplaceLikeArrayForShop(null, index);
                 }
@@ -73,7 +73,7 @@ namespace Project.Core.GameEvents
 
         public override void GenerateChoices()
         {
-            List<ServiceDefinition> choices = npcServiceDefinition.Services;
+            List<ServiceDefinition> choices = interactionDefinition.Services;
             if (choices.Count == 0) return;
             Choice = new Choice<ServiceDefinition>(choices, ResolveCallback);
 
@@ -95,14 +95,14 @@ namespace Project.Core.GameEvents
             {
                 GameManager.Instance.EffectQueue.AddEffect(service.Effect);
                 GameManager.Instance.EffectQueue.ResolveQueue();
+                if (service.ExitOnUse)
+                {
+                    Resolve();
+                    GameManager.Instance.GameEventManager.EndNPCServiceEvent();
+                }
             }
             Choice.Reset();
 
-            if (npcServiceDefinition.ExitAfterPurchase)
-            {
-                Resolve();
-                GameManager.Instance.GameEventManager.EndNPCServiceEvent();
-            }
         }
 
 

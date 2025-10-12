@@ -12,6 +12,7 @@ namespace Project.NPCs
         [SerializeField] public Sprite DisplaySprite;
         [SerializeField] public int Cost;
         [SerializeField] public bool Repeatable;
+        [SerializeField] public bool ExitOnUse;
         [SerializeField] public GameplayEffectStrategy Effect;
     }
 

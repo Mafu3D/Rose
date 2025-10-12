@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea6fd9ed2cfe84469f0bd75e7ff2e80, type: 3}
+  m_Name: Blacksmith_Service
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  DisplayName: Upgrade Weapon
+  Description: Upgrades your weapon
+  DisplaySprite: {fileID: 856815066, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Cost: 3
+  Repeatable: 0
+  Effect: {fileID: 11400000, guid: 10547ed8f993ef447be7d1817173715b, type: 2}

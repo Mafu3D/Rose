@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03e407449ac129f4bb6f698a47173f9c, type: 3}
-  m_Name: Blacksmith
+  m_Script: {fileID: 11500000, guid: 8ea6fd9ed2cfe84469f0bd75e7ff2e80, type: 3}
+  m_Name: ShantyTown_Rest
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  NPCName: Blacksmith
-  Callout: What can I do ya fer?
-  Services:
-  - Key: {fileID: 11400000, guid: 10547ed8f993ef447be7d1817173715b, type: 2}
-    Value: 3
-  ExitAfterPurchase: 1
-  ServicesAreRepeatable: 0
+  DisplayName: Rest
+  Description: Restore all hit points
+  DisplaySprite: {fileID: -536513802, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Cost: 3
+  Repeatable: 0
+  ExitOnUse: 1
+  Effect: {fileID: 11400000, guid: 332284ad8bc2d58439ddb5c5ad63a5d7, type: 2}

@@ -17,8 +17,6 @@ namespace Project.NPCs
         [Header("Services")]
         [DictionaryDrawerSettings(KeyLabel = "Effect", ValueLabel = "Price")]
         public List<ServiceDefinition> Services = new();
-        public bool ExitAfterPurchase = true;
-        public bool ServicesAreRepeatable = false;
     }
 
 }
