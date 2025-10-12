@@ -22,15 +22,20 @@ namespace Project
 
         public int Stunned;
 
-        public Character(CharacterData characterData, Inventory inventory)
+        public Character(CharacterData characterData)
         {
             this.Attributes = new CharacterAttributes(characterData.AttributesData);
             this.DisplayName = characterData.DisplayName;
             this.Description = characterData.Description;
             this.CombatDescription = characterData.CombatDescription;
             this.Sprite = characterData.CombatSprite;
-            this.Inventory = inventory;
+
             StatusEffectManager = new StatusEffectManager();
+        }
+
+        public void SetInventory(Inventory inventory)
+        {
+            this.Inventory = inventory;
         }
 
         public int GetAttackValue()

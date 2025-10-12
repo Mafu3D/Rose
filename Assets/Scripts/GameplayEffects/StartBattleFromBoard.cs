@@ -28,7 +28,17 @@ namespace Project.GameplayEffects
         {
             Character left = GameManager.Instance.Hero.Character;
 
-            Character right = new Character(enemyCharacterData, null);
+            Character right = new Character(enemyCharacterData);
+            Inventory inventory;
+            if (enemyCharacterData.InventoryDefinition != null)
+            {
+                inventory = new Inventory(right, enemyCharacterData.InventoryDefinition);
+            }
+            else
+            {
+                inventory = new Inventory(right);
+            }
+            right.SetInventory(inventory);
 
             GameManager.Instance.BattleManager.StartNewBattle(left, right, BattleConclusion);
             return Status.Running;

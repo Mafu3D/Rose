@@ -21,11 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Skeleton
-  Description: Chance to survive fatal damage
-  Sprite: {fileID: -3558442656048911363, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  DisplayName: Winter King
+  Description: 'On hit: Apply 2 Frost'
+  Sprite: {fileID: 4657546464997229677, guid: b96947d553702d34c967769f262153ce, type: 3}
   ActivationPriority: 0
-  TileType: 0
+  TileType: 2
   SecondaryTileType: 0
   IsLocked: 0
   IsTrapped: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
   DestroyAfterUsing: 1
   CharacterData: {fileID: 11400000, guid: 6b54c2e8b4f39124eb2415b40bc35006, type: 2}
   OnActivateStrategies:
-  - {fileID: 11400000, guid: 5cdef800af6ecd248b4ac2d06dd3d4d7, type: 2}
+  - {fileID: 11400000, guid: 102469e631b84a54c8569a1e99f977f4, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []

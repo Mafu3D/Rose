@@ -15,6 +15,7 @@ namespace Project
         [SerializeField] public string CombatDescription;
         [SerializeField] public Sprite CombatSprite;
         [SerializeField] public AttributesData AttributesData;
+        [SerializeField] public InventoryDefinition InventoryDefinition;
 
         [Header("Rewards")]
         [SerializeField] public int gemReward = 1;

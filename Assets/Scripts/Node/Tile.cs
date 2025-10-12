@@ -165,8 +165,17 @@ namespace Project.GameTiles
 
             if (CharacterData != null)
             {
-                Inventory inventory = GetComponent<Inventory>();
-                Character = new Character(CharacterData, inventory);
+                Character = new Character(CharacterData);
+                Inventory inventory;
+                if (CharacterData.InventoryDefinition != null)
+                {
+                    inventory = new Inventory(Character, CharacterData.InventoryDefinition);
+                }
+                else
+                {
+                    inventory = new Inventory(Character);
+                }
+                Character.SetInventory(inventory);
             }
         }
 
@@ -272,8 +281,17 @@ namespace Project.GameTiles
         {
             if (Character != null)
             {
-                Inventory inventory = GetComponent<Inventory>();
-                Character = new Character(characterData, inventory);
+                Character = new Character(characterData);
+                Inventory inventory;
+                if (characterData.InventoryDefinition != null)
+                {
+                    inventory = new Inventory(Character, characterData.InventoryDefinition);
+                }
+                else
+                {
+                    inventory = new Inventory(Character);
+                }
+                Character.SetInventory(inventory);
             }
         }
 

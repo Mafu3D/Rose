@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8390083368533897147}
   - component: {fileID: 9080791121904495192}
   - component: {fileID: 1633946812192861767}
-  - component: {fileID: 4573550975446478128}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Untagged
@@ -181,19 +180,14 @@ MonoBehaviour:
   moveDistance: 1
   willMoveTowardsPlayer: 0
   IsPlayer: 1
---- !u!114 &4573550975446478128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8881772238092289395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf0f76d14a45c948a3de15154f35394, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSlots: 4
-  startingEquippedWeaponData: {fileID: 0}
-  startingHeldItemsData:
-  - {fileID: 11400000, guid: 83d23d9e469eae44ca28564be5258477, type: 2}
+  icon: {fileID: 0}
+  outline1: {fileID: 0}
+  outline2: {fileID: 0}
+  usableIcon: {fileID: 0}
+  actionIcon: {fileID: 0}
+  ActivatesThisGame: 0
+  ActivatesThisTurn: 0
+  PlayerEntersThisGame: 0
+  PlayerEntersThisTurn: 0
+  PlayerExitsThisGame: 0
+  PlayerExitsThisTurn: 0

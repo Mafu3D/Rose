@@ -7,27 +7,25 @@ using UnityEngine;
 
 namespace Project.Items
 {
-    public class Inventory : MonoBehaviour
+    public class Inventory
     {
-        [SerializeField] private int maxSlots = 4;
-        [field: SerializeField] public ItemData startingEquippedWeaponData = null;
-        [field: SerializeField] public List<ItemData> startingHeldItemsData = new();
-
         private Item equippedWeapon;
         private List<Item> heldItems = new();
-
-        Tile owner;
+        private int maxSlots = 4;
 
         public event Action OnInventoryChanged;
+        Character owner;
 
-        void Awake()
+        public Inventory(Character owner)
         {
-            owner = GetComponent<Tile>();
+            this.owner = owner;
         }
 
-        void Start()
+        public Inventory(Character owner, InventoryDefinition inventoryDefinition)
         {
-            EquipStartingItems();
+            this.owner = owner;
+            EquipStartingItems(inventoryDefinition);
+            maxSlots = inventoryDefinition.MaxSlots;
         }
 
         public Item GetEquippedWeapon() => equippedWeapon;
@@ -56,14 +54,12 @@ namespace Project.Items
         {
             if (equippedWeapon != null)
             {
-                equippedWeapon.OnUnequip();
-                equippedWeapon.DeregisterFromNode();
+                equippedWeapon.OnUnequip(owner);
             }
 
             equippedWeapon = item;
 
-            item.RegisterToNode(owner);
-            item.OnEquip();
+            item.OnEquip(owner);
 
             OnInventoryChanged?.Invoke();
 
@@ -73,10 +69,13 @@ namespace Project.Items
         public int AddItem(Item item)
         {
             // Check for max slots
+            if (heldItems.Count >= maxSlots)
+            {
+                Debug.LogWarning($"Cannot equip item {item.ItemData.Name}! Already at max slots! Fix me!");
+            }
 
             heldItems.Add(item);
-            item.RegisterToNode(owner);
-            item.OnEquip();
+            item.OnEquip(owner);
 
             OnInventoryChanged?.Invoke();
             return heldItems.Count - 1;
@@ -86,22 +85,21 @@ namespace Project.Items
         {
             Item item;
             heldItems.Pop(index, out item);
-            item.OnUnequip();
-            item.DeregisterFromNode();
+            item.OnUnequip(owner);
 
             OnInventoryChanged?.Invoke();
         }
 
-        private void EquipStartingItems()
+        private void EquipStartingItems(InventoryDefinition inventoryDefinition)
         {
-            foreach (ItemData itemData in startingHeldItemsData)
+            foreach (ItemData itemData in inventoryDefinition.StartingHeldItemsData)
             {
                 Item item = new Item(itemData);
                 AddItem(item);
             }
-            if (startingEquippedWeaponData)
+            if (inventoryDefinition.StartingEquippedWeaponData)
             {
-                Item item = new Item(startingEquippedWeaponData);
+                Item item = new Item(inventoryDefinition.StartingEquippedWeaponData);
                 SwapEquippedWeapon(item);
             }
         }

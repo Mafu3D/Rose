@@ -8,7 +8,6 @@ namespace Project.PlayerSystem
     {
         [SerializeField] public Input.InputReader InputReader;
         [SerializeField] public Tile HeroTile;
-        [SerializeField] public Inventory Inventory;
         [SerializeField] public GoldTracker GoldTracker;
         [SerializeField] public GemTracker GemTracker;
         public Camera PlayerCamera { get; private set; }

@@ -13,69 +13,57 @@ namespace Project.Items
     public class Item
     {
         public ItemData ItemData;
-        Tile owner;
         public Item(ItemData itemData)
         {
             this.ItemData = itemData;
-
         }
 
-        public void RegisterToNode(Tile owner)
+        public virtual void OnEquip(Character character)
         {
-            this.owner = owner;
+            RegisterAttributeModifiers(character);
         }
 
-        public void DeregisterFromNode()
+        public virtual void OnUnequip(Character character)
         {
-            this.owner = null;
+            DeregisterAttributeModifiers(character);
         }
 
-        public virtual void OnEquip()
+        public void RegisterAttributeModifiers(Character character)
         {
-            RegisterAttributeModifiers();
+            if (this.ItemData.MaxHealthModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, this.ItemData.MaxHealthModifier);
+            if (this.ItemData.MaxArmorModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Armor, this.ItemData.MaxArmorModifier);
+
+            if (this.ItemData.MaxStrengthModifier != 0) character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.MaxStrengthModifier);
+            if (this.ItemData.MaxMagicModifier != 0) character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MaxMagicModifier);
+            if (this.ItemData.MaxDexterityModifier != 0) character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.MaxDexterityModifier);
+            if (this.ItemData.MaxSpeedModifier != 0) character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.MaxSpeedModifier);
+
+            if (this.ItemData.HealthModifier != 0) character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Health, this.ItemData.HealthModifier);
+            if (this.ItemData.ArmorModifier != 0) character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Armor, this.ItemData.ArmorModifier);
+
+            if (this.ItemData.StrengthModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.StrengthModifier);
+            if (this.ItemData.MagicModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
+            if (this.ItemData.DexterityModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
+            if (this.ItemData.SpeedModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
         }
 
-        public virtual void OnUnequip()
+        public void DeregisterAttributeModifiers(Character character)
         {
-            DeregisterAttributeModifiers();
-        }
+            if (this.ItemData.MaxHealthModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, -this.ItemData.MaxHealthModifier);
+            if (this.ItemData.MaxArmorModifier != 0) character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Armor, -this.ItemData.MaxArmorModifier);
 
-        private void RegisterAttributeModifiers()
-        {
-            if (this.ItemData.MaxHealthModifier != 0) owner.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, this.ItemData.MaxHealthModifier);
-            if (this.ItemData.MaxArmorModifier != 0) owner.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Armor, this.ItemData.MaxArmorModifier);
+            if (this.ItemData.MaxStrengthModifier != 0) character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.MaxStrengthModifier);
+            if (this.ItemData.MaxMagicModifier != 0) character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MaxMagicModifier);
+            if (this.ItemData.MaxDexterityModifier != 0) character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.MaxDexterityModifier);
+            if (this.ItemData.MaxSpeedModifier != 0) character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.MaxSpeedModifier);
 
-            if (this.ItemData.MaxStrengthModifier != 0) owner.Character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.MaxStrengthModifier);
-            if (this.ItemData.MaxMagicModifier != 0) owner.Character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MaxMagicModifier);
-            if (this.ItemData.MaxDexterityModifier != 0) owner.Character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.MaxDexterityModifier);
-            if (this.ItemData.MaxSpeedModifier != 0) owner.Character.Attributes.RegisterMaxAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.MaxSpeedModifier);
+            if (this.ItemData.HealthModifier != 0) character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Health, -this.ItemData.HealthModifier);
+            if (this.ItemData.ArmorModifier != 0) character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Armor, -this.ItemData.ArmorModifier);
 
-            if (this.ItemData.HealthModifier != 0) owner.Character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Health, this.ItemData.HealthModifier);
-            if (this.ItemData.ArmorModifier != 0) owner.Character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Armor, this.ItemData.ArmorModifier);
-
-            if (this.ItemData.StrengthModifier != 0) owner.Character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.StrengthModifier);
-            if (this.ItemData.MagicModifier != 0) owner.Character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
-            if (this.ItemData.DexterityModifier != 0) owner.Character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
-            if (this.ItemData.SpeedModifier != 0) owner.Character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
-        }
-
-        private void DeregisterAttributeModifiers()
-        {
-            if (this.ItemData.MaxHealthModifier != 0) owner.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, -this.ItemData.MaxHealthModifier);
-            if (this.ItemData.MaxArmorModifier != 0) owner.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Armor, -this.ItemData.MaxArmorModifier);
-
-            if (this.ItemData.MaxStrengthModifier != 0) owner.Character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.MaxStrengthModifier);
-            if (this.ItemData.MaxMagicModifier != 0) owner.Character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MaxMagicModifier);
-            if (this.ItemData.MaxDexterityModifier != 0) owner.Character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.MaxDexterityModifier);
-            if (this.ItemData.MaxSpeedModifier != 0) owner.Character.Attributes.DeregisterMaxAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.MaxSpeedModifier);
-
-            if (this.ItemData.HealthModifier != 0) owner.Character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Health, -this.ItemData.HealthModifier);
-            if (this.ItemData.ArmorModifier != 0) owner.Character.Attributes.ModifyAttributeValue(Attributes.AttributeType.Armor, -this.ItemData.ArmorModifier);
-
-            if (this.ItemData.StrengthModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.StrengthModifier);
-            if (this.ItemData.MagicModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
-            if (this.ItemData.DexterityModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
-            if (this.ItemData.SpeedModifier != 0) owner.Character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
+            if (this.ItemData.StrengthModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Strength, this.ItemData.StrengthModifier);
+            if (this.ItemData.MagicModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
+            if (this.ItemData.DexterityModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
+            if (this.ItemData.SpeedModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
         }
 
     }

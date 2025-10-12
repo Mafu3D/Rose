@@ -12,11 +12,11 @@ namespace Project.UI
             Item item;
             if (isWeapon)
             {
-                item = GameManager.Instance.Player.Inventory.GetEquippedWeapon();
+                item = GameManager.Instance.Player.HeroTile.Character.Inventory.GetEquippedWeapon();
             }
             else
             {
-                item = GameManager.Instance.Player.Inventory.GetItemAtSlot(slot);
+                item = GameManager.Instance.Player.HeroTile.Character.Inventory.GetItemAtSlot(slot);
             }
             if (item != null)
             {

@@ -31,10 +31,10 @@ namespace Project.Core.GameEvents
                 switch (itemData.ItemType)
                 {
                     case ItemType.Weapon:
-                        GameManager.Instance.Player.Inventory.SwapEquippedWeapon(item);
+                        GameManager.Instance.Player.HeroTile.Character.Inventory.SwapEquippedWeapon(item);
                         break;
                     default:
-                        GameManager.Instance.Player.Inventory.AddItem(item);
+                        GameManager.Instance.Player.HeroTile.Character.Inventory.AddItem(item);
                         break;
                 }
             }
