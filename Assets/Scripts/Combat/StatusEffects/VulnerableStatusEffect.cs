@@ -25,6 +25,7 @@ namespace Project.Combat.StatusEffects
             {
                 owner.TakeDamage(Stacks);
                 VFXManager.Instance.PlayStatusEffectVFX("VulnerableOnTrigger", owner);
+                RemoveAllStacks();
             },
             $"{owner.DisplayName} took an additional {Stacks} damage"); }
 

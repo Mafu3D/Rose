@@ -34,6 +34,11 @@ namespace Project.Core.GameEvents
         public event Action<IGameEvent> OnInventoryChoiceStarted;
         public event Action<IGameEvent> OnInventoryChoiceEnded;
 
+        public bool GameEventActive()
+        {
+            return CurrentTileChoiceEvent != null || CurrentItemChoiceEvent != null || CurrentCardChoiceEvent != null || CurrentShopEvent != null || CurrentServiceEvent != null || CurrentInventoryChoiceEvent != null;
+        }
+
         // Tile
         public TileChoiceEvent StartTileDrawEvent(int amount, bool shuffleRemaining)
         {

@@ -4,50 +4,43 @@ using Project;
 using Project.Decks;
 using Project.GameTiles;
 using Project.Items;
+using Project.PlayerSystem;
+using TMPro;
 using UnityEngine;
 
 namespace Project.UI.MainUI
 {
     public class MainUI : Singleton<MainUI>
     {
+        [SerializeField] GameObject activateButtonContainer;
+        [SerializeField] TMP_Text activateText;
 
+        private void Start()
+        {
+            activateButtonContainer.SetActive(false);
+        }
 
-        // [SerializeField] private GameObject treasureChoicePrefab;
-        // [SerializeField] private GameObject nextTileChoicePrefab;
-        // [SerializeField] private RectTransform choiceTransform;
-
-        // GameObject currentTreasureChoice;
-        // GameObject currentTileChoice;
-
-
-        // public void DisplayTreasureChoice(Choice<Item> treasureChoice)
-        // {
-        //     currentTreasureChoice = Instantiate(treasureChoicePrefab, choiceTransform.position, Quaternion.identity, choiceTransform);
-        //     TreasureChoiceDisplay treasureChoiceDisplay = currentTreasureChoice.GetComponent<TreasureChoiceDisplay>();
-        //     treasureChoiceDisplay.DisplayChoices(treasureChoice);
-        // }
-
-        // public void DestroyTreasureChoice()
-        // {
-        //     if (currentTreasureChoice != null)
-        //     {
-        //         Destroy(currentTreasureChoice);
-        //     }
-        // }
-
-        // public void DisplayTileChoice(Choice<TileData> tileChoice)
-        // {
-        //     currentTileChoice = Instantiate(nextTileChoicePrefab, choiceTransform.position, Quaternion.identity, choiceTransform);
-        //     NextTileChoiceDisplay nextTileChoiceDisplay = currentTileChoice.GetComponent<NextTileChoiceDisplay>();
-        //     nextTileChoiceDisplay.DisplayChoices(tileChoice);
-        // }
-
-        // public void DestroyTileChoice()
-        // {
-        //     if (currentTileChoice != null)
-        //     {
-        //         Destroy(currentTileChoice);
-        //     }
-        // }
+        void Update()
+        {
+            if (!GameManager.Instance.GameEventManager.GameEventActive())
+            {
+                Cell heroCell = GameManager.Instance.Player.HeroTile.CurrentCell;
+                List<Tile> registeredTiles;
+                if (GameManager.Instance.Grid.TryGetTileesRegisteredToCell(heroCell, out registeredTiles))
+                {
+                    foreach (Tile tile in registeredTiles)
+                    {
+                        if (tile.CanActivate())
+                        {
+                            activateButtonContainer.SetActive(true);
+                            activateText.text = $"[Space] Activate: {tile.TileData.DisplayName}";
+                            return;
+                        }
+                    }
+                }
+            }
+            activateButtonContainer.SetActive(false);
+            activateText.text = "";
+        }
     }
 }
