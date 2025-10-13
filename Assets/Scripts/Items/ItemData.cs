@@ -29,6 +29,10 @@ namespace Project.Items
         [SerializeField] public int SpeedModifier = 0;
         [SerializeField] public int MaxSpeedModifier = 0;
 
+        [Header("Uses")]
+        [SerializeField] public int UsesPerCombat = -1;
+
+
         [Header("Strategies")]
 
         [SerializeField] public List<CombatActionBaseData> OnHitStrategies = new();

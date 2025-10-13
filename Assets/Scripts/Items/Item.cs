@@ -13,6 +13,7 @@ namespace Project.Items
     public class Item
     {
         public ItemData ItemData;
+        public int Uses { get; private set; }
         public Item(ItemData itemData)
         {
             this.ItemData = itemData;
@@ -64,6 +65,16 @@ namespace Project.Items
             if (this.ItemData.MagicModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
             if (this.ItemData.DexterityModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
             if (this.ItemData.SpeedModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
+        }
+
+        public void IncUses()
+        {
+            Uses += 1;
+        }
+
+        public void ResetUses()
+        {
+            Uses = 0;
         }
 
     }

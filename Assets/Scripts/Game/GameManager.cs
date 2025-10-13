@@ -43,6 +43,11 @@ namespace Project
         [Header("Debug")]
         [SerializeField] public bool BattleDebugMode = false;
 
+
+        // please remove
+        public bool WillActivateTilesThisTurn = true;
+
+
         public GameGrid Grid;
 
         public Tile Hero => Player.HeroTile;
@@ -202,6 +207,8 @@ namespace Project
 
             Hero.ResetMovesRemaining();
             OnRoundStartEvent?.Invoke();
+
+            WillActivateTilesThisTurn = true;
         }
 
         public void OnNewTurn()

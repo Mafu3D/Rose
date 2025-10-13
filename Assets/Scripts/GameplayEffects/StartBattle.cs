@@ -54,6 +54,8 @@ namespace Project.GameplayEffects
                     Debug.Log("instantiating new tile");
                     GameObject gameObject = Instantiate(enemyNodePrefab, GameManager.Instance.Hero.CurrentCell.Center, Quaternion.identity);
                     Tile tile = gameObject.GetComponent<Tile>();
+                    tile.ActivatesThisTurn += 1;
+                    GameManager.Instance.WillActivateTilesThisTurn = false;
                     tile.RegisterToGrid();
                     tile.RegisterCharacter(right);
                     break;

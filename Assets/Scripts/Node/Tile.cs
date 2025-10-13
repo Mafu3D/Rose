@@ -299,7 +299,7 @@ namespace Project.GameTiles
         {
             if (Character != null)
             {
-                Inventory inventory = GetComponent<Inventory>();
+                // Inventory inventory = GetComponent<Inventory>();
                 Character = character;
                 ResetMovesRemaining(); // do this because reset moves takes infro
             }

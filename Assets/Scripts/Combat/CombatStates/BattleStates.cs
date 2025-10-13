@@ -245,7 +245,14 @@ namespace Project.Combat.CombatStates
 
         private void GoToNexState()
         {
-            StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));;
+            if (GameManager.BattleManager.ActiveBattle.CheckForResolution())
+            {
+                StateMachine.SwitchState(new PostBattleState("Post Battle", StateMachine, GameManager.Instance));
+            }
+            else
+            {
+                StateMachine.SwitchState(new RoundStartState("Round Start", StateMachine, GameManager.Instance));
+            }
         }
 
         public override void Update(float deltaTime) { }

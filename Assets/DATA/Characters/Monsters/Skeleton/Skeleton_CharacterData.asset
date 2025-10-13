@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Skeleton
   Description: Spooky scary skeleton
-  CombatDescription: Spooky scary skeleton
+  CombatDescription: The first time it dies it revives with 1 health
   CombatSprite: {fileID: -3558442656048911363, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   AttributesData: {fileID: 11400000, guid: 5a24b4c12d60ef948b7f3287c9d45bcf, type: 2}
+  InventoryDefinition: {fileID: 11400000, guid: ed3512f3811d49b4c8e486c4f00b8066, type: 2}
+  gemReward: 1
+  goldReward: 3

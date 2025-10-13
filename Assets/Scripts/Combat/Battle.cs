@@ -208,8 +208,11 @@ namespace Project.Combat
                     List<Item> items = combatant.Inventory.GetAllItems(true);
                     foreach (Item item in items)
                     {
+
                         foreach (CombatActionBaseData actionData in item.ItemData.OnCombatStartStrategies)
                         {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
                             actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
                         }
                     }
@@ -237,6 +240,8 @@ namespace Project.Combat
                     {
                         foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
                         {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
                             actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
                         }
                     }
@@ -267,8 +272,11 @@ namespace Project.Combat
                 List<Item> items = activeCombatant.Inventory.GetAllItems(true);
                 foreach (Item item in items)
                 {
+
                     foreach (CombatActionBaseData actionData in item.ItemData.OnTurnStartStrategies)
                     {
+                        if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                        item.IncUses();
                         actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
                     }
                 }
@@ -303,6 +311,8 @@ namespace Project.Combat
                 {
                     foreach (CombatActionBaseData actionData in item.ItemData.OnTurnEndStrategies)
                     {
+                        if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                        item.IncUses();
                         actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
                     }
                 }
@@ -338,8 +348,11 @@ namespace Project.Combat
                     List<Item> items = combatant.Inventory.GetAllItems(true);
                     foreach (Item item in items)
                     {
+
                         foreach (CombatActionBaseData actionData in item.ItemData.OnRoundEndStrategies)
                         {
+                                                    if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                        item.IncUses();
                             actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
                         }
                     }
@@ -394,8 +407,11 @@ namespace Project.Combat
 
                     foreach (Item item in items)
                     {
+
                         foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
                         {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                        item.IncUses();
                             Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
                             actionData.QueueAction(CombatQueue, attacker, GetTarget(attacker));
                         }
@@ -428,6 +444,7 @@ namespace Project.Combat
         public void EndBattle()
         {
             // Items
+            if (ranAway) return;
             foreach (Character combatant in combatantOrder)
             {
                 if (combatant.Inventory != null)
@@ -435,8 +452,11 @@ namespace Project.Combat
                     List<Item> items = combatant.Inventory.GetAllItems(true);
                     foreach (Item item in items)
                     {
+
                         foreach (CombatActionBaseData actionData in item.ItemData.OnCombatEndStrategies)
                         {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                        item.IncUses();
                             actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
                         }
                     }
@@ -472,7 +492,7 @@ namespace Project.Combat
             OnBattleLogUpdated?.Invoke(BattleLog);
         }
 
-        private bool CheckForResolution()
+        public bool CheckForResolution()
         {
             if (ranAway) return true;
             if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0
