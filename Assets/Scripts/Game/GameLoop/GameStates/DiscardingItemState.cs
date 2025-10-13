@@ -2,20 +2,17 @@ using Project.States;
 using UnityEngine;
 using Project.Core.GameEvents;
 using Project.Items;
-using Project.Custom;
-using Project.GameplayEffects;
-using Project.NPCs;
 
 namespace Project.GameLoop
 {
-    public class NPCServiceState : State
+    public class DiscardingItemState : State
     {
-        public NPCServiceState(string name,
+        public DiscardingItemState(string name,
                                 StateMachine stateMachine,
                                 GameManager gameManager) : base(name, stateMachine, gameManager) { }
 
         State interruptedState;
-        ChoiceEvent<ServiceDefinition> choiceEvent;
+        ChoiceEvent<Item> choiceEvent;
 
         public override void OnEnter()
         {
@@ -24,21 +21,27 @@ namespace Project.GameLoop
 
             GameManager.Player.InputReader.OnNumInput += Choose;
             GameManager.Player.InputReader.OnExitInput += Exit;
-            GameManager.GameEventManager.OnNPCServiceEnded += GoBackToInterruptedState;
+            GameManager.GameEventManager.OnInventoryChoiceEnded += GoBackToInterruptedState;
 
-            choiceEvent = GameManager.GameEventManager.CurrentServiceEvent;
+            choiceEvent = GameManager.GameEventManager.CurrentInventoryChoiceEvent;
         }
 
         private void Choose(int num)
         {
-            if (num == 0)
-            {
-                return;
-            }
-
             if (num > choiceEvent.Choice.NumberOfChoices) return;
-            choiceEvent.ChooseItem(num - 1);
-            choiceEvent.Resolve();
+
+            if (num == 0 && choiceEvent.Choice.GetAllItems()[0] != null)
+            {
+                choiceEvent.ChooseItem(0);
+            }
+            else if (num == 9 && choiceEvent.Choice.GetAllItems()[9] != null)
+            {
+                choiceEvent.ChooseItem(9);
+            }
+            else if (choiceEvent.Choice.GetAllItems()[num - 1] != null)
+            {
+                choiceEvent.ChooseItem(num - 1);
+            }
         }
 
         private void Exit()
@@ -46,7 +49,7 @@ namespace Project.GameLoop
             if (choiceEvent.IsExitable)
             {
                 choiceEvent.Resolve();
-                GameManager.GameEventManager.EndNPCServiceEvent();
+                // GameManager.GameEventManager.EndInventoryChoiceEvent();
             }
         }
 
@@ -63,7 +66,7 @@ namespace Project.GameLoop
         {
             GameManager.Player.InputReader.OnNumInput -= Choose;
             GameManager.Player.InputReader.OnExitInput -= Exit;
-            GameManager.GameEventManager.OnNPCServiceEnded -= GoBackToInterruptedState;
+            GameManager.GameEventManager.OnInventoryChoiceEnded -= GoBackToInterruptedState;
         }
     }
 }

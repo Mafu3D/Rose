@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hero_Attrs
   m_EditorClassIdentifier: 
   Health: 10
-  Speed: 3
+  Speed: 50
   Strength: 2
   Magic: 1
   Dexterity: 1

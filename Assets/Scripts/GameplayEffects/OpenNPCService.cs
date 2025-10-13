@@ -15,6 +15,7 @@ namespace Project.GameplayEffects
 
         public override Status ResolveEffect()
         {
+            if (GameManager.Instance.GameEventManager.CurrentServiceEvent != null) return Status.Running;
             return Status.Complete;
         }
 

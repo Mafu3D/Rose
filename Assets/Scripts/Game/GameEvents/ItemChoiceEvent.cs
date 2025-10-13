@@ -25,7 +25,7 @@ namespace Project.Core.GameEvents
 
         protected override void ResolveCallback(List<ItemData> chosen, List<ItemData> notChosen)
         {
-            foreach(ItemData itemData in chosen)
+            foreach (ItemData itemData in chosen)
             {
                 Item item = new Item(itemData);
                 switch (itemData.ItemType)

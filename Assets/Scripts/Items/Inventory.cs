@@ -10,10 +10,12 @@ namespace Project.Items
     public class Inventory
     {
         private Item equippedWeapon;
+        private Item equippedOffhand;
         private List<Item> heldItems = new();
         private List<Item> secretItems = new();
         private Item weaponUpgrade;
         private int maxSlots = 4;
+        const int TOTAL_INVENTORY_SLOTS = 8;
 
         public event Action OnInventoryChanged;
         Character owner;
@@ -31,6 +33,7 @@ namespace Project.Items
         }
 
         public Item GetEquippedWeapon() => equippedWeapon;
+        public Item GetEquippedOffhand() => equippedOffhand;
 
         public Item GetItemAtSlot(int index)
         {
@@ -44,7 +47,7 @@ namespace Project.Items
         public List<Item> GetSecretItems() => secretItems;
         public Item GetWeaponUpgrade() => weaponUpgrade;
 
-        public List<Item> GetAllItems()
+        public List<Item> GetAllItems(bool includeSecretItems = false)
         {
             List<Item> allItems = new List<Item>(GetHeldItems());
             if (equippedWeapon != null)
@@ -55,9 +58,49 @@ namespace Project.Items
                     allItems.Add(weaponUpgrade);
                 }
             }
-            List<Item> secretItems = new List<Item>(GetSecretItems());
-            Debug.Log(secretItems.Count);
-            allItems.AddRange(secretItems);
+            if (equippedOffhand != null)
+            {
+                allItems.Add(equippedOffhand);
+            }
+            if (includeSecretItems)
+            {
+                List<Item> secretItems = new List<Item>(GetSecretItems());
+                allItems.AddRange(secretItems);
+            }
+            return allItems;
+        }
+
+        public List<Item> GetAllItemsWithNulls()
+        {
+            List<Item> allItems = new List<Item>(GetHeldItems());
+            for (int i = 0; i < TOTAL_INVENTORY_SLOTS; i++)
+            {
+                if (i >= allItems.Count)
+                {
+                    allItems.Add(null);
+                }
+            }
+
+            if (equippedWeapon != null)
+            {
+                allItems.Add(equippedWeapon);
+                if (weaponUpgrade != null)
+                {
+                    allItems.Add(weaponUpgrade);
+                }
+            }
+            else
+            {
+                allItems.Add(null);
+            }
+            if (equippedOffhand != null)
+            {
+                allItems.Add(equippedOffhand);
+            }
+            else
+            {
+                allItems.Add(null);
+            }
             return allItems;
         }
 
@@ -100,6 +143,31 @@ namespace Project.Items
             item.OnUnequip(owner);
 
             OnInventoryChanged?.Invoke();
+        }
+
+        public void RemoveItem(Item item)
+        {
+            if (item == equippedWeapon)
+            {
+                equippedWeapon.OnUnequip(owner);
+                RemoveWeaponUpgrade();
+                equippedWeapon = null;
+                OnInventoryChanged?.Invoke();
+            }
+
+            if (item == equippedOffhand)
+            {
+                equippedOffhand.OnUnequip(owner);
+                equippedOffhand = null;
+                OnInventoryChanged?.Invoke();
+            }
+
+            if (heldItems.Contains(item))
+            {
+                heldItems.Pop(heldItems.IndexOf(item), out item);
+                item.OnUnequip(owner);
+                OnInventoryChanged?.Invoke();
+            }
         }
 
         public int AddSecretItem(Item item)

@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
-  m_Name: Skeleton_Attrs
+  m_Script: {fileID: 11500000, guid: 0647614c21f7a6c4a830d65714429fe3, type: 3}
+  m_Name: DevouringPortal_DiscardItem
   m_EditorClassIdentifier: 
-  Health: 5
-  Speed: 2
-  Strength: 2
-  Magic: 1
-  Dexterity: 0
-  Armor: 0

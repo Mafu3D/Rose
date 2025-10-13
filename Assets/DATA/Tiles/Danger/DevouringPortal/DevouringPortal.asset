@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
+  m_Name: DevouringPortal
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  DisplayName: Devouring Portal
+  Description: Sacrifice an item for 3 gems
+  Sprite: {fileID: -1072578427, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  ActivationPriority: 0
+  TileType: 3
+  SecondaryTileType: 4
+  IsLocked: 0
+  IsTrapped: 0
+  DangerStatus: 0
+  Cost: 0
+  CanBeUsedMultipleTimes: 0
+  UsesPerTurn: 1
+  LimitTotalUses: 1
+  TotalUses: 1
+  DestroyAfterUsing: 0
+  CharacterData: {fileID: 0}
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: e5c05441b75e6d844913c5eb146d531c, type: 2}
+  - {fileID: 11400000, guid: 3d3f5295f8742d844b73c0d7a3dc75bd, type: 2}
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []

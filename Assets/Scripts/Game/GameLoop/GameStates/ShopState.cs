@@ -26,7 +26,7 @@ namespace Project.GameLoop
             GameManager.Player.InputReader.OnExitInput += Exit;
             GameManager.GameEventManager.OnShopEnded += GoBackToInterruptedState;
 
-            choiceEvent = GameManager.GameEventManager.CurrentGameEvent as ChoiceEvent<ItemData>;
+            choiceEvent = GameManager.GameEventManager.CurrentShopEvent;
         }
 
         private void Choose(int num)

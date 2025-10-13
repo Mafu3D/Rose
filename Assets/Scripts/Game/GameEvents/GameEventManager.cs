@@ -9,8 +9,12 @@ namespace Project.Core.GameEvents
     public class GameEventManager
     {
         // game event is card/tile/item draw, a choice the player is given, a battle, dialogue, etc. basically anything that interrupts normal flow of the game
-
-        public IGameEvent CurrentGameEvent { get;  private set; }
+        public TileChoiceEvent CurrentTileChoiceEvent { get; private set; }
+        public ItemChoiceEvent CurrentItemChoiceEvent { get; private set; }
+        public CardChoiceEvent CurrentCardChoiceEvent { get; private set; }
+        public ShopEvent CurrentShopEvent { get; private set; }
+        public ServiceEvent CurrentServiceEvent { get; private set; }
+        public InventoryChoiceEvent CurrentInventoryChoiceEvent { get; private set; }
 
         public event Action<IGameEvent> OnTileDrawStarted;
         public event Action<IGameEvent> OnTileDrawEnded;
@@ -27,13 +31,16 @@ namespace Project.Core.GameEvents
         public event Action<IGameEvent> OnNPCServiceStarted;
         public event Action<IGameEvent> OnNPCServiceEnded;
 
+        public event Action<IGameEvent> OnInventoryChoiceStarted;
+        public event Action<IGameEvent> OnInventoryChoiceEnded;
+
         // Tile
         public TileChoiceEvent StartTileDrawEvent(int amount, bool shuffleRemaining)
         {
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+            if (CurrentTileChoiceEvent != null) throw new Exception($"A game event is already running: {CurrentTileChoiceEvent.GetType()}");
 
             TileChoiceEvent tileChoiceEvent = new TileChoiceEvent(amount, shuffleRemaining);
-            CurrentGameEvent = tileChoiceEvent;
+            CurrentTileChoiceEvent = tileChoiceEvent;
             tileChoiceEvent.SetupEvent();
             OnTileDrawStarted?.Invoke(tileChoiceEvent);
             return tileChoiceEvent;
@@ -41,8 +48,8 @@ namespace Project.Core.GameEvents
 
         public void EndTileDrawEvent()
         {
-            IGameEvent gameEvent = CurrentGameEvent;
-            CurrentGameEvent = null;
+            TileChoiceEvent gameEvent = CurrentTileChoiceEvent;
+            CurrentTileChoiceEvent = null;
             OnTileDrawEnded?.Invoke(gameEvent);
         }
 
@@ -50,10 +57,10 @@ namespace Project.Core.GameEvents
         public ItemChoiceEvent StartItemDrawEvent(int amount, bool shuffleRemaining)
         {
             Debug.Log("Starting new ItemChoiceEvent");
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+            if (CurrentItemChoiceEvent != null) throw new Exception($"A game event is already running: {CurrentItemChoiceEvent.GetType()}");
 
             ItemChoiceEvent itemChoiceEvent = new ItemChoiceEvent(amount, shuffleRemaining);
-            CurrentGameEvent = itemChoiceEvent;
+            CurrentItemChoiceEvent = itemChoiceEvent;
             itemChoiceEvent.SetupEvent();
             OnItemDrawStarted?.Invoke(itemChoiceEvent);
             return itemChoiceEvent;
@@ -61,9 +68,9 @@ namespace Project.Core.GameEvents
 
         public void EndItemDrawEvent()
         {
-            Debug.Log($"Ending event: {CurrentGameEvent}");
-            IGameEvent gameEvent = CurrentGameEvent;
-            CurrentGameEvent = null;
+            Debug.Log($"Ending event: {CurrentItemChoiceEvent}");
+            ItemChoiceEvent gameEvent = CurrentItemChoiceEvent;
+            CurrentItemChoiceEvent = null;
             OnItemDrawEnded?.Invoke(gameEvent);
         }
 
@@ -71,10 +78,10 @@ namespace Project.Core.GameEvents
         public CardChoiceEvent StartCardDrawEvent(Deck<Card> deck, int amount, bool shuffleRemaining)
         {
             Debug.Log("Starting new CardDrawEvent");
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+            if (CurrentCardChoiceEvent != null) throw new Exception($"A game event is already running: {CurrentCardChoiceEvent.GetType()}");
 
             CardChoiceEvent cardChoiceEvent = new CardChoiceEvent(deck, amount, shuffleRemaining);
-            CurrentGameEvent = cardChoiceEvent;
+            CurrentCardChoiceEvent = cardChoiceEvent;
             cardChoiceEvent.SetupEvent();
             OnCardDrawStarted?.Invoke(cardChoiceEvent);
             return cardChoiceEvent;
@@ -82,9 +89,9 @@ namespace Project.Core.GameEvents
 
         public void EndCardDrawEvent()
         {
-            Debug.Log($"Ending event: {CurrentGameEvent}");
-            IGameEvent gameEvent = CurrentGameEvent;
-            CurrentGameEvent = null;
+            Debug.Log($"Ending event: {CurrentCardChoiceEvent}");
+            CardChoiceEvent gameEvent = CurrentCardChoiceEvent;
+            CurrentCardChoiceEvent = null;
             OnCardDrawEnded?.Invoke(gameEvent);
         }
 
@@ -92,10 +99,10 @@ namespace Project.Core.GameEvents
         public ShopEvent StartShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0)
         {
             Debug.Log("Starting new shop event");
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+            if (CurrentShopEvent != null) throw new Exception($"A game event is already running: {CurrentShopEvent.GetType()}");
 
             ShopEvent shopEvent = new ShopEvent(amount, priceModifier, replaceOnBuy, refreshable, refreshCost);
-            CurrentGameEvent = shopEvent;
+            CurrentShopEvent = shopEvent;
             shopEvent.SetupEvent();
             OnShopStarted?.Invoke(shopEvent);
             return shopEvent;
@@ -103,9 +110,9 @@ namespace Project.Core.GameEvents
 
         public void EndShopEvent()
         {
-            Debug.Log($"Ending event: {CurrentGameEvent}");
-            IGameEvent gameEvent = CurrentGameEvent;
-            CurrentGameEvent = null;
+            Debug.Log($"Ending event: {CurrentShopEvent}");
+            ShopEvent gameEvent = CurrentShopEvent;
+            CurrentShopEvent = null;
             OnShopEnded?.Invoke(gameEvent);
         }
 
@@ -113,10 +120,10 @@ namespace Project.Core.GameEvents
         public ServiceEvent StartNPCServiceEvent(NPCInteractionDefinition npcServiceDefinition)
         {
             Debug.Log("Starting new npc service event");
-            if (CurrentGameEvent != null) throw new Exception($"A game event is already running: {CurrentGameEvent.GetType()}");
+            if (CurrentServiceEvent != null) throw new Exception($"A game event is already running: {CurrentServiceEvent.GetType()}");
 
             ServiceEvent npcServiceEvent = new ServiceEvent(npcServiceDefinition.Services.Count, npcServiceDefinition);
-            CurrentGameEvent = npcServiceEvent;
+            CurrentServiceEvent = npcServiceEvent;
             npcServiceEvent.SetupEvent();
             OnNPCServiceStarted?.Invoke(npcServiceEvent);
             return npcServiceEvent;
@@ -124,10 +131,31 @@ namespace Project.Core.GameEvents
 
         public void EndNPCServiceEvent()
         {
-            Debug.Log($"Ending event: {CurrentGameEvent}");
-            IGameEvent gameEvent = CurrentGameEvent;
-            CurrentGameEvent = null;
+            Debug.Log($"Ending event: {CurrentServiceEvent}");
+            ServiceEvent gameEvent = CurrentServiceEvent;
+            CurrentServiceEvent = null;
             OnNPCServiceEnded?.Invoke(gameEvent);
+        }
+
+        // Inventory Choice
+        public InventoryChoiceEvent StartInventoryChoiceEvent(int amount)
+        {
+            Debug.Log("Starting new npc service event");
+            if (CurrentInventoryChoiceEvent != null) throw new Exception($"A game event is already running: {CurrentInventoryChoiceEvent.GetType()}");
+
+            InventoryChoiceEvent inventoryChoiceEvent = new InventoryChoiceEvent(amount);
+            CurrentInventoryChoiceEvent = inventoryChoiceEvent;
+            inventoryChoiceEvent.SetupEvent();
+            OnInventoryChoiceStarted?.Invoke(inventoryChoiceEvent);
+            return inventoryChoiceEvent;
+        }
+
+        public void EndInventoryChoiceEvent()
+        {
+            Debug.Log($"Ending event: {CurrentInventoryChoiceEvent}");
+            InventoryChoiceEvent gameEvent = CurrentInventoryChoiceEvent;
+            CurrentInventoryChoiceEvent = null;
+            OnInventoryChoiceEnded?.Invoke(gameEvent);
         }
     }
 }
