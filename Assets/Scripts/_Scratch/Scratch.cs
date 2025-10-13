@@ -29,30 +29,24 @@ public class Scratch : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            if (!lmbClicked)
-            {
-                lmbClicked = true;
-                Player.GoldTracker.AddGold(1);
-            }
-        }
-        else
-        {
-            lmbClicked = false;
+            Player.GoldTracker.AddGold(1);
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            if (!rmbClicked)
-            {
-                rmbClicked = true;
-                Player.GoldTracker.RemoveGold(1);
-            }
+            Player.GoldTracker.RemoveGold(1);
         }
-        else
+
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            rmbClicked = false;
+            Player.GemTracker.AddGem(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Player.GemTracker.RemoveGem(1);
         }
     }
 

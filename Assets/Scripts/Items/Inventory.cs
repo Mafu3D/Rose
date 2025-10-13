@@ -138,34 +138,52 @@ namespace Project.Items
 
         public void RemoveItem(int index)
         {
-            Item item;
-            heldItems.Pop(index, out item);
-            item.OnUnequip(owner);
+            if (index < heldItems.Count)
+            {
+                Item item;
+                heldItems.Pop(index, out item);
+                item.OnUnequip(owner);
 
-            OnInventoryChanged?.Invoke();
+                OnInventoryChanged?.Invoke();
+            }
         }
 
         public void RemoveItem(Item item)
         {
             if (item == equippedWeapon)
             {
-                equippedWeapon.OnUnequip(owner);
-                RemoveWeaponUpgrade();
-                equippedWeapon = null;
-                OnInventoryChanged?.Invoke();
+                RemoveWeapon();
             }
 
             if (item == equippedOffhand)
             {
-                equippedOffhand.OnUnequip(owner);
-                equippedOffhand = null;
-                OnInventoryChanged?.Invoke();
+                RemoveOffhand();
             }
 
             if (heldItems.Contains(item))
             {
                 heldItems.Pop(heldItems.IndexOf(item), out item);
                 item.OnUnequip(owner);
+                OnInventoryChanged?.Invoke();
+            }
+        }
+
+        public void RemoveWeapon()
+        {
+            if (equippedWeapon != null) {
+                equippedWeapon.OnUnequip(owner);
+                RemoveWeaponUpgrade();
+                equippedWeapon = null;
+                OnInventoryChanged?.Invoke();
+            }
+        }
+
+        public void RemoveOffhand()
+        {
+            if (equippedOffhand != null)
+            {
+                equippedOffhand.OnUnequip(owner);
+                equippedOffhand = null;
                 OnInventoryChanged?.Invoke();
             }
         }

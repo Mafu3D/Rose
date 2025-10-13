@@ -22,6 +22,7 @@ namespace Project.UI
             {
                 header = item.ItemData.Name;
                 content = item.ItemData.Description;
+                content += "\n \n WARNING: Clicking this will DISCARD the item FOREVER!";
                 return true;
             }
             content = default;
