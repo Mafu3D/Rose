@@ -26,11 +26,11 @@ namespace Project.Combat.CombatActions
             string message;
             if (amount >= 0)
             {
-                message = $"{user.DisplayName} gained {Math.Abs(amount)} gold";
+                message = $"Gained {Math.Abs(amount)} gold";
             }
             else
             {
-                message = $"{user.DisplayName} lost {Math.Abs(amount)} gold";
+                message = $"Lost {Math.Abs(amount)} gold";
             }
             return message;
         }
