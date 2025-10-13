@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Orc_InventoryDefinition
   m_EditorClassIdentifier: 
   MaxSlots: 4
-  StartingEquippedWeaponData: {fileID: 0}
+  StartingEquippedWeaponData: {fileID: 11400000, guid: d433ba77e7775cb49b6b54a2fadfcf51, type: 2}
   StartingHeldItemsData: []

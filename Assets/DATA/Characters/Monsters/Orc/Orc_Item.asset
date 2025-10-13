@@ -41,7 +41,8 @@ MonoBehaviour:
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
-  OnSelfBloodiedStrategies: []
+  OnSelfBloodiedStrategies:
+  - {fileID: 11400000, guid: 7f9dbace7a25a8d4fa5e3cde88f5472d, type: 2}
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []

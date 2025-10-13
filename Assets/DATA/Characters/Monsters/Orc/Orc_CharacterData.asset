@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Orc_CharacterData
   m_EditorClassIdentifier: 
   DisplayName: Orc
-  Description: It's a big ugly orc
-  CombatDescription: It's a big ugly orc
+  Description: Gets stronger when bloodied
+  CombatDescription: 'Bloodied: Attack +2'
   CombatSprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   AttributesData: {fileID: 11400000, guid: 726a2e8ecf860b843b211d5f04c09e0a, type: 2}
+  InventoryDefinition: {fileID: 11400000, guid: 11a5b944095d8bb4cbb4694f2fe01711, type: 2}
+  gemReward: 1
+  goldReward: 3
