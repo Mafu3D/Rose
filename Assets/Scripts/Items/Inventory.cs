@@ -20,6 +20,8 @@ namespace Project.Items
         public event Action OnInventoryChanged;
         Character owner;
 
+        public bool InventoryIsFull => heldItems.Count >= maxSlots;
+
         public Inventory(Character owner)
         {
             this.owner = owner;

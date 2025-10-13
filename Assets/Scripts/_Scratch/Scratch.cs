@@ -9,7 +9,7 @@ using UnityEngine;
 public class Scratch : MonoBehaviour
 {
     [SerializeField] Player Player;
-    private bool firstUpdate;
+    private bool firstUpdate = true;
     private bool lmbClicked;
     private bool rmbClicked;
 
@@ -20,8 +20,6 @@ public class Scratch : MonoBehaviour
 
     void Update()
     {
-
-
         if (firstUpdate)
         {
             FirstUpdate();
@@ -52,6 +50,5 @@ public class Scratch : MonoBehaviour
 
     private void FirstUpdate()
     {
-
     }
 }

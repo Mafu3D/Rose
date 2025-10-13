@@ -32,6 +32,13 @@ namespace Project.GameLoop
         private void Choose(int num)
         {
             if (num > choiceEvent.Choice.NumberOfChoices) return;
+
+            if (GameManager.Hero.Character.Inventory.InventoryIsFull)
+            {
+                CalloutUI.Instance.QueueCallout("Inventory full! Please discard an item by left clicking it.");
+                return;
+            }
+
             choiceEvent.ChooseItem(num - 1);
             choiceEvent.Resolve();
             GameManager.GameEventManager.EndItemDrawEvent();
