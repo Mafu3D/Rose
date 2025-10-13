@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08de7308af1a35844bf257f6aa03b3a0, type: 3}
-  m_Name: BleedingFlask_AddVulnerable
+  m_Script: {fileID: 11500000, guid: d1b397118be74e24d818b1e4ff9c4b25, type: 3}
+  m_Name: Orc_ItemIncreaseStrength
   m_EditorClassIdentifier: 
-  targetCharacter: 1
-  effectType: 4
-  stackAmount: 2
+  IsPermanent: 0
+  targetCharacter: 0
+  AttributeType: 2
+  BaseValueModifier: 2
+  MaxValueModifier: 0

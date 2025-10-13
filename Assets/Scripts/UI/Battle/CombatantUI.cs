@@ -38,7 +38,7 @@ namespace Project.UI.BattleUI
         {
             image.sprite = combatant.Sprite;
             displayName.text = combatant.DisplayName;
-            this.description.text = combatant.Description;
+            this.description.text = combatant.CombatDescription;
 
             this.combatant = combatant;
 

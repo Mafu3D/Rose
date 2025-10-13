@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08de7308af1a35844bf257f6aa03b3a0, type: 3}
-  m_Name: BleedingFlask_AddVulnerable
+  m_Script: {fileID: 11500000, guid: 21dff2319b65f454998b5bbcbdb49063, type: 3}
+  m_Name: Orc_InventoryDefinition
   m_EditorClassIdentifier: 
-  targetCharacter: 1
-  effectType: 4
-  stackAmount: 2
+  MaxSlots: 4
+  StartingEquippedWeaponData: {fileID: 0}
+  StartingHeldItemsData: []

@@ -167,9 +167,16 @@ namespace Project.Combat
 
         #region Battle Loop
 
+        private bool heroBloodied = false;
+        private bool enemyBloodied = false;
+        private bool heroExposed = false;
+        private bool enemyExposed = false;
+
         public void NextAction()
         {
             bool proceed = true;
+
+
 
             while (proceed)
             {
@@ -177,6 +184,8 @@ namespace Project.Combat
                 {
                     if (debugMode) Debug.Log("Next Action: Exeucting item in queue...");
                     CombatQueue.ExecuteNextInQueue();
+                    CheckExposed();
+                    CheckBloodied();
                     proceed = false;
                 }
                 else
@@ -192,7 +201,144 @@ namespace Project.Combat
                     proceed = false;
                 }
             }
+        }
 
+        private void CheckBloodied()
+        {
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= (Hero.Attributes.GetMaxAttributeValue(Attributes.AttributeType.Health) / 2) && !heroBloodied)
+            {
+                heroBloodied = true;
+                if (Hero.Inventory != null)
+                {
+                    List<Item> items = Hero.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnSelfBloodiedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Hero, GetTarget(Hero));
+                        }
+                    }
+                }
+                if (Enemy.Inventory != null)
+                {
+                    List<Item> items = Enemy.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyBloodiedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Enemy, GetTarget(Enemy));
+                        }
+                    }
+                }
+            }
+
+            if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= (Enemy.Attributes.GetMaxAttributeValue(Attributes.AttributeType.Health) / 2) && !enemyBloodied)
+            {
+                enemyBloodied = true;
+                if (Hero.Inventory != null)
+                {
+                    List<Item> items = Hero.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyBloodiedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Hero, GetTarget(Hero));
+                        }
+                    }
+                }
+                if (Enemy.Inventory != null)
+                {
+                    List<Item> items = Enemy.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnSelfBloodiedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Enemy, GetTarget(Enemy));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CheckExposed()
+        {
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Armor) <= 0 && !heroExposed)
+            {
+                heroExposed = true;
+                if (Hero.Inventory != null)
+                {
+                    List<Item> items = Hero.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnSelfExposedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Hero, GetTarget(Hero));
+                        }
+                    }
+                }
+                if (Enemy.Inventory != null)
+                {
+                    List<Item> items = Enemy.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyExposedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Enemy, GetTarget(Enemy));
+                        }
+                    }
+                }
+            }
+
+            if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Armor) <= 0 && !enemyExposed)
+            {
+                enemyExposed = true;
+                if (Hero.Inventory != null)
+                {
+                    List<Item> items = Hero.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyExposedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Hero, GetTarget(Hero));
+                        }
+                    }
+                }
+                if (Enemy.Inventory != null)
+                {
+                    List<Item> items = Enemy.Inventory.GetAllItems(true);
+                    foreach (Item item in items)
+                    {
+                        foreach (CombatActionBaseData actionData in item.ItemData.OnSelfExposedStrategies)
+                        {
+                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                            item.IncUses();
+                            Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                            actionData.QueueAction(CombatQueue, Enemy, GetTarget(Enemy));
+                        }
+                    }
+                }
+            }
         }
 
         public void StartBattle()
@@ -220,6 +366,17 @@ namespace Project.Combat
             }
 
             if (debugMode) Debug.Log($"Battle Start - InQueue: {CombatQueue.Queue.Count}");
+
+            // If characters start with no armor then they can't be exposed!
+            if (Hero.Attributes.GetAttributeValue(Attributes.AttributeType.Armor) <= 0 && !heroExposed)
+            {
+                heroExposed = true;
+            }
+
+            if (Enemy.Attributes.GetAttributeValue(Attributes.AttributeType.Armor) <= 0 && !enemyExposed)
+            {
+                enemyExposed = true;
+            }
 
             OnBattleStart?.Invoke();
         }
@@ -399,12 +556,6 @@ namespace Project.Combat
                 if (attacker.Inventory != null)
                 {
                     List<Item> items = attacker.Inventory.GetAllItems(true);
-                    foreach (Item item in items)
-                    {
-                        Debug.Log(item.ToString());
-                        Debug.Log(item.ItemData.name);
-                    }
-
                     foreach (Item item in items)
                     {
 
