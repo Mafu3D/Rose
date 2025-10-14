@@ -151,17 +151,8 @@ namespace Project.Combat
 
         private Character GetTarget(Character combatant)
         {
-            for (int i = 0; i < combatantOrder.Length; i++)
-            {
-                if (i == 0)
-                {
-                    if (combatantOrder[i] == combatant) return combatantOrder[1];
-                }
-                else
-                {
-                    if (combatantOrder[i] == combatant) return combatantOrder[0];
-                }
-            }
+            if (Hero == combatant) return Enemy;
+            if (Enemy == combatant) return Hero;
             return null;
         }
 
@@ -562,7 +553,7 @@ namespace Project.Combat
                         foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
                         {
                             Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
-                            actionData.QueueAction(CombatQueue, attacker, GetTarget(attacker));
+                            actionData.QueueAction(CombatQueue, attacker, defender);
                         }
                     }
                 }

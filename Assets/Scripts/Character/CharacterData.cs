@@ -20,5 +20,11 @@ namespace Project
         [Header("Rewards")]
         [SerializeField] public int gemReward = 1;
         [SerializeField] public int goldReward = 3;
+
+        [Header("Immunity")]
+        [SerializeField] public bool ImmuneToFrost = false;
+        [SerializeField] public bool ImmuneToBurn = false;
+        [SerializeField] public bool ImmuneToVulnerable = false;
+        [SerializeField] public bool ImmuneToWeaken = false;
     }
 }

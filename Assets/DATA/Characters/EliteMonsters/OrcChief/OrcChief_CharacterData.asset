@@ -18,5 +18,9 @@ MonoBehaviour:
   CombatSprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   AttributesData: {fileID: 11400000, guid: c1b33174aa0decf4ba91dbed7a7327ab, type: 2}
   InventoryDefinition: {fileID: 11400000, guid: abbfd826d1f0f894f96fa136b43fd1f5, type: 2}
-  gemReward: 1
-  goldReward: 3
+  gemReward: 2
+  goldReward: 6
+  ImmuneToFrost: 0
+  ImmuneToBurn: 0
+  ImmuneToVulnerable: 0
+  ImmuneToWeaken: 0

@@ -36,6 +36,7 @@ MonoBehaviour:
   OnCombatStartStrategies: []
   OnCombatEndStrategies:
   - {fileID: 11400000, guid: 7455bd721ec00564aac8ffa4f8a07973, type: 2}
+  - {fileID: 11400000, guid: 861e72c80677def458650a4caca30130, type: 2}
   - {fileID: 11400000, guid: cfb1b7367c18d1a4eac6130ef1edd802, type: 2}
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []

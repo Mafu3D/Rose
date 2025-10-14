@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
+  m_Name: Vampire_Item
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: 
+  ItemID: 
+  Sprite: {fileID: 0}
+  GoldValue: 0
+  ItemType: 0
+  HealthModifier: 0
+  MaxHealthModifier: 0
+  ArmorModifier: 0
+  MaxArmorModifier: 0
+  StrengthModifier: 0
+  MaxStrengthModifier: 0
+  MagicModifier: 0
+  MaxMagicModifier: 0
+  DexterityModifier: 0
+  MaxDexterityModifier: 0
+  SpeedModifier: 0
+  MaxSpeedModifier: 0
+  UsesPerCombat: -1
+  OnHitStrategies:
+  - {fileID: 11400000, guid: 71fd9a6a24c46424b8e3479f03e7bd3e, type: 2}
+  OnReceiveHitStrategies: []
+  OnCombatStartStrategies:
+  - {fileID: 11400000, guid: 2823bfdfc360425428c1e62c7f9ce729, type: 2}
+  OnCombatEndStrategies: []
+  OnRoundStartStrategies: []
+  OnRoundEndStrategies: []
+  OnTurnStartStrategies: []
+  OnTurnEndStrategies: []
+  OnEnemyTurnStartStrategies: []
+  OnEnemyTurnEndStrategies: []
+  OnSelfBloodiedStrategies: []
+  OnEnemyBloodiedStrategies: []
+  OnSelfExposedStrategies: []
+  OnEnemyExposedStrategies: []

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc65741e31c1ebc45ba1155aeec0fc9c, type: 3}
+  m_Name: Dog_CharacterData
+  m_EditorClassIdentifier: 
+  DisplayName: Just a dog
+  Description: You wouldn't hurt a dog would you?
+  CombatDescription: You're the real monster
+  CombatSprite: {fileID: -6786059808183817280, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  AttributesData: {fileID: 11400000, guid: 6271db1a636e514448a22e559fbf35bc, type: 2}
+  InventoryDefinition: {fileID: 0}
+  gemReward: 1
+  goldReward: 3
+  ImmuneToFrost: 0
+  ImmuneToBurn: 0
+  ImmuneToVulnerable: 0
+  ImmuneToWeaken: 0

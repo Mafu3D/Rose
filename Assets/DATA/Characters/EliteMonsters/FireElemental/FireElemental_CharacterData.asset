@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc65741e31c1ebc45ba1155aeec0fc9c, type: 3}
+  m_Name: FireElemental_CharacterData
+  m_EditorClassIdentifier: 
+  DisplayName: Fire Elemental
+  Description: 'Immune to burn, On Hit: apply 2 burn'
+  CombatDescription: 'Immune to burn, On Hit: apply 2 burn'
+  CombatSprite: {fileID: 1256095980742163159, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  AttributesData: {fileID: 11400000, guid: bb0a6be74f2f6974aa4d612825c81874, type: 2}
+  InventoryDefinition: {fileID: 11400000, guid: 1d34778d8f7ea6249b80e480dd4c76f7, type: 2}
+  gemReward: 2
+  goldReward: 6
+  ImmuneToFrost: 0
+  ImmuneToBurn: 1
+  ImmuneToVulnerable: 0
+  ImmuneToWeaken: 0

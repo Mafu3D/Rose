@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de37a04a3ae037c4e8c51ab3d505446f, type: 3}
-  m_Name: TestEliteMonsterDeck
+  m_Name: EliteMonsterDeck
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2

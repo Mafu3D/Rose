@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
   m_Name: OrcChief_Attrs
   m_EditorClassIdentifier: 
-  Health: 20
+  Health: 15
   Speed: 1
   Strength: 3
   Magic: 0
   Dexterity: 0
-  Armor: 0
+  Armor: 5

@@ -17,6 +17,7 @@ namespace Project
         public string CombatDescription;
         public Sprite Sprite;
         public Inventory Inventory;
+        public CharacterData CharacterData;
 
         public event Action<HitReport> OnReceiveHit;
 
@@ -29,6 +30,8 @@ namespace Project
             this.Description = characterData.Description;
             this.CombatDescription = characterData.CombatDescription;
             this.Sprite = characterData.CombatSprite;
+
+            this.CharacterData = characterData;
 
             StatusEffectManager = new StatusEffectManager();
         }

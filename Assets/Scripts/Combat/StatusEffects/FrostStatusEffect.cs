@@ -14,7 +14,7 @@ namespace Project.Combat.StatusEffects
         public override void OnAllStacksRemoved() { }
         public override void OnReceiveMaxStacks()
         {
-            FrozenStatusEffect frozenStatusEffect = new FrozenStatusEffect(owner, enemy, 99);
+            FrozenStatusEffect frozenStatusEffect = new FrozenStatusEffect(owner, source, 99);
             owner.StatusEffectManager.AddStack(frozenStatusEffect, 1);
             RemoveStacks(Stacks);
 

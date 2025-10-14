@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
+  m_Name: Imp_TileData
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  DisplayName: Imp
+  Description: 
+  Sprite: {fileID: -9066083113907974341, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  ActivationPriority: 0
+  TileType: 0
+  SecondaryTileType: 0
+  IsLocked: 0
+  IsTrapped: 0
+  DangerStatus: 0
+  Cost: 0
+  CanBeUsedMultipleTimes: 0
+  UsesPerTurn: 1
+  LimitTotalUses: 0
+  TotalUses: 1
+  DestroyAfterUsing: 1
+  CharacterData: {fileID: 11400000, guid: adf811a31258d4340b7305c9c056bbb4, type: 2}
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 411565a421170c74198264f48a3a8d2b, type: 2}
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []

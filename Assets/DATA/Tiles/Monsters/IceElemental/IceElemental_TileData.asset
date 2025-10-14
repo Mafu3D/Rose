@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
+  m_Name: IceElemental_TileData
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  DisplayName: Ice Elemental
+  Description: 
+  Sprite: {fileID: -3290614522382434875, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  ActivationPriority: 0
+  TileType: 0
+  SecondaryTileType: 0
+  IsLocked: 0
+  IsTrapped: 0
+  DangerStatus: 0
+  Cost: 0
+  CanBeUsedMultipleTimes: 0
+  UsesPerTurn: 1
+  LimitTotalUses: 0
+  TotalUses: 1
+  DestroyAfterUsing: 1
+  CharacterData: {fileID: 11400000, guid: 5b7dbe2847cae394ca7eaab69ba94803, type: 2}
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 3ae59f64fb2347645a4dcf7c0bb74785, type: 2}
+  OnRoundStartStrategies: []
+  OnTurnStartStrategies: []
+  OnPlayerMoveStrategies: []
+  OnPlayerMoveEndStrategies: []
+  OnPlayerEnterStrategies: []
+  OnPlayerExitStrategies: []
+  OnEndOfTurnStrategies: []
+  OnDrawCardStrategies: []
+  OnEndOfRoundStrategies: []
+  OnCreateStrategies: []
+  OnDestroyStrategies: []

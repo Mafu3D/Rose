@@ -15,12 +15,12 @@ namespace Project.Combat.StatusEffects
         public int MaxStacks;
         public event Action<StatusEffect> OnAllStacksRemovedEvent;
         protected Character owner;
-        protected Character enemy;
+        protected Character source;
 
-        public StatusEffect(Character owner, Character enemy, int maxStacks)
+        public StatusEffect(Character owner, Character source, int maxStacks)
         {
             this.owner = owner;
-            this.enemy = enemy;
+            this.source = source;
             this.MaxStacks = maxStacks;
         }
 

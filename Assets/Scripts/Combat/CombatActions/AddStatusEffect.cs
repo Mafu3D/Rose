@@ -12,51 +12,50 @@ namespace Project.Combat.CombatActions
 
         public override void Execute(Character user, Character target)
         {
-            Character character;
-            Character other;
-            if (targetCharacter == CombatActionTarget.User)
-            {
-                character = user;
-                other = target;
-            }
-            else
-            {
-                character = target;
-                other = user;
-            }
+            if (targetCharacter == CombatActionTarget.User) target = user;
 
             switch (effectType)
             {
                 case StatusEffectType.Frost:
-                    FrostStatusEffect frost = new FrostStatusEffect(character, other, 3);
-                    character.StatusEffectManager.AddStack(frost, stackAmount);
+                    FrostStatusEffect frost = new FrostStatusEffect(target, user, 3);
+                    target.StatusEffectManager.AddStack(frost, stackAmount);
+                    if (!target.CharacterData.ImmuneToFrost)
+                    {
+                    }
                     break;
                 case StatusEffectType.Burn:
-                    BurnStatusEffect burn = new BurnStatusEffect(character, other, 99);
-                    character.StatusEffectManager.AddStack(burn, stackAmount);
+                    BurnStatusEffect burn = new BurnStatusEffect(target, user, 99);
+                    target.StatusEffectManager.AddStack(burn, stackAmount);
+                    if (!target.CharacterData.ImmuneToBurn)
+                    {
+                    }
                     break;
                 case StatusEffectType.Weakened:
-                    WeakenStatusEffect weak = new WeakenStatusEffect(character, other, 99);
-                    character.StatusEffectManager.AddStack(weak, stackAmount);
+                    WeakenStatusEffect weak = new WeakenStatusEffect(target, user, 99);
+                    target.StatusEffectManager.AddStack(weak, stackAmount);
+                    if (!target.CharacterData.ImmuneToWeaken)
+                    {
+                    }
                     break;
                 case StatusEffectType.Vulnerable:
-                    VulnerableStatusEffect vulnerable = new VulnerableStatusEffect(character, other, 99);
-                    character.StatusEffectManager.AddStack(vulnerable, stackAmount);
+                    VulnerableStatusEffect vulnerable = new VulnerableStatusEffect(target, user, 99);
+                    target.StatusEffectManager.AddStack(vulnerable, stackAmount);
+                    if (!target.CharacterData.ImmuneToVulnerable)
+                    {
+                    }
                     break;
             }
         }
 
         protected override string Message(Character user, Character target)
         {
-            Character character;
-            if (targetCharacter == CombatActionTarget.User) character = user;
-            else character = target;
+            if (targetCharacter == CombatActionTarget.User) target = user;
 
             string stackOrStacks;
             if (stackAmount == 1) stackOrStacks = "stack";
             else stackOrStacks = "stacks";
 
-            return $"{character.DisplayName} received {stackAmount} {stackOrStacks} of {effectType.ToString()}";
+            return $"{target.DisplayName} received {stackAmount} {stackOrStacks} of {effectType.ToString()}";
         }
     }
 }

@@ -20,3 +20,7 @@ MonoBehaviour:
   InventoryDefinition: {fileID: 11400000, guid: 8450b6bcbec07344cac785389b186b7b, type: 2}
   gemReward: 1
   goldReward: 3
+  ImmuneToFrost: 0
+  ImmuneToBurn: 0
+  ImmuneToVulnerable: 0
+  ImmuneToWeaken: 0
