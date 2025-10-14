@@ -12,15 +12,17 @@ namespace Project.Core.GameEvents
         private bool replaceOnBuy;
         public bool Refreshable { get; private set; }
         public int RefreshCost { get; private set; }
+        List<ItemData> existingInventory = new();
 
         private bool debug = true;
 
-        public ShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0) : base(amount, true)
+        public ShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0, List<ItemData> existingInventory = null) : base(amount, true)
         {
             this.priceModifier = priceModifier;
             this.replaceOnBuy = replaceOnBuy;
             this.Refreshable = refreshable;
             this.RefreshCost = refreshCost;
+            this.existingInventory = existingInventory;
         }
 
         public event Action OnBuyEvent;
@@ -80,7 +82,15 @@ namespace Project.Core.GameEvents
 
         public override void GenerateChoices()
         {
-            List<ItemData> choices = GameManager.Instance.ItemDeck.DrawMultiple(amount);
+            List<ItemData> choices = new();
+            if (existingInventory != null && existingInventory.Count > 0)
+            {
+                choices = new List<ItemData>(existingInventory);
+            }
+            else
+            {
+                choices = GameManager.Instance.ItemDeck.DrawMultiple(amount);
+            }
             if (choices.Count == 0) return;
             Choice = new Choice<ItemData>(choices, ResolveCallback);
 

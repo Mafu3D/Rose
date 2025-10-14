@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: Thicket
+  m_Name: Volcano
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Thicket
-  Description: 'On Enter: Take 2 damage'
-  Sprite: {fileID: -1269918139, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  DisplayName: Volcano
+  Description: 'On Enter: Lose 1 movement and take 1 damage. End Turn: Take 2 damage
+    and gain 1 gem.'
+  Sprite: {fileID: -167682619, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 0
   TileType: 3
   SecondaryTileType: 0
@@ -37,13 +38,16 @@ MonoBehaviour:
   TotalUses: 1
   DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
-  OnActivateStrategies: []
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 89468108528efbb4ca14b8fe28dca744, type: 2}
+  - {fileID: 11400000, guid: aebe23ec857ad9b44a3dabb10626cb2f, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []
   OnPlayerMoveEndStrategies: []
   OnPlayerEnterStrategies:
-  - {fileID: 11400000, guid: a38dcc6eaaa820d4d8bae86b0c5fcdaa, type: 2}
+  - {fileID: 11400000, guid: 77d871aac2207614588f0ecb13bce50a, type: 2}
+  - {fileID: 11400000, guid: 99c1915c96194ca4fb81ae41974fbaa4, type: 2}
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies: []
   OnDrawCardStrategies: []

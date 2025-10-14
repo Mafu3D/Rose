@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: Thicket
+  m_Name: TimeRift
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,29 +21,29 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Thicket
-  Description: 'On Enter: Take 2 damage'
-  Sprite: {fileID: -1269918139, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  DisplayName: Time Rift
+  Description: Delay the boss by 3 turns
+  Sprite: {fileID: -1603600227877920923, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   ActivationPriority: 0
-  TileType: 3
+  TileType: 0
   SecondaryTileType: 0
   IsLocked: 0
   IsTrapped: 0
-  DangerStatus: 2
+  DangerStatus: 0
   Cost: 0
-  CanBeUsedMultipleTimes: 1
+  CanBeUsedMultipleTimes: 0
   UsesPerTurn: 1
-  LimitTotalUses: 0
+  LimitTotalUses: 1
   TotalUses: 1
   DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
-  OnActivateStrategies: []
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 5d542427a0322b04eb3e8fe5294a7d17, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []
   OnPlayerMoveEndStrategies: []
-  OnPlayerEnterStrategies:
-  - {fileID: 11400000, guid: a38dcc6eaaa820d4d8bae86b0c5fcdaa, type: 2}
+  OnPlayerEnterStrategies: []
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies: []
   OnDrawCardStrategies: []

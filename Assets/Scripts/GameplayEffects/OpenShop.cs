@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project.GameLoop;
+using Project.Items;
 using UnityEngine;
 
 namespace Project.GameplayEffects
@@ -12,6 +13,7 @@ namespace Project.GameplayEffects
         [SerializeField] private bool replaceOnBuy = false;
         [SerializeField] private bool refreshable = true;
         [SerializeField] private int refreshCost = 5;
+        [SerializeField] List<ItemData> existingInventory;
 
         public override void ResetEffect()
         {
@@ -25,7 +27,7 @@ namespace Project.GameplayEffects
 
         public override Status StartEffect()
         {
-            GameManager.Instance.GameEventManager.StartShopEvent(inventoryAmount, priceModifier, replaceOnBuy, refreshable, refreshCost);
+            GameManager.Instance.GameEventManager.StartShopEvent(inventoryAmount, priceModifier, replaceOnBuy, refreshable, refreshCost, existingInventory);
             GameManager.Instance.StateMachine.SwitchState(new ShopState("Shopping State", GameManager.Instance.StateMachine, GameManager.Instance));
 
             return Status.Running;

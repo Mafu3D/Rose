@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09cf826ed806e47458fe43a19c3f49ce, type: 3}
-  m_Name: TestTileDeck
+  m_Name: TileDeck
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -27,6 +27,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fc6fc5f2264dd8c43bd26c68b8dbefdc, type: 2}
     - {fileID: 11400000, guid: 0427e45975170a344a5f0016a522cf7e, type: 2}
     - {fileID: 11400000, guid: 1c2ba4ba68935e04d8454a31a9968cb2, type: 2}
+    - {fileID: 11400000, guid: 8e15245451d717342a6893f5f49ae0a4, type: 2}
+    - {fileID: 11400000, guid: 4bf42c43598e6074cbd0757bc6f48aac, type: 2}
+    - {fileID: 11400000, guid: a9113a9ff0ec2de43baa01f523639d5a, type: 2}
+    - {fileID: 11400000, guid: ed85c4794cf814c49b78378ae5c3f974, type: 2}
+    - {fileID: 11400000, guid: 42a54134ffc2c3945a1d23c12cb537ae, type: 2}
+    - {fileID: 11400000, guid: 0e4ff9c50418ea7488274aa9512f03b0, type: 2}
+    - {fileID: 11400000, guid: f6bab5d41d051fd4f8445b3916d24ba9, type: 2}
+    - {fileID: 11400000, guid: 26b175f4221c6c840be2ebcc234d939a, type: 2}
+    - {fileID: 11400000, guid: ee99238ddafc5184db1a108a9ba36a9a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -45,7 +54,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 11
+      Data: 20
     - Name: 
       Entry: 7
       Data: 
@@ -174,7 +183,115 @@ MonoBehaviour:
       Data: 10
     - Name: $v
       Entry: 3
-      Data: 0
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 11
+    - Name: $v
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 12
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 13
+    - Name: $v
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 14
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 15
+    - Name: $v
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 16
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 17
+    - Name: $v
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 18
+    - Name: $v
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 19
+    - Name: $v
+      Entry: 3
+      Data: 1
     - Name: 
       Entry: 8
       Data: 

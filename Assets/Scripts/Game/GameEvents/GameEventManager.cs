@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Project.Decks;
+using Project.Items;
 using Project.NPCs;
 using UnityEngine;
 
@@ -101,12 +103,12 @@ namespace Project.Core.GameEvents
         }
 
         // Shop
-        public ShopEvent StartShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0)
+        public ShopEvent StartShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0, List<ItemData> existingInventory = null)
         {
             Debug.Log("Starting new shop event");
             if (CurrentShopEvent != null) throw new Exception($"A game event is already running: {CurrentShopEvent.GetType()}");
 
-            ShopEvent shopEvent = new ShopEvent(amount, priceModifier, replaceOnBuy, refreshable, refreshCost);
+            ShopEvent shopEvent = new ShopEvent(amount, priceModifier, replaceOnBuy, refreshable, refreshCost, existingInventory);
             CurrentShopEvent = shopEvent;
             shopEvent.SetupEvent();
             OnShopStarted?.Invoke(shopEvent);

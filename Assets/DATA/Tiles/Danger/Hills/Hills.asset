@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: Thicket
+  m_Name: Hills
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Thicket
-  Description: 'On Enter: Take 2 damage'
-  Sprite: {fileID: -1269918139, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  DisplayName: Hills
+  Description: 'On Enter: -1 moves this turn'
+  Sprite: {fileID: 55378420, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 0
   TileType: 3
   SecondaryTileType: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   OnPlayerMoveStrategies: []
   OnPlayerMoveEndStrategies: []
   OnPlayerEnterStrategies:
-  - {fileID: 11400000, guid: a38dcc6eaaa820d4d8bae86b0c5fcdaa, type: 2}
+  - {fileID: 11400000, guid: f1e6b6340ccb312459719bd2d03c546c, type: 2}
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies: []
   OnDrawCardStrategies: []

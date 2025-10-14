@@ -17,31 +17,31 @@ namespace Project.Combat.CombatActions
             switch (effectType)
             {
                 case StatusEffectType.Frost:
-                    FrostStatusEffect frost = new FrostStatusEffect(target, user, 3);
-                    target.StatusEffectManager.AddStack(frost, stackAmount);
                     if (!target.CharacterData.ImmuneToFrost)
                     {
+                        FrostStatusEffect frost = new FrostStatusEffect(target, user, 3);
+                        target.StatusEffectManager.AddStack(frost, stackAmount);
                     }
                     break;
                 case StatusEffectType.Burn:
-                    BurnStatusEffect burn = new BurnStatusEffect(target, user, 99);
-                    target.StatusEffectManager.AddStack(burn, stackAmount);
                     if (!target.CharacterData.ImmuneToBurn)
                     {
+                        BurnStatusEffect burn = new BurnStatusEffect(target, user, 99);
+                        target.StatusEffectManager.AddStack(burn, stackAmount);
                     }
                     break;
                 case StatusEffectType.Weakened:
-                    WeakenStatusEffect weak = new WeakenStatusEffect(target, user, 99);
-                    target.StatusEffectManager.AddStack(weak, stackAmount);
                     if (!target.CharacterData.ImmuneToWeaken)
                     {
+                        WeakenStatusEffect weak = new WeakenStatusEffect(target, user, 99);
+                        target.StatusEffectManager.AddStack(weak, stackAmount);
                     }
                     break;
                 case StatusEffectType.Vulnerable:
-                    VulnerableStatusEffect vulnerable = new VulnerableStatusEffect(target, user, 99);
-                    target.StatusEffectManager.AddStack(vulnerable, stackAmount);
                     if (!target.CharacterData.ImmuneToVulnerable)
                     {
+                        VulnerableStatusEffect vulnerable = new VulnerableStatusEffect(target, user, 99);
+                        target.StatusEffectManager.AddStack(vulnerable, stackAmount);
                     }
                     break;
             }

@@ -22,16 +22,16 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Campfire
-  Description: Restore 5 health when you end your turn here
+  Description: Restore 3 health when you enter this tile (once per turn)
   Sprite: {fileID: 1256095980742163159, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   ActivationPriority: 0
   TileType: 7
   SecondaryTileType: 0
   IsLocked: 0
   IsTrapped: 0
-  DangerStatus: 0
+  DangerStatus: 1
   Cost: 0
-  CanBeUsedMultipleTimes: 0
+  CanBeUsedMultipleTimes: 1
   UsesPerTurn: 1
   LimitTotalUses: 0
   TotalUses: 1

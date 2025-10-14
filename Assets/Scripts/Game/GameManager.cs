@@ -442,6 +442,7 @@ namespace Project
                 new int[] {-1, 3},
                 new int[] {-1, 4},
                 new int[] {6, 4},
+                new int[] {-6, -4},
                 // new int[] {7, 4},
                 // new int[] {8, 4},
                 // new int[] {8, 3},

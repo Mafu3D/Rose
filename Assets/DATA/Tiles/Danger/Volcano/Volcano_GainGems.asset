@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b56f4431e040849a900d78fbbcc88a, type: 3}
-  m_Name: Campfire_RestoreHealth
+  m_Script: {fileID: 11500000, guid: 82a42535f080b8e4b9d71942b79f0cbf, type: 3}
+  m_Name: Volcano_GainGems
   m_EditorClassIdentifier: 
-  AttributeType: 0
-  BaseValueModifier: 2
-  MaxValueModifier: 0
+  Amount: 1

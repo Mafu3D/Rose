@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: Thicket
+  m_Name: LootHoard
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,29 +21,31 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Thicket
-  Description: 'On Enter: Take 2 damage'
-  Sprite: {fileID: -1269918139, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
+  DisplayName: Loot Hoard
+  Description: Choose from 3 treasures and gain 3 gold
+  Sprite: {fileID: -1543209236, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   ActivationPriority: 0
-  TileType: 3
-  SecondaryTileType: 0
+  TileType: 4
+  SecondaryTileType: 3
   IsLocked: 0
   IsTrapped: 0
-  DangerStatus: 2
+  DangerStatus: 3
   Cost: 0
-  CanBeUsedMultipleTimes: 1
+  CanBeUsedMultipleTimes: 0
   UsesPerTurn: 1
-  LimitTotalUses: 0
+  LimitTotalUses: 1
   TotalUses: 1
   DestroyAfterUsing: 0
   CharacterData: {fileID: 0}
-  OnActivateStrategies: []
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 1fb00dca2d6e58e4ea88409f5738eae9, type: 2}
+  - {fileID: 11400000, guid: 2db3341ec7b925545bda58348b325e57, type: 2}
+  - {fileID: 11400000, guid: 1ec061420adad864080d1751d846e384, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []
   OnPlayerMoveEndStrategies: []
-  OnPlayerEnterStrategies:
-  - {fileID: 11400000, guid: a38dcc6eaaa820d4d8bae86b0c5fcdaa, type: 2}
+  OnPlayerEnterStrategies: []
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies: []
   OnDrawCardStrategies: []
