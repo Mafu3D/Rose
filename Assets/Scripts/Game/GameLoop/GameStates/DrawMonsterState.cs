@@ -26,6 +26,11 @@ namespace Project.GameLoop
             {
                 foreach (Tile tile in registeredTiles)
                 {
+                    if (tile.TileData.DangerStatus == DangerStatus.Elite)
+                    {
+                        dangerStatus = DangerStatus.Elite;
+                        break;
+                    }
                     if (tile.TileData.DangerStatus == DangerStatus.Dangerous)
                     {
                         dangerStatus = DangerStatus.Dangerous;
@@ -51,6 +56,9 @@ namespace Project.GameLoop
                     break;
                 case DangerStatus.Dangerous:
                     monsterChoiceEvent = GameManager.GameEventManager.StartCardDrawEvent(GameManager.MonsterDeck, 1, false);
+                    break;
+                case DangerStatus.Elite:
+                    monsterChoiceEvent = GameManager.GameEventManager.StartCardDrawEvent(GameManager.EliteMonsterDeck, 1, false);
                     break;
             }
         }

@@ -29,6 +29,7 @@ namespace Project
         [SerializeField] public float ChanceForMonsterEncounter = 50f;
         [SerializeField] public DeckData EncounterDeckData;
         [SerializeField] public DeckData MonsterDeckData;
+        [SerializeField] public DeckData EliteMonsterDeckData;
         [SerializeField] public ItemDeckData ItemDeckData;
         [SerializeField] public TileDeckData TileDeckData;
         [SerializeField] public int RoundsTillBoss;
@@ -62,6 +63,7 @@ namespace Project
         public GameEventManager GameEventManager;
         public Deck<Card> EncounterDeck;
         public Deck<Card> MonsterDeck;
+        public Deck<Card> EliteMonsterDeck;
         public Deck<ItemData> ItemDeck;
         public Deck<TileData> TileDeck;
         public Deck<CharacterData> BossDeck;
@@ -122,6 +124,7 @@ namespace Project
 
             EncounterDeck = InitializeCardDeck(EncounterDeckData);
             MonsterDeck = InitializeCardDeck(MonsterDeckData);
+            EliteMonsterDeck = InitializeCardDeck(EliteMonsterDeckData);
             ItemDeck = InitializeItemDeck(ItemDeckData);
             TileDeck = InitializeTileDeck(TileDeckData);
             BossDeck = InitializeBossDeck(BossDeckData);

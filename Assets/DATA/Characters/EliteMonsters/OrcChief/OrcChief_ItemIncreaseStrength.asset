@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9559b1472856e024bb7e5b3505bb172c, type: 3}
-  m_Name: Goblin_StartBattle
+  m_Script: {fileID: 11500000, guid: d1b397118be74e24d818b1e4ff9c4b25, type: 3}
+  m_Name: OrcChief_ItemIncreaseStrength
   m_EditorClassIdentifier: 
-  enemyCharacterData: {fileID: 11400000, guid: 368707c328e433e4eb9d9714ee488e6d, type: 2}
-  enemyNodePrefab: {fileID: 4534305980478911969, guid: eed4e8c3318bcb049ae72c63b41b2fa9, type: 3}
+  IsPermanent: 0
+  targetCharacter: 0
+  AttributeType: 2
+  BaseValueModifier: 3
+  MaxValueModifier: 0

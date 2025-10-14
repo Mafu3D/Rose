@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc65741e31c1ebc45ba1155aeec0fc9c, type: 3}
+  m_Name: OrcChief_CharacterData
+  m_EditorClassIdentifier: 
+  DisplayName: Orc Chief
+  Description: Gets stronger when bloodied
+  CombatDescription: 'Bloodied: Attack +3'
+  CombatSprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  AttributesData: {fileID: 11400000, guid: c1b33174aa0decf4ba91dbed7a7327ab, type: 2}
+  InventoryDefinition: {fileID: 11400000, guid: abbfd826d1f0f894f96fa136b43fd1f5, type: 2}
+  gemReward: 1
+  goldReward: 3

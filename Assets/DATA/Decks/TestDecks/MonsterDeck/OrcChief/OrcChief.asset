@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49cefa1598630d94d89c01ab2f3c1ac1, type: 3}
-  m_Name: Goblin
+  m_Name: OrcChief
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Goblin
-  Sprite: {fileID: 4375002580437866251, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Name: Orc Chief
+  Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
   CardType: 4
-  DisplayText: Steals your gold
+  DisplayText: Run! it's an even nastier orc!
   Strategies:
-  - {fileID: 11400000, guid: 0c22675860865e94a9ecfa77bed92378, type: 2}
+  - {fileID: 11400000, guid: ca16357779216ef479c939b4549f8e6e, type: 2}

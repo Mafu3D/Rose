@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad44f1935caa7946ba2416f6dffe3f6, type: 3}
-  m_Name: MonsterLair
+  m_Name: OrcChief_TileData
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,23 +21,24 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Monster Lair
-  Description: Fight an elite monster
-  Sprite: {fileID: -1066573289, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
-  ActivationPriority: 1
-  TileType: 3
+  DisplayName: Orc
+  Description: Doubles strength when bloodied
+  Sprite: {fileID: 8101519127246320686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  ActivationPriority: 0
+  TileType: 0
   SecondaryTileType: 0
   IsLocked: 0
-  IsTrapped: 1
-  DangerStatus: 3
+  IsTrapped: 0
+  DangerStatus: 0
   Cost: 0
   CanBeUsedMultipleTimes: 0
   UsesPerTurn: 1
-  LimitTotalUses: 1
+  LimitTotalUses: 0
   TotalUses: 1
-  DestroyAfterUsing: 0
-  CharacterData: {fileID: 0}
-  OnActivateStrategies: []
+  DestroyAfterUsing: 1
+  CharacterData: {fileID: 11400000, guid: f0ca96752808d6f4892f2352aedc2212, type: 2}
+  OnActivateStrategies:
+  - {fileID: 11400000, guid: 64efa05a376f4244ea2efe92fbd2a276, type: 2}
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []

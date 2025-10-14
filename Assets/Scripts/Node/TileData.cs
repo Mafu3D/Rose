@@ -11,7 +11,8 @@ namespace Project.GameTiles
     {
         Standard,
         Safe,
-        Dangerous
+        Dangerous,
+        Elite
     }
 
     [CreateAssetMenu(fileName = "TileData", menuName = "Tiles/Tile Data", order = 0)]

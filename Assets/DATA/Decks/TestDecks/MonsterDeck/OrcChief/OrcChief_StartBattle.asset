@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9559b1472856e024bb7e5b3505bb172c, type: 3}
-  m_Name: Goblin_StartBattle
+  m_Name: OrcChief_StartBattle
   m_EditorClassIdentifier: 
-  enemyCharacterData: {fileID: 11400000, guid: 368707c328e433e4eb9d9714ee488e6d, type: 2}
-  enemyNodePrefab: {fileID: 4534305980478911969, guid: eed4e8c3318bcb049ae72c63b41b2fa9, type: 3}
+  enemyCharacterData: {fileID: 11400000, guid: f0ca96752808d6f4892f2352aedc2212, type: 2}
+  enemyNodePrefab: {fileID: 4534305980478911969, guid: f9350a9facb7f40419592515af5766aa, type: 3}
