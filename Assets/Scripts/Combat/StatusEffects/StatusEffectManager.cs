@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Project.Items;
+using UnityEngine;
 
 namespace Project.Combat.StatusEffects
 {
@@ -47,6 +49,20 @@ namespace Project.Combat.StatusEffects
             {
                 RemoveStatusEffect(keyValuePair.Value);
             }
+        }
+
+        public bool TryGetStacksOf<T>(out int stacks)
+        {
+            foreach (StatusEffect registeredStatusEffect in registeredStatusEffects.Values)
+            {
+                if (registeredStatusEffect.GetType() == typeof(T))
+                {
+                    stacks = registeredStatusEffect.Stacks;
+                    return true;
+                }
+            }
+            stacks = 0;
+            return false;
         }
 
         public List<StatusEffect> GetAllStatusEffects()

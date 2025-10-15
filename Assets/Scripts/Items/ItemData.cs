@@ -29,6 +29,9 @@ namespace Project.Items
         [SerializeField] public int SpeedModifier = 0;
         [SerializeField] public int MaxSpeedModifier = 0;
 
+        [Header("Hidden attributes")]
+        [SerializeField] public int MultistrikeModifier = 0;
+
         [Header("Uses")]
         [SerializeField] public int UsesPerCombat = -1;
 

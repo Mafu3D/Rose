@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e14a05f907bdb4d8211f6b1066579e, type: 3}
-  m_Name: Hero_Attrs
+  m_Script: {fileID: 11500000, guid: e8ab8b96d6739b84e897e1e2702f3db0, type: 3}
+  m_Name: Frostfang_CheckFrostConditional
   m_EditorClassIdentifier: 
-  Health: 15
-  Speed: 2
-  Strength: 2
-  Magic: 1
-  Dexterity: 1
-  Armor: 0
-  Multistrike: 0
+  targetCharacter: 1
+  toCheck: 6
+  operation: 2
+  value: 1
+  actionDatas:
+  - {fileID: 11400000, guid: e24397e22b07a1e46a14a5ea30635a58, type: 2}

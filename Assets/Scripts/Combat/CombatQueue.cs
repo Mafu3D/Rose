@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using Project.Combat.CombatActions;
 using UnityEngine;
 
@@ -32,7 +33,10 @@ namespace Project.Combat
         public void ExecuteNextInQueue()
         {
             Queue[currentQueueIndex].Execute();
-            OnActionExecuted?.Invoke(Queue[currentQueueIndex].Message);
+            if (!Queue[currentQueueIndex].Message.IsNullOrEmpty())
+            {
+                OnActionExecuted?.Invoke(Queue[currentQueueIndex].Message);
+            }
             currentQueueIndex++;
             if (currentQueueIndex >= Queue.Count)
             {

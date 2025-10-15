@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: Necromancer_Item
+  m_Name: Swiftblade
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
+  Name: Swiftblade
+  Description: Multistrike +1
   ItemID: 
-  Sprite: {fileID: 0}
-  GoldValue: 0
-  ItemType: 0
+  Sprite: {fileID: 10057838, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 7
+  ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 0
+  StrengthModifier: 1
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -30,16 +30,12 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
-  MultistrikeModifier: 0
-  UsesPerCombat: 1
-  OnHitStrategies:
-  - {fileID: 11400000, guid: 7396ab44e63f22841a9ffd5d048c3450, type: 2}
+  MultistrikeModifier: 1
+  UsesPerCombat: -1
+  OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
-  OnCombatEndStrategies:
-  - {fileID: 11400000, guid: 7455bd721ec00564aac8ffa4f8a07973, type: 2}
-  - {fileID: 11400000, guid: 861e72c80677def458650a4caca30130, type: 2}
-  - {fileID: 11400000, guid: cfb1b7367c18d1a4eac6130ef1edd802, type: 2}
+  OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
   OnTurnStartStrategies: []

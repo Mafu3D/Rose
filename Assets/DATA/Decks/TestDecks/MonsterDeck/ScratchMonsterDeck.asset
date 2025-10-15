@@ -17,12 +17,6 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 2b0d5e7db713c6746bae60afe912bf06, type: 2}
-    - {fileID: 11400000, guid: 43668fefb0e2bce42ae4fb3cccafbac7, type: 2}
-    - {fileID: 11400000, guid: 4b156a461b07f4741bafd0794bd60de2, type: 2}
-    - {fileID: 11400000, guid: b88ffca267945c34e95a2248d0cb84db, type: 2}
-    - {fileID: 11400000, guid: 3ce896ade7444274f92d44e42031a972, type: 2}
-    - {fileID: 11400000, guid: 2f03b2a46b9f59a498cca968bb5d0b51, type: 2}
-    - {fileID: 11400000, guid: aa8b64304b0fc034b937c83a796f6678, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -41,7 +35,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
@@ -51,78 +45,6 @@ MonoBehaviour:
     - Name: $v
       Entry: 3
       Data: 10
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 1
-    - Name: $v
-      Entry: 3
-      Data: 10
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 2
-    - Name: $v
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 3
-    - Name: $v
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 4
-    - Name: $v
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 5
-    - Name: $v
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 6
-    - Name: $v
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 8
       Data: 

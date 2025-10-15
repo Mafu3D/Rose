@@ -15,6 +15,8 @@ namespace Project.Attributes
             Attributes.Add(AttributeType.Magic, new Attribute(AttributeType.Magic, data.Magic));
             Attributes.Add(AttributeType.Dexterity, new Attribute(AttributeType.Dexterity, data.Dexterity));
             Attributes.Add(AttributeType.Speed, new Attribute(AttributeType.Speed, data.Speed));
+
+            Attributes.Add(AttributeType.Multistrike, new Attribute(AttributeType.Multistrike, data.Multistrike));
         }
 
         public CharacterAttributes() {
@@ -32,7 +34,9 @@ namespace Project.Attributes
                 { AttributeType.Strength, GetAttribute(AttributeType.Strength).Copy() },
                 { AttributeType.Magic, GetAttribute(AttributeType.Magic).Copy() },
                 { AttributeType.Speed, GetAttribute(AttributeType.Speed).Copy() },
-                { AttributeType.Dexterity, GetAttribute(AttributeType.Dexterity).Copy() }
+                { AttributeType.Dexterity, GetAttribute(AttributeType.Dexterity).Copy() },
+
+                { AttributeType.Multistrike, GetAttribute(AttributeType.Multistrike).Copy() }
             };
 
             copy.Attributes = copyAttributes;

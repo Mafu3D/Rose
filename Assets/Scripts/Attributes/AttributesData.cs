@@ -11,5 +11,8 @@ namespace Project.Attributes
         [SerializeField] public int Magic = 0;
         [SerializeField] public int Dexterity = 0;
         [SerializeField] public int Armor = 0;
+
+        [Header("Hidden")]
+        [SerializeField] public int Multistrike = 0;
     }
 }

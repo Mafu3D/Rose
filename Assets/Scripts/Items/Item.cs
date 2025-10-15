@@ -46,6 +46,8 @@ namespace Project.Items
             if (this.ItemData.MagicModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
             if (this.ItemData.DexterityModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
             if (this.ItemData.SpeedModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
+
+            if (this.ItemData.MultistrikeModifier != 0) character.Attributes.RegisterAttributeModifier(Attributes.AttributeType.Multistrike, this.ItemData.MultistrikeModifier);
         }
 
         private void DeregisterAttributeModifiers(Character character)
@@ -65,6 +67,8 @@ namespace Project.Items
             if (this.ItemData.MagicModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Magic, this.ItemData.MagicModifier);
             if (this.ItemData.DexterityModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Dexterity, this.ItemData.DexterityModifier);
             if (this.ItemData.SpeedModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Speed, this.ItemData.SpeedModifier);
+
+            if (this.ItemData.MultistrikeModifier != 0) character.Attributes.DeregisterAttributeModifier(Attributes.AttributeType.Multistrike, this.ItemData.MultistrikeModifier);
         }
 
         public void IncUses()

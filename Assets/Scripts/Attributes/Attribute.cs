@@ -11,7 +11,8 @@ namespace Project.Attributes
         Strength,
         Magic,
         Dexterity,
-        Speed
+        Speed,
+        Multistrike
     }
 
     public class Attribute

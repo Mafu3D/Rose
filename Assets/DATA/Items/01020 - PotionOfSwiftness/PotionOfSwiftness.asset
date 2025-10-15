@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: Necromancer_Item
+  m_Name: PotionOfSwiftness
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
+  Name: Potion of Swiftness
+  Description: 'Combat Start: Gain multistrike +1 for one turn'
   ItemID: 
-  Sprite: {fileID: 0}
-  GoldValue: 0
+  Sprite: {fileID: 1554869157, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 7
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
@@ -32,18 +32,16 @@ MonoBehaviour:
   MaxSpeedModifier: 0
   MultistrikeModifier: 0
   UsesPerCombat: 1
-  OnHitStrategies:
-  - {fileID: 11400000, guid: 7396ab44e63f22841a9ffd5d048c3450, type: 2}
+  OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
-  OnCombatEndStrategies:
-  - {fileID: 11400000, guid: 7455bd721ec00564aac8ffa4f8a07973, type: 2}
-  - {fileID: 11400000, guid: 861e72c80677def458650a4caca30130, type: 2}
-  - {fileID: 11400000, guid: cfb1b7367c18d1a4eac6130ef1edd802, type: 2}
+  OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies: []
-  OnTurnEndStrategies: []
+  OnTurnStartStrategies:
+  - {fileID: 11400000, guid: c6e93729dce18a7449555a19ec7a3ecf, type: 2}
+  OnTurnEndStrategies:
+  - {fileID: 11400000, guid: cbea90f5d92610d47b5ea78cd61db7bf, type: 2}
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
   OnSelfBloodiedStrategies: []

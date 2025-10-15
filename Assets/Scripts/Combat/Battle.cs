@@ -209,7 +209,7 @@ namespace Project.Combat
                         if (item.ItemData.OnSelfBloodiedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnSelfBloodiedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -226,7 +226,7 @@ namespace Project.Combat
                         if (item.ItemData.OnEnemyBloodiedStrategies.Count > 0 )
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyBloodiedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -248,7 +248,7 @@ namespace Project.Combat
                         if (item.ItemData.OnEnemyBloodiedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyBloodiedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -265,7 +265,7 @@ namespace Project.Combat
                         if (item.ItemData.OnSelfBloodiedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnSelfBloodiedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -290,7 +290,7 @@ namespace Project.Combat
                         if (item.ItemData.OnSelfExposedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnSelfExposedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -307,7 +307,7 @@ namespace Project.Combat
                         if (item.ItemData.OnEnemyExposedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyExposedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -329,7 +329,7 @@ namespace Project.Combat
                         if (item.ItemData.OnEnemyExposedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnEnemyExposedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -346,7 +346,7 @@ namespace Project.Combat
                         if (item.ItemData.OnSelfExposedStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnSelfExposedStrategies)
                             {
                                 Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
@@ -374,7 +374,7 @@ namespace Project.Combat
                         if (item.ItemData.OnCombatStartStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnCombatStartStrategies)
                             {
                                 actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
@@ -417,7 +417,7 @@ namespace Project.Combat
                         if (item.ItemData.OnRoundStartStrategies.Count > 0 )
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnRoundStartStrategies)
                             {
                                 actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
@@ -454,7 +454,7 @@ namespace Project.Combat
                     if (item.ItemData.OnTurnStartStrategies.Count > 0)
                     {
                         if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                        item.IncUses();
+                        if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                         foreach (CombatActionBaseData actionData in item.ItemData.OnTurnStartStrategies)
                         {
                             actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
@@ -493,7 +493,7 @@ namespace Project.Combat
                     if (item.ItemData.OnTurnEndStrategies.Count > 0)
                     {
                         if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                        item.IncUses();
+                        if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                         foreach (CombatActionBaseData actionData in item.ItemData.OnTurnEndStrategies)
                         {
                             actionData.QueueAction(CombatQueue, activeCombatant, GetTarget(activeCombatant));
@@ -535,7 +535,7 @@ namespace Project.Combat
                         if (item.ItemData.OnRoundEndStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnRoundEndStrategies)
                             {
                                 actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
@@ -548,10 +548,16 @@ namespace Project.Combat
                 foreach (StatusEffect statusEffect in combatant.StatusEffectManager.GetAllStatusEffects())
                 {
                     CombatAction statusEffectAction = statusEffect.OnRoundEnd();
-                    if (statusEffectAction != null) {
+                    if (statusEffectAction != null)
+                    {
                         CombatQueue.AddAction(statusEffectAction);
                     }
                 }
+            }
+
+            foreach(Item item in itemsUsedThisRound)
+            {
+                item.IncUses();
             }
 
             if (debugMode) Debug.Log($"End Round: {Round} - InQueue: {CombatQueue.Queue.Count}");
@@ -576,51 +582,56 @@ namespace Project.Combat
             int attackValue = attacker.GetAttackValue();
             HitReport hitReport = new HitReport(attackValue);
 
-            CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
+            for (int i = 0; i < attacker.Attributes.GetAttributeValue(AttributeType.Multistrike) + 1; i++)
             {
-                defender.ReceiveAttack(hitReport);
-                OnAttack?.Invoke();
-
-                // Items
-                if (attacker.Inventory != null)
+                CombatAction attackAction = new CombatAction(attacker, defender, (attacker, defender) =>
                 {
-                    List<Item> items = attacker.Inventory.GetAllItems(true);
-                    foreach (Item item in items)
+                    defender.ReceiveAttack(hitReport);
+                    OnAttack?.Invoke();
+
+                    // Items
+                    if (attacker.Inventory != null)
                     {
-                        if (item.ItemData.OnHitStrategies.Count > 0)
+                        List<Item> items = attacker.Inventory.GetAllItems(true);
+                        foreach (Item item in items)
                         {
-                            if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
-                            foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
+                            if (item.ItemData.OnHitStrategies.Count > 0)
                             {
-                                Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
-                                actionData.QueueAction(CombatQueue, attacker, defender);
+                                if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+                                if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
+                                foreach (CombatActionBaseData actionData in item.ItemData.OnHitStrategies)
+                                {
+                                    Debug.Log($"Queueing {item.ItemData.Name} : {actionData.ToString()}");
+                                    actionData.QueueAction(CombatQueue, attacker, defender);
+                                }
                             }
                         }
                     }
-                }
 
-                // Status Effects
-                foreach (StatusEffect statusEffect in attacker.StatusEffectManager.GetAllStatusEffects())
-                {
-                    CombatAction statusEffectAction = statusEffect.OnHit();
-                    if (statusEffectAction != null) {
-                        CombatQueue.AddAction(statusEffectAction);
+                    // Status Effects
+                    foreach (StatusEffect statusEffect in attacker.StatusEffectManager.GetAllStatusEffects())
+                    {
+                        CombatAction statusEffectAction = statusEffect.OnHit();
+                        if (statusEffectAction != null)
+                        {
+                            CombatQueue.AddAction(statusEffectAction);
+                        }
                     }
-                }
 
-                foreach (StatusEffect statusEffect in defender.StatusEffectManager.GetAllStatusEffects())
-                {
-                    CombatAction statusEffectAction = statusEffect.OnReceiveHit();
-                    if (statusEffectAction != null) {
-                        CombatQueue.AddAction(statusEffectAction);
+                    foreach (StatusEffect statusEffect in defender.StatusEffectManager.GetAllStatusEffects())
+                    {
+                        CombatAction statusEffectAction = statusEffect.OnReceiveHit();
+                        if (statusEffectAction != null)
+                        {
+                            CombatQueue.AddAction(statusEffectAction);
+                        }
                     }
-                }
 
-                if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
-            },
-            $"{defender.DisplayName} took {hitReport.Damage} dmg");
-            CombatQueue.AddAction(attackAction);
+                    if (debugMode) Debug.Log($"Attack: {attacker.DisplayName} attacked {defender.DisplayName} - InQueue: {CombatQueue.Queue.Count}");
+                },
+                $"{defender.DisplayName} took {hitReport.Damage} dmg");
+                CombatQueue.AddAction(attackAction);
+            }
         }
 
         public void EndBattle()
@@ -637,7 +648,7 @@ namespace Project.Combat
                         if (item.ItemData.OnCombatEndStrategies.Count > 0)
                         {
                             if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
-                            item.IncUses();
+                            if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
                             foreach (CombatActionBaseData actionData in item.ItemData.OnCombatEndStrategies)
                             {
                                 Debug.Log("queueing");
@@ -648,6 +659,29 @@ namespace Project.Combat
                 }
             }
         }
+
+        private List<Item> itemsUsedThisRound = new();
+
+        // private void QueueStrategy(Character combatant, List<CombatActionBaseData> strategies)
+        // {
+        //     if (combatant.Inventory != null)
+        //     {
+        //         List<Item> items = combatant.Inventory.GetAllItems(true);
+        //         foreach (Item item in items)
+        //         {
+        //             if (strategies.Count > 0)
+        //             {
+        //                 if (item.ItemData.UsesPerCombat >= 0 && item.Uses >= item.ItemData.UsesPerCombat) continue;
+        //                 if (!itemsUsedThisRound.Contains(item)) itemsUsedThisRound.Add(item);
+        //                 foreach (CombatActionBaseData actionData in strategies)
+        //                 {
+        //                     Debug.Log("queueing");
+        //                     actionData.QueueAction(CombatQueue, combatant, GetTarget(combatant));
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         public void FinishBattle()
         {
