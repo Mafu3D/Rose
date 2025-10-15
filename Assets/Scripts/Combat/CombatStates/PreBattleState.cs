@@ -16,7 +16,7 @@ namespace Project.Combat.CombatStates
 
         public override void OnEnter()
         {
-            List<Action> prebattleChoices = new List<Action> { ChooseFight, ChooseSteal, ChooseRun };
+            List<Action> prebattleChoices = new List<Action> { ChooseFight, ChooseRun, ChooseRun };
             PreBattleChoice = new Choice<Action>(prebattleChoices, ResolvePrebattleChoice);
 
             GameManager.Instance.Player.InputReader.OnNumInput += Choose;

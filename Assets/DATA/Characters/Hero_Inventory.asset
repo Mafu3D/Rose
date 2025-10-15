@@ -16,4 +16,5 @@ MonoBehaviour:
   StartingEquippedWeaponData: {fileID: 0}
   StartingHeldItemsData:
   - {fileID: 11400000, guid: aeeff3d3472f2b1449702c3506b202fe, type: 2}
+  - {fileID: 11400000, guid: aeeff3d3472f2b1449702c3506b202fe, type: 2}
   - {fileID: 11400000, guid: afaced601a8fb7e479adfecc5bd4b3d0, type: 2}

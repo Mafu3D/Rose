@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: If the enemy is frozen, gain +1 multistrike that turn
   ItemID: 
   Sprite: {fileID: -66858294, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 7
+  GoldValue: 10
   ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0
@@ -40,7 +40,8 @@ MonoBehaviour:
   OnRoundEndStrategies: []
   OnTurnStartStrategies:
   - {fileID: 11400000, guid: 69ba072ed2e70d24b9f074713e526c95, type: 2}
-  OnTurnEndStrategies: []
+  OnTurnEndStrategies:
+  - {fileID: 11400000, guid: f50881a1aabda2d43822d0611927f478, type: 2}
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
   OnSelfBloodiedStrategies: []

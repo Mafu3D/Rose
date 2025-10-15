@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8ab8b96d6739b84e897e1e2702f3db0, type: 3}
-  m_Name: Frostfang_CheckFrostConditional
+  m_Name: Frostfang_CheckFrostConditonalRemove
   m_EditorClassIdentifier: 
   targetCharacter: 1
   toCheck: 6
-  operation: 2
+  operation: 4
   value: 1
   actionDatas:
-  - {fileID: 11400000, guid: e24397e22b07a1e46a14a5ea30635a58, type: 2}
+  - {fileID: 11400000, guid: 5c51575cf8be49940aa530eaba9193ce, type: 2}

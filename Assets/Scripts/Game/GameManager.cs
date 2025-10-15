@@ -199,14 +199,33 @@ namespace Project
         public void OnNewRound()
         {
             Round += 1;
-            if (Round >= RoundsTillBoss)
+
+            int roundsRemaining = RoundsTillBoss - Round;
+            if (roundsRemaining == 10)
+            {
+                CalloutUI.Instance.QueueCallout("Boss arrives in 10 turns", Color.white, 2f);
+            }
+            else if (roundsRemaining == 5)
+            {
+                string hexColor;
+                hexColor = "#FF4C00";
+                Color color;
+                ColorUtility.TryParseHtmlString(hexColor, out color);
+                CalloutUI.Instance.QueueCallout("Boss arrives in 5 turns", color, 2f);
+            }
+            else if (roundsRemaining <= 3 && roundsRemaining > 1)
+            {
+                CalloutUI.Instance.QueueCallout($"Boss arrives in {roundsRemaining} turns", Color.red, 2f);
+            }
+            else if (roundsRemaining == 1)
+            {
+                CalloutUI.Instance.QueueCallout($"Last turn", Color.red, 2f);
+            }
+            else if (roundsRemaining == 0)
             {
                 SummonBoss();
             }
-            else
-            {
-                Debug.Log($"The boss will appear in {RoundsTillBoss - Round} rounds!");
-            }
+            Debug.Log($"The boss will appear in {RoundsTillBoss - Round} rounds!");
 
             Hero.ResetMovesRemaining();
             OnRoundStartEvent?.Invoke();
