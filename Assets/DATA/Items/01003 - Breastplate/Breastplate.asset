@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Breastplate
   Description: +3 Armor -1 Speed
   ItemID: 01002
-  Sprite: {fileID: 598871768815864723, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: -1388814, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3
   ItemType: 0
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: -1
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
@@ -44,3 +45,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

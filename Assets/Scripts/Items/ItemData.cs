@@ -57,6 +57,8 @@ namespace Project.Items
         [SerializeField] public List<CombatActionBaseData> OnSelfExposedStrategies = new();
         [SerializeField] public List<CombatActionBaseData> OnEnemyExposedStrategies = new();
 
+        [SerializeField] public List<CombatActionBaseData> OnDieStrategies = new();
+
         // gameplay effects for defeat opponent, run, or steal?
     }
 }

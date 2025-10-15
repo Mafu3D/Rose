@@ -55,6 +55,10 @@ namespace Project.UI
                             header = "Risky";
                             content = "You have a chance to encounter a monster here.";
                             return true;
+                        case DangerStatus.Elite:
+                            header = "Elite";
+                            content = "You will fight an elite monster here.";
+                            return true;
                     }
                     break;
                 case TileHelpIconType.Trapped:

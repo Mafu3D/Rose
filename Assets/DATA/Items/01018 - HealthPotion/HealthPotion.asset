@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   Name: Health Potion
-  Description: 'Combat End: Restore 3 Health'
+  Description: 'Combat Start: Restore 3 Health'
   ItemID: 
-  Sprite: {fileID: -8529683765627389468, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: -682804151, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3
   ItemType: 0
   HealthModifier: 0
@@ -30,11 +30,12 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies: []
-  OnCombatEndStrategies:
+  OnCombatStartStrategies:
   - {fileID: 11400000, guid: 995657dac4af6f644a9a7eaee508d05d, type: 2}
+  OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
   OnTurnStartStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

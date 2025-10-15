@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Ice Lance
   Description: '+1 Attack, +3 Armor, On Hit: Apply 1 Frost'
   ItemID: 
-  Sprite: {fileID: 1480474399701166164, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: -1942552248, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
   ItemType: 1
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies:
   - {fileID: 11400000, guid: 7846e6b3e0b914941820b236fef5836d, type: 2}
   OnReceiveHitStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

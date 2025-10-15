@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Poison Dagger
   Description: '+1 Attack, +1 Speed, On Hit: Apply 1 Weakened'
   ItemID: 
-  Sprite: {fileID: 6133003168617082715, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 876636615, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5
   ItemType: 1
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 1
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies:
   - {fileID: 11400000, guid: 7e9a7b0265fa8224fbf28344b7458aac, type: 2}
   OnReceiveHitStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

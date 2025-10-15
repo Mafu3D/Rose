@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Ring Of Ice
   Description: 'Round Start: Apply 1 Frost'
   ItemID: 
-  Sprite: {fileID: -8049432349739340861, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 2102662179, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
   ItemType: 0
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

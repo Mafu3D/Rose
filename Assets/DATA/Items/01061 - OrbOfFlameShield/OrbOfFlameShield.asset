@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
   m_Name: OrbOfFlameShield
   m_EditorClassIdentifier: 
-  Name: Orb Of Flame Shield
+  Name: Flame Shield Cloak
   Description: 'On Receive Hit: Apply 1 Burn'
   ItemID: 
-  Sprite: {fileID: 1256095980742163159, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 820231469, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
   ItemType: 0
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies:
   - {fileID: 11400000, guid: 6fd1bda802f8ac24a997bf6704a4b0e4, type: 2}
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

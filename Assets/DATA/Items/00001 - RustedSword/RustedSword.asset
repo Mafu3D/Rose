@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Rusted Sword
   Description: +1 Attack
   ItemID: 0001
-  Sprite: {fileID: -8218794040945226646, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 384969753, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 0
   ItemType: 1
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
@@ -44,3 +45,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

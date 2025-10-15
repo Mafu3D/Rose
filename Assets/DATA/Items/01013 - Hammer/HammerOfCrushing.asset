@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Hammer of Crushing
   Description: '+2 Attack, -1 Speed, On Hit: Apply 1 Vulnerable'
   ItemID: 
-  Sprite: {fileID: -4785610169228118174, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 317609799, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3
   ItemType: 1
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: -1
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies:
   - {fileID: 11400000, guid: 5e6ca9a10ab45964ab8e0bcb90b59b59, type: 2}
   OnReceiveHitStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

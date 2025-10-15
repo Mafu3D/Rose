@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Poison Oil
   Description: 'On Hit: Apply 1 Weakened'
   ItemID: 
-  Sprite: {fileID: 8119881643591593686, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 1082369930, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5
   ItemType: 0
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies:
   - {fileID: 11400000, guid: fe64c6cb22529864d84d14143bd6bd03, type: 2}
   OnReceiveHitStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

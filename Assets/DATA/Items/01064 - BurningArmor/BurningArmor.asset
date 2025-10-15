@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: '+2 Armor, Combat Start: Apply 2 Burn (Self), On Receive Hit: Apply
     1 Burn'
   ItemID: 
-  Sprite: {fileID: 1256095980742163159, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: -781737818, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
   ItemType: 0
   HealthModifier: 0
@@ -31,6 +31,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies:
   - {fileID: 11400000, guid: 8e74241f778ecbd468089d4ddb680414, type: 2}
@@ -47,3 +48,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

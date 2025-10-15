@@ -610,7 +610,9 @@ namespace Project.Combat
 
             // Reset attributes
             Hero.RestoreSnapshotAttributes();
+            Hero.StatusEffectManager.ClearAllStatusEffects();
             Enemy.RestoreSnapshotAttributes();
+            Enemy.StatusEffectManager.ClearAllStatusEffects();
 
             finishedCallback(battleReport, Hero, Enemy);
         }

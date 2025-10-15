@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Fire Sword
   Description: '+2 Attack, On Hit: Apply 1 Burn'
   ItemID: 
-  Sprite: {fileID: -8218794040945226646, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 242487388, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
   ItemType: 1
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies:
   - {fileID: 11400000, guid: 9d1ac9627e8c25942a9e05772ca39c7c, type: 2}
   OnReceiveHitStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

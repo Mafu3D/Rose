@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: '+4 Armor, Combat Start: Apply 2 Frost (self), On Receive HIt: Apply
     1 Frost'
   ItemID: 
-  Sprite: {fileID: 598871768815864723, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 1222193843, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
   ItemType: 0
   HealthModifier: 0
@@ -31,6 +31,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies:
   - {fileID: 11400000, guid: 9cc1a92a852c285428c433d07f781523, type: 2}
@@ -47,3 +48,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

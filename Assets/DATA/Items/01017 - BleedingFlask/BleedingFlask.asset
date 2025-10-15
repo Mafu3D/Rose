@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Vulnerable Oil
   Description: 'Combat Start: Apply 2 Vulnerable'
   ItemID: 
-  Sprite: {fileID: 5926964135845988567, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: 1159845123, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5
   ItemType: 0
   HealthModifier: 0
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
@@ -45,3 +46,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []

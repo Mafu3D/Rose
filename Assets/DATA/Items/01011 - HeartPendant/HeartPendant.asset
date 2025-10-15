@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
   m_Name: HeartPendant
   m_EditorClassIdentifier: 
-  Name: Heart Pendant
+  Name: Life Pendant
   Description: +5 Health
   ItemID: 
-  Sprite: {fileID: 3996424042659583036, guid: 0cbd341242f32124caf77da06721ae8e, type: 3}
+  Sprite: {fileID: -494773118, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3
   ItemType: 0
   HealthModifier: 5
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
@@ -44,3 +45,4 @@ MonoBehaviour:
   OnEnemyBloodiedStrategies: []
   OnSelfExposedStrategies: []
   OnEnemyExposedStrategies: []
+  OnDieStrategies: []
