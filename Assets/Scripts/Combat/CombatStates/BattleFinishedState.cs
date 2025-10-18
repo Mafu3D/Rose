@@ -11,6 +11,10 @@ namespace Project.Combat.CombatStates
         public override void OnEnter()
         {
             GameManager.BattleManager.ActiveBattle.CloseBattle();
+            if (GameManager.Player.HeroTile.Character.Attributes.GetAttributeValue(Attributes.AttributeType.Health) <= 0)
+            {
+                GameManager.HandleGameOver();
+            }
         }
 
         public override void OnExit()

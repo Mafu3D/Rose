@@ -13,6 +13,8 @@ using Project.Combat;
 using Project.States;
 using Project.Resources;
 using Project.Core.GameEvents;
+using Project.VFX;
+using Project.SceneManagement;
 
 namespace Project
 {
@@ -390,6 +392,17 @@ namespace Project
             tilesToBeDestroyed = new();
         }
 
+
+        public void HandleGameOver()
+        {
+            Destroy(CalloutUI.Instance.gameObject);
+            Destroy(VFXManager.Instance.gameObject);
+            Destroy(MainUI.Instance.gameObject);
+            Destroy(TileFactory.Instance.gameObject);
+            Destroy(CalloutUI.Instance.gameObject);
+            SceneLoader.GameOver();
+            Destroy(this.gameObject);
+        }
 
 
         #region Temp Shit
