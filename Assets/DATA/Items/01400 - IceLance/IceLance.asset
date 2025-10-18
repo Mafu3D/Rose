@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceLance
   m_EditorClassIdentifier: 
   Name: Ice Lance
-  Description: '+1 Attack, +3 Armor, On Hit: Apply 1 Frost'
+  Description: '+1 Attack \n +3 Armor \n On Hit: Apply 1 Frost'
   ItemID: 
   Sprite: {fileID: -1942552248, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TheStatStick
   m_EditorClassIdentifier: 
   Name: The Stat Stick
-  Description: +5 Health, +5 Armor, +2 Attack, +2 Speed
+  Description: +5 Health \n +5 Armor \n +2 Attack \n +2 Speed
   ItemID: 
   Sprite: {fileID: 762908163, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 0

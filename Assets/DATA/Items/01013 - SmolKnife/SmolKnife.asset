@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SmolKnife
   m_EditorClassIdentifier: 
   Name: Smol Knife
-  Description: 
+  Description: +1 Attack
   ItemID: 
   Sprite: {fileID: 1215000109, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireSword
   m_EditorClassIdentifier: 
   Name: Fire Sword
-  Description: '+2 Attack, On Hit: Apply 1 Burn'
+  Description: '+2 Attack \n On Hit: Apply 1 Burn'
   ItemID: 
   Sprite: {fileID: 242487388, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7

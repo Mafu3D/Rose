@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BloodyAxe
   m_EditorClassIdentifier: 
   Name: Bloody Axe
-  Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
+  Description: '+4 Attack \n Combat Start: +1 vulnerable (self)'
   ItemID: 
   Sprite: {fileID: -1765020933, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 6

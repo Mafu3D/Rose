@@ -17,6 +17,7 @@ MonoBehaviour:
   ItemID: 
   Sprite: {fileID: 482079394, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5
+  Rarity: 1
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
@@ -30,6 +31,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  MultistrikeModifier: 0
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []

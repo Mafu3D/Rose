@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: FlameStaff
+  m_Name: Bomb
   m_EditorClassIdentifier: 
-  Name: Flame Staff
-  Description: '+1 Attack \n Turn Start: Apply 2 Burn'
-  ItemID: 
-  Sprite: {fileID: -888398554, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 7
-  Rarity: 1
-  ItemType: 1
+  Name: Tower Shield
+  Description: +3 Armor -1 Speed
+  ItemID: 01002
+  Sprite: {fileID: 254468417, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 3
+  Rarity: 0
+  ItemType: 2
   HealthModifier: 0
   MaxHealthModifier: 0
-  ArmorModifier: 0
+  ArmorModifier: 3
   MaxArmorModifier: 0
-  StrengthModifier: 1
+  StrengthModifier: 0
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
   DexterityModifier: 0
   MaxDexterityModifier: 0
-  SpeedModifier: 0
+  SpeedModifier: -1
   MaxSpeedModifier: 0
   MultistrikeModifier: 0
   UsesPerCombat: -1
@@ -39,8 +39,7 @@ MonoBehaviour:
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies:
-  - {fileID: 11400000, guid: 8282d1cf41386b9498d3f3c8b7dd5ee1, type: 2}
+  OnTurnStartStrategies: []
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []

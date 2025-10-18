@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArmoredLance
   m_EditorClassIdentifier: 
   Name: Armored Lance
-  Description: +2 Attack, +2 Armor
+  Description: +2 Attack \n +2 Armor
   ItemID: 
   Sprite: {fileID: 1939110747, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5

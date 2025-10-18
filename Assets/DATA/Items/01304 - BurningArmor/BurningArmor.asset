@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BurningArmor
   m_EditorClassIdentifier: 
   Name: Burning Armor
-  Description: '+3 Armor, Combat Start: Apply 2 Burn (Self), On Receive Hit: Apply
-    1 Burn'
+  Description: '+3 Armor \n Combat Start: Receive 2 Burn (Self) \n On Receive Hit:
+    Apply 1 Burn'
   ItemID: 
   Sprite: {fileID: -781737818, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7

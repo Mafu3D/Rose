@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BoneCrusher
   m_EditorClassIdentifier: 
   Name: Bone Crusher
-  Description: '+2 Attack, -1 Speed, On Hit: Apply 1 Vulnerable'
+  Description: '+2 Attack \n -1 Speed \n On Hit: Apply 1 Vulnerable'
   ItemID: 
   Sprite: {fileID: 1524341738, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3

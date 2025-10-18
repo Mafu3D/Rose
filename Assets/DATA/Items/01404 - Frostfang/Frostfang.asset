@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Frostfang
   m_EditorClassIdentifier: 
   Name: Frostfang
-  Description: 'Turn Start: If the enemy is frozen, gain +1 multistrike this turn'
+  Description: '+3 Attack  \n Turn Start: If the enemy is frozen, gain +1 multistrike
+    this turn'
   ItemID: 
   Sprite: {fileID: -66858294, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 10

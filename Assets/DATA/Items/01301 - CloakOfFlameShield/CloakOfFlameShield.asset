@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CloakOfFlameShield
   m_EditorClassIdentifier: 
   Name: Flame Shield Cloak
-  Description: 'End of turn: Receive 1 burn (self), On Hit: apply 1 burn'
+  Description: 'End of turn: Receive 1 burn (self) \n On Hit: apply 1 burn'
   ItemID: 
   Sprite: {fileID: 820231469, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7

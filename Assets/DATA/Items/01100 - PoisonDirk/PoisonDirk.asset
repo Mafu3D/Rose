@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PoisonDirk
   m_EditorClassIdentifier: 
   Name: Poisoned Dirk
-  Description: '+1 Attack, +1 Speed, On Hit: Apply 1 Weakened'
+  Description: '+1 Attack \n +1 Speed, On Hit: Apply 1 Weakened'
   ItemID: 
   Sprite: {fileID: 876636615, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5

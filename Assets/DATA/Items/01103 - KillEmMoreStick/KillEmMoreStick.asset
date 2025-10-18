@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KillEmMoreStick
   m_EditorClassIdentifier: 
   Name: Jeremy
-  Description: If the enemy's attack is 0, gain +2 attack
+  Description: If the enemy's attack is 0, gain +3 attack
   ItemID: 
   Sprite: {fileID: -718443890, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5

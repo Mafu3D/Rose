@@ -20,7 +20,7 @@ namespace Project.Decks
                 switch (entry.Key.Rarity)
                 {
                     case ItemRarity.Common:
-                        amount = 4;
+                        amount = 3;
                         break;
                     case ItemRarity.Uncommon:
                         amount = 3;

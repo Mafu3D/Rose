@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ArmorOfIce
   m_EditorClassIdentifier: 
   Name: Armor Of Ice
-  Description: '+4 Armor, Combat Start: Apply 2 Frost (self), On Receive HIt: Apply
-    1 Frost'
+  Description: '+4 Armor \n Combat Start: Receive 2 Frost (self) \n On Receive HIt:
+    Apply 1 Frost'
   ItemID: 
   Sprite: {fileID: 1222193843, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
