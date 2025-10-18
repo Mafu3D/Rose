@@ -26,7 +26,21 @@ namespace Project.UI
             if (item != null)
             {
                 header = item.ItemData.Name;
-                content = item.ItemData.Description;
+                content = "";
+                switch (item.ItemData.ItemType)
+                {
+                    case ItemType.Basic:
+                        content = "Held";
+                        break;
+                    case ItemType.Weapon:
+                        content = "Weapon";
+                        break;
+                    case ItemType.Offhand:
+                        content = "Offhand";
+                        break;
+                }
+
+                content += $"\n {item.ItemData.Description}";
                 content += "\n \n WARNING: Clicking this will DISCARD the item FOREVER!";
                 return true;
             }

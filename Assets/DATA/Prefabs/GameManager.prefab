@@ -47,11 +47,18 @@ MonoBehaviour:
   Player: {fileID: 0}
   CharacterData: {fileID: 11400000, guid: 3fac53523f1ea7649a27e9292bc1d8d4, type: 2}
   UICanvas: {fileID: 0}
+  ChanceForMonsterEncounter: 50
   EncounterDeckData: {fileID: 11400000, guid: a52d215cec2418e4c93e99025946dab8, type: 2}
-  MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}
+  MonsterDeckData: {fileID: 11400000, guid: 8f610344dd0e4904d839befff4f5414f, type: 2}
+  EliteMonsterDeckData: {fileID: 11400000, guid: 4afd7972a9fe6f149874871ac16d0cca, type: 2}
   ItemDeckData: {fileID: 11400000, guid: 13b5f39b389816a40a66297c56709d96, type: 2}
+  TileDeckData: {fileID: 11400000, guid: de8b22a9fb1d8a44da5effd52661fd86, type: 2}
+  RoundsTillBoss: 21
+  BossDeckData: {fileID: 11400000, guid: 323493d1abfe3d94d831a7e7640e3a9e, type: 2}
   AutoBattle: 1
-  AutoBattleSpeed: 1
+  AutoBattleSpeed: 0.5
   MinTimeBetweenPlayerMoves: 0.25
   MinTimeBetweenPhases: 0.5
   BattleDebugMode: 0
+  WillActivateTilesThisTurn: 1
+  Boss: {fileID: 0}

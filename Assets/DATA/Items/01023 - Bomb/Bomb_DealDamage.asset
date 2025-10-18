@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bomb_DealDamage
   m_EditorClassIdentifier: 
   targetCharacter: 1
-  amount: 3
+  amount: 2

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9602db118131c4dbb88ea27e76fbfe, type: 3}
   m_Name: ShreddersClaws_DealDamage
   m_EditorClassIdentifier: 
-  targetCharacter: 0
-  amount: 0
+  targetCharacter: 1
+  amount: 3
