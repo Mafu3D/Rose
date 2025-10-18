@@ -17,7 +17,7 @@ MonoBehaviour:
   ItemID: 10002
   Sprite: {fileID: -1425057364, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 3
-  ItemType: 0
+  ItemType: 2
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 2
@@ -30,6 +30,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  MultistrikeModifier: 0
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []

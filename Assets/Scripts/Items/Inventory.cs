@@ -123,6 +123,23 @@ namespace Project.Items
             return equippedWeapon;
         }
 
+        public Item SwapEquippedOffhand(Item item)
+        {
+            if (equippedOffhand != null)
+            {
+                equippedOffhand.OnUnequip(owner);
+                RemoveWeaponUpgrade();
+            }
+
+            equippedOffhand = item;
+
+            item.OnEquip(owner);
+
+            OnInventoryChanged?.Invoke();
+
+            return equippedOffhand;
+        }
+
         public int AddItem(Item item)
         {
             // Check for max slots

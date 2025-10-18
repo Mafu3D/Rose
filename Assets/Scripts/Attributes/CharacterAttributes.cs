@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Attributes
@@ -60,6 +61,11 @@ namespace Project.Attributes
             return default;
         }
 
+        public List<Attribute> GetAllAttributes()
+        {
+            return Attributes.Values.ToList();
+        }
+
         public int GetAttributeValue(AttributeType type)
         {
             Attribute attribute;
@@ -107,21 +113,21 @@ namespace Project.Attributes
             }
         }
 
-        public void RegisterAttributeModifier(AttributeType type, int value)
+        public void RegisterAttributeModifier(AttributeType type, int value, int duration=-1)
         {
             Attribute attribute;
             if (Attributes.TryGetValue(type, out attribute))
             {
-                attribute.RegisterBaseAttributeModifier(value);
+                attribute.RegisterBaseAttributeModifier(value, duration);
             }
         }
 
-        public void RegisterMaxAttributeModifier(AttributeType type, int value)
+        public void RegisterMaxAttributeModifier(AttributeType type, int value, int duration=-1)
         {
             Attribute attribute;
             if (Attributes.TryGetValue(type, out attribute))
             {
-                attribute.RegisterMaxAttributeModifier(value);
+                attribute.RegisterMaxAttributeModifier(value, duration);
             }
         }
 

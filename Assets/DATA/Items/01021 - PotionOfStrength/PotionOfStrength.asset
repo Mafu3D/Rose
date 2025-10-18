@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: Frostfang
+  m_Name: PotionOfStrength
   m_EditorClassIdentifier: 
-  Name: Frostfang
-  Description: If the enemy is frozen, gain +1 multistrike that turn
+  Name: Potion of Strength
+  Description: 'Combat Start: Gain +2 attack for one turn'
   ItemID: 
-  Sprite: {fileID: -66858294, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 10
-  ItemType: 1
+  Sprite: {fileID: 1554869157, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 7
+  ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 3
+  StrengthModifier: 0
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   SpeedModifier: 0
   MaxSpeedModifier: 0
   MultistrikeModifier: 0
-  UsesPerCombat: -1
+  UsesPerCombat: 1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
@@ -39,7 +39,7 @@ MonoBehaviour:
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
   OnTurnStartStrategies:
-  - {fileID: 11400000, guid: 69ba072ed2e70d24b9f074713e526c95, type: 2}
+  - {fileID: 11400000, guid: e5b762f01d7a4bf4f980485d560ef651, type: 2}
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []

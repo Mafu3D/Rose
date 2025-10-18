@@ -7,12 +7,17 @@ namespace Project.UI
     {
         [SerializeField] int slot;
         [SerializeField] bool isWeapon = false;
+        [SerializeField] bool isOffhand = false;
         public override bool TryGetTooltipInformation(out string content, out string header)
         {
             Item item;
             if (isWeapon)
             {
                 item = GameManager.Instance.Player.HeroTile.Character.Inventory.GetEquippedWeapon();
+            }
+            else if (isOffhand)
+            {
+                item = GameManager.Instance.Player.HeroTile.Character.Inventory.GetEquippedOffhand();
             }
             else
             {

@@ -17,3 +17,4 @@ MonoBehaviour:
   AttributeType: 6
   BaseValueModifier: 1
   MaxValueModifier: 0
+  Duration: 1

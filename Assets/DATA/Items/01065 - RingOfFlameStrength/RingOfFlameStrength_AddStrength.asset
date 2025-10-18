@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1b397118be74e24d818b1e4ff9c4b25, type: 3}
-  m_Name: Frostfang_GainMultistrike
+  m_Name: RingOfFlameStrength_AddStrength
   m_EditorClassIdentifier: 
   IsPermanent: 0
   targetCharacter: 0
-  AttributeType: 6
+  AttributeType: 2
   BaseValueModifier: 1
   MaxValueModifier: 0
   Duration: 1

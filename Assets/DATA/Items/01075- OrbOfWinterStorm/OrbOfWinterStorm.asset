@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: Frostfang
+  m_Name: OrbOfWinterStorm
   m_EditorClassIdentifier: 
-  Name: Frostfang
-  Description: If the enemy is frozen, gain +1 multistrike that turn
+  Name: Ring Of Ice
+  Description: 'Turn End: Apply 1 Frost'
   ItemID: 
-  Sprite: {fileID: -66858294, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 10
-  ItemType: 1
+  Sprite: {fileID: -860142163, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 7
+  ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 3
+  StrengthModifier: 0
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -38,9 +38,9 @@ MonoBehaviour:
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies:
-  - {fileID: 11400000, guid: 69ba072ed2e70d24b9f074713e526c95, type: 2}
-  OnTurnEndStrategies: []
+  OnTurnStartStrategies: []
+  OnTurnEndStrategies:
+  - {fileID: 11400000, guid: 10950120e0e024447a40bb74eae3612d, type: 2}
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
   OnSelfBloodiedStrategies: []

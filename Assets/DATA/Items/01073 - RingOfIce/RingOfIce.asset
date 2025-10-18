@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RingOfIce
   m_EditorClassIdentifier: 
   Name: Ring Of Ice
-  Description: 'Round Start: Apply 1 Frost'
+  Description: 'Round End: If the enemy has Frost, they gain one more Frost'
   ItemID: 
   Sprite: {fileID: 2102662179, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
@@ -30,14 +30,15 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  MultistrikeModifier: 0
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
   OnCombatEndStrategies: []
-  OnRoundStartStrategies:
-  - {fileID: 11400000, guid: 856997ddbb58e0c40a2fa784381cb928, type: 2}
-  OnRoundEndStrategies: []
+  OnRoundStartStrategies: []
+  OnRoundEndStrategies:
+  - {fileID: 11400000, guid: 1f27c3aa4aecaa047a5ba7de4e886dea, type: 2}
   OnTurnStartStrategies: []
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []

@@ -7,7 +7,7 @@ namespace Project.Items
     {
         Basic,
         Weapon,
-        Consumable
+        Offhand
     }
 
     public class Item

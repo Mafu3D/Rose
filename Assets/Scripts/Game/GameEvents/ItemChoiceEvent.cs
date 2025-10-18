@@ -33,6 +33,9 @@ namespace Project.Core.GameEvents
                     case ItemType.Weapon:
                         GameManager.Instance.Player.HeroTile.Character.Inventory.SwapEquippedWeapon(item);
                         break;
+                    case ItemType.Offhand:
+                        GameManager.Instance.Player.HeroTile.Character.Inventory.SwapEquippedOffhand(item);
+                        break;
                     default:
                         GameManager.Instance.Player.HeroTile.Character.Inventory.AddItem(item);
                         break;

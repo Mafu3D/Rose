@@ -484,6 +484,11 @@ namespace Project.Combat
 
         public void EndTurn()
         {
+            foreach(Project.Attributes.Attribute attribute in activeCombatant.Attributes.GetAllAttributes())
+            {
+                attribute.TickAttributeModifiers();
+            }
+
             // Items
             if (activeCombatant.Inventory != null)
             {
@@ -524,6 +529,8 @@ namespace Project.Combat
 
         public void EndRound()
         {
+
+
             // Items
             foreach (Character combatant in combatantOrder)
             {

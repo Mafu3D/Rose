@@ -40,8 +40,7 @@ MonoBehaviour:
   OnRoundEndStrategies: []
   OnTurnStartStrategies:
   - {fileID: 11400000, guid: c6e93729dce18a7449555a19ec7a3ecf, type: 2}
-  OnTurnEndStrategies:
-  - {fileID: 11400000, guid: cbea90f5d92610d47b5ea78cd61db7bf, type: 2}
+  OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
   OnSelfBloodiedStrategies: []

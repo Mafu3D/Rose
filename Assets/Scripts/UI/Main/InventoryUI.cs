@@ -44,8 +44,18 @@ namespace Project.UI.MainUI
                 weaponSlot.sprite = unequippedSprite;
             }
 
+            Item equippedOffhand = player.HeroTile.Character.Inventory.GetEquippedOffhand();
+            if (equippedOffhand != null)
+            {
+                offHandSlot.sprite = player.HeroTile.Character.Inventory.GetEquippedOffhand().ItemData.Sprite;
+            }
+            else
+            {
+                offHandSlot.sprite = unequippedSprite;
+            }
+
             // offHandSlot.sprite = player.HeroTile.Character.Inventory.GetEquippedWeapon().ItemData.Sprite;
-            offHandSlot.sprite = unequippedSprite;
+            // offHandSlot.sprite = unequippedSprite;
 
             List<Item> heldItems = player.HeroTile.Character.Inventory.GetHeldItems();
             for (int i = 0; i < heldItemSlots.Count; i++)

@@ -1,4 +1,5 @@
 using Project.Attributes;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 namespace Project.Combat.CombatActions
@@ -13,6 +14,9 @@ namespace Project.Combat.CombatActions
         [SerializeField] AttributeType AttributeType;
         [SerializeField] int BaseValueModifier;
         [SerializeField] int MaxValueModifier;
+
+        [Tooltip("Does not work on health or armor!!!")]
+        [SerializeField] int Duration = -1;
 
         public override void Execute(Character user, Character target)
         {
@@ -44,14 +48,14 @@ namespace Project.Combat.CombatActions
             {
                 if (MaxValueModifier != 0)
                 {
-                    if (IsPermanent) { character.StoredAttributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier); }
-                    character.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier);
+                    if (IsPermanent) { character.StoredAttributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier, Duration); }
+                    character.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier, Duration);
                 }
 
                 if (BaseValueModifier != 0)
                 {
-                    if (IsPermanent) { character.StoredAttributes.RegisterAttributeModifier(AttributeType, BaseValueModifier); }
-                    character.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier);
+                    if (IsPermanent) { character.StoredAttributes.RegisterAttributeModifier(AttributeType, BaseValueModifier, Duration); }
+                    character.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier, Duration);
                 }
             }
         }
