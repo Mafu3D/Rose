@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: BloodyAxe
+  m_Name: Swiftblade
   m_EditorClassIdentifier: 
-  Name: Bloody Axe
-  Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
+  Name: Swiftblade
+  Description: Multistrike +1
   ItemID: 
-  Sprite: {fileID: -1765020933, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 6
-  Rarity: 2
+  Sprite: {fileID: 10057838, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 7
+  Rarity: 1
   ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 4
+  StrengthModifier: 1
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -31,12 +31,11 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
-  MultistrikeModifier: 0
+  MultistrikeModifier: 1
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies:
-  - {fileID: 11400000, guid: 43ea1d89f6dfb6146a1cdeef97bfff72, type: 2}
+  OnCombatStartStrategies: []
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []

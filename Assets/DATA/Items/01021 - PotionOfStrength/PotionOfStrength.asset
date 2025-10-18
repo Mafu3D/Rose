@@ -17,6 +17,7 @@ MonoBehaviour:
   ItemID: 
   Sprite: {fileID: 1554869157, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
+  Rarity: 1
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0

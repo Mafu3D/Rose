@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace Project.Items
 {
+    public enum ItemRarity
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Legendary
+    }
+
     [CreateAssetMenu(fileName = "ItemData", menuName = "ItemData", order = 0)]
     public class ItemData : ScriptableObject
     {
@@ -13,6 +21,7 @@ namespace Project.Items
         [SerializeField] public string ItemID;
         [SerializeField] public Sprite Sprite;
         [SerializeField] public int GoldValue;
+        [SerializeField] public ItemRarity Rarity;
         [SerializeField] public ItemType ItemType;
 
         [Header("Modifiers")]

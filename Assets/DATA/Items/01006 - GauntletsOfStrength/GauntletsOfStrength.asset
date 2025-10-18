@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: GauntletsOfStrength
   m_EditorClassIdentifier: 
   Name: Gauntlets of Strength
-  Description: +1 Armor, +1 Attack
+  Description: +2 Armor, +1 Attack
   ItemID: 
   Sprite: {fileID: 836442388, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 5
+  Rarity: 1
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
-  ArmorModifier: 1
+  ArmorModifier: 2
   MaxArmorModifier: 0
   StrengthModifier: 1
   MaxStrengthModifier: 0
@@ -30,6 +31,7 @@ MonoBehaviour:
   MaxDexterityModifier: 0
   SpeedModifier: 0
   MaxSpeedModifier: 0
+  MultistrikeModifier: 0
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []

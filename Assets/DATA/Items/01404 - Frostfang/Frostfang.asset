@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: BloodyAxe
+  m_Name: Frostfang
   m_EditorClassIdentifier: 
-  Name: Bloody Axe
-  Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
+  Name: Frostfang
+  Description: 'Turn Start: If the enemy is frozen, gain +1 multistrike this turn'
   ItemID: 
-  Sprite: {fileID: -1765020933, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 6
-  Rarity: 2
+  Sprite: {fileID: -66858294, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 10
+  Rarity: 3
   ItemType: 1
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 4
+  StrengthModifier: 3
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -35,12 +35,12 @@ MonoBehaviour:
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies:
-  - {fileID: 11400000, guid: 43ea1d89f6dfb6146a1cdeef97bfff72, type: 2}
+  OnCombatStartStrategies: []
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies: []
+  OnTurnStartStrategies:
+  - {fileID: 11400000, guid: 69ba072ed2e70d24b9f074713e526c95, type: 2}
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []

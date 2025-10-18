@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: BloodyAxe
+  m_Name: RingOfIce
   m_EditorClassIdentifier: 
-  Name: Bloody Axe
-  Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
+  Name: Ring Of Ice
+  Description: 'Round Start: Apply 1 Frost'
   ItemID: 
-  Sprite: {fileID: -1765020933, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 6
-  Rarity: 2
-  ItemType: 1
+  Sprite: {fileID: 2102662179, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 7
+  Rarity: 1
+  ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 4
+  StrengthModifier: 0
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies:
-  - {fileID: 11400000, guid: 43ea1d89f6dfb6146a1cdeef97bfff72, type: 2}
+  OnCombatStartStrategies: []
   OnCombatEndStrategies: []
-  OnRoundStartStrategies: []
+  OnRoundStartStrategies:
+  - {fileID: 11400000, guid: 10950120e0e024447a40bb74eae3612d, type: 2}
   OnRoundEndStrategies: []
   OnTurnStartStrategies: []
   OnTurnEndStrategies: []

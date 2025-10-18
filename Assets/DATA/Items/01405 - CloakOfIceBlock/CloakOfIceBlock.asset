@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: BloodyAxe
+  m_Name: CloakOfIceBlock
   m_EditorClassIdentifier: 
-  Name: Bloody Axe
-  Description: '+4 Attack, Combat Start: +1 vulnerable (self)'
+  Name: Cloak of Ice Block
+  Description: 'Turn Start: Apply 1 frost (self), Turn End: If you are frozen, gain
+    6 armor'
   ItemID: 
-  Sprite: {fileID: -1765020933, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
-  GoldValue: 6
-  Rarity: 2
-  ItemType: 1
+  Sprite: {fileID: -1011630420, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  GoldValue: 0
+  Rarity: 1
+  ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
   MaxArmorModifier: 0
-  StrengthModifier: 4
+  StrengthModifier: 0
   MaxStrengthModifier: 0
   MagicModifier: 0
   MaxMagicModifier: 0
@@ -35,13 +36,14 @@ MonoBehaviour:
   UsesPerCombat: -1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies:
-  - {fileID: 11400000, guid: 43ea1d89f6dfb6146a1cdeef97bfff72, type: 2}
+  OnCombatStartStrategies: []
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies: []
-  OnTurnEndStrategies: []
+  OnTurnStartStrategies:
+  - {fileID: 11400000, guid: 33b2894b85ed89c4eb17133d783e6e4c, type: 2}
+  OnTurnEndStrategies:
+  - {fileID: 11400000, guid: 36cd94262e222d64db99a64e5721d31e, type: 2}
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
   OnSelfBloodiedStrategies: []
