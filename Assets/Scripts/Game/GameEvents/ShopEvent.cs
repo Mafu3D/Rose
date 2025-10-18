@@ -43,7 +43,8 @@ namespace Project.Core.GameEvents
                 return;
             }
 
-            int price = (int)Mathf.Ceil(Choice.GetAllItems()[index].GoldValue * priceModifier);
+            int goldValue = GetGoldValue(Choice.GetAllItems()[index].Rarity);
+            int price = (int)Mathf.Ceil(goldValue * priceModifier);
             if (GameManager.Instance.Player.GoldTracker.Gold >= price)
             {
                 Choice.ChooseItem(index);
@@ -78,6 +79,22 @@ namespace Project.Core.GameEvents
             {
                 DebugShop();
             }
+        }
+
+        private int GetGoldValue(ItemRarity rarity)
+        {
+            switch (rarity)
+            {
+                case ItemRarity.Common:
+                    return 3;
+                case ItemRarity.Uncommon:
+                    return 5;
+                case ItemRarity.Rare:
+                    return 7;
+                case ItemRarity.Legendary:
+                    return 10;
+            }
+            return 3;
         }
 
         public override void GenerateChoices()
@@ -170,7 +187,8 @@ namespace Project.Core.GameEvents
                 if (itemDatas[i] == null) Debug.Log($"({i + 1}) SOLD OUT");
                 else
                 {
-                    Debug.Log($"({i + 1}) {itemDatas[i].Name} - {itemDatas[i].Description} :: {(int)Mathf.Ceil(itemDatas[i].GoldValue * priceModifier)}g");
+                    int goldValue = GetGoldValue(Choice.GetAllItems()[i].Rarity);
+                    Debug.Log($"({i + 1}) {itemDatas[i].Name} - {itemDatas[i].Description} :: {(int)Mathf.Ceil(goldValue * priceModifier)}g");
                 }
             }
 

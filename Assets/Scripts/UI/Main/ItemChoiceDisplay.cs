@@ -11,6 +11,11 @@ namespace Project.UI.MainUI
         [SerializeField] TMP_Text descriptionText;
         [SerializeField] TMP_Text choiceNumber;
         [SerializeField] Image image;
+        [SerializeField] TMP_Text typeText;
+        [SerializeField] GameObject commonIcon;
+        [SerializeField] GameObject uncommonIcon;
+        [SerializeField] GameObject rareIcon;
+        [SerializeField] GameObject legendaryIcon;
 
         [SerializeField] GameObject attributesDisplayContainer;
 
@@ -21,13 +26,54 @@ namespace Project.UI.MainUI
             image.sprite = itemData.Sprite;
             this.choiceNumber.text = choiceNumber.ToString();
 
-            // [SerializeField] public int HealthModifier = 0;
-            // [SerializeField] public int ArmorModifier = 0;
-            // [SerializeField] public int StrengthModifier = 0;
-            // [SerializeField] public int MagicModifier = 0;
-            // [SerializeField] public int DexterityModifier = 0;
-            // [SerializeField] public int SpeedModifier = 0;
-        }
+            switch (itemData.ItemType)
+            {
+                case ItemType.Basic:
+                    typeText.text = "Held";
+                    break;
+                case ItemType.Weapon:
+                    typeText.text = "Weapon";
+                    break;
+                case ItemType.Offhand:
+                    typeText.text = "Offhand";
+                    break;
+            }
 
+            switch (itemData.Rarity)
+            {
+                case ItemRarity.Common:
+                    commonIcon.SetActive(true);
+                    uncommonIcon.SetActive(false);
+                    rareIcon.SetActive(false);
+                    legendaryIcon.SetActive(false);
+                    break;
+                case ItemRarity.Uncommon:
+                    commonIcon.SetActive(false);
+                    uncommonIcon.SetActive(true);
+                    rareIcon.SetActive(false);
+                    legendaryIcon.SetActive(false);
+                    break;
+                case ItemRarity.Rare:
+                    commonIcon.SetActive(false);
+                    uncommonIcon.SetActive(false);
+                    rareIcon.SetActive(true);
+                    legendaryIcon.SetActive(false);
+                    break;
+                case ItemRarity.Legendary:
+                    commonIcon.SetActive(false);
+                    uncommonIcon.SetActive(false);
+                    rareIcon.SetActive(false);
+                    legendaryIcon.SetActive(true);
+                    break;
+
+                    // [SerializeField] public int HealthModifier = 0;
+                    // [SerializeField] public int ArmorModifier = 0;
+                    // [SerializeField] public int StrengthModifier = 0;
+                    // [SerializeField] public int MagicModifier = 0;
+                    // [SerializeField] public int DexterityModifier = 0;
+                    // [SerializeField] public int SpeedModifier = 0;
+            }
+
+        }
     }
 }

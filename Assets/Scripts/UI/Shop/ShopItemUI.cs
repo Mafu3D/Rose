@@ -22,7 +22,10 @@ namespace Project.UI.Shop
             this.itemData = itemData;
             nameTMPText.text = itemData.Name;
             costContainer.SetActive(true);
-            costTMPText.text = itemData.GoldValue.ToString();
+
+            int goldValue = GetGoldValue(itemData.Rarity);
+            int price = (int)Mathf.Ceil(goldValue); // does not factor in price modifier!
+            costTMPText.text = price.ToString();
             image.sprite = itemData.Sprite;
         }
 
@@ -34,5 +37,21 @@ namespace Project.UI.Shop
         }
 
         public ItemData GetItemData() => itemData;
+
+        private int GetGoldValue(ItemRarity rarity)
+        {
+            switch (rarity)
+            {
+                case ItemRarity.Common:
+                    return 3;
+                case ItemRarity.Uncommon:
+                    return 5;
+                case ItemRarity.Rare:
+                    return 7;
+                case ItemRarity.Legendary:
+                    return 10;
+            }
+            return 3;
+        }
     }
 }

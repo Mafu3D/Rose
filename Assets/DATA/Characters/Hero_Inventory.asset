@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSlots: 8
   StartingEquippedWeaponData: {fileID: 11400000, guid: 7f5830758eadbdc46bd374b56777fc7f, type: 2}
-  StartingHeldItemsData:
-  - {fileID: 11400000, guid: 1607a5a2a2ceac648853fc1425f612cf, type: 2}
-  - {fileID: 11400000, guid: b0f300d080770154188669413762de9f, type: 2}
+  StartingHeldItemsData: []

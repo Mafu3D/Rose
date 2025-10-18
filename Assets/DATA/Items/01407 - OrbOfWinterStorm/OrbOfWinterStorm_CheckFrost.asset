@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCharacter: 1
   toCheck: 0
-  operation: 4
-  value: 1
+  operation: 1
+  value: 0
   actionDatas:
   - {fileID: 11400000, guid: 856997ddbb58e0c40a2fa784381cb928, type: 2}

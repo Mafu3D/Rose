@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: OrbOfWinterStorm
   m_EditorClassIdentifier: 
   Name: Orb Of Winter Storm
-  Description: 'Round End: If the enemy has Frost, they gain one more Frost'
+  Description: 'Turn Start: If the enemy has no frost, they gain 1 frost'
   ItemID: 
   Sprite: {fileID: -860142163, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
-  Rarity: 3
+  Rarity: 2
   ItemType: 0
   HealthModifier: 0
   MaxHealthModifier: 0
@@ -38,9 +38,9 @@ MonoBehaviour:
   OnCombatStartStrategies: []
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
-  OnRoundEndStrategies:
-  - {fileID: 11400000, guid: 1f27c3aa4aecaa047a5ba7de4e886dea, type: 2}
-  OnTurnStartStrategies: []
+  OnRoundEndStrategies: []
+  OnTurnStartStrategies:
+  - {fileID: 11400000, guid: 2249009b5574a104987b425c15a0ca80, type: 2}
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []
