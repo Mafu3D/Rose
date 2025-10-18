@@ -117,7 +117,7 @@ namespace Project.Combat
             if (heroSpeed < enemySpeed)
             {
                 avoidedRunDamage = false;
-                QueueAttack(Enemy, Hero);
+                // QueueAttack(Enemy, Hero);
             }
             else
             {
@@ -664,6 +664,12 @@ namespace Project.Combat
                         }
                     }
                 }
+            }
+
+
+            foreach(Item item in itemsUsedThisRound)
+            {
+                item.IncUses();
             }
         }
 

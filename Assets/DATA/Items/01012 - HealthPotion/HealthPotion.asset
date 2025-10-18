@@ -32,12 +32,12 @@ MonoBehaviour:
   SpeedModifier: 0
   MaxSpeedModifier: 0
   MultistrikeModifier: 0
-  UsesPerCombat: -1
+  UsesPerCombat: 1
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies: []
   OnCombatEndStrategies:
-  - {fileID: 11400000, guid: 995657dac4af6f644a9a7eaee508d05d, type: 2}
+  - {fileID: 11400000, guid: 2ab83fcffecea3a44ba0d493d06903c5, type: 2}
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
   OnTurnStartStrategies: []

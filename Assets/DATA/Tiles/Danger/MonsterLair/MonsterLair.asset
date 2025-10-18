@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Monster Lair
-  Description: Fight an elite monster
+  Description: Fight an elite monster, gain double rewards
   Sprite: {fileID: -1066573289, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 1
   TileType: 3

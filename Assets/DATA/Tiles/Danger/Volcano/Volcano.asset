@@ -22,8 +22,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Volcano
-  Description: 'On Enter: Lose 1 movement and take 1 damage. End Turn: Take 2 damage
-    and gain 1 gem.'
+  Description: 'On Enter: Lose 1 movement and take 1 damage.\n  End Turn: Take 2
+    damage and gain 1 gem. \n Fight a monster'
   Sprite: {fileID: -167682619, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 0
   TileType: 3

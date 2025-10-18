@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Thicket
-  Description: 'On Enter: Take 2 damage'
+  Description: 'On Enter: Take 2 damage \n Fight a monster'
   Sprite: {fileID: -1269918139, guid: d0b5d55e6b2e47344bd24f4fb4b2a5b0, type: 3}
   ActivationPriority: 0
   TileType: 3
