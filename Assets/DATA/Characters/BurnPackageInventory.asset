@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21dff2319b65f454998b5bbcbdb49063, type: 3}
-  m_Name: Hero_OPInventory
+  m_Name: BurnPackageInventory
   m_EditorClassIdentifier: 
   MaxSlots: 8
   StartingEquippedWeaponData: {fileID: 11400000, guid: a6e04f280a8d9c44d83bd439fb0d2045, type: 2}
   StartingHeldItemsData:
-  - {fileID: 11400000, guid: 1607a5a2a2ceac648853fc1425f612cf, type: 2}
   - {fileID: 11400000, guid: 5ab778efcd9907647a34330cb43ae962, type: 2}
-  - {fileID: 11400000, guid: 32d76ca7afc53d34d8124222f495c6a6, type: 2}
-  - {fileID: 11400000, guid: 2f4c7fd0716dc8e42961fd114907aef2, type: 2}
-  - {fileID: 11400000, guid: 94fe6151fd49225488986335bd3dfac5, type: 2}
-  - {fileID: 11400000, guid: 848246f300a650247acecea0155c8b46, type: 2}
+  - {fileID: 11400000, guid: 1607a5a2a2ceac648853fc1425f612cf, type: 2}
+  - {fileID: 11400000, guid: 00e00ca44b9dccd48b75e85f47a627fa, type: 2}
+  - {fileID: 11400000, guid: b0f300d080770154188669413762de9f, type: 2}
+  - {fileID: 11400000, guid: df006a6d006aa4748b8fae8a276c3e65, type: 2}
+  - {fileID: 11400000, guid: db6ae6672e161e649a63d4926dc7addf, type: 2}
+  - {fileID: 11400000, guid: a2bf96d545c71cf47b5ae9b4f3deb2a4, type: 2}
+  - {fileID: 11400000, guid: d49cceb75cc37e941abd8bc494ac8eed, type: 2}
