@@ -37,13 +37,13 @@ MonoBehaviour:
   TotalUses: 1
   DestroyAfterUsing: 1
   CharacterData: {fileID: 11400000, guid: 5b7dbe2847cae394ca7eaab69ba94803, type: 2}
-  OnActivateStrategies:
-  - {fileID: 11400000, guid: 3ae59f64fb2347645a4dcf7c0bb74785, type: 2}
+  OnActivateStrategies: []
   OnRoundStartStrategies: []
   OnTurnStartStrategies: []
   OnPlayerMoveStrategies: []
   OnPlayerMoveEndStrategies: []
-  OnPlayerEnterStrategies: []
+  OnPlayerEnterStrategies:
+  - {fileID: 11400000, guid: 3ae59f64fb2347645a4dcf7c0bb74785, type: 2}
   OnPlayerExitStrategies: []
   OnEndOfTurnStrategies: []
   OnDrawCardStrategies: []

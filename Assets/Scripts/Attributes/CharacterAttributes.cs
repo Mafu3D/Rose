@@ -85,6 +85,15 @@ namespace Project.Attributes
             }
         }
 
+        public void SetAttributeMaxValue(AttributeType type, int value)
+        {
+            Attribute attribute;
+            if (Attributes.TryGetValue(type, out attribute))
+            {
+                attribute.SetMaxValue(value);
+            }
+        }
+
         public int GetMaxAttributeValue(AttributeType type)
         {
             Attribute attribute;

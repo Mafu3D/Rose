@@ -133,7 +133,7 @@ namespace Project
                 if (gameSettings.StartingHealth != 0)
                 {
                     Player.HeroTile.Character.Attributes.SetAttributeBaseValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
-                    Player.HeroTile.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
+                    Player.HeroTile.Character.Attributes.SetAttributeMaxValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
                 }
                 if (gameSettings.StartingSpeed != 0)
                 {
