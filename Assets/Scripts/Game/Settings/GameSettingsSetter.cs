@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Project.Items;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Project
 
         [SerializeField] List<int> maps = new();
         [SerializeField] List<int> startHealths = new();
+        [SerializeField] List<int> startSpeeds = new();
         [SerializeField] List<int> startGolds = new();
         [SerializeField] List<CharacterData> bosses = new();
         [SerializeField] List<int> bossRounds = new();
@@ -23,6 +25,7 @@ namespace Project
         int gameSpeedsIndex;
         int startGoldIndex;
         int bossRoundsIndex;
+        int startSpeedIndex;
 
 
         public void SetToDefault()
@@ -33,6 +36,7 @@ namespace Project
             gameSettingsDefinition.PreloadedInventory = inventories[0];
             gameSettingsDefinition.GameSpeed = gameSpeeds[0];
             gameSettingsDefinition.StartingGold = startGolds[0];
+            gameSettingsDefinition.StartingSpeed = startSpeeds[0];
 
             gameSettingsDefinition.RoundsTillBoss = bossRounds[0];
         }
@@ -105,6 +109,16 @@ namespace Project
                 bossRoundsIndex = 0;
             }
             gameSettingsDefinition.RoundsTillBoss = bossRounds[bossRoundsIndex];
+        }
+
+        internal void IncStartSpeed()
+        {
+            startSpeedIndex += 1;
+            if (startSpeedIndex >= startSpeeds.Count)
+            {
+                startSpeedIndex = 0;
+            }
+            gameSettingsDefinition.StartingSpeed = startSpeeds[startSpeedIndex];
         }
     }
 }

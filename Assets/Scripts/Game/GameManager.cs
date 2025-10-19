@@ -135,6 +135,10 @@ namespace Project
                     Player.HeroTile.Character.Attributes.SetAttributeBaseValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
                     Player.HeroTile.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
                 }
+                if (gameSettings.StartingSpeed != 0)
+                {
+                    Player.HeroTile.Character.Attributes.SetAttributeBaseValue(Attributes.AttributeType.Speed, gameSettings.StartingSpeed);
+                }
                 if (gameSettings.PreloadedInventory != null)
                 {
                     Player.HeroTile.Character.Inventory.LoadInventory(gameSettings.PreloadedInventory);

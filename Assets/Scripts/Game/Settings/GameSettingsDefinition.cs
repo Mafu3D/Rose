@@ -10,6 +10,7 @@ namespace Project
     {
         [SerializeField] public int Map;
         [SerializeField] public int StartingHealth = 0;
+        [SerializeField] public int StartingSpeed = 0;
         [SerializeField] public int StartingGold = 0;
         [SerializeField] public CharacterData BossData;
         [SerializeField] public InventoryDefinition PreloadedInventory;

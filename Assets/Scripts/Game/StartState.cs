@@ -35,9 +35,13 @@ namespace Project
                 gameSettingsSetter.IncInventories();
             }
 
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))
             {
                 gameSettingsSetter.IncGameSpeed();
+            }
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
+            {
+                gameSettingsSetter.IncStartSpeed();
             }
 
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.G))

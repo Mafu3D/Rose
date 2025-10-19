@@ -58,6 +58,12 @@ namespace Project.UI.TitleScreen
             if (gameSettings.StartingGold == 0) text += $"Start Gold: Default \n";
             else text += $"Start Gold: {gameSettings.StartingGold} \n";
 
+            if (gameSettings.StartingSpeed == 0) text += $"Start Speed: Default \n";
+            else text += $"Start Speed: {gameSettings.StartingSpeed} \n";
+
+            if (gameSettings.StartingGold == 0) text += $"Start Gold: Default \n";
+            else text += $"Start Gold: {gameSettings.StartingGold} \n";
+
             if (gameSettings.BossData == null) text += $"Boss: Random \n";
             else text += $"Boss: {gameSettings.BossData.DisplayName} \n";
 
@@ -67,8 +73,8 @@ namespace Project.UI.TitleScreen
             if (gameSettings.PreloadedInventory == null) text += $"Starting Inventory: Default \n";
             else text += $"Starting Inventory: {gameSettings.PreloadedInventory} \n";
 
-            if (gameSettings.GameSpeed == 0) text += $"Speed: Default \n";
-            else text += $"Speed: {gameSettings.GameSpeed} \n";
+            if (gameSettings.GameSpeed == 0) text += $"GameSpeed: Default \n";
+            else text += $"GameSpeed: {gameSettings.GameSpeed} \n";
 
             debugPregameSettingsText.text = text;
         }
