@@ -75,13 +75,11 @@ namespace Project.UI.MainUI
                     break;
             }
 
-
             button.onClick.AddListener(Choose);
         }
 
         private void Choose()
         {
-            Debug.Log("button clicked! " + choiceNumber);
             ItemChoiceEvent itemChoiceEvent = gameEvent as ItemChoiceEvent;
             itemChoiceEvent.ChooseItem(choiceNumber - 1);
             itemChoiceEvent.Resolve();

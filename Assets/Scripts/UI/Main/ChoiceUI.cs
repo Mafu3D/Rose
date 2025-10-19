@@ -40,7 +40,7 @@ namespace Project.UI.MainUI
         {
             GameObject displayedObeject = Instantiate(displayPrefab, parent.position, Quaternion.identity, parent);
             TileChoiceDisplay display = displayedObeject.GetComponent<TileChoiceDisplay>();
-            display.DisplayTile(tile, number);
+            display.RegisterDisplayTile(tile, number);
             displayedObjects.Add(displayedObeject);
         }
 
