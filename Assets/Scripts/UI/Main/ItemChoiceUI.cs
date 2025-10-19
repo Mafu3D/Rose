@@ -32,16 +32,16 @@ namespace Project.UI.MainUI
 
             for (int i = 0; i < items.Count; i++)
             {
-                PopulateDisplay(items[i], i+1, displayParentTransforms[i]);
+                PopulateDisplay(items[i], i+1, displayParentTransforms[i], gameEvent);
             }
             mainContainer.SetActive(true);
         }
 
-        private void PopulateDisplay(ItemData item, int number, Transform parent)
+        private void PopulateDisplay(ItemData item, int number, Transform parent, IGameEvent gameEvent)
         {
             GameObject displayedObeject = Instantiate(displayPrefab, parent.position, Quaternion.identity, parent);
             ItemChoiceDisplay display = displayedObeject.GetComponent<ItemChoiceDisplay>();
-            display.DisplayItem(item, number);
+            display.RegisterDisplayItem(item, number, gameEvent);
             displayedObjects.Add(displayedObeject);
         }
 

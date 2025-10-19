@@ -1,3 +1,4 @@
+using Project.Core.GameEvents;
 using Project.Items;
 using TMPro;
 using UnityEngine;
@@ -9,22 +10,29 @@ namespace Project.UI.MainUI
     {
         [SerializeField] TMP_Text displayName;
         [SerializeField] TMP_Text descriptionText;
-        [SerializeField] TMP_Text choiceNumber;
+        [SerializeField] TMP_Text choiceNumberText;
         [SerializeField] Image image;
         [SerializeField] TMP_Text typeText;
         [SerializeField] GameObject commonIcon;
         [SerializeField] GameObject uncommonIcon;
         [SerializeField] GameObject rareIcon;
         [SerializeField] GameObject legendaryIcon;
+        [SerializeField] Button button;
 
         [SerializeField] GameObject attributesDisplayContainer;
 
-        public void DisplayItem(ItemData itemData, int choiceNumber)
+        int choiceNumber;
+        IGameEvent gameEvent;
+
+        public void RegisterDisplayItem(ItemData itemData, int choiceNumber, IGameEvent gameEvent)
         {
+            this.choiceNumber = choiceNumber;
+            this.gameEvent = gameEvent;
+
             displayName.text = itemData.Name;
             descriptionText.text = itemData.Description;
             image.sprite = itemData.Sprite;
-            this.choiceNumber.text = choiceNumber.ToString();
+            choiceNumberText.text = choiceNumber.ToString();
 
             switch (itemData.ItemType)
             {
@@ -65,15 +73,19 @@ namespace Project.UI.MainUI
                     rareIcon.SetActive(false);
                     legendaryIcon.SetActive(true);
                     break;
-
-                    // [SerializeField] public int HealthModifier = 0;
-                    // [SerializeField] public int ArmorModifier = 0;
-                    // [SerializeField] public int StrengthModifier = 0;
-                    // [SerializeField] public int MagicModifier = 0;
-                    // [SerializeField] public int DexterityModifier = 0;
-                    // [SerializeField] public int SpeedModifier = 0;
             }
 
+
+            button.onClick.AddListener(Choose);
+        }
+
+        private void Choose()
+        {
+            Debug.Log("button clicked! " + choiceNumber);
+            ItemChoiceEvent itemChoiceEvent = gameEvent as ItemChoiceEvent;
+            itemChoiceEvent.ChooseItem(choiceNumber - 1);
+            itemChoiceEvent.Resolve();
+            GameManager.Instance.GameEventManager.EndItemDrawEvent();
         }
     }
 }

@@ -9,6 +9,11 @@ public class BossUI : MonoBehaviour
 
     void Awake()
     {
+        // GameManager.Instance.OnGameStartEvent += SetBossImage;
+    }
+
+    void Start()
+    {
         GameManager.Instance.OnGameStartEvent += SetBossImage;
     }
 
