@@ -100,5 +100,21 @@ namespace Project.UI.Shop
 
             shopEvent.OnShopUpdated -= Populate;
         }
+
+        public void Exit()
+        {
+            ShopEvent shopEvent = GameManager.Instance.GameEventManager.CurrentShopEvent;
+            if (shopEvent.IsExitable)
+            {
+                shopEvent.Resolve();
+                GameManager.Instance.GameEventManager.EndShopEvent();
+            }
+        }
+
+        public void Refresh()
+        {
+            ShopEvent shopEvent = GameManager.Instance.GameEventManager.CurrentShopEvent;
+            shopEvent.Refresh();
+        }
     }
 }

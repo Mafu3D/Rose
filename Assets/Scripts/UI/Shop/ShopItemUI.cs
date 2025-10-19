@@ -1,3 +1,4 @@
+using Project.Core.GameEvents;
 using Project.Items;
 using TMPro;
 using UnityEngine;
@@ -13,9 +14,16 @@ namespace Project.UI.Shop
         [SerializeField] TMP_Text shopNumberTMPText;
         [SerializeField] Image image;
         [SerializeField] Sprite soldOutSprite;
+        [SerializeField] Button button;
         ItemData itemData;
+        int choiceNumber;
 
-        internal void SetShopSlotNumber(int num) => shopNumberTMPText.text = num.ToString();
+        internal void SetShopSlotNumber(int num)
+        {
+            shopNumberTMPText.text = num.ToString();
+            choiceNumber = num;
+        }
+
 
         internal void DisplayItemData(ItemData itemData)
         {
@@ -27,6 +35,9 @@ namespace Project.UI.Shop
             int price = (int)Mathf.Ceil(goldValue); // does not factor in price modifier!
             costTMPText.text = price.ToString();
             image.sprite = itemData.Sprite;
+
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(Choose);
         }
 
         internal void DisplaySoldOut()
@@ -34,6 +45,7 @@ namespace Project.UI.Shop
             costContainer.SetActive(false);
             nameTMPText.text = "SOLD OUT";
             image.sprite = soldOutSprite;
+            button.onClick.RemoveAllListeners();
         }
 
         public ItemData GetItemData() => itemData;
@@ -52,6 +64,19 @@ namespace Project.UI.Shop
                     return 10;
             }
             return 3;
+        }
+
+        private void Choose()
+        {
+            if (GameManager.Instance.Hero.Character.Inventory.InventoryIsFull)
+            {
+                CalloutUI.Instance.QueueCallout("Inventory full! Please discard an item by left clicking it.");
+                return;
+            }
+
+            ShopEvent shopEvent = GameManager.Instance.GameEventManager.CurrentShopEvent;
+            shopEvent.ChooseItem(choiceNumber - 1);
+            shopEvent.Resolve();
         }
     }
 }
