@@ -27,22 +27,22 @@ public class Scratch : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
         {
             Player.GoldTracker.AddGold(1);
         }
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))
         {
             Player.GoldTracker.RemoveGold(1);
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.G))
         {
             Player.GemTracker.AddGem(1);
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.H))
         {
             Player.GemTracker.RemoveGem(1);
         }

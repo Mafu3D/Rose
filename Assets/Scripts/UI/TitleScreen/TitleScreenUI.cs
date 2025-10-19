@@ -12,7 +12,16 @@ namespace Project.UI.TitleScreen
         public void StartGame()
         {
             Debug.Log("Game Started");
-            SceneLoader.Load(2);
+            int mapIndex;
+            if (gameSettings.Map == 0)
+            {
+                mapIndex = Random.Range(1, 4);
+            }
+            else
+            {
+                mapIndex = gameSettings.Map;
+            }
+            SceneLoader.Load(mapIndex + 1);
         }
 
         public void ExitGame()
