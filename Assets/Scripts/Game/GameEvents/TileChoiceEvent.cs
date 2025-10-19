@@ -40,7 +40,12 @@ namespace Project.Core.GameEvents
 
         public override void ChooseItem(int index)
         {
-            Choice.ChooseItem(index);
+            if (Choice.GetItem(index).Cost <= GameManager.Instance.Player.GemTracker.Gem) {
+                GameManager.Instance.Player.GemTracker.RemoveGem(Choice.GetItem(index).Cost);
+                Choice.ChooseItem(index);
+                Resolve();
+                GameManager.Instance.GameEventManager.EndTileDrawEvent();
+            }
         }
 
         protected override void ResolveCallback(List<TileData> chosen, List<TileData> notChosen)

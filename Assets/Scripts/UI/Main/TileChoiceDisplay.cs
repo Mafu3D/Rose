@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Project.Core.GameEvents;
 using Project.GameTiles;
 using TMPro;
 using UnityEngine;
@@ -11,24 +13,28 @@ namespace Project.UI.MainUI
         [Header("Main")]
         [SerializeField] TMP_Text displayName;
         [SerializeField] TMP_Text descriptionText;
-        [SerializeField] TMP_Text choiceNumber;
+        [SerializeField] TMP_Text choiceNumberText;
         [SerializeField] Image image;
         [SerializeField] Image background1;
         [SerializeField] Image background2;
         [SerializeField] Image outline;
+        [SerializeField] Button button;
         [Header("Icons")]
         [SerializeField] GameObject lockedIcon;
         [SerializeField] GameObject trappedIcon;
         [SerializeField] GameObject safeIcon;
         [SerializeField] GameObject dangerIcon;
         [SerializeField] GameObject riskyIcon;
+        [SerializeField] GameObject eliteIcon;
         [SerializeField] List<GameObject> costIcons;
 
         public TileData TileData { get; private set; }
+        private int choiceNumber;
 
-        public void DisplayTile(TileData tileData, int choiceNumber)
+        public void RegisterDisplayTile(TileData tileData, int choiceNumber)
         {
             this.TileData = tileData;
+            this.choiceNumber = choiceNumber;
 
             displayName.text = tileData.DisplayName;
             descriptionText.text = tileData.Description;
@@ -41,23 +47,32 @@ namespace Project.UI.MainUI
                     safeIcon.SetActive(true);
                     dangerIcon.SetActive(false);
                     riskyIcon.SetActive(false);
+                    eliteIcon.SetActive(false);
                     break;
                 case DangerStatus.Dangerous:
                     safeIcon.SetActive(false);
                     dangerIcon.SetActive(true);
                     riskyIcon.SetActive(false);
+                    eliteIcon.SetActive(false);
+                    break;
+                case DangerStatus.Elite:
+                    safeIcon.SetActive(false);
+                    dangerIcon.SetActive(false);
+                    riskyIcon.SetActive(false);
+                    eliteIcon.SetActive(true);
                     break;
                 default:
                     safeIcon.SetActive(false);
                     dangerIcon.SetActive(false);
                     riskyIcon.SetActive(true);
+                    eliteIcon.SetActive(false);
                     break;
 
             }
             lockedIcon.SetActive(tileData.IsLocked);
             trappedIcon.SetActive(tileData.IsTrapped);
 
-            this.choiceNumber.text = choiceNumber.ToString();
+            choiceNumberText.text = choiceNumber.ToString();
 
             string hexColor = "#222323";
             if (background1 != null)
@@ -141,13 +156,21 @@ namespace Project.UI.MainUI
             if (tileData.Cost > GameManager.Instance.Player.GemTracker.Gem)
             {
                 List<Image> images = new List<Image> { image, background1, background2, outline };
-                foreach(Image image in images)
+                foreach (Image image in images)
                 {
                     Color color = image.color;
                     color.a = 0.25f;
                     image.color = color;
                 }
             }
+
+            button.onClick.AddListener(Choose);
+        }
+
+        private void Choose()
+        {
+            TileChoiceEvent tileChoiceEvent = GameManager.Instance.GameEventManager.CurrentTileChoiceEvent;
+            tileChoiceEvent.ChooseItem(choiceNumber - 1);
         }
     }
 }

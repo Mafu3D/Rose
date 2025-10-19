@@ -32,13 +32,7 @@ namespace Project.GameLoop
         {
             if (num > tileChoiceEvent.Choice.NumberOfChoices) return;
 
-            if (tileChoiceEvent.Choice.GetItem(num - 1).Cost <= GameManager.Player.GemTracker.Gem) {
-                GameManager.Player.GemTracker.RemoveGem(tileChoiceEvent.Choice.GetItem(num - 1).Cost);
-
-                tileChoiceEvent.ChooseItem(num - 1);
-                tileChoiceEvent.Resolve();
-                GameManager.GameEventManager.EndTileDrawEvent();
-            }
+            tileChoiceEvent.ChooseItem(num - 1);
         }
 
         private void Proceed()
