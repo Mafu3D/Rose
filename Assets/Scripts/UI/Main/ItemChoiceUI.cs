@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Project.Core.GameEvents;
 using Project.GameTiles;
 using Project.Items;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.UI.MainUI
 {
@@ -13,6 +15,7 @@ namespace Project.UI.MainUI
         [SerializeField] private GameObject displayPrefab;
         [SerializeField] private List<RectTransform> displayParentTransforms;
         List<GameObject> displayedObjects = new();
+        [SerializeField] private Button exitButton;
 
         void Awake()
         {
@@ -35,6 +38,18 @@ namespace Project.UI.MainUI
                 PopulateDisplay(items[i], i+1, displayParentTransforms[i], gameEvent);
             }
             mainContainer.SetActive(true);
+
+            exitButton.onClick.AddListener(Exit);
+        }
+
+        private void Exit()
+        {
+            ChoiceEvent<ItemData> choiceEvent = GameManager.Instance.GameEventManager.CurrentItemChoiceEvent;
+            if (choiceEvent.IsExitable)
+            {
+                choiceEvent.Resolve();
+                GameManager.Instance.GameEventManager.EndItemDrawEvent();
+            }
         }
 
         private void PopulateDisplay(ItemData item, int number, Transform parent, IGameEvent gameEvent)
