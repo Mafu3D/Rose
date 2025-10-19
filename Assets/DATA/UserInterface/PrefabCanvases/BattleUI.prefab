@@ -215,10 +215,10 @@ RectTransform:
   - {fileID: 4205142292240683958}
   m_Father: {fileID: 4745525389105101445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -75}
+  m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5224769222058522813
 CanvasRenderer:
@@ -301,7 +301,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3189160048485614158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7698953220067189152}
+        m_TargetAssemblyTypeName: Project.UI.BattleUI.BattleUI, Assembly-CSharp
+        m_MethodName: FightOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &323198164698478318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,6 +1752,8 @@ MonoBehaviour:
   LeftCombatantUI: {fileID: 1053595594815772521}
   RightCombatantUI: {fileID: 5578778594591761735}
   PrebattleContainer: {fileID: 8167909610684141011}
+  fightButton: {fileID: 0}
+  runButton: {fileID: 0}
   ActiveBattleContainer: {fileID: 1355074345613088536}
   BattleLog: {fileID: 4714945801673703660}
   MaxLogLength: 10
@@ -4186,7 +4200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3 - Run
+  m_text: Run
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0267e976913342f42aed5a5dc4305b4a, type: 2}
   m_sharedMaterial: {fileID: -6994938554730903771, guid: 0267e976913342f42aed5a5dc4305b4a, type: 2}
@@ -4307,7 +4321,7 @@ GameObject:
   - component: {fileID: 3503438074263794776}
   - component: {fileID: 985759646634676615}
   m_Layer: 5
-  m_Name: FightButton
+  m_Name: RunButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4328,10 +4342,10 @@ RectTransform:
   - {fileID: 9054011642611918468}
   m_Father: {fileID: 4745525389105101445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &597296234030572579
 CanvasRenderer:
@@ -4414,7 +4428,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3503438074263794776}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7698953220067189152}
+        m_TargetAssemblyTypeName: Project.UI.BattleUI.BattleUI, Assembly-CSharp
+        m_MethodName: RunOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5464566379069962541
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,7 +4506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1 - Fight!
+  m_text: Fight!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0267e976913342f42aed5a5dc4305b4a, type: 2}
   m_sharedMaterial: {fileID: -6994938554730903771, guid: 0267e976913342f42aed5a5dc4305b4a, type: 2}
@@ -6007,10 +6033,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4745525389105101445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -20}
+  m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2871640596403460532
 CanvasRenderer:
@@ -6559,7 +6585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4745525389105101445
 RectTransform:
   m_ObjectHideFlags: 0

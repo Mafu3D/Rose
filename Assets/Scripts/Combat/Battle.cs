@@ -68,6 +68,8 @@ namespace Project.Combat
 
         private bool debugMode;
 
+        public Choice<Action> PreBattleChoice;
+
 
         public Battle(Character hero, Character enemy, Action<BattleReport, Character, Character> finished, bool debugMode = false)
         {
@@ -97,6 +99,29 @@ namespace Project.Combat
 
             Hero.ShapshotAttributes();
             Enemy.ShapshotAttributes();
+
+            List<Action> prebattleChoices = new List<Action> { ChooseFight, ChooseRun, ChooseRun };
+            PreBattleChoice = new Choice<Action>(prebattleChoices, ResolvePrebattleChoice);
+        }
+
+        private void ResolvePrebattleChoice(List<Action> actions, List<Action> _) => actions[0]();
+
+        private void ChooseRun()
+        {
+            Debug.Log("I choose to run!");
+            StateMachine.SwitchState(new AttemptToRunState("Attempt to Run", StateMachine, GameManager.Instance));
+        }
+
+        private void ChooseSteal()
+        {
+            Debug.Log("I choose to steal!");
+            StateMachine.SwitchState(new AttemptToStealState("Attempt To Steal", StateMachine, GameManager.Instance));
+        }
+
+        private void ChooseFight()
+        {
+            Debug.Log("I choose to fight!");
+            StateMachine.SwitchState(new BattleStartState("Battle State", StateMachine, GameManager.Instance));
         }
 
         #endregion

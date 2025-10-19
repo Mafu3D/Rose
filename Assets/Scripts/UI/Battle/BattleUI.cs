@@ -6,6 +6,7 @@ using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.UI.BattleUI
 {
@@ -23,6 +24,8 @@ namespace Project.UI.BattleUI
 
         [Header("Prebattle")]
         [SerializeField] GameObject PrebattleContainer;
+        [SerializeField] Button fightButton;
+        [SerializeField] Button runButton;
 
         [Header("During Battle")]
         [SerializeField] GameObject ActiveBattleContainer;
@@ -218,6 +221,20 @@ namespace Project.UI.BattleUI
             RightCombatantUI.UpdateStats();
             RightCombatantUI.UpdateStatusEffects();
             BattleLog.text = truncatedLog;
+        }
+
+        public void FightOnClick()
+        {
+            Battle activeBattle = GameManager.Instance.BattleManager.ActiveBattle;
+            activeBattle.PreBattleChoice.ChooseItem(0);
+            activeBattle.PreBattleChoice.Resolve();
+        }
+
+        public void RunOnClick()
+        {
+            Battle activeBattle = GameManager.Instance.BattleManager.ActiveBattle;
+            activeBattle.PreBattleChoice.ChooseItem(2);
+            activeBattle.PreBattleChoice.Resolve();
         }
     }
 }
