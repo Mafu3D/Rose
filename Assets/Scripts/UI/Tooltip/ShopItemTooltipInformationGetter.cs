@@ -14,7 +14,23 @@ namespace Project.UI
             if (itemData != null)
             {
                 header = itemData.Name;
-                content = itemData.Description;
+
+                content = "";
+                switch (itemData.ItemType)
+                {
+                    case ItemType.Basic:
+                        content += "Held";
+                        break;
+                    case ItemType.Weapon:
+                        content += "Weapon";
+                        break;
+                    case ItemType.Offhand:
+                        content += "Offhand";
+                        break;
+                }
+
+                content += $"\n {itemData.Description}";
+
                 return true;
             }
             content = default;

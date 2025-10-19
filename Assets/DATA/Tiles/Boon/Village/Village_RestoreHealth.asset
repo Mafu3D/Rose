@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Village_RestoreHealth
   m_EditorClassIdentifier: 
   AttributeType: 0
-  BaseValueModifier: 5
+  BaseValueModifier: 10
   MaxValueModifier: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Swiftblade
   m_EditorClassIdentifier: 
   Name: Swiftblade
-  Description: Multistrike +1
+  Description: Attack+1 \n Multistrike +1
   ItemID: 
   Sprite: {fileID: 10057838, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7

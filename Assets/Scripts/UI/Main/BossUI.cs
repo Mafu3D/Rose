@@ -7,7 +7,7 @@ public class BossUI : MonoBehaviour
 {
     [SerializeField] Image image;
 
-    void Start()
+    void Awake()
     {
         GameManager.Instance.OnGameStartEvent += SetBossImage;
     }

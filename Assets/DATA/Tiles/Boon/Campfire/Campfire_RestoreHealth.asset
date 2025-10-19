@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Campfire_RestoreHealth
   m_EditorClassIdentifier: 
   AttributeType: 0
-  BaseValueModifier: 2
+  BaseValueModifier: 5
   MaxValueModifier: 0

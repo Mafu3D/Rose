@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pulp-tiles-layer-World-count-129-table-8-8_0: 8826970346002206764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

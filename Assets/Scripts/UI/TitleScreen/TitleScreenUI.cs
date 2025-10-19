@@ -61,9 +61,6 @@ namespace Project.UI.TitleScreen
             if (gameSettings.StartingSpeed == 0) text += $"Start Speed: Default \n";
             else text += $"Start Speed: {gameSettings.StartingSpeed} \n";
 
-            if (gameSettings.StartingGold == 0) text += $"Start Gold: Default \n";
-            else text += $"Start Gold: {gameSettings.StartingGold} \n";
-
             if (gameSettings.BossData == null) text += $"Boss: Random \n";
             else text += $"Boss: {gameSettings.BossData.DisplayName} \n";
 

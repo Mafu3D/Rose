@@ -177,11 +177,11 @@ namespace Project.GameTiles
                 }
                 Character.SetInventory(inventory);
             }
+            GameManager.Instance.OnGameStartEvent += Initialize;
         }
 
         protected virtual void Start()
         {
-            GameManager.Instance.OnGameStartEvent += Initialize;
             GameManager.Instance.OnPlayerMoveEvent += MoveTowardsPlayer;
 
             if (usableIcon != null) usableIcon.SetActive(true);
@@ -209,8 +209,10 @@ namespace Project.GameTiles
             }
         }
 
-        private void Initialize()
+        public void Initialize()
         {
+            CurrentCell = GameManager.Instance.Grid.WorldPositionToCell(this.transform.position);
+            MoveToCell(CurrentCell);
             RegisterToGrid();
             ResetMovesRemaining();
         }

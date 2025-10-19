@@ -30,13 +30,13 @@ namespace Project.UI
                 switch (item.ItemData.ItemType)
                 {
                     case ItemType.Basic:
-                        content = "Held";
+                        content += "Held";
                         break;
                     case ItemType.Weapon:
-                        content = "Weapon";
+                        content += "Weapon";
                         break;
                     case ItemType.Offhand:
-                        content = "Offhand";
+                        content += "Offhand";
                         break;
                 }
 

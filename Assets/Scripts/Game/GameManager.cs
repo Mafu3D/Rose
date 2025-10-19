@@ -227,6 +227,8 @@ namespace Project
             OnGameStartEvent?.Invoke();
             Round = 0;
             OnNewRound();
+
+            Player.HeroTile.Initialize();
         }
 
 
@@ -502,6 +504,7 @@ namespace Project
                     new int[] {-3, 3},
                     new int[] {1, 3},
                 };
+
             }
             else if (mapIndex == 4) { // Map #3
                 coords = new List<int[]> {
