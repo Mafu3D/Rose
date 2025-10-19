@@ -1,3 +1,5 @@
+using System;
+using Project.Core.GameEvents;
 using Project.GameplayEffects;
 using Project.NPCs;
 using TMPro;
@@ -14,9 +16,16 @@ namespace Project.UI.Shop
         [SerializeField] TMP_Text shopNumberTMPText;
         [SerializeField] Image image;
         [SerializeField] Sprite soldOutSprite;
+        [SerializeField] Button button;
         ServiceDefinition serviceDefinition;
 
-        internal void SetShopSlotNumber(int num) => shopNumberTMPText.text = num.ToString();
+        private int choiceNumber;
+
+        internal void SetShopSlotNumber(int num)
+        {
+            choiceNumber = num;
+            shopNumberTMPText.text = num.ToString();
+        }
 
         internal void DisplayItemData(ServiceDefinition serviceDefinition)
         {
@@ -25,6 +34,16 @@ namespace Project.UI.Shop
             costContainer.SetActive(true);
             costTMPText.text = serviceDefinition.Cost.ToString();
             image.sprite = serviceDefinition.DisplaySprite;
+
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(Choose);
+        }
+
+        private void Choose()
+        {
+            ChoiceEvent<ServiceDefinition> choiceEvent = GameManager.Instance.GameEventManager.CurrentServiceEvent;
+            choiceEvent.ChooseItem(choiceNumber - 1);
+            choiceEvent.Resolve();
         }
 
         internal void DisplaySoldOut()
@@ -32,6 +51,8 @@ namespace Project.UI.Shop
             costContainer.SetActive(false);
             nameTMPText.text = "SOLD OUT";
             image.sprite = soldOutSprite;
+
+            button.onClick.RemoveAllListeners();
         }
 
         public ServiceDefinition GetServiceDefinition() => serviceDefinition;

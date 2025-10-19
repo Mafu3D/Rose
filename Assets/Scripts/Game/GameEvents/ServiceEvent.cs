@@ -14,12 +14,12 @@ namespace Project.Core.GameEvents
 
         private bool debug = true;
 
-        private NPCInteractionDefinition interactionDefinition;
+        public NPCInteractionDefinition InteractionDefinition;
         public ServiceEvent(int amount, NPCInteractionDefinition npcServiceDefinition) : base(amount, true)
         {
             this.npcName = npcServiceDefinition.NPCName;
             this.callout = npcServiceDefinition.Callout;
-            this.interactionDefinition = npcServiceDefinition;
+            this.InteractionDefinition = npcServiceDefinition;
         }
 
         public event Action OnBuyEvent;
@@ -28,7 +28,7 @@ namespace Project.Core.GameEvents
 
         public override void ChooseItem(int index)
         {
-            if (index > interactionDefinition.Services.Count)
+            if (index > InteractionDefinition.Services.Count)
             {
                 return;
             }
@@ -73,7 +73,7 @@ namespace Project.Core.GameEvents
 
         public override void GenerateChoices()
         {
-            List<ServiceDefinition> choices = interactionDefinition.Services;
+            List<ServiceDefinition> choices = InteractionDefinition.Services;
             if (choices.Count == 0) return;
             Choice = new Choice<ServiceDefinition>(choices, ResolveCallback);
 

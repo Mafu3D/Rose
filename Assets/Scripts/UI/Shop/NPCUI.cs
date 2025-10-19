@@ -16,6 +16,8 @@ namespace Project.UI.Shop
 
         [Header("Main")]
         [SerializeField] private GameObject mainContainer;
+        [SerializeField] private TMP_Text titleText;
+        [SerializeField] private TMP_Text calloutText;
 
         [Header("Item Grid")]
         [SerializeField] RectTransform gridContainer;
@@ -40,6 +42,10 @@ namespace Project.UI.Shop
         {
             mainContainer.SetActive(true);
             serviceEvent = gameEvent as ServiceEvent;
+
+            titleText.text = serviceEvent.InteractionDefinition.NPCName;
+            calloutText.text = serviceEvent.InteractionDefinition.Callout;
+
             Populate();
 
             serviceEvent.OnServicesUpdated += Populate;
@@ -82,6 +88,16 @@ namespace Project.UI.Shop
         {
             mainContainer.SetActive(false);
             serviceEvent.OnServicesUpdated -= Populate;
+        }
+
+        public void Exit()
+        {
+            ChoiceEvent<ServiceDefinition> choiceEvent = GameManager.Instance.GameEventManager.CurrentServiceEvent;
+            if (choiceEvent.IsExitable)
+            {
+                choiceEvent.Resolve();
+                GameManager.Instance.GameEventManager.EndNPCServiceEvent();
+            }
         }
     }
 }
