@@ -47,6 +47,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   CharacterData: {fileID: 11400000, guid: 3fac53523f1ea7649a27e9292bc1d8d4, type: 2}
   UICanvas: {fileID: 0}
+  gameSettings: {fileID: 11400000, guid: 5505d5af281d7ef498d7cb7bf8b92ba6, type: 2}
   ChanceForMonsterEncounter: 50
   EncounterDeckData: {fileID: 11400000, guid: a52d215cec2418e4c93e99025946dab8, type: 2}
   MonsterDeckData: {fileID: 11400000, guid: fe0f10d0107c33d419d74c526c84ccde, type: 2}

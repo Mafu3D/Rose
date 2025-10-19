@@ -26,6 +26,8 @@ namespace Project
         [SerializeField] public CharacterData CharacterData;
         [SerializeField] public GameObject UICanvas;
 
+        [SerializeField] private GameSettingsDefinition gameSettings;
+
         [Header("Game Parameters")]
         [Range(0, 100)]
         [SerializeField] public float ChanceForMonsterEncounter = 50f;
@@ -121,6 +123,31 @@ namespace Project
         {
             // Player.HeroTile.RegisterCharacterFromData(CharacterData);
 
+            if (gameSettings != null)
+            {
+                if (gameSettings.GameSpeed != 0)
+                {
+                    AutoBattleSpeed = gameSettings.GameSpeed;
+                }
+                if (gameSettings.StartingHealth != 0)
+                {
+                    Player.HeroTile.Character.Attributes.SetAttributeBaseValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
+                    Player.HeroTile.Character.Attributes.ModifyMaxAttributeValue(Attributes.AttributeType.Health, gameSettings.StartingHealth);
+                }
+                if (gameSettings.PreloadedInventory != null)
+                {
+                    Player.HeroTile.Character.Inventory.LoadInventory(gameSettings.PreloadedInventory);
+                }
+                if (gameSettings.StartingGold != 0)
+                {
+                    Player.GoldTracker.AddGold(gameSettings.StartingGold);
+                }
+                if (gameSettings.RoundsTillBoss != 0)
+                {
+                    RoundsTillBoss = gameSettings.RoundsTillBoss;
+                }
+            }
+
             Grid = new GameGrid(new Vector2(1, 1));
             TEMP_BUILD_MAP();
 
@@ -131,7 +158,15 @@ namespace Project
             TileDeck = InitializeTileDeck(TileDeckData);
             BossDeck = InitializeBossDeck(BossDeckData);
 
-            Boss = BossDeck.Draw();
+
+            if (gameSettings == null || gameSettings.BossData == null)
+            {
+                Boss = BossDeck.Draw();
+            }
+            else
+            {
+                Boss = gameSettings.BossData;
+            }
             Debug.Log($"The boss for this round is {Boss.DisplayName}");
 
             CardDrawManager = new CardDrawManager();

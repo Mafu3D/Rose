@@ -154,7 +154,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 20, y: 20}
-  m_SizeDelta: {x: 500, y: 150}
+  m_SizeDelta: {x: 681.89, y: 150}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &477915330
 MonoBehaviour:
@@ -262,6 +262,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477915328}
   m_CullTransparentMesh: 1
+--- !u!1 &509437907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 509437910}
+  - component: {fileID: 509437909}
+  - component: {fileID: 509437908}
+  m_Layer: 0
+  m_Name: START
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &509437908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509437907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3002aba541b08445b0b86e6e50d5347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSettingsSetter: {fileID: 509437909}
+  titleScreenUI: {fileID: 1010449205}
+--- !u!114 &509437909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509437907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f3a7a9d2ac009459f00756ce388550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSettingsDefinition: {fileID: 11400000, guid: 5505d5af281d7ef498d7cb7bf8b92ba6, type: 2}
+  maps: 00000000010000000200000003000000
+  startHealths: 000000000a0000000f0000001400000063000000
+  startGolds: 000000000a0000001400000063000000
+  bosses:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 3a883b3e9cfe9574880b641ad56cca4d, type: 2}
+  - {fileID: 11400000, guid: 83770f32631e0cd458a0c6a97ee0b13a, type: 2}
+  bossRounds: 00000000060000000b000000150000001f00000033000000
+  inventories:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2884645e5ca7aec45a6224e90810178e, type: 2}
+  - {fileID: 11400000, guid: 0aad597b0cfcc7a48baa48114673ad68, type: 2}
+  gameSpeeds:
+  - 0
+  - 0.25
+  - 0.5
+  - 1
+  - 3
+--- !u!4 &509437910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509437907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec78e4ae7ac36e448252f74b54a9bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugPregameSettingsText: {fileID: 477915330}
+  gameSettings: {fileID: 11400000, guid: 5505d5af281d7ef498d7cb7bf8b92ba6, type: 2}
 --- !u!1 &1086856277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1633,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 97.499985}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: 750, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1769474066
 MonoBehaviour:
@@ -1575,7 +1655,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Project Rose (WIP Title)
+  m_text: Untitled Roguelike Auto-battler
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0267e976913342f42aed5a5dc4305b4a, type: 2}
   m_sharedMaterial: {fileID: -6994938554730903771, guid: 0267e976913342f42aed5a5dc4305b4a, type: 2}
@@ -1860,3 +1940,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1255375738}
   - {fileID: 1010449204}
+  - {fileID: 509437910}

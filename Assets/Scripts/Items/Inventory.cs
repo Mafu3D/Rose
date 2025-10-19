@@ -34,6 +34,13 @@ namespace Project.Items
             maxSlots = inventoryDefinition.MaxSlots;
         }
 
+        public void LoadInventory(InventoryDefinition inventoryDefinition)
+        {
+            UnequipAllItems();
+            EquipStartingItems(inventoryDefinition);
+            maxSlots = inventoryDefinition.MaxSlots;
+        }
+
         public Item GetEquippedWeapon() => equippedWeapon;
         public Item GetEquippedOffhand() => equippedOffhand;
 
@@ -252,6 +259,16 @@ namespace Project.Items
                 Item item = new Item(inventoryDefinition.StartingEquippedWeaponData);
                 SwapEquippedWeapon(item);
             }
+        }
+
+        private void UnequipAllItems()
+        {
+            foreach (Item item in heldItems)
+            {
+                RemoveItem(item);
+            }
+            RemoveWeapon();
+            RemoveOffhand();
         }
     }
 }
