@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Project.Combat;
+using Project.Combat.CombatStates;
 using Project.VFX;
 using TMPro;
 using Unity.Mathematics;
@@ -235,6 +236,12 @@ namespace Project.UI.BattleUI
             Battle activeBattle = GameManager.Instance.BattleManager.ActiveBattle;
             activeBattle.PreBattleChoice.ChooseItem(2);
             activeBattle.PreBattleChoice.Resolve();
+        }
+
+        public void ContinueOnClick()
+        {
+            GameManager.Instance.BattleManager.ActiveBattle.StateMachine.SwitchState(new BattleFinishedState("Battle Finished", GameManager.Instance.BattleManager.ActiveBattle.StateMachine, GameManager.Instance));
+            // StateMachine.SwitchState(new BattleFinishedState("Battle Finished", StateMachine, GameManager));
         }
     }
 }
