@@ -14,6 +14,7 @@ namespace Project.UI.MainUI
         [SerializeField] private GameObject mainContainer;
         [SerializeField] private GameObject displayPrefab;
         [SerializeField] private List<RectTransform> displayParentTransforms;
+        [SerializeField] private Button continueButton;
 
         List<GameObject> displayedObjects = new();
 
@@ -38,6 +39,8 @@ namespace Project.UI.MainUI
                 PopulateDisplay(cards[i], i + 1, displayParentTransforms[i]);
             }
             mainContainer.SetActive(true);
+
+            continueButton.gameObject.SetActive(true);
         }
 
         private void PopulateDisplay(Card card, int number, Transform parent)
@@ -56,6 +59,15 @@ namespace Project.UI.MainUI
             }
 
             mainContainer.SetActive(false);
+            continueButton.gameObject.SetActive(false);
+        }
+
+        public void OnContinueClicked()
+        {
+            CardChoiceEvent cardChoiceEvent = GameManager.Instance.GameEventManager.CurrentCardChoiceEvent;
+            cardChoiceEvent.ChooseItem(0);
+            cardChoiceEvent.Resolve();
+            GameManager.Instance.GameEventManager.EndCardDrawEvent();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Project.GameLoop
                 }
             }
 
-            switch(dangerStatus)
+            switch (dangerStatus)
             {
                 case DangerStatus.Standard:
                     float random = Random.Range(0f, 100f);
@@ -60,6 +60,10 @@ namespace Project.GameLoop
                 case DangerStatus.Elite:
                     monsterChoiceEvent = GameManager.GameEventManager.StartCardDrawEvent(GameManager.EliteMonsterDeck, 1, false);
                     break;
+            }
+            if (monsterChoiceEvent != null)
+            {
+                GameManager.GameEventManager.OnCardDrawEnded += GoToNextState;
             }
         }
 
@@ -77,7 +81,11 @@ namespace Project.GameLoop
             monsterChoiceEvent.ChooseItem(0);
             monsterChoiceEvent.Resolve();
             GameManager.GameEventManager.EndCardDrawEvent();
+        }
 
+        private void GoToNextState(IGameEvent gameEvent)
+        {
+            GameManager.GameEventManager.OnCardDrawEnded -= GoToNextState;
             StateMachine.SwitchState(new DrawMonsterResolveState("Draw Monster Resolve", StateMachine, GameManager));
         }
     }
