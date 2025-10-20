@@ -240,6 +240,11 @@ namespace Project
         #region Game Loop
         // Everthing about the game stat itself should be updated here! (What turn is it, shuffling decks, etc.)
 
+        internal void EndTurnEarly()
+        {
+            StateMachine.SwitchState(new PlayerMoveEndResolveState("Player Move End Resolve", StateMachine, this));
+        }
+
         public void OnNewRound()
         {
             Round += 1;
@@ -628,6 +633,8 @@ namespace Project
             }
             Grid.RegisterWalkableCells(walkableCells);
         }
+
+
         #endregion
     }
 }

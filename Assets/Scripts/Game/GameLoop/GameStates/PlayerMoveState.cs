@@ -75,7 +75,7 @@ namespace Project.GameLoop
 
         private void Proceed()
         {
-            StateMachine.SwitchState(new PlayerMoveEndResolveState("Player Move End Resolve", StateMachine, GameManager));
+            GameManager.EndTurnEarly();
         }
 
         private void Resolve()
