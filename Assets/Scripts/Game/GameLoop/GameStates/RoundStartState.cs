@@ -15,6 +15,11 @@ namespace Project.GameLoop
         {
             Debug.Log($"Enter: {Name}");
 
+            foreach(Attributes.Attribute attribute in GameManager.Instance.Player.HeroTile.Character.Attributes.GetAllAttributes())
+            {
+                attribute.TickAttributeModifiers();
+            }
+
             foreach (Tile tile in GameManager.Grid.GetAllRegisteredTiles())
             {
                 foreach (GameplayEffectStrategy effect in tile.TileData.OnRoundStartStrategies)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Project.Combat;
+using Project.GameplayEffects;
 using Project.GameTiles;
 using UnityEngine;
 
@@ -288,14 +289,16 @@ namespace Project.Items
             if (index < consumableItems.Count)
             {
                 Item item;
-                heldItems.Pop(index, out item);
+                consumableItems.Pop(index, out item);
                 activeConsumableItems.Add(item);
+                OnInventoryChanged?.Invoke();
             }
         }
 
         public void ClearActiveConsumableItems()
         {
             activeConsumableItems.Clear();
+            OnInventoryChanged?.Invoke();
         }
 
         private void EquipStartingItems(InventoryDefinition inventoryDefinition)
@@ -330,6 +333,19 @@ namespace Project.Items
             }
             RemoveWeapon();
             RemoveOffhand();
+        }
+
+        internal bool TryUseConsumableItemOverworld(int index)
+        {
+            Item item = consumableItems[index];
+            if (item.ItemData.OnOverworldUse.Count == 0) return false;
+            foreach (GameplayEffectStrategy effect in item.ItemData.OnOverworldUse)
+            {
+                GameManager.Instance.EffectQueue.AddEffect(effect);
+            }
+            GameManager.Instance.EffectQueue.ResolveQueue();
+            MoveConsumableItem(index);
+            return true;
         }
     }
 }

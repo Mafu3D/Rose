@@ -31,6 +31,14 @@ namespace Project.UI.MainUI
             UpdateUI();
         }
 
+        public void UseConsumableItem(int index)
+        {
+            if (player.HeroTile.Character.Inventory.TryUseConsumableItemOverworld(index))
+            {
+                player.HeroTile.Character.Inventory.ClearActiveConsumableItems();
+            }
+        }
+
         private void UpdateUI()
         {
             player.HeroTile.Character.Inventory.OnInventoryChanged += UpdateUI;
@@ -78,10 +86,25 @@ namespace Project.UI.MainUI
                 if (consumableItems.Count > i)
                 {
                     consumableItemSlots[i].sprite = consumableItems[i].ItemData.Sprite;
+                    if (consumableItems[i].ItemData.OnOverworldUse.Count == 0)
+                    {
+                        Color color = consumableItemSlots[i].color;
+                        color.a = 0.25f;
+                        consumableItemSlots[i].color = color;
+                    }
+                    else
+                    {
+                        Color color = consumableItemSlots[i].color;
+                        color.a = 1;
+                        consumableItemSlots[i].color = color;
+                    }
                 }
                 else
                 {
                     consumableItemSlots[i].sprite = unequippedSprite;
+                    Color color = consumableItemSlots[i].color;
+                    color.a = 1;
+                    consumableItemSlots[i].color = color;
                 }
             }
         }

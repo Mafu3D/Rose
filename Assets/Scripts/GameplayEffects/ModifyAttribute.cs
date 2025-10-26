@@ -11,6 +11,7 @@ namespace Project.GameplayEffects
         [SerializeField] AttributeType AttributeType;
         [SerializeField] int BaseValueModifier;
         [SerializeField] int MaxValueModifier;
+        [SerializeField] int Duration;
 
         public override void ResetEffect() { }
         public override Status ResolveEffect() { return Status.Complete; }
@@ -34,15 +35,14 @@ namespace Project.GameplayEffects
             {
                 if (MaxValueModifier != 0)
                 {
-                    heroTile.Character.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier);
+                    heroTile.Character.Attributes.RegisterMaxAttributeModifier(AttributeType, MaxValueModifier, Duration);
                 }
 
                 if (BaseValueModifier != 0)
                 {
-                    heroTile.Character.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier);
+                    heroTile.Character.Attributes.RegisterAttributeModifier(AttributeType, BaseValueModifier, Duration);
                 }
             }
-
 
             return Status.Complete;
         }

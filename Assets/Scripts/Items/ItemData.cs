@@ -18,7 +18,6 @@ namespace Project.Items
         [SerializeField] public int GoldValue;
         [SerializeField] public ItemRarity Rarity;
         [SerializeField] public ItemType ItemType;
-        [SerializeField] public bool UsableInOverworld;
 
         [Header("Modifiers")]
         [SerializeField] public int HealthModifier = 0;

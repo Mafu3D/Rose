@@ -13,6 +13,11 @@ namespace Project.UI.MainUI
             UpdateMovesTracker();
         }
 
+        void Update()
+        {
+            UpdateMovesTracker();
+        }
+
         private void UpdateMovesTracker()
         {
             movesRemainingText.text = GameManager.Instance.Hero.MovesRemaining.ToString();

@@ -53,7 +53,8 @@ namespace Project.GameTiles
         public int PlayerExitsThisTurn;
 
 
-        public int MovesRemaining { get; private set; }
+        public int MovesRemaining => Math.Clamp(Character.Attributes.GetAttributeValue(AttributeType.Speed), 1, 99) - MovesThisTurn;
+        public int MovesThisTurn { get; private set; }
         public Action OnRemainingMovesChanged;
 
         void OnValidate()
@@ -309,7 +310,7 @@ namespace Project.GameTiles
 
         public void ModifyMovesRemaining(int amount)
         {
-            MovesRemaining += amount;
+            MovesThisTurn -= amount;
             OnRemainingMovesChanged?.Invoke();
         }
 
@@ -332,7 +333,7 @@ namespace Project.GameTiles
                     myRigidBody.MovePosition(destinationCell.Center);
                     GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
 
-                    MovesRemaining -= 1;
+                    MovesThisTurn += 1;
                     OnRemainingMovesChanged?.Invoke();
                 }
             }
@@ -349,7 +350,7 @@ namespace Project.GameTiles
                     myRigidBody.MovePosition(CurrentCell.Center);
                     GameManager.Instance.Grid.RegisterToCell(CurrentCell, this);
 
-                    MovesRemaining -= 1;
+                    MovesThisTurn += 1;
                     OnRemainingMovesChanged?.Invoke();
                 }
             }
@@ -359,7 +360,7 @@ namespace Project.GameTiles
         {
             if (Character != null)
             {
-                MovesRemaining = Math.Clamp(Character.Attributes.GetAttributeValue(AttributeType.Speed), 1, 99);
+                MovesThisTurn = 0;
                 OnRemainingMovesChanged?.Invoke();
             }
         }
