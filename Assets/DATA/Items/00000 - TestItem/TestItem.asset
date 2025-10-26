@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: TestItem
   m_EditorClassIdentifier: 
   Name: Test Consumable
-  Description: description
+  Description: Increase speed by 2 for one turn
   ItemID: 
   Sprite: {fileID: -2134610100, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 0
   Rarity: 2
   ItemType: 3
-  UsableInOverworld: 0
   HealthModifier: 0
   MaxHealthModifier: 0
   ArmorModifier: 0
@@ -34,13 +33,16 @@ MonoBehaviour:
   MaxSpeedModifier: 0
   MultistrikeModifier: 0
   UsesPerCombat: -1
-  OnHitStrategies: []
+  OnHitStrategies:
+  - {fileID: 11400000, guid: 97e905698dd671b4fbf1294ba5a064f9, type: 2}
   OnReceiveHitStrategies: []
-  OnCombatStartStrategies: []
+  OnCombatStartStrategies:
+  - {fileID: 11400000, guid: d4b4e028cf9ebc3418b20d49887afd87, type: 2}
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
-  OnTurnStartStrategies: []
+  OnTurnStartStrategies:
+  - {fileID: 11400000, guid: acd997c946b60c348ba0c4170e10c56f, type: 2}
   OnTurnEndStrategies: []
   OnEnemyTurnStartStrategies: []
   OnEnemyTurnEndStrategies: []

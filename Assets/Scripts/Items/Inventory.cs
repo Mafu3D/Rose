@@ -73,7 +73,14 @@ namespace Project.Items
 
         public List<Item> GetAllItems(bool includeSecretItems = false)
         {
-            List<Item> allItems = new List<Item>(GetHeldItems());
+            List<Item> allItems = new();
+
+            List<Item> activeConsumables = new List<Item>(GetActiveConsumableItems());
+            allItems.AddRange(activeConsumables);
+
+            List<Item> heldItems = new List<Item>(GetHeldItems());
+            allItems.AddRange(heldItems);
+
             if (equippedWeapon != null)
             {
                 allItems.Add(equippedWeapon);
@@ -346,6 +353,16 @@ namespace Project.Items
             GameManager.Instance.EffectQueue.ResolveQueue();
             MoveConsumableItem(index);
             return true;
+        }
+
+        internal void UseConsumableItemPrecombat(int index)
+        {
+            Debug.Log($"usin {index}");
+            foreach(Item item in consumableItems)
+            {
+                Debug.Log(item.ItemData.Name);
+            }
+            MoveConsumableItem(index);
         }
     }
 }

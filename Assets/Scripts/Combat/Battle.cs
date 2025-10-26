@@ -732,6 +732,8 @@ namespace Project.Combat
             Enemy.RestoreSnapshotAttributes();
             Enemy.StatusEffectManager.ClearAllStatusEffects();
 
+            Hero.Inventory.ClearActiveConsumableItems();
+
             finishedCallback(battleReport, Hero, Enemy);
         }
 

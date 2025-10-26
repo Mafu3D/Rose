@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 3244807043984441016}
   - component: {fileID: 6354313289100820042}
   - component: {fileID: 506465052191271022}
-  - component: {fileID: 3999145810180959974}
   m_Layer: 5
   m_Name: Slot1
   m_TagString: Untagged
@@ -466,9 +465,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3999145810180959974}
-        m_TargetAssemblyTypeName: TempRemoveItem, Assembly-CSharp
-        m_MethodName: RemoveItem
+      - m_Target: {fileID: 3721020448226841838}
+        m_TargetAssemblyTypeName: Project.UI.MainUI.InventoryUI, Assembly-CSharp
+        m_MethodName: UseConsumableItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -478,18 +477,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3999145810180959974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291381668908375276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add640483c6604643825542119cf8a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &351568811535140781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3905,7 +3892,6 @@ GameObject:
   - component: {fileID: 8007439794529288437}
   - component: {fileID: 5667490475460572894}
   - component: {fileID: 2581147340718753331}
-  - component: {fileID: 5613651946256070551}
   m_Layer: 5
   m_Name: Slot2
   m_TagString: Untagged
@@ -4046,9 +4032,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5613651946256070551}
-        m_TargetAssemblyTypeName: TempRemoveItem, Assembly-CSharp
-        m_MethodName: RemoveItem
+      - m_Target: {fileID: 3721020448226841838}
+        m_TargetAssemblyTypeName: Project.UI.MainUI.InventoryUI, Assembly-CSharp
+        m_MethodName: UseConsumableItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4058,18 +4044,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5613651946256070551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3599327350345494191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add640483c6604643825542119cf8a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3667126268211507363
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,7 +5274,6 @@ GameObject:
   - component: {fileID: 8749593234595036113}
   - component: {fileID: 3525613564845350476}
   - component: {fileID: 896649310568798112}
-  - component: {fileID: 5138019264320854615}
   m_Layer: 5
   m_Name: Slot4
   m_TagString: Untagged
@@ -5441,9 +5414,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5138019264320854615}
-        m_TargetAssemblyTypeName: TempRemoveItem, Assembly-CSharp
-        m_MethodName: RemoveItem
+      - m_Target: {fileID: 3721020448226841838}
+        m_TargetAssemblyTypeName: Project.UI.MainUI.InventoryUI, Assembly-CSharp
+        m_MethodName: UseConsumableItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5453,18 +5426,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5138019264320854615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758869154356056517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add640483c6604643825542119cf8a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4779916283053625274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6214,7 +6175,6 @@ GameObject:
   - component: {fileID: 3358046041869986491}
   - component: {fileID: 6176973588286949426}
   - component: {fileID: 2007817325751408138}
-  - component: {fileID: 6218068826630412164}
   m_Layer: 5
   m_Name: Slot3
   m_TagString: Untagged
@@ -6355,9 +6315,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6218068826630412164}
-        m_TargetAssemblyTypeName: TempRemoveItem, Assembly-CSharp
-        m_MethodName: RemoveItem
+      - m_Target: {fileID: 3721020448226841838}
+        m_TargetAssemblyTypeName: Project.UI.MainUI.InventoryUI, Assembly-CSharp
+        m_MethodName: UseConsumableItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6367,18 +6327,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6218068826630412164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6249329801130249570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add640483c6604643825542119cf8a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6316766940328796024
 GameObject:
   m_ObjectHideFlags: 0

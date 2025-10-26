@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Project.Combat;
 using Project.Combat.CombatStates;
+using Project.Items;
 using Project.VFX;
 using TMPro;
 using Unity.Mathematics;
@@ -27,6 +28,8 @@ namespace Project.UI.BattleUI
         [SerializeField] GameObject PrebattleContainer;
         [SerializeField] Button fightButton;
         [SerializeField] Button runButton;
+        [SerializeField] List<Image> consumableItemSlots;
+        [SerializeField] Sprite unequippedSprite;
 
         [Header("During Battle")]
         [SerializeField] GameObject ActiveBattleContainer;
@@ -137,6 +140,45 @@ namespace Project.UI.BattleUI
             PrebattleContainer.SetActive(true);
             ActiveBattleContainer.SetActive(false);
             PostbattleContainer.SetActive(false);
+
+            UpdateConsumableInventoryUI();
+        }
+
+        public void UseConsumableItem(int index)
+        {
+            GameManager.Instance.Player.HeroTile.Character.Inventory.UseConsumableItemPrecombat(index);
+            UpdateConsumableInventoryUI();
+        }
+
+        private void UpdateConsumableInventoryUI()
+        {
+            List<Item> consumableItems = GameManager.Instance.Player.HeroTile.Character.Inventory.GetConsumableItems();
+            for (int i = 0; i < consumableItemSlots.Count; i++)
+            {
+                if (consumableItems.Count > i)
+                {
+                    consumableItemSlots[i].sprite = consumableItems[i].ItemData.Sprite;
+                    if (consumableItems[i].ItemData.OnOverworldUse.Count == 0)
+                    {
+                        Color color = consumableItemSlots[i].color;
+                        color.a = 0.25f;
+                        consumableItemSlots[i].color = color;
+                    }
+                    else
+                    {
+                        Color color = consumableItemSlots[i].color;
+                        color.a = 1;
+                        consumableItemSlots[i].color = color;
+                    }
+                }
+                else
+                {
+                    consumableItemSlots[i].sprite = unequippedSprite;
+                    Color color = consumableItemSlots[i].color;
+                    color.a = 1;
+                    consumableItemSlots[i].color = color;
+                }
+            }
         }
 
         private void CloseBattleUI()
