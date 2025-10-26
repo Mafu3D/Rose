@@ -103,12 +103,13 @@ namespace Project.Core.GameEvents
         }
 
         // Shop
-        public ShopEvent StartShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0, List<ItemData> existingInventory = null)
+        public ShopEvent StartShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true,
+                                        int refreshCost = 0, List<ItemType> acceptedItemTypes = null, List<ItemData> existingInventory = null)
         {
             Debug.Log("Starting new shop event");
             if (CurrentShopEvent != null) throw new Exception($"A game event is already running: {CurrentShopEvent.GetType()}");
 
-            ShopEvent shopEvent = new ShopEvent(amount, priceModifier, replaceOnBuy, refreshable, refreshCost, existingInventory);
+            ShopEvent shopEvent = new ShopEvent(amount, priceModifier, replaceOnBuy, refreshable, refreshCost, acceptedItemTypes, existingInventory);
             CurrentShopEvent = shopEvent;
             shopEvent.SetupEvent();
             OnShopStarted?.Invoke(shopEvent);

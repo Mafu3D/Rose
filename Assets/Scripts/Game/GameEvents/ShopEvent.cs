@@ -13,16 +13,19 @@ namespace Project.Core.GameEvents
         public bool Refreshable { get; private set; }
         public int RefreshCost { get; private set; }
         List<ItemData> existingInventory = new();
+        List<ItemType> acceptedItemTypes = null;
 
         private bool debug = true;
 
-        public ShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true, int refreshCost = 0, List<ItemData> existingInventory = null) : base(amount, true)
+        public ShopEvent(int amount, float priceModifier, bool replaceOnBuy = false, bool refreshable = true,
+                         int refreshCost = 0, List<ItemType> acceptedItemTypes = null, List<ItemData> existingInventory = null) : base(amount, true)
         {
             this.priceModifier = priceModifier;
             this.replaceOnBuy = replaceOnBuy;
             this.Refreshable = refreshable;
             this.RefreshCost = refreshCost;
             this.existingInventory = existingInventory;
+            this.acceptedItemTypes = acceptedItemTypes;
         }
 
         public event Action OnBuyEvent;
@@ -106,7 +109,41 @@ namespace Project.Core.GameEvents
             }
             else
             {
-                choices = GameManager.Instance.ItemDeck.DrawMultiple(amount);
+                if (acceptedItemTypes != null && acceptedItemTypes.Count > 0)
+                {
+                    List<ItemData> shuffleBackIn = new();
+                    for (int i = 0; i < amount; i++)
+                    {
+                        if (GameManager.Instance.ItemDeck.CurrentCount == 0)
+                        {
+                            break;
+                        }
+                        ItemData drawn = GameManager.Instance.ItemDeck.Draw();
+                        if (drawn != null)
+                        {
+                            while (drawn != null && !acceptedItemTypes.Contains(drawn.ItemType))
+                            {
+                                shuffleBackIn.Add(drawn);
+                                if (GameManager.Instance.ItemDeck.CurrentCount == 0)
+                                {
+                                    break;
+                                }
+                                drawn = GameManager.Instance.ItemDeck.Draw();
+                            }
+                            choices.Add(drawn);
+                        }
+                        else
+                        {
+                            choices.Add(null);
+                        }
+                    }
+                    GameManager.Instance.ItemDeck.AddToRemaining(shuffleBackIn, true);
+                }
+                else
+                {
+                    choices = GameManager.Instance.ItemDeck.DrawMultiple(amount);
+                }
+
             }
             if (choices.Count == 0) return;
             Choice = new Choice<ItemData>(choices, ResolveCallback);

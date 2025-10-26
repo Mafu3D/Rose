@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: PotionOfStrength
+  m_Name: GreaterHealthPotion
   m_EditorClassIdentifier: 
-  Name: Potion of Strength
-  Description: Gain 1 attack this combat
+  Name: Greater Potion of Health
+  Description: Restore all health (activates at start of combat if used in combat)
   ItemID: 
-  Sprite: {fileID: -1216552884, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Sprite: {fileID: -682804151, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
-  Rarity: 1
+  Rarity: 2
   ItemType: 3
   HealthModifier: 0
   MaxHealthModifier: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies:
-  - {fileID: 11400000, guid: e5b762f01d7a4bf4f980485d560ef651, type: 2}
+  - {fileID: 11400000, guid: 2ff54370b266cf04da47e25263d045af, type: 2}
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
@@ -50,4 +50,5 @@ MonoBehaviour:
   OnEnemyExposedStrategies: []
   OnDieStrategies: []
   OnCombatUse: []
-  OnOverworldUse: []
+  OnOverworldUse:
+  - {fileID: 11400000, guid: 529a4ad16b558d64dbd065a5cbcd32f4, type: 2}

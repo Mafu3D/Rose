@@ -154,6 +154,8 @@ namespace Project.GameTiles
             }
         }
 
+        bool initialized = false;
+
         protected virtual void Awake()
         {
             mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -178,11 +180,22 @@ namespace Project.GameTiles
                 }
                 Character.SetInventory(inventory);
             }
-            GameManager.Instance.OnGameStartEvent += Initialize;
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnGameStartEvent += Initialize;
+                initialized = true;
+            }
         }
 
         protected virtual void Start()
         {
+            if (GameManager.Instance != null && !initialized)
+            {
+                GameManager.Instance.OnGameStartEvent += Initialize;
+                initialized = true;
+            }
+
             GameManager.Instance.OnPlayerMoveEvent += MoveTowardsPlayer;
 
             if (usableIcon != null) usableIcon.SetActive(true);

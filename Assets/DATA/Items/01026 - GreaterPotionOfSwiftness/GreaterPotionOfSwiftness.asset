@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e3a6326dc5c194ea9da844891a89f5, type: 3}
-  m_Name: PotionOfStrength
+  m_Name: GreaterPotionOfSwiftness
   m_EditorClassIdentifier: 
-  Name: Potion of Strength
-  Description: Gain 1 attack this combat
+  Name: Greater Potion Of Swiftness
+  Description: Gain +1 multistrike for the entire combat
   ItemID: 
-  Sprite: {fileID: -1216552884, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
+  Sprite: {fileID: -2134610100, guid: c8d2371f79eda9e449e65f211615772d, type: 3}
   GoldValue: 7
-  Rarity: 1
+  Rarity: 3
   ItemType: 3
   HealthModifier: 0
   MaxHealthModifier: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
   OnHitStrategies: []
   OnReceiveHitStrategies: []
   OnCombatStartStrategies:
-  - {fileID: 11400000, guid: e5b762f01d7a4bf4f980485d560ef651, type: 2}
+  - {fileID: 11400000, guid: c49c6ef4f4815b84f8a987badd5f7eee, type: 2}
   OnCombatEndStrategies: []
   OnRoundStartStrategies: []
   OnRoundEndStrategies: []
