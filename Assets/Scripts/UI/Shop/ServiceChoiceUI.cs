@@ -41,6 +41,7 @@ namespace Project.UI.Shop
 
         private void Choose()
         {
+            button.onClick.RemoveAllListeners();
             ChoiceEvent<ServiceDefinition> choiceEvent = GameManager.Instance.GameEventManager.CurrentServiceEvent;
             choiceEvent.ChooseItem(choiceNumber - 1);
             choiceEvent.Resolve();

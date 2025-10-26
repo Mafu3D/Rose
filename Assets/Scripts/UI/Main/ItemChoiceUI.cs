@@ -38,11 +38,9 @@ namespace Project.UI.MainUI
                 PopulateDisplay(items[i], i+1, displayParentTransforms[i], gameEvent);
             }
             mainContainer.SetActive(true);
-
-            exitButton.onClick.AddListener(Exit);
         }
 
-        private void Exit()
+        public void Exit()
         {
             ChoiceEvent<ItemData> choiceEvent = GameManager.Instance.GameEventManager.CurrentItemChoiceEvent;
             if (choiceEvent.IsExitable)

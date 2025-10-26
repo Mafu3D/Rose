@@ -68,6 +68,7 @@ namespace Project.UI.Shop
 
         private void Choose()
         {
+            button.onClick.RemoveAllListeners();
             if (GameManager.Instance.Hero.Character.Inventory.InventoryIsFull)
             {
                 CalloutUI.Instance.QueueCallout("Inventory full! Please discard an item by left clicking it.");

@@ -169,6 +169,7 @@ namespace Project.UI.MainUI
 
         private void Choose()
         {
+            button.onClick.RemoveAllListeners();
             TileChoiceEvent tileChoiceEvent = GameManager.Instance.GameEventManager.CurrentTileChoiceEvent;
             tileChoiceEvent.ChooseItem(choiceNumber - 1);
         }

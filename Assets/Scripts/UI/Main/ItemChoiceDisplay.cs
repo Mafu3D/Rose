@@ -80,10 +80,12 @@ namespace Project.UI.MainUI
 
         private void Choose()
         {
+            button.onClick.RemoveAllListeners();
             ItemChoiceEvent itemChoiceEvent = gameEvent as ItemChoiceEvent;
             itemChoiceEvent.ChooseItem(choiceNumber - 1);
             itemChoiceEvent.Resolve();
             GameManager.Instance.GameEventManager.EndItemDrawEvent();
+
         }
     }
 }
