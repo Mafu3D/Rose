@@ -43,7 +43,7 @@ namespace Project.UI.MainUI
         public void Exit()
         {
             ChoiceEvent<ItemData> choiceEvent = GameManager.Instance.GameEventManager.CurrentItemChoiceEvent;
-            if (choiceEvent.IsExitable)
+            if (choiceEvent != null && choiceEvent.IsExitable)
             {
                 choiceEvent.Resolve();
                 GameManager.Instance.GameEventManager.EndItemDrawEvent();
