@@ -8,6 +8,7 @@ namespace Project.UI
         [SerializeField] int slot;
         [SerializeField] bool isWeapon = false;
         [SerializeField] bool isOffhand = false;
+        [SerializeField] bool isConsumable = false;
         public override bool TryGetTooltipInformation(out string content, out string header)
         {
             Item item;
@@ -18,6 +19,10 @@ namespace Project.UI
             else if (isOffhand)
             {
                 item = GameManager.Instance.Player.HeroTile.Character.Inventory.GetEquippedOffhand();
+            }
+            else if (isConsumable)
+            {
+                item = GameManager.Instance.Player.HeroTile.Character.Inventory.GetConsumableItemAtSlot(slot);
             }
             else
             {
@@ -37,6 +42,9 @@ namespace Project.UI
                         break;
                     case ItemType.Offhand:
                         content += "Offhand";
+                        break;
+                    case ItemType.Consumable:
+                        content += "Consumable";
                         break;
                 }
 

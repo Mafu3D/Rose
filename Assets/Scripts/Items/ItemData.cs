@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 using Project.Combat.CombatActions;
+using Project.GameplayEffects;
 using UnityEngine;
 
 namespace Project.Items
 {
-    public enum ItemRarity
-    {
-        Common,
-        Uncommon,
-        Rare,
-        Legendary
-    }
+
 
     [CreateAssetMenu(fileName = "ItemData", menuName = "ItemData", order = 0)]
     public class ItemData : ScriptableObject
@@ -23,6 +18,7 @@ namespace Project.Items
         [SerializeField] public int GoldValue;
         [SerializeField] public ItemRarity Rarity;
         [SerializeField] public ItemType ItemType;
+        [SerializeField] public bool UsableInOverworld;
 
         [Header("Modifiers")]
         [SerializeField] public int HealthModifier = 0;
@@ -45,7 +41,7 @@ namespace Project.Items
         [SerializeField] public int UsesPerCombat = -1;
 
 
-        [Header("Strategies")]
+        [Header("Combat Strategies")]
 
         [SerializeField] public List<CombatActionBaseData> OnHitStrategies = new();
         [SerializeField] public List<CombatActionBaseData> OnReceiveHitStrategies = new();
@@ -70,6 +66,11 @@ namespace Project.Items
         [SerializeField] public List<CombatActionBaseData> OnEnemyExposedStrategies = new();
 
         [SerializeField] public List<CombatActionBaseData> OnDieStrategies = new();
+
+
+        [Header("Consumable Strategies")]
+        [SerializeField] public List<CombatActionBaseData> OnCombatUse = new();
+        [SerializeField] public List<GameplayEffectStrategy> OnOverworldUse = new();
 
         // gameplay effects for defeat opponent, run, or steal?
     }

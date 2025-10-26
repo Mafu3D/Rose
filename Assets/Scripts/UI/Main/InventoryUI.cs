@@ -10,7 +10,8 @@ namespace Project.UI.MainUI
     {
         [SerializeField] private Image weaponSlot;
         [SerializeField] private Image offHandSlot;
-        [SerializeField] private List<Image> heldItemSlots = new ();
+        [SerializeField] private List<Image> heldItemSlots = new();
+        [SerializeField] private List<Image> consumableItemSlots = new ();
         [SerializeField] private Sprite unequippedSprite;
 
         [SerializeField] Player player;
@@ -67,6 +68,20 @@ namespace Project.UI.MainUI
                 else
                 {
                     heldItemSlots[i].sprite = unequippedSprite;
+                }
+            }
+
+
+            List<Item> consumableItems = player.HeroTile.Character.Inventory.GetConsumableItems();
+            for (int i = 0; i < consumableItemSlots.Count; i++)
+            {
+                if (consumableItems.Count > i)
+                {
+                    consumableItemSlots[i].sprite = consumableItems[i].ItemData.Sprite;
+                }
+                else
+                {
+                    consumableItemSlots[i].sprite = unequippedSprite;
                 }
             }
         }

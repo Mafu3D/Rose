@@ -13,14 +13,19 @@ namespace Project.Items
         private Item equippedOffhand;
         private List<Item> heldItems = new();
         private List<Item> secretItems = new();
+        private List<Item> consumableItems = new();
+        private List<Item> activeConsumableItems = new();
         private Item weaponUpgrade;
         private int maxSlots = 4;
+        private int maxConsumableSlots = 4;
         const int TOTAL_INVENTORY_SLOTS = 8;
+        const int TOTAL_CONSUMABLE_SLOTS = 4;
 
         public event Action OnInventoryChanged;
         Character owner;
 
         public bool InventoryIsFull => heldItems.Count >= maxSlots;
+        public bool ConsumablesAreFull => consumableItems.Count >= maxConsumableSlots;
 
         public Inventory(Character owner)
         {
@@ -32,6 +37,7 @@ namespace Project.Items
             this.owner = owner;
             EquipStartingItems(inventoryDefinition);
             maxSlots = inventoryDefinition.MaxSlots;
+            maxConsumableSlots = inventoryDefinition.MaxConsumableSlots;
         }
 
         public void LoadInventory(InventoryDefinition inventoryDefinition)
@@ -39,6 +45,7 @@ namespace Project.Items
             UnequipAllItems();
             EquipStartingItems(inventoryDefinition);
             maxSlots = inventoryDefinition.MaxSlots;
+            maxConsumableSlots = inventoryDefinition.MaxConsumableSlots;
         }
 
         public Item GetEquippedWeapon() => equippedWeapon;
@@ -52,7 +59,14 @@ namespace Project.Items
             }
             return heldItems[index];
         }
+        public Item GetConsumableItemAtSlot(int index)
+        {
+            if (index >= consumableItems.Count) return null;
+            return consumableItems[index];
+        }
         public List<Item> GetHeldItems() => heldItems;
+        public List<Item> GetConsumableItems() => consumableItems;
+        public List<Item> GetActiveConsumableItems() => activeConsumableItems;
         public List<Item> GetSecretItems() => secretItems;
         public Item GetWeaponUpgrade() => weaponUpgrade;
 
@@ -155,8 +169,23 @@ namespace Project.Items
                 Debug.LogWarning($"Cannot equip item {item.ItemData.Name}! Already at max slots! Fix me!");
             }
 
-            heldItems.Add(item);
-            item.OnEquip(owner);
+            switch (item.ItemData.ItemType)
+            {
+                case ItemType.Basic:
+                    heldItems.Add(item);
+                    item.OnEquip(owner);
+                    break;
+                case ItemType.Weapon:
+                    SwapEquippedWeapon(item);
+                    break;
+                case ItemType.Offhand:
+                    SwapEquippedOffhand(item);
+                    break;
+                case ItemType.Consumable:
+                    consumableItems.Add(item);
+                    item.OnEquip(owner);
+                    break;
+            }
 
             OnInventoryChanged?.Invoke();
             return heldItems.Count - 1;
@@ -164,6 +193,7 @@ namespace Project.Items
 
         public void RemoveItem(int index)
         {
+            // only goes by index of held items
             if (index < heldItems.Count)
             {
                 Item item;
@@ -186,7 +216,13 @@ namespace Project.Items
                 RemoveOffhand();
             }
 
-            if (heldItems.Contains(item))
+            if (consumableItems.Contains(item))
+            {
+                consumableItems.Pop(consumableItems.IndexOf(item), out item);
+                item.OnUnequip(owner);
+                OnInventoryChanged?.Invoke();
+            }
+            else if (heldItems.Contains(item))
             {
                 heldItems.Pop(heldItems.IndexOf(item), out item);
                 item.OnUnequip(owner);
@@ -247,9 +283,29 @@ namespace Project.Items
             }
         }
 
+        public void MoveConsumableItem(int index)
+        {
+            if (index < consumableItems.Count)
+            {
+                Item item;
+                heldItems.Pop(index, out item);
+                activeConsumableItems.Add(item);
+            }
+        }
+
+        public void ClearActiveConsumableItems()
+        {
+            activeConsumableItems.Clear();
+        }
+
         private void EquipStartingItems(InventoryDefinition inventoryDefinition)
         {
             foreach (ItemData itemData in inventoryDefinition.StartingHeldItemsData)
+            {
+                Item item = new Item(itemData);
+                AddItem(item);
+            }
+            foreach (ItemData itemData in inventoryDefinition.StartingConsumablesItemData)
             {
                 Item item = new Item(itemData);
                 AddItem(item);
@@ -258,6 +314,11 @@ namespace Project.Items
             {
                 Item item = new Item(inventoryDefinition.StartingEquippedWeaponData);
                 SwapEquippedWeapon(item);
+            }
+            if (inventoryDefinition.StartingEquippedOffhandData)
+            {
+                Item item = new Item(inventoryDefinition.StartingEquippedOffhandData);
+                SwapEquippedOffhand(item);
             }
         }
 

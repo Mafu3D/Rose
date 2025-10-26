@@ -3,12 +3,7 @@ using Project.GameTiles;
 
 namespace Project.Items
 {
-    public enum ItemType
-    {
-        Basic,
-        Weapon,
-        Offhand
-    }
+
 
     public class Item
     {
