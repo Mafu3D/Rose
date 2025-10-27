@@ -36,8 +36,14 @@ namespace Project.UI.Shop
             costTMPText.text = price.ToString();
             image.sprite = itemData.Sprite;
 
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(Choose);
+            // button.onClick.RemoveAllListeners();
+            // button.onClick.RemoveListener(Choose);
+            // button.onClick.AddListener(Choose);
+        }
+
+        void OnDestroy()
+        {
+            // button.onClick.RemoveAllListeners();
         }
 
         internal void DisplaySoldOut()
@@ -45,7 +51,8 @@ namespace Project.UI.Shop
             costContainer.SetActive(false);
             nameTMPText.text = "SOLD OUT";
             image.sprite = soldOutSprite;
-            button.onClick.RemoveAllListeners();
+            // button.onClick.RemoveAllListeners();
+            // button.onClick.RemoveListener(Choose);
         }
 
         public ItemData GetItemData() => itemData;
@@ -66,7 +73,7 @@ namespace Project.UI.Shop
             return 3;
         }
 
-        private void Choose()
+        public void Choose()
         {
             if (GameManager.Instance.Hero.Character.Inventory.InventoryIsFull)
             {

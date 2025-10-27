@@ -4,6 +4,7 @@ using Project.Core.GameEvents;
 using Project.Items;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.UI.Shop
 {
@@ -22,6 +23,8 @@ namespace Project.UI.Shop
         [Header("Refresh")]
         [SerializeField] GameObject refreshContainer;
         [SerializeField] TMP_Text refreshTMPText;
+
+        [SerializeField] List<ShopItemUI> shopItemUIs;
 
         List<GameObject> shopItemObjects = new();
 
@@ -69,19 +72,14 @@ namespace Project.UI.Shop
 
         private void PopulateGrid()
         {
-            // TEMP
-            foreach (GameObject gameObject in shopItemObjects)
-            {
-                Destroy(gameObject);
-            }
-
             List<ItemData> items = shopEvent.Choice.GetAllItems();
             for (int i = 0; i < items.Count; i++)
             {
-                GameObject shopItemUIGameObject;
-                shopItemUIGameObject = Instantiate(shopItemUIPrefab, gridContainer);
-                shopItemObjects.Add(shopItemUIGameObject);
-                ShopItemUI shopItemUI = shopItemUIGameObject.GetComponent<ShopItemUI>();
+                // GameObject shopItemUIGameObject;
+                // shopItemUIGameObject = Instantiate(shopItemUIPrefab, gridContainer);
+                // shopItemObjects.Add(shopItemUIGameObject);
+                // ShopItemUI shopItemUI = shopItemUIGameObject.GetComponent<ShopItemUI>();
+                ShopItemUI shopItemUI = shopItemUIs[i];
                 shopItemUI.SetShopSlotNumber(i + 1);
                 if (items[i] != null)
                 {

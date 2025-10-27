@@ -27,13 +27,12 @@ namespace Project.UI.MainUI
 
         void Start()
         {
+            player.HeroTile.Character.Inventory.OnInventoryChanged += UpdateUI;
             UpdateUI();
         }
 
         private void UpdateUI()
         {
-            player.HeroTile.Character.Inventory.OnInventoryChanged += UpdateUI;
-
             Item equippedWeapon = player.HeroTile.Character.Inventory.GetEquippedWeapon();
             if (equippedWeapon != null)
             {

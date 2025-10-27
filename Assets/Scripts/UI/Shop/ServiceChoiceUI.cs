@@ -46,6 +46,11 @@ namespace Project.UI.Shop
             choiceEvent.Resolve();
         }
 
+        void OnDestroy()
+        {
+            button.onClick.RemoveAllListeners();
+        }
+
         internal void DisplaySoldOut()
         {
             costContainer.SetActive(false);
