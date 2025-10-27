@@ -29,7 +29,7 @@ public class Scratch : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
         {
-            Player.GoldTracker.AddGold(1);
+            Player.GoldTracker.AddGold(10);
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))

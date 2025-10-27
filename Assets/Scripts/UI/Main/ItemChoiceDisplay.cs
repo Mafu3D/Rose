@@ -78,14 +78,18 @@ namespace Project.UI.MainUI
             button.onClick.AddListener(Choose);
         }
 
-        private void Choose()
+        void OnDestroy()
         {
             button.onClick.RemoveAllListeners();
+        }
+
+        private void Choose()
+        {
             ItemChoiceEvent itemChoiceEvent = gameEvent as ItemChoiceEvent;
             itemChoiceEvent.ChooseItem(choiceNumber - 1);
             itemChoiceEvent.Resolve();
             GameManager.Instance.GameEventManager.EndItemDrawEvent();
-
+            button.onClick.RemoveAllListeners();
         }
     }
 }
